@@ -1,10 +1,10 @@
 import React from 'react';
-import Drink from './Drink.js'
+import Bar from './Bar.js'
 
 function App() {
   return (
     <>
-    <Drink/>
+    <Bar/>
     </>
   );
 }
