@@ -1,7 +1,7 @@
 import React from 'react';
-import drinks from './Data.js';
 
-export default function Drink(){
+
+export default function Drink({drinks}){
     return (
         <ul>
       {drinks.map(({name, description, price}, index) => (
