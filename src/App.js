@@ -1,10 +1,15 @@
 import React from 'react';
-import Bar from './Bar.js'
+import Bar from './Bar.js';
+import Read from './Read.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 function App() {
   return (
     <>
     <Bar/>
+    <Read/>
     </>
   );
 }
