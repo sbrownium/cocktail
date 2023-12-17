@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 // import { REACT_APP_API_KEY, REACT_APP_BASE_URL } from "../.env"
+// doc https://firebase.google.com/docs/database/web/read-and-write#web-modular-api_2
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
