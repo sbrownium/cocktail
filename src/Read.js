@@ -15,31 +15,39 @@ export default function Read() {
   // });
 
   useEffect(() => {
+    
     const fetchData = () => {
       // console.log(db);
       const drinkRef = ref(db);
-console.log(db);
-      // try {
+      console.log(drinkRef)
+// console.log(db);
+      try {
         // Attach an asynchronous callback to read the data
         onValue(drinkRef, (snapshot) => {
-          console.log(snapshot.exists(), ' snapshort exists');
+          // console.log(snapshot.exists(), ' snapshot exists');
           const data = snapshot.val();
-          // setData(data);
-          console.log(data);
+          setData(data);
+          //check firebase docs to remove onValue listener
+          // console.log(data);
         });
-      // } catch (error) {
-        // setError(error);
-      // } finally {
-        // setLoading(false);
-      // }
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
     };
+    const unsubscribe = () => void
     fetchData();
 
     // Clean up the Firebase listener when the component unmounts
     return () => {
       // const drinkRef = ref(db);
+      // const drinkRef = ref(db);
       // ref.off(); // Detach the listener
       // drinkRef.off();
+      unsubscribe();
+      // console.log(ref(db))
+      // ref(db).off();
       // off(onValue)
       // fetchData.off();
     };
