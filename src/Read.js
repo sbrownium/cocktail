@@ -7,60 +7,25 @@ export default function Read() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // const db = getDatabase();
-  // const starCountRef = ref(db, 'posts/' + postId + '/starCount');
-  // onValue(starCountRef, (snapshot) => {
-  //   const data = snapshot.val();
-  //   updateStarCount(postElement, data);
-  // });
-
+  
   useEffect(() => {
-    
-    const fetchData = () => {
-      // console.log(db);
-      const drinkRef = ref(db);
-      console.log(drinkRef)
-// console.log(db);
-      try {
-        // Attach an asynchronous callback to read the data
-        onValue(drinkRef, (snapshot) => {
-          // console.log(snapshot.exists(), ' snapshot exists');
-          const data = snapshot.val();
-          setData(data);
-          //check firebase docs to remove onValue listener
-          // console.log(data);
+    const drinkRef = ref(db);
+     return onValue(drinkRef, (snapshot) => {
+      const data = snapshot.val();
+          setData(() => data);
+          setLoading(() => false);
+        }, (error) => {
+          setError(() => error);
+          setLoading(() => false);
         });
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    const unsubscribe = () => void
-    fetchData();
-
-    // Clean up the Firebase listener when the component unmounts
-    return () => {
-      // const drinkRef = ref(db);
-      // const drinkRef = ref(db);
-      // ref.off(); // Detach the listener
-      // drinkRef.off();
-      unsubscribe();
-      // console.log(ref(db))
-      // ref(db).off();
-      // off(onValue)
-      // fetchData.off();
-    };
-  }, []); // The empty dependency array ensures that this effect runs once after the initial render
-
+  }, []);
+// TODO induce error by blocking URL request
   if (loading) {
     return <div>Loading...</div>;
   }
-
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
   return (
     <div>
       {/* Render your component using the fetched data */}
