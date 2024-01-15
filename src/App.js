@@ -5,7 +5,6 @@ import Read from './Read.js';
 function App() {
   return (
     <>
-    <Bar/>
     <Read/>
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase.js";
+import Bar from './Bar.js'
 
 export default function Read() {
   const [data, setData] = useState(null);
@@ -31,7 +32,8 @@ export default function Read() {
       {/* Render your component using the fetched data */}
       {data && (
         <div>
-          {/* Display data here */}
+          <Bar drinks={data[0]}/>
+          {/* <Drink drinks={data[0]}/> */}
         </div>
       )}
     </div>

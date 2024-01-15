@@ -1,10 +1,9 @@
 import React from 'react';
 
-
-export default function Drink({drinks}){
+export default function Drink({drinksAtBar}){
     return (
         <ul>
-      {drinks.map(({name, description, price}, index) => (
+      {drinksAtBar.map(({name, description, price}, index) => (
           <li key={index}>
             {name} &mdash; &nbsp;
             {description} &mdash; &nbsp;
