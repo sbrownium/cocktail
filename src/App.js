@@ -1,10 +1,11 @@
 import React from 'react';
-import Bar from './Bar.js';
 import Read from './Read.js';
+import SignIn from './SignIn.js';
 
 function App() {
   return (
     <>
+    <SignIn/>
     <Read/>
     </>
   );
