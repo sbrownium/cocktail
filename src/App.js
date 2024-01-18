@@ -1,11 +1,22 @@
 import React from 'react';
 import Read from './Read.js';
-import SignIn from './SignIn.js';
+import { GoogleLogin } from '@react-oauth/google';
+// import SignIn from './SignIn.js';
 
 function App() {
+  const responseMessage = (response) => {
+    console.log(response);
+};
+const errorMessage = (error) => {
+    console.log(error);
+};
   return (
     <>
-    <SignIn/>
+    <h2>React Google Login</h2>
+            <br />
+            <br />
+            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+    {/* <SignIn/> */}
     <Read/>
     </>
   );
