@@ -77,3 +77,6 @@ export default function Comment({drinkID, commentsOnDrink}){
 //            </ul> 
 //       )
 // }
+
+
+//performance.now()
