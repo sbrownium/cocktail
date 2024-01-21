@@ -29,14 +29,14 @@ export default function Read() {
   }
   return (
     <div>
-      {/* Render your component using the fetched data */}
       {data && (
         <div>
-          <Bar drinks={data[0]}/>
-          {/* <Drink drinks={data[0]}/> */}
+          <Bar drinks={data[0]} comments={data[1]}/>
         </div>
       )}
     </div>
   );
 }
 
+// https://react.dev/reference/react/createContext - not avoid pass {comments} so many times before being used
+// https://react.dev/learn/passing-data-deeply-with-context

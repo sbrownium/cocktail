@@ -1,17 +1,19 @@
 import React from 'react';
-import Comment from './Comment';
+import CommentList from './CommentList';
 
-export default function Drink({drinksAtBar}){
+export default function Drink({drinksAtBar, comments}){
     return (
         <ul>
-      {drinksAtBar.map(({name, description, price}, index) => (
-          <li key={index}>
-            {name} &mdash;&nbsp;
+      {drinksAtBar.map(({drinkName, drinkID, description, price}, index) => (
+          <li key={index} drinkID={drinkID}>
+            {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${price.toFixed(2)}
-            <Comment/>
+            <CommentList drinkID={drinkID} comments={comments}/>
           </li>
              ))}
            </ul> 
       )
 }
+// need something like uniqueBars for the drink to know what
+// drink to attach comments to
