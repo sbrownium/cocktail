@@ -1,15 +1,15 @@
 import React from 'react';
-import CommentList from './CommentList';
+import Comment from './Comment';
 
 export default function Drink({drinksAtBar, comments}){
     return (
         <ul>
       {drinksAtBar.map(({drinkName, drinkID, description, price}, index) => (
-          <li key={index} drinkID={drinkID}>
+          <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${price.toFixed(2)}
-            <CommentList drinkID={drinkID} comments={comments}/>
+            <Comment comments={comments} commentDrinkID={drinkID}/>
           </li>
              ))}
            </ul> 
