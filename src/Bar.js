@@ -3,14 +3,19 @@ import React from 'react';
 import Drink from './Drink.js'
 
 export default function Bar({drinks, comments}) {
-  const uniqueBars = new Set();
+ 
+const drinksObjectToArray = Object.entries(drinks);
+const removedKey = drinksObjectToArray.map(([firstElement, ...rest]) => rest);
+const drinksArray = removedKey.flat();
+
+const uniqueBars = new Set();
 
   return (
     <ul>
-      {drinks.map(({ barName, barID }, index) => {
+      {drinksArray.map(({ barName, barID }, index) => {
         if (!uniqueBars.has(barID)) {
           uniqueBars.add(barID);
-          const drinksAtBar = drinks.filter(drink => drink.barID === barID);
+          const drinksAtBar = drinksArray.filter(drink => drink.barID === barID);
 
           return (
             <li key={index}>

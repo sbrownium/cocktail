@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from './Comment';
+import NewComment from './NewComment';
 
 export default function Drink({drinksAtBar, comments}){
     return (
@@ -9,10 +10,11 @@ export default function Drink({drinksAtBar, comments}){
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${price.toFixed(2)}
-            <Comment comments={comments} commentDrinkID={drinkID}/>
+            {/* <Comment comments={comments} commentDrinkID={drinkID}/> */}
+            <NewComment commentDrinkID={drinkID}/>
           </li>
              ))}
-           </ul> 
+           </ul>   
       )
 }
 // need something like uniqueBars for the drink to know what

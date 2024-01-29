@@ -1,16 +1,45 @@
-import React from 'react';
-import Read from './Read.js';
+import React, { useState, useEffect } from 'react';
+import { ref, onValue } from "firebase/database";
+import { db } from "./firebase.js";
 import SignIn from './SignIn.js';
+import Bar from './Bar.js'
 
 function App() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  
+  useEffect(() => {
+    const drinkRef = ref(db);
+     return onValue(drinkRef, (snapshot) => {
+      const data = snapshot.val();
+          setData(() => data);
+          setLoading(() => false);
+        }, (error) => {
+          setError(() => error);
+          setLoading(() => false);
+        });
+  }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <>
-    <SignIn/>
-    <Read/>
+      {data && (
+        <>
+          <SignIn/>
+          <Bar drinks={data.drinks} comments={data.comments}/>
+        </>
+      )}
     </>
   )
 }
 export default App;
+
 
 /* 
 Login page
