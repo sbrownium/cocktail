@@ -1,7 +1,12 @@
 import React from 'react';
+import NewComment from './NewComment';
 
 export default function Comment ({comments, commentDrinkID}) {
-    const filteredComments = comments.filter(comment => comment.drinkID === commentDrinkID);
+    const commentsObjectToArray = Object.entries(comments);
+    const removedKey = commentsObjectToArray.map(([firstElement, ...rest]) => rest);
+    const commentsArray = removedKey.flat();
+
+    const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
 return (
     <ul>
         {filteredComments.map(({userName, timeStamp, text}, index) => {
@@ -17,6 +22,7 @@ return (
         </li>
         )}
         )}
+        <NewComment commentDrinkID={commentDrinkID}/>
     </ul>
 )
 };

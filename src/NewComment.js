@@ -29,7 +29,7 @@ import { db } from "./firebase.js";
 //   return update(ref(db), updates);
 // }
 
-export default function NewComment() {
+export default function NewComment({commentDrinkID}) {
     const [comment, setComment] = useState('');
   
     function handleClick(e) {
@@ -40,10 +40,11 @@ export default function NewComment() {
         commentID: newCommentKey,
         userName: 'Scott',
         userToken: 'ifdshoiadklsf90239vnkc92',
-        drinkID: 'commentDrinkID',
+        drinkID: commentDrinkID,
         timeStamp: performance.timeOrigin,
         text: comment,
       };
+    setComment('');
       
     updates['/comments/' + newCommentKey] = newComment;
     return (
@@ -53,7 +54,8 @@ export default function NewComment() {
       .catch((error) => {
         console.log('problem writing')
       })
-    )}
+    )
+}
   
     return (
       <>
