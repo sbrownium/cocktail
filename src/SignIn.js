@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState } from 'react'; 
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
+import { ref, child, push, update } from "firebase/database";
+import { db } from "./firebase.js";
 // import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 // https://developers.google.com/identity/sign-in/web/sign-in
@@ -8,52 +10,56 @@ import { jwtDecode } from "jwt-decode";
 // https://www.dhiwise.com/post/react-google-oauth-the-key-to-secure-and-quick-logins#designing-a-custom-login-button
 // https://alexb72.medium.com/how-to-add-google-login-to-a-react-app-37f525cd7f01
 
+// https://www.npmjs.com/package/jwt-decode
+// React context
 
-export default function SignIn (){
-const [userInfo, setUserInfo] = useState([]);
-const [profileInfo, setProfileInfo] = useState([]);
 
+export default function SignIn ({users}){
+const [user, setUser] = useState();
+
+const usersObjectToArray = Object.entries(users);
+const removedKey = usersObjectToArray.map(([firstElement, ...rest]) => rest);
+const usersArray = removedKey.flat();
+
+// {drinksArray.map(({ barName, barID }, index) => {
+//   if (!uniqueBars.has(barID)) {
+//     uniqueBars.add(barID);
+//     const drinksAtBar = drinksArray.filter(drink => drink.barID === barID);
     const responseMessage = (response) => {
       const token = response.credential;
-      // everything happens here:
-      // database request
-      
-      setUserInfo(response);
-      console.log(jwtDecode(token));
+      const decoded = jwtDecode(token);
+      const {name, given_name, family_name, email, sub} = decoded
+      const currentUser = {
+        userName: name,
+        giveName: given_name,
+        familyName: family_name,
+        email,
+        userID: sub
+      }
+      setUser(currentUser);
+      // usersArray.map({userID}) => {
+      //   if (userID != user.UserID) {
+      //     addToDB = true;
+      //   }
+      // }
+
+      const newUserKey = push(child(ref(db), '/users/')).key;
+      const updates = {};
+      updates['/users/' + newUserKey] = currentUser;
+  return (
+      update(ref(db), updates).then(() => {
+          console.log('Data saved successfully!')
+    })
+    .catch((error) => {
+      console.log('problem writing')
+    })
+  )
     }
     const errorMessage = (error) => {
         console.log(error);
     };
-
-  //   useEffect(
-  //     () => {
-  //         if (userInfo) {
-  //             fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userInfo.credential}`, {
-            
-  //                 })
-  //                 .then((response) => {
-  //                     setProfileInfo(response.data);
-  //                 })
-  //                 .catch((error) => console.log(error));
-  //         }
-  //     },
-  //     [ userInfo ]
-  // );
       return (
         <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
       );
 }
 
-// export default function SignIn () {
-//       const responseMessage = (response) => {
-//         console.log(response);
-//       }
-//       const errorMessage = (error) => {
-//           console.log(error);
-//       };
-//         return (
-//           <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-//         );
-//   }
-
-//https://www.npmjs.com/package/jwt-decode

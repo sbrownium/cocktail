@@ -31,7 +31,7 @@ function App() {
     <>
       {data && (
         <>
-          <SignIn/>
+          <SignIn users={data.users}/>
           <Bar drinks={data.drinks} comments={data.comments}/>
         </>
       )}
