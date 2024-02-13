@@ -3,11 +3,7 @@ import React from 'react';
 import Drink from './Drink.js'
 
 export default function Bar({drinks, comments}) {
- 
-const drinksObjectToArray = Object.entries(drinks);
-const removedKey = drinksObjectToArray.map(([firstElement, ...rest]) => rest);
-const drinksArray = removedKey.flat();
-
+const drinksArray = Object.values(drinks);
 const uniqueBars = new Set();
 
   return (

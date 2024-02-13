@@ -17,14 +17,8 @@ import { db } from "./firebase.js";
 export default function SignIn ({users}){
 const [user, setUser] = useState();
 
-const usersObjectToArray = Object.entries(users);
-const removedKey = usersObjectToArray.map(([firstElement, ...rest]) => rest);
-const usersArray = removedKey.flat();
+const usersArray = Object.values(users);
 
-// {drinksArray.map(({ barName, barID }, index) => {
-//   if (!uniqueBars.has(barID)) {
-//     uniqueBars.add(barID);
-//     const drinksAtBar = drinksArray.filter(drink => drink.barID === barID);
     const responseMessage = (response) => {
       const token = response.credential;
       const decoded = jwtDecode(token);
@@ -37,24 +31,20 @@ const usersArray = removedKey.flat();
         userID: sub
       }
       setUser(currentUser);
-      // usersArray.map({userID}) => {
-      //   if (userID != user.UserID) {
-      //     addToDB = true;
-      //   }
-      // }
-
+      const existingUser = usersArray.find((u) => u.userID === currentUser.userID )
+      if (!existingUser) {
       const newUserKey = push(child(ref(db), '/users/')).key;
       const updates = {};
       updates['/users/' + newUserKey] = currentUser;
   return (
       update(ref(db), updates).then(() => {
-          console.log('Data saved successfully!')
+          console.log('Data saved successfully!');
     })
     .catch((error) => {
       console.log('problem writing')
     })
   )
-    }
+    }}
     const errorMessage = (error) => {
         console.log(error);
     };
