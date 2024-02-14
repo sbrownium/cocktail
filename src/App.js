@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase.js";
+import { UserProvider } from './UserContext';
 import SignIn from './SignIn.js';
 import Bar from './Bar.js'
 
@@ -31,8 +32,10 @@ function App() {
     <>
       {data && (
         <>
+        <UserProvider>
           <SignIn users={data.users}/>
           <Bar drinks={data.drinks} comments={data.comments}/>
+        </UserProvider>
         </>
       )}
     </>

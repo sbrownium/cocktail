@@ -1,8 +1,9 @@
-import React, { useState } from 'react'; 
+import React, { useState, useContext } from 'react'; 
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
+import { UserContext } from './UserContext.js';
 // import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 // https://developers.google.com/identity/sign-in/web/sign-in
@@ -15,7 +16,8 @@ import { db } from "./firebase.js";
 
 
 export default function SignIn ({users}){
-const [user, setUser] = useState();
+
+const [user, setUser] = useContext(UserContext);
 
 const usersArray = Object.values(users);
 
