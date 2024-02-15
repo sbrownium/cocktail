@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'; 
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
@@ -16,10 +16,14 @@ import { UserContext } from './UserContext.js';
 
 
 export default function SignIn ({users}){
-
 const [user, setUser] = useContext(UserContext);
-
 const usersArray = Object.values(users);
+
+function handleClick (e) {
+  e.preventDefault();
+  googleLogout();
+  setUser('');
+}
 
     const responseMessage = (response) => {
       const token = response.credential;
@@ -50,8 +54,14 @@ const usersArray = Object.values(users);
     const errorMessage = (error) => {
         console.log(error);
     };
+    if (!user) {
       return (
         <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-      );
-}
+      )}
+      else {
+        return (
+          <button onClick={handleClick}>log out</button>
+        )
+      }
+};
 
