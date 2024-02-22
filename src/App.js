@@ -4,7 +4,7 @@ import { db } from "./firebase.js";
 import { UserProvider } from './UserContext';
 import SignIn from './SignIn.js';
 import Bar from './Bar.js'
-import NewDrink from './NewDrink.js'
+import NewContainer from './NewContainer.js';
 
 function App() {
   const [data, setData] = useState(null);
@@ -35,8 +35,8 @@ function App() {
         <>
         <UserProvider>
           <SignIn users={data.users}/>
-          <Bar drinks={data.drinks} comments={data.comments}/>
-          <NewDrink bars={data.drinks}/>
+          <Bar bars={data.bars} drinks={data.drinks} comments={data.comments}/>
+          {/* <NewContainer bars={data.bars}/> */}
         </UserProvider>
         </>
       )}

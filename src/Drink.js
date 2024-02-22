@@ -2,17 +2,19 @@ import React from 'react';
 import Comment from './Comment';
 // import NewComment from './NewComment';
 
-export default function Drink({drinksAtBar, comments}){
+export default function Drink({barID, drinks, comments}){
+  const drinksArray = Object.values(drinks);
+  const filteredBars = drinksArray.filter(bar => bar.barID === barID);
     return (
         <ul>
-      {drinksAtBar.map(({drinkName, drinkID, description, price}, index) => (
+      {filteredBars.map(({drinkName, drinkID, description, price}, index) => (  
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${price.toFixed(2)}
             <Comment comments={comments} commentDrinkID={drinkID}/>
           </li>
-             ))}
+          ))}
            </ul>   
       )
 }

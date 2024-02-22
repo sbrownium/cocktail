@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
+import Submit from './Submit.js';
+
 
 export default function NewComment({commentDrinkID}) {
     const [comment, setComment] = useState('');
@@ -46,14 +48,7 @@ export default function NewComment({commentDrinkID}) {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <input
-            type="submit"
-            value="add"
-            onClick={handleClick}
-            onKeyDown={(e) =>
-              e.key === 'Enter' ? handleClick(e) : ''
-            }
-          />
+          <Submit handleClick={handleClick}/>
         </form>
       </>
     );
