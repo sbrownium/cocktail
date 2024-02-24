@@ -11,7 +11,7 @@ export default function Drink({barID, drinks, comments}){
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
-            ${price.toFixed(2)}
+            {/* ${price.toFixed(2)} */}
             <Comment comments={comments} commentDrinkID={drinkID}/>
           </li>
           ))}

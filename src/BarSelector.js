@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 
 
-export default function BarSelector({bars}) {
-    const [selectedBar, setSelectedBar] = useState('');
+export default function BarSelector({bars, newDrink, handleExistingBar}) {
     const barsArray = Object.values(bars);
     const uniqueBars = new Set();
-    const barIDToObject = barsArray.find(({barID}) => barID === selectedBar)
-    const barIDToBarName = barIDToObject.barName
+    // const findBarName = barsArray.find(({barID}) => barID === selectedBar)
+    // const barIDToBarName = barIDToObject.barName
       return (
         <>
           <label for='barSelect'>Bar</label>
           <select name='barSelect' 
-          value={selectedBar} 
-          onChange={e => setSelectedBar(e.target.value)}>
+          value={newDrink.barID} 
+          onChange={handleExistingBar}>
             <option value=''>Please choose a bar</option> 
             {barsArray.map(({ barName, barID }, index) => {
               if (!uniqueBars.has(barID)) {

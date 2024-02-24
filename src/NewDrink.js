@@ -1,14 +1,42 @@
+import React, { useState } from 'react';
+
+export default function NewDrink({newDrink, handleName, handleDescription, handlePrice}){
+
+// const {drinkName, description, price } = newDrink
+  return (
+    <>
+      <label for='drinkName'>Name of Drink</label>
+      <input
+          id='drinkName'
+          type="text"
+          value={newDrink.drinkName}
+          onChange={handleName}
+      />
+      <label for='description'>Drink Description (from menu)</label>
+      <input
+          id='description'
+          type="text"
+          value={newDrink.description}
+          onChange={handleDescription}
+      />
+      <label for='price'>Price $</label>
+      <input
+          id='price'
+          type='number'
+          value={newDrink.price}
+          onChange={handlePrice}
+      />
+    </> 
+)
+}
+
+
 // import React, { useState, useContext } from 'react';
 // import { ref, child, push, update } from "firebase/database";
 // import { db } from "./firebase.js";
 // import { UserContext } from './UserContext.js';
 
-
-
-// export default function NewDrink ({selectedBar}){
-  
-   
-   
+// export default function NewDrink ({selectedBar}){ 
 //     // function barPicker(e) {
 //     //   setSelectedBar(e.target.value);
 //     // };
@@ -78,9 +106,6 @@
 //         <>
 //             <NewContainer selectedBar={selectedBar}/>
 //             <form>
-            
-            
-            
 //             <input
 //               type="submit"
 //               value="add"

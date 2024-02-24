@@ -36,7 +36,7 @@ function App() {
         <UserProvider>
           <SignIn users={data.users}/>
           <Bar bars={data.bars} drinks={data.drinks} comments={data.comments}/>
-          {/* <NewContainer bars={data.bars}/> */}
+          <NewContainer bars={data.bars}/>
         </UserProvider>
         </>
       )}

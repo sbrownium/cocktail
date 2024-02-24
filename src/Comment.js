@@ -2,10 +2,7 @@ import React from 'react';
 import NewComment from './NewComment';
 
 export default function Comment ({comments, commentDrinkID}) {
-    const commentsObjectToArray = Object.entries(comments);
-    const removedKey = commentsObjectToArray.map(([firstElement, ...rest]) => rest);
-    const commentsArray = removedKey.flat();
-
+    const commentsArray = Object.values(comments);
     const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
 return (
     <ul>
