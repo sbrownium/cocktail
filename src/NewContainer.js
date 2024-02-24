@@ -35,7 +35,8 @@ export default function NewContainer ({bars}) {
         } else {
             setNewDrink({
                 ...newDrink,
-                barID: e.target.value});
+                barID: e.target.value,
+                barName: ''});
         }};
 
     function handleNewBar (e) {
