@@ -22,16 +22,12 @@ export default function NewContainer ({bars}) {
         isNewBar: false
     }
     const [newDrink, setNewDrink] = useState(initialNewDrink);
-    const [isNew, setIsNew] = useState(false);
     const newDrinkKey = push(child(ref(db), '/drinks/')).key;
     const newBarKey = push(child(ref(db), '/bars/')).key;
+    const barsArray = Object.values(bars);
 
     function handleExistingBar (e) {
-            
-        // const barsArray = Object.values(bars);
-        // const findBar = barsArray.find(ID => ID.barID === e.target.value);
         if (e.target.value === 'new') {
-            // setIsNew(true);
             setNewDrink({
                 ...newDrink,
                 isNewBar: true,
@@ -39,7 +35,6 @@ export default function NewContainer ({bars}) {
             });   
         } 
         else {
-            const barsArray = Object.values(bars);
             const findBar = barsArray.find(ID => ID.barID === e.target.value);
             const barIDToBarName = findBar.barName 
             setNewDrink({
@@ -83,17 +78,7 @@ export default function NewContainer ({bars}) {
     }
    
     function handleClick(e){
-        // const newDrinkKey = push(child(ref(db), '/drinks/')).key;
-        // const newBarKey = push(child(ref(db), '/bars/')).key;
         e.preventDefault();
-        
-        // setNewDrink({
-        //     ...newDrink,
-        //     // barID: newBarKey,
-        //     // drinkID: newDrinkKey,
-        //     addedBy: userID,
-        //     timeStamp: performance.timeOrigin
-        // })
           if (!user) { 
               return (
                 alert('Please login to add a drink')
@@ -104,21 +89,23 @@ export default function NewContainer ({bars}) {
             const {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price} = newDrink
             const newDrinkObj = {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price};
             const newBarObj = {barID, barName, addedBy, timeStamp};
+            
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
-            updates['/bars/' + newBarKey] = newBarObj;
-            // allUpdates['/drinks/' + newDrinkKey, '/bars/' + newBarKey ] = newUpdates;
+            const matchBar = barsArray.find(ID => ID.barID === newDrink.barID);
+            
+            if (!matchBar) {
+            updates['/bars/' + newBarKey] = newBarObj;}
+            setNewDrink(initialNewDrink)
             return (
-                // update(ref(db), barUpdates, drinkUpdates, ).then(() => {
                 update(ref(db), updates).then(() => {
-                console.log('Drink Data saved successfully!')
+                console.log('Data saved successfully!')
                 })
-                // update(ref(db), barUpdates).then(() => {
-                //     console.log('Bar Data saved successfully!')
-                // })
         .catch((error) => {
           console.log('problem writing')
-        }))}
-        setNewDrink(initialNewDrink)
+        }))
+        
+    }
+        
     }
         
     return (
