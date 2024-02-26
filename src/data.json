@@ -1,6 +1,7 @@
 {
 "drinks": {
     "-NpHWPZX3UPujdq_bWkx": {
+        "addedBy": "kdahofienfakd2930547usklfnd",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "85% Euphoria",
@@ -9,6 +10,7 @@
         "price": 17
     },
     "-NpHsYVvtj0emdOgk-Mo": {
+        "addedBy": "kdahofienfakd2930547usklfnd",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "Earthly Tether",
@@ -17,6 +19,7 @@
         "price": 14
     },
     "-NpHrmTBbIekPIk0Fd89": {
+        "addedBy": "kdahofienfakd2930547usklfnd",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Booryoung",
@@ -25,6 +28,7 @@
         "price": 22
     },
     "-NpHs4DwzB9U8ka98ZFb":{
+        "addedBy": "kdahofienfakd2930547usklfnd",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Sumnara",
@@ -35,11 +39,15 @@
     "bars": {
         "-Nr7lOhIhP11igBsjqOp": {
             "barName": "Stampede Cocktail Club",
-            "barID": "-Nr7lOhIhP11igBsjqOp"
+            "barID": "-Nr7lOhIhP11igBsjqOp",
+            "addedBy": "kdahofienfakd2930547usklfnd",
+            "timeStamp": 1705790249166
         },
         "-NqtP2KgP0su3VWrXHaf": {
             "barName": "Wero",
-            "barID": "-NqtP2KgP0su3VWrXHaf"
+            "barID": "-NqtP2KgP0su3VWrXHaf",
+            "addedBy": "kdahofienfakd2930547usklfnd",
+            "timeStamp": 1705790280212
         }},
 "comments": {
    "-NpI6y26xFs-j2y0M7r9": {
