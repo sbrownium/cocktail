@@ -7,7 +7,7 @@ import NewBar from './NewBar.js';
 import NewDrink from './NewDrink.js';
 import Submit from './Submit.js';
 
-export default function NewContainer ({bars}) {
+export default function NewContainer ({bars, drinks}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
     const initialNewDrink = {
@@ -25,6 +25,7 @@ export default function NewContainer ({bars}) {
     const newDrinkKey = push(child(ref(db), '/drinks/')).key;
     const newBarKey = push(child(ref(db), '/bars/')).key;
     const barsArray = Object.values(bars);
+    
 
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
@@ -35,7 +36,7 @@ export default function NewContainer ({bars}) {
             });   
         } 
         else {
-            const findBar = barsArray.find(ID => ID.barID === e.target.value);
+            const findBar = barsArray.find((ID) => ID.barID === e.target.value);
             const barIDToBarName = findBar.barName 
             setNewDrink({
                 ...newDrink,
@@ -46,12 +47,20 @@ export default function NewContainer ({bars}) {
     };
 
     function handleNewBar (e) {
+        const findBarName = barsArray.find((bar) => bar.barName === e.target.value);
+        if (findBarName) {
+            setNewDrink({
+                ...newDrink,
+                barName: findBarName.barName,
+                barID: findBarName.barID
+            })
+        } else {
         setNewDrink({
             ...newDrink,
             barName: e.target.value,
             barID: newBarKey
         })
-    }
+    }}
         
     function handleName (e) {
         setNewDrink({
@@ -78,13 +87,19 @@ export default function NewContainer ({bars}) {
     }
    
     function handleClick(e){
+        const drinksArray = Object.values(drinks);
+        const matchDrink = drinksArray.filter((drink) => drink.barID === newDrink.barID).find((drink) => drink.drinkName === newDrink.drinkName);
+        const matchBarName = barsArray.find((name) => name.barName === newDrink.barName)
         e.preventDefault();
           if (!user) { 
               return (
                 alert('Please login to add a drink')
               )
-          }
-          else {
+          } else if (matchDrink) {
+            return (
+                alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
+            )}
+           else {
             const updates = {};   
             const {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price} = newDrink
             const newDrinkObj = {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price};
@@ -92,9 +107,10 @@ export default function NewContainer ({bars}) {
             
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
             const matchBar = barsArray.find(ID => ID.barID === newDrink.barID);
-            
+        
             if (!matchBar) {
-            updates['/bars/' + newBarKey] = newBarObj;}
+            updates['/bars/' + newBarKey] = newBarObj;
+        }
             setNewDrink(initialNewDrink)
             return (
                 update(ref(db), updates).then(() => {
@@ -103,11 +119,8 @@ export default function NewContainer ({bars}) {
         .catch((error) => {
           console.log('problem writing')
         }))
-        
     }
-        
-    }
-        
+    }    
     return (
         <>
             <form>
