@@ -5,9 +5,8 @@ import { db } from "./firebase.js";
 import BarSelector from './BarSelector.js';
 import NewBar from './NewBar.js';
 import NewDrink from './NewDrink.js';
-import NewComment from './NewComment.js';
 import Submit from './Submit.js';
-import './NewContainer.css' 
+
 
 export default function NewContainer ({bars, drinks, commets}) {
     const [user, setUser] = useContext(UserContext);
@@ -74,9 +73,19 @@ export default function NewContainer ({bars, drinks, commets}) {
             drinkName: e.target.value,
             drinkID: newDrinkKey,
             addedBy: userID,
-            timeStamp: performance.timeOrigin
+            timeStamp: performance.timeOrigin,
+            needsName: false
         })
     }
+
+    function handleNameFocus () {
+        if (newDrink.needsName === true) {
+        setNewDrink({
+            ...newDrink,
+            drinkName: '',
+            needsName: false
+        })
+    }}
    
     function handleDescription (e) {
         setNewDrink({
@@ -109,7 +118,6 @@ export default function NewContainer ({bars, drinks, commets}) {
                     ...newDrink,
                     needsName: true
                 });
-                alert('Please fill out the missing fields');
             }
            else {
             const updates = {};   
@@ -138,7 +146,7 @@ export default function NewContainer ({bars, drinks, commets}) {
             <form>
                 <BarSelector bars={bars} newDrink={newDrink} handleExistingBar={handleExistingBar}/>
                 <NewBar bars={bars} newDrink={newDrink} handleNewBar={handleNewBar}/>
-                <NewDrink newDrink={newDrink} handleName={handleName} handleDescription={handleDescription} handlePrice={handlePrice}/>
+                <NewDrink newDrink={newDrink} handleName={handleName} handleNameFocus={handleNameFocus} handleDescription={handleDescription} handlePrice={handlePrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <Submit handleClick={handleClick}/>
               

@@ -1,7 +1,7 @@
 import React from 'react';
 import './NewDrink.css'
 
-export default function NewDrink({newDrink, handleName, handleDescription, handlePrice}){
+export default function NewDrink({newDrink, handleName, handleNameFocus, handleDescription, handlePrice}){
 
 // const {drinkName, description, price } = newDrink
   return (
@@ -11,8 +11,10 @@ export default function NewDrink({newDrink, handleName, handleDescription, handl
           className={newDrink.needsName ? 'missing' : '' }
           id='drinkName'
           type="text"
-          value={newDrink.drinkName}
+          // value={newDrink.drinkName}
+          value={newDrink.needsName ? 'Required' : newDrink.drinkName}
           onChange={handleName}
+          onFocus={handleNameFocus}
       />
       </label>
       <label>Drink Description (from menu)
