@@ -5,9 +5,11 @@ import { db } from "./firebase.js";
 import BarSelector from './BarSelector.js';
 import NewBar from './NewBar.js';
 import NewDrink from './NewDrink.js';
+import NewComment from './NewComment.js';
 import Submit from './Submit.js';
+import './NewContainer.css' 
 
-export default function NewContainer ({bars, drinks}) {
+export default function NewContainer ({bars, drinks, commets}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
     const initialNewDrink = {
@@ -19,7 +21,11 @@ export default function NewContainer ({bars, drinks}) {
         price: '',
         addedBy: '',
         timeStamp: '',
-        isNewBar: false
+        isNewBar: false,
+        needsName: false,
+        needsBar: false,
+        needsDescription: false,
+        needsPrice: false,
     }
     const [newDrink, setNewDrink] = useState(initialNewDrink);
     const newDrinkKey = push(child(ref(db), '/drinks/')).key;
@@ -47,7 +53,7 @@ export default function NewContainer ({bars, drinks}) {
     };
 
     function handleNewBar (e) {
-        const findBarName = barsArray.find((bar) => bar.barName === e.target.value);
+        const findBarName = barsArray.find((bar) => bar.barName.toLowerCase() === e.target.value.toLowerCase());
         if (findBarName) {
             setNewDrink({
                 ...newDrink,
@@ -88,8 +94,8 @@ export default function NewContainer ({bars, drinks}) {
    
     function handleClick(e){
         const drinksArray = Object.values(drinks);
-        const matchDrink = drinksArray.filter((drink) => drink.barID === newDrink.barID).find((drink) => drink.drinkName === newDrink.drinkName);
-        const matchBarName = barsArray.find((name) => name.barName === newDrink.barName)
+        const matchDrink = drinksArray.filter((drink) => drink.barID === newDrink.barID).find((drink) => drink.drinkName.toLowerCase() === newDrink.drinkName.toLowerCase());
+       
         e.preventDefault();
           if (!user) { 
               return (
@@ -98,7 +104,13 @@ export default function NewContainer ({bars, drinks}) {
           } else if (matchDrink) {
             return (
                 alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
-            )}
+            )} else if (newDrink.drinkName === '') {
+                setNewDrink({
+                    ...newDrink,
+                    needsName: true
+                });
+                alert('Please fill out the missing fields');
+            }
            else {
             const updates = {};   
             const {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price} = newDrink
@@ -127,7 +139,9 @@ export default function NewContainer ({bars, drinks}) {
                 <BarSelector bars={bars} newDrink={newDrink} handleExistingBar={handleExistingBar}/>
                 <NewBar bars={bars} newDrink={newDrink} handleNewBar={handleNewBar}/>
                 <NewDrink newDrink={newDrink} handleName={handleName} handleDescription={handleDescription} handlePrice={handlePrice}/>
+                {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <Submit handleClick={handleClick}/>
+              
             </form>
        </>
     )         

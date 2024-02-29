@@ -8,13 +8,14 @@ export default function NewBar ({bars, newDrink, handleNewBar, isNew}) {
     if (newDrink.isNewBar) {    
     return (
         <>
-            <label for='newBar'>New Bar Name</label>
+            <label>New Bar Name
             <input
               id='newBar'
               type="text"
               value={newDrink.barName}
               onChange={handleNewBar}
             />
+            </label>
         </>
     )
 }};

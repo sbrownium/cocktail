@@ -1,6 +1,7 @@
 import React from 'react';
 import NewComment from './NewComment';
 
+
 export default function Comment ({comments, commentDrinkID}) {
     const commentsArray = Object.values(comments);
     const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);

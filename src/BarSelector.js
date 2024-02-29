@@ -8,7 +8,7 @@ export default function BarSelector({bars, newDrink, handleExistingBar}) {
     // const barIDToBarName = barIDToObject.barName
       return (
         <>
-          <label for='barSelect'>Bar</label>
+          <label>Bar
           <select name='barSelect' 
           value={newDrink.barID} 
           onChange={handleExistingBar}>
@@ -22,6 +22,7 @@ export default function BarSelector({bars, newDrink, handleExistingBar}) {
               }})}
             <option isNew={true} className='new' value='new'>New</option>
             </select>
+            </label>
             </>
       )
 };
