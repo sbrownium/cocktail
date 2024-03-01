@@ -78,7 +78,7 @@ export default function NewContainer ({bars, drinks, commets}) {
         })
     }
 
-    function handleNameFocus () {
+    function focusName () {
         if (newDrink.needsName === true) {
         setNewDrink({
             ...newDrink,
@@ -90,16 +90,36 @@ export default function NewContainer ({bars, drinks, commets}) {
     function handleDescription (e) {
         setNewDrink({
             ...newDrink,
-            description: e.target.value
+            description: e.target.value,
+            needsDescription: false
         })
     }
+
+    function focusDescription () {
+        if (newDrink.needsDescription === true) {
+        setNewDrink({
+            ...newDrink,
+            description: '',
+            needsDescription: false
+        })
+    }}
 
     function handlePrice (e) {
         setNewDrink({
             ...newDrink,
-            price: e.target.value
+            price: e.target.value,
+            focusPrice: false
         })
     }
+
+    function focusPrice () {
+        if (newDrink.needsPrice === true) {
+        setNewDrink({
+            ...newDrink,
+            price: '',
+            needsPrice: false
+        })
+    }}
    
     function handleClick(e){
         const drinksArray = Object.values(drinks);
@@ -110,15 +130,69 @@ export default function NewContainer ({bars, drinks, commets}) {
               return (
                 alert('Please login to add a drink')
               )
-          } else if (matchDrink) {
+          } if (matchDrink) {
             return (
                 alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
-            )} else if (newDrink.drinkName === '') {
+            );
+        } if (newDrink.drinkName === '' || newDrink.description === '' || newDrink.price === '') {
+            if (newDrink.drinkName === '') {
+                console.log('needs drink name');
                 setNewDrink({
                     ...newDrink,
                     needsName: true
                 });
             }
+            if (newDrink.description === '') {
+                console.log('needs description');
+                setNewDrink({
+                    ...newDrink,
+                    needsDescription: true
+                });
+            }
+            if (newDrink.price === '') {
+                console.log('needs price');
+                setNewDrink({
+                    ...newDrink,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.description === '' && newDrink.price === '') {
+                console.log('needs description and price');
+                setNewDrink({
+                    ...newDrink,
+                    needsDescription: true,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.drinkName === '' && newDrink.price === '') {
+                console.log('needs drink name and price');
+                setNewDrink({
+                    ...newDrink,
+                    needsName: true,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.drinkName === '' && newDrink.description === '') {
+                console.log('needs drink name and description');
+                setNewDrink({
+                    ...newDrink,
+                    needsName: true,
+                    needsDescription: true
+                });
+            }
+            if (newDrink.drinkName === '' && newDrink.description === '' && newDrink.price === '') {
+                console.log('needs drink name, description, and price');
+                setNewDrink({
+                    ...newDrink,
+                    needsName: true,
+                    needsDescription: true,
+                    needsPrice: true
+                });
+            }
+            return (
+                alert('Missing Stuff')
+            )
+        }
            else {
             const updates = {};   
             const {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price} = newDrink
@@ -146,7 +220,7 @@ export default function NewContainer ({bars, drinks, commets}) {
             <form>
                 <BarSelector bars={bars} newDrink={newDrink} handleExistingBar={handleExistingBar}/>
                 <NewBar bars={bars} newDrink={newDrink} handleNewBar={handleNewBar}/>
-                <NewDrink newDrink={newDrink} handleName={handleName} handleNameFocus={handleNameFocus} handleDescription={handleDescription} handlePrice={handlePrice}/>
+                <NewDrink newDrink={newDrink} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <Submit handleClick={handleClick}/>
               
