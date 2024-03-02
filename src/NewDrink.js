@@ -1,34 +1,34 @@
 import React from 'react';
 import './NewDrink.css'
 
-export default function NewDrink({newDrink, handleName, focusName, handleDescription, focusDescription, handlePrice, focusPrice}){
+export default function NewDrink({newDrink, validation, handleName, focusName, handleDescription, focusDescription, handlePrice, focusPrice}){
 
 // const {drinkName, description, price } = newDrink
   return (
     <>
       <label>Name of Drink
       <input
-          className={newDrink.needsName ? 'missing' : '' }
+          className={validation.needsDrinkName ? 'missing' : '' }
           id='drinkName'
           type="text"
-          value={newDrink.needsName ? 'Scott is a completist' : newDrink.drinkName}
+          value={newDrink.drinkName}
           onChange={handleName}
           onFocus={focusName}
       />
       </label>
       <label>Drink Description (from menu)
       <input
-          className={newDrink.needsDescription ? 'missing' : '' }
+          className={validation.needsDescription ? 'missing' : '' }
           id='description'
           type="text"
-          value={newDrink.needsDescription ? 'Scott is a completist' : newDrink.description}
+          value={newDrink.description}
           onChange={handleDescription}
           onFocus={focusDescription}
       />
       </label>
       <label>Price $
       <input
-          className={newDrink.needsPrice ? 'missing' : '' }
+          className={validation.needsPrice ? 'missing' : '' }
           id='price'
           type='number'
           value={newDrink.price}

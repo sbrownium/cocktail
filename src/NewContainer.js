@@ -11,6 +11,13 @@ import Submit from './Submit.js';
 export default function NewContainer ({bars, drinks, commets}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
+    const initialValidation = {
+        needsDrinkName: false,
+        needsBarName: false,
+        needsBardID: false,
+        needsDescription: false,
+        needsPrice: false,
+    }
     const initialNewDrink = {
         barID: '',
         barName: '',
@@ -20,13 +27,10 @@ export default function NewContainer ({bars, drinks, commets}) {
         price: '',
         addedBy: '',
         timeStamp: '',
-        isNewBar: false,
-        needsName: false,
-        needsBar: false,
-        needsDescription: false,
-        needsPrice: false,
+        isNewBar: false
     }
     const [newDrink, setNewDrink] = useState(initialNewDrink);
+    const [validation, setValidation] = useState(initialValidation);
     const newDrinkKey = push(child(ref(db), '/drinks/')).key;
     const newBarKey = push(child(ref(db), '/bars/')).key;
     const barsArray = Object.values(bars);
@@ -73,33 +77,45 @@ export default function NewContainer ({bars, drinks, commets}) {
             drinkName: e.target.value,
             drinkID: newDrinkKey,
             addedBy: userID,
-            timeStamp: performance.timeOrigin,
-            needsName: false
+            timeStamp: performance.timeOrigin
+        })
+        setValidation({
+            ...validation,
+            needsDrinkName: false
         })
     }
 
     function focusName () {
-        if (newDrink.needsName === true) {
+        if (validation.needsDrinkName === true) {
         setNewDrink({
             ...newDrink,
-            drinkName: '',
-            needsName: false
+            drinkName: ''
+        })
+        setValidation({
+            ...validation,
+            needsDrinkName: false
         })
     }}
    
     function handleDescription (e) {
         setNewDrink({
             ...newDrink,
-            description: e.target.value,
+            description: e.target.value   
+        })
+        setValidation({
+            ...validation,
             needsDescription: false
         })
     }
 
     function focusDescription () {
-        if (newDrink.needsDescription === true) {
+        if (validation.needsDescription === true) {
         setNewDrink({
             ...newDrink,
             description: '',
+        })
+        setValidation({
+            ...validation,
             needsDescription: false
         })
     }}
@@ -107,16 +123,22 @@ export default function NewContainer ({bars, drinks, commets}) {
     function handlePrice (e) {
         setNewDrink({
             ...newDrink,
-            price: e.target.value,
-            focusPrice: false
+            price: e.target.value
+        })
+        setValidation({
+            ...validation,
+            needsPrice: false
         })
     }
 
     function focusPrice () {
-        if (newDrink.needsPrice === true) {
+        if (validation.needsPrice === true) {
         setNewDrink({
             ...newDrink,
-            price: '',
+            price: ''
+        })
+        setValidation({
+            ...validation,
             needsPrice: false
         })
     }}
@@ -134,57 +156,57 @@ export default function NewContainer ({bars, drinks, commets}) {
             return (
                 alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
             );
-        } if (newDrink.drinkName === '' || newDrink.description === '' || newDrink.price === '') {
+        } if (newDrink.drinkDrinkName === '' || newDrink.description === '' || newDrink.price === '' || newDrink.barID === '' || newDrink.barName === '') {
             if (newDrink.drinkName === '') {
                 console.log('needs drink name');
-                setNewDrink({
-                    ...newDrink,
-                    needsName: true
+                setValidation({
+                    ...validation,
+                    needsDrinkName: true
                 });
             }
             if (newDrink.description === '') {
                 console.log('needs description');
-                setNewDrink({
-                    ...newDrink,
+                setValidation({
+                    ...validation,
                     needsDescription: true
                 });
             }
             if (newDrink.price === '') {
                 console.log('needs price');
-                setNewDrink({
-                    ...newDrink,
+                setValidation({
+                    ...validation,
                     needsPrice: true
                 });
             }
             if (newDrink.description === '' && newDrink.price === '') {
                 console.log('needs description and price');
-                setNewDrink({
-                    ...newDrink,
+                setValidation({
+                    ...validation,
                     needsDescription: true,
                     needsPrice: true
                 });
             }
             if (newDrink.drinkName === '' && newDrink.price === '') {
                 console.log('needs drink name and price');
-                setNewDrink({
-                    ...newDrink,
-                    needsName: true,
+                setValidation({
+                    ...validation,
+                    needsDrinkName: true,
                     needsPrice: true
                 });
             }
             if (newDrink.drinkName === '' && newDrink.description === '') {
                 console.log('needs drink name and description');
-                setNewDrink({
-                    ...newDrink,
-                    needsName: true,
+                setValidation({
+                    ...validation,
+                    needsDrinkName: true,
                     needsDescription: true
                 });
             }
             if (newDrink.drinkName === '' && newDrink.description === '' && newDrink.price === '') {
                 console.log('needs drink name, description, and price');
-                setNewDrink({
-                    ...newDrink,
-                    needsName: true,
+                setValidation({
+                    ...validation,
+                    needsDrinkName: true,
                     needsDescription: true,
                     needsPrice: true
                 });
@@ -220,7 +242,7 @@ export default function NewContainer ({bars, drinks, commets}) {
             <form>
                 <BarSelector bars={bars} newDrink={newDrink} handleExistingBar={handleExistingBar}/>
                 <NewBar bars={bars} newDrink={newDrink} handleNewBar={handleNewBar}/>
-                <NewDrink newDrink={newDrink} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
+                <NewDrink newDrink={newDrink} validation={validation} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <Submit handleClick={handleClick}/>
               
