@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-
+import React from 'react';
+import './BarSelector.css';
 
 export default function BarSelector({bars, newDrink, handleExistingBar}) {
     const barsArray = Object.values(bars);
     const uniqueBars = new Set();
-    // const findBarName = barsArray.find(({barID}) => barID === selectedBar)
-    // const barIDToBarName = barIDToObject.barName
       return (
         <>
           <label>Bar
