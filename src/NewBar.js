@@ -7,7 +7,7 @@ export default function NewBar ({ newDrink, validation, handleNewBar, focusNewBa
         <>
             <label>New Bar Name
             <input
-            className={validation.needsBarName ? 'missing' : '' }
+              className={validation.needsBarName ? 'missing' : '' }
               id='newBar'
               type="text"
               value={newDrink.barName}

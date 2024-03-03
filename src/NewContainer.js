@@ -14,7 +14,7 @@ export default function NewContainer ({bars, drinks, commets}) {
     const initialValidation = {
         needsDrinkName: false,
         needsBarName: false,
-        needsBardID: false,
+        needsBarID: false,
         needsDescription: false,
         needsPrice: false,
     }
@@ -35,7 +35,6 @@ export default function NewContainer ({bars, drinks, commets}) {
     const newBarKey = push(child(ref(db), '/bars/')).key;
     const barsArray = Object.values(bars);
     
-
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
             setNewDrink({
@@ -54,6 +53,19 @@ export default function NewContainer ({bars, drinks, commets}) {
                 barName: barIDToBarName});     
         } 
     };
+
+    function focusSelector () {
+        if (validation.needsBarID === true) {
+            setNewDrink({
+                ...newDrink,
+                barID: ''
+            })
+            setValidation({
+                ...validation,
+                needsBarID: false
+            })
+        }
+    }
 
     function handleNewBar (e) {
         const findBarName = barsArray.find((bar) => bar.barName.toLowerCase() === e.target.value.toLowerCase());
@@ -168,7 +180,8 @@ export default function NewContainer ({bars, drinks, commets}) {
             return (
                 alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
             );
-        } if (newDrink.drinkName === '' || newDrink.description === '' || newDrink.price === '' || newDrink.barID === '' || newDrink.barName === '') {
+        } 
+        if (newDrink.drinkName === '' || newDrink.description === '' || newDrink.price === '' || newDrink.barID === '' || newDrink.barName === '') {
             if (newDrink.barName === '') {
                 setValidation({
                     ...validation,
@@ -188,14 +201,19 @@ export default function NewContainer ({bars, drinks, commets}) {
                 });
             }
             if (newDrink.price === '') {
-                console.log('needs price');
                 setValidation({
                     ...validation,
                     needsPrice: true
                 });
             }
+            if (newDrink.barID === '' && newDrink.barName === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
+                    needsBarName: true
+                });
+            }
             if (newDrink.description === '' && newDrink.price === '') {
-                console.log('needs description and price');
                 setValidation({
                     ...validation,
                     needsDescription: true,
@@ -203,7 +221,6 @@ export default function NewContainer ({bars, drinks, commets}) {
                 });
             }
             if (newDrink.drinkName === '' && newDrink.price === '') {
-                console.log('needs drink name and price');
                 setValidation({
                     ...validation,
                     needsDrinkName: true,
@@ -211,7 +228,6 @@ export default function NewContainer ({bars, drinks, commets}) {
                 });
             }
             if (newDrink.drinkName === '' && newDrink.description === '') {
-                console.log('needs drink name and description');
                 setValidation({
                     ...validation,
                     needsDrinkName: true,
@@ -247,7 +263,7 @@ export default function NewContainer ({bars, drinks, commets}) {
                     needsPrice: true
                 });
             }
-            if (newDrink.description === '' && newDrink.price === '' && newDrink.barName === '') {
+            if (newDrink.barName === '' && newDrink.description === '' && newDrink.price === '') {
                 setValidation({
                     ...validation,
                     needsBarName: true,
@@ -255,7 +271,7 @@ export default function NewContainer ({bars, drinks, commets}) {
                     needsPrice: true
                 });
             }
-            if (newDrink.drinkName === '' && newDrink.price === '' && newDrink.barName === '') {
+            if (newDrink.barName === '' && newDrink.drinkName === '' && newDrink.price === '') {
                 setValidation({
                     ...validation,
                     needsBarName: true,
@@ -263,7 +279,7 @@ export default function NewContainer ({bars, drinks, commets}) {
                     needsPrice: true
                 });
             }
-            if (newDrink.drinkName === '' && newDrink.description === '' && newDrink.barName === '') {
+            if (newDrink.barName === '' && newDrink.drinkName === '' && newDrink.description === '') {
                 setValidation({
                     ...validation,
                     needsBarName: true,
@@ -271,9 +287,70 @@ export default function NewContainer ({bars, drinks, commets}) {
                     needsDescription: true
                 });
             }
-            if (newDrink.drinkName === '' && newDrink.description === '' && newDrink.price === '' && newDrink.barName === '') {
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.drinkName === '') {
                 setValidation({
                     ...validation,
+                    needsBarID: true,
+                    needsBarName: true,
+                    needsDrinkName: true
+                });
+            }
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.description === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
+                    needsBarName: true,
+                    needsDescription: true
+                });
+            }
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.price === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
+                    needsBarName: true,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.barName === '' && newDrink.drinkName === '' && newDrink.description === '' && newDrink.price === '') {
+                setValidation({
+                    ...validation,
+                    needsBarName: true,
+                    needsDrinkName: true,
+                    needsDescription: true,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.description === '' && newDrink.price === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
+                    needsDrinkName: true,
+                    needsDescription: true,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.drinkName === '' && newDrink.price === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
+                    needsBarName: true,
+                    needsDrinkName: true,
+                    needsPrice: true
+                });
+            }
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.drinkName === '' && newDrink.description === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
+                    needsBarName: true,
+                    needsDrinkName: true,
+                    needsDescription: true
+                });
+            }
+            if (newDrink.barID === '' && newDrink.barName === '' && newDrink.drinkName === '' && newDrink.description === '' && newDrink.price === '') {
+                setValidation({
+                    ...validation,
+                    needsBarID: true,
                     needsBarName: true,
                     needsDrinkName: true,
                     needsDescription: true,
@@ -296,7 +373,8 @@ export default function NewContainer ({bars, drinks, commets}) {
             if (!matchBar) {
             updates['/bars/' + newBarKey] = newBarObj;
         }
-            setNewDrink(initialNewDrink)
+            setNewDrink(initialNewDrink);
+            validation(initialValidation);
             return (
                 update(ref(db), updates).then(() => {
                 console.log('Data saved successfully!')
@@ -309,7 +387,7 @@ export default function NewContainer ({bars, drinks, commets}) {
     return (
         <>
             <form>
-                <BarSelector bars={bars} newDrink={newDrink} validation={validation} handleExistingBar={handleExistingBar}/>
+                <BarSelector bars={bars} newDrink={newDrink} validation={validation} handleExistingBar={handleExistingBar} focusSelector={focusSelector}/>
                 <NewBar newDrink={newDrink} validation={validation} handleNewBar={handleNewBar} focusNewBar={focusNewBar}/>
                 <NewDrink newDrink={newDrink} validation={validation} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
