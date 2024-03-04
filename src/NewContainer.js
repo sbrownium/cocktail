@@ -374,7 +374,7 @@ export default function NewContainer ({bars, drinks, commets}) {
             updates['/bars/' + newBarKey] = newBarObj;
         }
             setNewDrink(initialNewDrink);
-            validation(initialValidation);
+            setValidation(initialValidation);
             return (
                 update(ref(db), updates).then(() => {
                 console.log('Data saved successfully!')
