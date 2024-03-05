@@ -10,7 +10,6 @@ export default function Comment ({index, commentID, text, userName, date}) {
         e.preventDefault();
         setShowEdit(showEdit => !showEdit); 
     };
-    
 return (
         <li key={index} id={commentID}>
             {showEdit ? <EditBox text={text}/> : text }

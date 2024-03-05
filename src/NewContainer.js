@@ -25,7 +25,7 @@ export default function NewContainer ({bars, drinks, commets}) {
         drinkName: '',
         description: '',
         price: '',
-        addedBy: '',
+        // addedBy: '',
         timeStamp: '',
         isNewBar: false
     }
@@ -34,6 +34,11 @@ export default function NewContainer ({bars, drinks, commets}) {
     const newDrinkKey = push(child(ref(db), '/drinks/')).key;
     const newBarKey = push(child(ref(db), '/bars/')).key;
     const barsArray = Object.values(bars);
+
+    // setNewDrink({
+    //     ...newDrink,
+    //     addedBy: userID
+    // })
     
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
@@ -100,7 +105,7 @@ export default function NewContainer ({bars, drinks, commets}) {
             ...newDrink,
             drinkName: e.target.value,
             drinkID: newDrinkKey,
-            addedBy: userID,
+            // addedBy: userID,
             timeStamp: performance.timeOrigin
         })
         setValidation({
@@ -377,9 +382,9 @@ export default function NewContainer ({bars, drinks, commets}) {
         }
            else {
             const updates = {};   
-            const {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price} = newDrink
-            const newDrinkObj = {barID, barName, addedBy, timeStamp, drinkID, drinkName, description, price};
-            const newBarObj = {barID, barName, addedBy, timeStamp};
+            const {barID, barName, timeStamp, drinkID, drinkName, description, price} = newDrink
+            const newDrinkObj = {barID, barName, addedBy: userID, timeStamp, drinkID, drinkName, description, price};
+            const newBarObj = {barID, barName, addedBy: userID, timeStamp};
             
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
             const matchBar = barsArray.find(ID => ID.barID === newDrink.barID);
