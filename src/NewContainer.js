@@ -172,11 +172,25 @@ export default function NewContainer ({bars, drinks, commets}) {
         const matchDrink = drinksArray.filter((drink) => drink.barID === newDrink.barID).find((drink) => drink.drinkName.toLowerCase() === newDrink.drinkName.toLowerCase());
        
         e.preventDefault();
-          if (!user) { 
-              return (
-                alert('Please login to add a drink')
-              )
-          } if (matchDrink) {
+        if (!user) { 
+            return (
+              alert('Please login to add a drink')
+            )
+          }
+        // if (newDrink.addedBy === undefined){
+        //     if (user) {
+        //         setNewDrink({
+        //             ...newDrink,
+        //             addedBy: userID
+        //       });
+        //       }
+        //   if (!user) { 
+        //       return (
+        //         alert('Please login to add a drink')
+        //       )
+        //     }
+        //   }    
+           if (matchDrink) {
             return (
                 alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
             );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Comment from './Comment';
+import CommentList from './CommentList';
 // import NewComment from './NewComment';
 
 export default function Drink({barID, drinks, comments}){
@@ -12,7 +12,7 @@ export default function Drink({barID, drinks, comments}){
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${Number(price).toFixed(2)}
-            <Comment comments={comments} commentDrinkID={drinkID}/>
+            <CommentList comments={comments} commentDrinkID={drinkID}/>
           </li>
           ))}
            </ul>   
