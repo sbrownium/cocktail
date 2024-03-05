@@ -25,8 +25,6 @@ export default function NewContainer ({bars, drinks, commets}) {
         drinkName: '',
         description: '',
         price: '',
-        // addedBy: '',
-        timeStamp: '',
         isNewBar: false
     }
     const [newDrink, setNewDrink] = useState(initialNewDrink);
@@ -35,11 +33,6 @@ export default function NewContainer ({bars, drinks, commets}) {
     const newBarKey = push(child(ref(db), '/bars/')).key;
     const barsArray = Object.values(bars);
 
-    // setNewDrink({
-    //     ...newDrink,
-    //     addedBy: userID
-    // })
-    
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
             setNewDrink({
@@ -104,9 +97,7 @@ export default function NewContainer ({bars, drinks, commets}) {
         setNewDrink({
             ...newDrink,
             drinkName: e.target.value,
-            drinkID: newDrinkKey,
-            // addedBy: userID,
-            timeStamp: performance.timeOrigin
+            drinkID: newDrinkKey
         })
         setValidation({
             ...validation,
@@ -182,19 +173,6 @@ export default function NewContainer ({bars, drinks, commets}) {
               alert('Please login to add a drink')
             )
           }
-        // if (newDrink.addedBy === undefined){
-        //     if (user) {
-        //         setNewDrink({
-        //             ...newDrink,
-        //             addedBy: userID
-        //       });
-        //       }
-        //   if (!user) { 
-        //       return (
-        //         alert('Please login to add a drink')
-        //       )
-        //     }
-        //   }    
            if (matchDrink) {
             return (
                 alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
@@ -383,8 +361,8 @@ export default function NewContainer ({bars, drinks, commets}) {
            else {
             const updates = {};   
             const {barID, barName, timeStamp, drinkID, drinkName, description, price} = newDrink
-            const newDrinkObj = {barID, barName, addedBy: userID, timeStamp, drinkID, drinkName, description, price};
-            const newBarObj = {barID, barName, addedBy: userID, timeStamp};
+            const newDrinkObj = {barID, barName, addedBy: userID, timeStamp: performance.timeOrigin, drinkID, drinkName, description, price};
+            const newBarObj = {barID, barName, addedBy: userID, timeStamp: performance.timeOrigin};
             
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
             const matchBar = barsArray.find(ID => ID.barID === newDrink.barID);
