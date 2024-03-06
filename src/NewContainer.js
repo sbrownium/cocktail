@@ -98,11 +98,11 @@ export default function NewContainer ({bars, drinks, commets}) {
             ...newDrink,
             drinkName: e.target.value,
             drinkID: newDrinkKey
-        })
+        });
         setValidation({
             ...validation,
             needsDrinkName: false
-        })
+        });
     }
 
     function focusName () {
