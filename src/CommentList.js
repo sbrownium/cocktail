@@ -9,13 +9,13 @@ export default function CommentList ({comments, commentDrinkID}) {
     const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
 return (
     <ul>
-        {filteredComments.map(({userName, timeStamp, text, commentID}, index) => {
+        {filteredComments.map(({userName, timeStamp, text, commentID, userID}, index) => {
         const date = new Intl.DateTimeFormat('en-US', {
             dateStyle: 'medium',
             timeStyle: 'short'
           }).format(timeStamp);
         return (
-        <Comment key={index} commentID={commentID} text={text} userName={userName} date={date}/>   
+        <Comment key={index} userID={userID} commentID={commentID} text={text} userName={userName} date={date}/>   
         )
     }
         )}

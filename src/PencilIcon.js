@@ -3,6 +3,7 @@ import React from "react";
 export default function PencilIcon ({fillColor}) {
     return (
         <svg
+        data="Pencil by Graphik Designz from https://thenounproject.com/browse/icons/term/pencil/"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"
