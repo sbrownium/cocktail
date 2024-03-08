@@ -18,6 +18,7 @@ export default function NewComment({commentDrinkID}) {
         )}
         else {
       const newCommentKey = push(child(ref(db), '/comments/')).key;
+      const newVersionKey = push(child(ref(db), '/commentVersions/')).key;
       const updates = {};
       const newComment = {
         commentID: newCommentKey,
@@ -27,8 +28,15 @@ export default function NewComment({commentDrinkID}) {
         timeStamp: performance.timeOrigin,
         text: comment,
       };
+      const newVersion = {
+        commentID: newCommentKey,
+        versionID: newVersionKey,
+        timeStamp: performance.timeOrigin,
+        text: comment
+      }
     setComment('');
     updates['/comments/' + newCommentKey] = newComment;
+    updates['/commentVersions/' + newVersionKey] = newVersion;
    
     return (
         update(ref(db), updates).then(() => {

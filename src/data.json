@@ -49,31 +49,39 @@
             "addedBy": "kdahofienfakd2930547usklfnd",
             "timeStamp": 1705790280212
         }},
-"comments": {
-   "-NpI6y26xFs-j2y0M7r9": {
-        "userName": "Jessica",
-        "userID": "kdahofienfakd2930547usklfnd",
-        "drinkID": "345e52c4-edb8-443e-888a-fed00574f7b9",
-        "timeStamp": 1705790249166,
-        "text": "A delicious old fashioned that feels syrupy but only a little sweet. I loved it!",
-        "commentID": "940209c2-c6c9-4afc-8d9f-c93b5ad81bc4"
+    "comments": {
+        "-NpI6y26xFs-j2y0M7r9": {
+                "userName": "Jessica",
+                "userID": "kdahofienfakd2930547usklfnd",
+                "drinkID": "345e52c4-edb8-443e-888a-fed00574f7b9",
+                "timeStamp": 1705790249166,
+                "text": "A delicious old fashioned that feels syrupy but only a little sweet. I loved it!",
+                "commentID": "940209c2-c6c9-4afc-8d9f-c93b5ad81bc4"
+        },
+        "-NpI6yy8tu1V6qZvhqnK": {
+            "userName": "Scott Brown",
+            "userID": "113176315869470908948",
+            "drinkID": "345e52c4-edb8-443e-888a-fed00574f7b9",
+            "timeStamp": 1705790280212,
+            "text": "I concur!",
+            "commentID":"8ebeee3a-c81a-4ef3-b296-50d71725633b"
+        },
+        "-NpI6znwoOwQ7kFoOAgU": {
+            "userName": "Scott Brown",
+            "userID": "113176315869470908948",
+            "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
+            "timeStamp": 1705798896134,
+            "text": "Cinnamon smell, not really banana, sweet Manhattan, served up. I like more than the Shim Bwat Da",
+            "commentID":"df23923f-15fb-43b1-b200-93cdcad14b19"
+        }},
+    "commentVersions": {
+        "-NpkK_-yPif57roiJj9h": {
+            "text": "A delicious old fashioned that feels syrupy but only a little sweet. I loved it!",
+            "timeStamp": 1705790249166,
+            "commentID": "940209c2-c6c9-4afc-8d9f-c93b5ad81bc4",
+            "editID": "-NpkK_-yPif57roiJj9h"
+        }
     },
-    "-NpI6yy8tu1V6qZvhqnK": {
-        "userName": "Scott Brown",
-        "userID": "113176315869470908948",
-        "drinkID": "345e52c4-edb8-443e-888a-fed00574f7b9",
-        "timeStamp": 1705790280212,
-        "text": "I concur!",
-        "commentID":"8ebeee3a-c81a-4ef3-b296-50d71725633b"
-    },
-    "-NpI6znwoOwQ7kFoOAgU": {
-        "userName": "Scott Brown",
-        "userID": "113176315869470908948",
-        "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
-        "timeStamp": 1705798896134,
-        "text": "Cinnamon smell, not really banana, sweet Manhattan, served up. I like more than the Shim Bwat Da",
-        "commentID":"df23923f-15fb-43b1-b200-93cdcad14b19"
-    }},
     "users": {
         "-NpkK_-xXif57roiJjNh": {
             "userName": "name",
@@ -81,5 +89,5 @@
             "familyName": "family_name",
             "email": "e@mail.com",
             "userID": "8743215987519223"
-         }
+    }
 }}
