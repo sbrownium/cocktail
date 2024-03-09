@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function Submit({handleClick}) {
+export default function Submit({handleClick, value}) {
     return (
         <input
             type="submit"
-            value="add"
+            value={value}
             onClick={handleClick}
             onKeyDown={(e) =>
               e.key === 'Enter' ? handleClick(e) : ''

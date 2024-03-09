@@ -388,7 +388,7 @@ export default function NewContainer ({bars, drinks, commets}) {
                 <NewBar newDrink={newDrink} validation={validation} handleNewBar={handleNewBar} focusNewBar={focusNewBar}/>
                 <NewDrink newDrink={newDrink} validation={validation} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
-                <Submit handleClick={handleClick}/>
+                <Submit handleClick={handleClick} value='add'/>
               
             </form>
        </>

@@ -56,7 +56,7 @@ export default function NewComment({commentDrinkID}) {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <Submit handleClick={handleClick}/>
+          <Submit handleClick={handleClick} value='add'/>
         </form>
       </>
     );
