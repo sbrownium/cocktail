@@ -13,9 +13,9 @@ return (
         const date = new Intl.DateTimeFormat('en-US', {
             dateStyle: 'medium',
             timeStyle: 'short'
-          }).format(timeStamp);
+          }).format(timeStamp)
         return (
-        <Comment key={index} userID={userID} commentID={commentID} text={text} userName={userName} date={date}/>   
+        <Comment commentDrinkID={commentDrinkID} key={index} timeStamp={timeStamp} userID={userID} commentID={commentID} text={text} userName={userName} date={date}/>   
         )
     }
         )}
