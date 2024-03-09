@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import Edit from './Edit';
+import EditIcon from './EditIcon';
 import EditBox from './EditBox';
 import { UserContext } from './UserContext.js';
 
@@ -18,7 +18,7 @@ return (
              &nbsp;
             ({userName} &mdash;&nbsp;
             {date})
-            {user.userID === userID ? <Edit handleEdit={handleEdit}/> : '' }
+            {user.userID === userID ? <EditIcon handleEdit={handleEdit}/> : '' }
         </li>
 )
 };

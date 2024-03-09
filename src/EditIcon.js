@@ -1,5 +1,5 @@
 import React from "react";
-import './Edit.css';
+import './EditIcon.css';
 import PencilIcon from "./PencilIcon";
 
 export default function Edit ({handleEdit}){
