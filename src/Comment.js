@@ -39,7 +39,6 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
       }
     e.preventDefault();
     handleToggle(); 
-    setEdit('');
     updates['/comments/' + commentID] = newEdit;
     updates['/commentVersions/' + newVersionKey] = newVersion;
    
