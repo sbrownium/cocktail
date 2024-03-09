@@ -1,15 +1,18 @@
 import React from "react";
 import './EditIcon.css';
 import PencilIcon from "./PencilIcon";
-import Submit from "./Submit";
 
-export default function Edit ({handleEdit}){
+export default function Edit ({handleEdit, beingEditted}){
     return (
+        < >
+        {beingEditted ? 
         <>
-        <button className='edit' onClick={handleEdit}>
+        <button onClick={handleEdit}>Save</button> 
+        <button>Never Mind</button>
+        </> : 
+        (<button className='edit' onClick={handleEdit}>
             <PencilIcon fillColor='black'/>
-        </button> 
-        <Submit value='save'/>
+        </button>)}
         </>
     )
 }
