@@ -35,7 +35,7 @@ function App() {
         <>
         <UserProvider>
           <SignIn users={data.users}/>
-          <Bar bars={data.bars} drinks={data.drinks} comments={data.comments}/>
+          <Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/>
           <NewContainer bars={data.bars} drinks={data.drinks} comments={data.comments}/>
         </UserProvider>
         </>

@@ -82,6 +82,22 @@
             "editID": "-NpkK_-yPif57roiJj9h"
         }
     },
+    "ratings": {
+        "-NpI6-yPif5j2y0M7r9": {
+            "rating": 4,
+            "userID": "113176315869470908948",
+            "timeStamp": 1705790249166,
+            "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
+            "ratingID": "-NpI6-yPif5j2y0M7r9"
+        },
+        "-NpI6-yPif5j2y0M710": {
+            "rating": 2,
+            "userID": "kdahofienfakd2930547usklfnd",
+            "timeStamp": 1705790249169,
+            "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
+            "ratingID": "-NpI6-yPif5j2y0M710"
+        }
+    },
     "users": {
         "-NpkK_-xXif57roiJjNh": {
             "userName": "name",

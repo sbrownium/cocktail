@@ -1,8 +1,9 @@
 import React from 'react';
 import CommentList from './CommentList';
+import Rating from './Rating';
 // import NewComment from './NewComment';
 
-export default function Drink({barID, drinks, comments}){
+export default function Drink({barID, drinks, comments, ratings}){
   const drinksArray = Object.values(drinks);
   const filteredBars = drinksArray.filter(bar => bar.barID === barID);
     return (
@@ -12,6 +13,7 @@ export default function Drink({barID, drinks, comments}){
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${Number(price).toFixed(2)}
+            <Rating ratings={ratings} ratingDrinkID={drinkID}/>
             <CommentList comments={comments} commentDrinkID={drinkID}/>
           </li>
           ))}

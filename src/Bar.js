@@ -1,7 +1,7 @@
 import React from 'react';
 import Drink from './Drink.js'
 
-export default function Bar({bars, drinks, comments}) {
+export default function Bar({bars, drinks, comments, ratings}) {
   const barsArray = Object.values(bars);
   // const uniqueBars = new Set();
   
@@ -15,7 +15,7 @@ export default function Bar({bars, drinks, comments}) {
             return (
               <li key={index}>
                 {barName}
-                <Drink barID={barID} barsArray={barsArray} drinks={drinks} comments={comments}/>
+                <Drink barID={barID} barsArray={barsArray} drinks={drinks} comments={comments} ratings={ratings}/>
               </li>
             );
           })}
