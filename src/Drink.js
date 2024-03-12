@@ -21,7 +21,7 @@ export default function Drink({barID, drinks, comments, ratings}){
             {description} &mdash;
             ${Number(price).toFixed(2)}
             <Rating emojiLookUp={emojiLookUp} ratings={ratings} ratingDrinkID={drinkID}/>
-            <NewRating emojiLookUp={emojiLookUp} ratingDrinkID={drinkID}/>
+            <NewRating emojiLookUp={emojiLookUp} ratings={ratings} ratingDrinkID={drinkID}/>
             <CommentList comments={comments} commentDrinkID={drinkID}/>
           </li>
           ))}
