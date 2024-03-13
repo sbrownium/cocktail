@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import CommentList from './CommentList';
-import Rating from './Rating';
+import AverageRating from './AverageRating';
 import NewRating from './NewRating';
-// import NewComment from './NewComment';
+import UserRating from './UserRating';
+import { UserContext } from './UserContext';
 
 export default function Drink({barID, drinks, comments, ratings}){
+  const [user, setUser] = useContext(UserContext);
+  // const { userName, userID } = user 
   const emojiLookUp = {
     '🤢': 1,
     '🤷‍♀️': 2,
@@ -20,8 +23,12 @@ export default function Drink({barID, drinks, comments, ratings}){
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${Number(price).toFixed(2)}
-            <Rating emojiLookUp={emojiLookUp} ratings={ratings} ratingDrinkID={drinkID}/>
+            <AverageRating emojiLookUp={emojiLookUp} ratings={ratings} ratingDrinkID={drinkID}/>
+            {user ? <UserRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} ratingDrinkID={drinkID}/>
+            : 
             <NewRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} ratingDrinkID={drinkID}/>
+            }
+            
             <CommentList comments={comments} commentDrinkID={drinkID}/>
           </li>
           ))}

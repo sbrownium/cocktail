@@ -1,8 +1,7 @@
 import React from "react";
-import './Rating.css';
-// import NewRating from "./NewRating";
+import './AverageRating.css';
 
-export default function Rating ({emojiLookUp, ratings, ratingDrinkID}) {
+export default function AverageRating ({emojiLookUp, ratings, ratingDrinkID}) {
 
     const ratingsArray = Object.values(ratings);
     const filteredRatings = ratingsArray.filter(drink => drink.drinkID === ratingDrinkID);
@@ -16,10 +15,7 @@ export default function Rating ({emojiLookUp, ratings, ratingDrinkID}) {
     const ratingToEmoji = Object.keys(emojiLookUp).find(key => emojiLookUp[key] === ratingAverage);
     return (
         <>
-            <span className='emoji'>
-                {ratingToEmoji}
-            </span>
-            
+            <p>Average Rating: <span className='emoji'>{ratingToEmoji}</span></p>
         </>
     )}
 }

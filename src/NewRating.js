@@ -15,26 +15,28 @@ export default function NewRating({emojiLookUp, ratings, drinkName, ratingDrinkI
 
     function handleRating (e) {
         setRating({
-            rating: e.target.value
+            rating: Number(e.target.value)
         })
 }
     function handleClick(e) {
-    const ratingsArray = Object.values(ratings);
-    const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
-    const emojiKeys = Object.keys(emojiLookUp);
-    const oldRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === filterRatings[0].rating);
-    const newRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === Number(rating.rating));
+    // const ratingsArray = Object.values(ratings);
+    // const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
+    // const emojiKeys = Object.keys(emojiLookUp);
+    // const oldRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === filterRatings[0].rating);
+    // const newRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === rating.rating);
     
       e.preventDefault();
       if (!user) { 
         return (
           alert('Please login to rate a drink')
-        )} if (filterRatings.length != 0 && count < 1) {
-            setCount(count + 1);
-            return (
-                alert('You already rated ' + drinkName + ' as ' + oldRatingToEmoji + '. Do you want to change the rating to ' + newRatingToEmoji + '?')
-            )
-        }
+        )
+    } 
+    // if (filterRatings.length != 0 && count < 1) {
+    //         setCount(count + 1);
+    //         return (
+    //             alert('You already rated ' + drinkName + ' as ' + oldRatingToEmoji + '. Do you want to change the rating to ' + newRatingToEmoji + '?')
+    //         )
+    //     }
         // if user has already rated alert that will change rating (return what was already rated)
         else {
       const newRatingKey = push(child(ref(db), '/ratings/')).key;
@@ -44,8 +46,9 @@ export default function NewRating({emojiLookUp, ratings, drinkName, ratingDrinkI
         userName: userName,
         userID: userID,
         drinkID: ratingDrinkID,
-        timeStamp: performance.timeOrigin,
-        rating: Number(rating.rating)
+        originalTimeStamp: performance.timeOrigin,
+        lastTimeStamp: performance.timeOrigin,
+        rating: rating.rating
       };
     setRating('');
     setCount(0);
