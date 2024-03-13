@@ -5,11 +5,10 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewRating({emojiLookUp, ratings, ratingDrinkID}) {
-    // const commentsArray = Object.values(comments);
-    // const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
+export default function NewRating({emojiLookUp, ratings, drinkName, ratingDrinkID}) {
     
     const [rating, setRating] = useState('');
+    const [count, setCount] = useState(0)
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user 
     
@@ -22,13 +21,18 @@ export default function NewRating({emojiLookUp, ratings, ratingDrinkID}) {
     function handleClick(e) {
     const ratingsArray = Object.values(ratings);
     const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
+    const emojiKeys = Object.keys(emojiLookUp);
+    const oldRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === filterRatings[0].rating);
+    const newRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === Number(rating.rating));
+    
       e.preventDefault();
       if (!user) { 
         return (
           alert('Please login to rate a drink')
-        )} if (filterRatings.length != 0) {
+        )} if (filterRatings.length != 0 && count < 1) {
+            setCount(count + 1);
             return (
-                alert('You already rated' + 'drink varible' + 'as' + 'rating variable')
+                alert('You already rated ' + drinkName + ' as ' + oldRatingToEmoji + '. Do you want to change the rating to ' + newRatingToEmoji + '?')
             )
         }
         // if user has already rated alert that will change rating (return what was already rated)
@@ -44,6 +48,7 @@ export default function NewRating({emojiLookUp, ratings, ratingDrinkID}) {
         rating: Number(rating.rating)
       };
     setRating('');
+    setCount(0);
     updates['/ratings/' + newRatingKey] = newRating;
    
     return (
