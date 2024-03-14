@@ -28,7 +28,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
             </button>
             </> :
             <>
-            <NewRating emojiLookUp={emojiLookUp} setBeingEditted={setBeingEditted} ratingDrinkID={ratingDrinkID}/>
+            <NewRating emojiLookUp={emojiLookUp} handleToggle={handleToggle} filterRatings={filterRatings} ratingDrinkID={ratingDrinkID}/>
             <button onClick={handleToggle}>Never Mind</button>
             </> }
         </>
@@ -37,7 +37,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
     else {
         return(
             <>
-            <NewRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} ratingDrinkID={ratingDrinkID}/>
+            <NewRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} filterRatings={filterRatings} ratingDrinkID={ratingDrinkID}/>
             </>
         )
     }

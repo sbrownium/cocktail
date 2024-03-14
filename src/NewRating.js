@@ -5,7 +5,7 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewRating({emojiLookUp, setBeingEditted, ratings, drinkName, ratingDrinkID}) {
+export default function NewRating({emojiLookUp, handleToggle, filterRatings, ratings, drinkName, ratingDrinkID}) {
     
     const [rating, setRating] = useState('');
     const [user, setUser] = useContext(UserContext);
@@ -18,19 +18,41 @@ export default function NewRating({emojiLookUp, setBeingEditted, ratings, drinkN
         })
 }
     function handleClick(e) {
-  
       e.preventDefault();
       if (!user) { 
         return (
           alert('Please login to rate a drink')
         )
     } 
-      else {
+    if (filterRatings.length != 0) {
+      const updates = {};
+      const updatedRating = {
+        ratingID: filterRatings[0].ratingID,
+        userID: filterRatings[0].userID,
+        drinkID: filterRatings[0].drinkID,
+        originalTimeStamp: filterRatings[0].originalTimeStamp,
+        lastTimeStamp: performance.timeOrigin,
+        rating: rating.rating
+      };
+    setRating('');
+    handleToggle();
+    updates['/ratings/' + filterRatings[0].ratingID] = updatedRating;
+   
+    return (
+        update(ref(db), updates).then(() => {
+            console.log('Data saved successfully!')
+      })
+      .catch((error) => {
+        console.log('problem writing')
+      })
+    ) 
+  }
+if (filterRatings.length === 0)  
+   {
       const newRatingKey = push(child(ref(db), '/ratings/')).key;
       const updates = {};
       const newRating = {
         ratingID: newRatingKey,
-        userName: userName,
         userID: userID,
         drinkID: ratingDrinkID,
         originalTimeStamp: performance.timeOrigin,
@@ -38,7 +60,6 @@ export default function NewRating({emojiLookUp, setBeingEditted, ratings, drinkN
         rating: rating.rating
       };
     setRating('');
-    setBeingEditted(false);
     updates['/ratings/' + newRatingKey] = newRating;
    
     return (
