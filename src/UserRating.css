@@ -2,3 +2,8 @@
     font-size: 1.5em;
     vertical-align: middle;
 }
+button.edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

@@ -5,10 +5,9 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewRating({emojiLookUp, ratings, drinkName, ratingDrinkID}) {
+export default function NewRating({emojiLookUp, setBeingEditted, ratings, drinkName, ratingDrinkID}) {
     
     const [rating, setRating] = useState('');
-    const [count, setCount] = useState(0)
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user 
     
@@ -19,26 +18,14 @@ export default function NewRating({emojiLookUp, ratings, drinkName, ratingDrinkI
         })
 }
     function handleClick(e) {
-    // const ratingsArray = Object.values(ratings);
-    // const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
-    // const emojiKeys = Object.keys(emojiLookUp);
-    // const oldRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === filterRatings[0].rating);
-    // const newRatingToEmoji = emojiKeys.find(key => emojiLookUp[key] === rating.rating);
-    
+  
       e.preventDefault();
       if (!user) { 
         return (
           alert('Please login to rate a drink')
         )
     } 
-    // if (filterRatings.length != 0 && count < 1) {
-    //         setCount(count + 1);
-    //         return (
-    //             alert('You already rated ' + drinkName + ' as ' + oldRatingToEmoji + '. Do you want to change the rating to ' + newRatingToEmoji + '?')
-    //         )
-    //     }
-        // if user has already rated alert that will change rating (return what was already rated)
-        else {
+      else {
       const newRatingKey = push(child(ref(db), '/ratings/')).key;
       const updates = {};
       const newRating = {
@@ -51,7 +38,7 @@ export default function NewRating({emojiLookUp, ratings, drinkName, ratingDrinkI
         rating: rating.rating
       };
     setRating('');
-    setCount(0);
+    setBeingEditted(false);
     updates['/ratings/' + newRatingKey] = newRating;
    
     return (
