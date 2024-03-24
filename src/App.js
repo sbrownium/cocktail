@@ -5,6 +5,16 @@ import { UserProvider } from './UserContext';
 import SignIn from './SignIn.js';
 import Bar from './Bar.js'
 import NewContainer from './NewContainer.js';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import RootLayout from './RootLayout.js';
+import Account from './Account.js';
+
+
 
 function App() {
   const [data, setData] = useState(null);
@@ -29,13 +39,22 @@ function App() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/>} />
+        <Route path="/Account" element={<Account />} />
+      </Route>
+    )
+  );
   return (
     <>
       {data && (
         <>
         <UserProvider>
           <SignIn users={data.users}/>
-          <Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/>
+          <RouterProvider router={router} />
+          {/* <Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/> */}
           <NewContainer bars={data.bars} drinks={data.drinks} comments={data.comments}/>
         </UserProvider>
         </>
