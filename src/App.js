@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import RootLayout from './RootLayout.js';
 import Account from './Account.js';
+import Edit from './Edit.js';
 
 
 
@@ -43,7 +44,9 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/>} />
+        <Route path="/NewContainer" element={<NewContainer bars={data.bars} drinks={data.drinks} comments={data.comments}/>} />
         <Route path="/Account" element={<Account />} />
+        <Route path="/Edit" element={<Edit />} />
       </Route>
     )
   );
@@ -54,8 +57,6 @@ function App() {
         <UserProvider>
           <SignIn users={data.users}/>
           <RouterProvider router={router} />
-          {/* <Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/> */}
-          <NewContainer bars={data.bars} drinks={data.drinks} comments={data.comments}/>
         </UserProvider>
         </>
       )}
