@@ -15,7 +15,7 @@ export default function AverageRating ({emojiLookUp, ratings, ratingDrinkID}) {
     const ratingToEmoji = Object.keys(emojiLookUp).find(key => emojiLookUp[key] === ratingAverage);
     return (
         <>
-            <p>Average Rating: <span className='emoji'>{ratingToEmoji}</span></p>
+            Average Rating: <span className='emoji'>{ratingToEmoji}</span>
         </>
     )}
 }

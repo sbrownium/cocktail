@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function PencilIcon ({fillColor}) {
+export default function PencilIcon ({width, heigth, fillColor}) {
     return (
         <svg
         data="Pencil by Graphik Designz from https://thenounproject.com/browse/icons/term/pencil/"
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
+        width={width}
+        height={heigth}
         fill={fillColor}
         viewBox="0 0 62.6 62.5"
         >

@@ -8,7 +8,7 @@ export default function EditIcon ({handleToggle, beingEditted}){
             {beingEditted ? '' :
             <>
                 <button className='edit' onClick={handleToggle}>
-                    <PencilIcon fillColor='black'/>
+                    <PencilIcon fillColor='black' width='16' heigth='16'/>
                 </button>
             </>}
         </>

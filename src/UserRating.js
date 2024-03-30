@@ -22,7 +22,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
         <>
             {beingEditted ?
             <>
-            <p>Your Rating: <span className='emoji'>{ratingToEmoji}</span></p>
+           Your Rating: <span className='emoji'>{ratingToEmoji}</span>
             <button className='edit' onClick={handleToggle}>
                 <PencilIcon fillColor='black'/>
             </button>
