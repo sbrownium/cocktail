@@ -9,11 +9,10 @@ export default function ChangeBar ({bars, handleSelect}) {
     
       return (
         <>
-          <label>Bar
+          <label>Pick a bar, any bar
           <select name='barSelect'
           onChange={handleSelect}
           >
-            <option value='Please choose a bar'>Please choose a bar</option> 
             {barsArray.map(({ barName, barID }, index) => {
                 return (
                   <option key={index} value={barID}>{barName}</option>
