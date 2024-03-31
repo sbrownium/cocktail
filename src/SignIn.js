@@ -34,7 +34,8 @@ function handleClick (e) {
         giveName: given_name,
         familyName: family_name,
         email,
-        userID: sub
+        userID: sub,
+        lastBar: '-NqtP2KgP0su3VWrXHaf',
       }
       setUser(currentUser);
       const existingUser = usersArray.find((u) => u.userID === currentUser.userID )

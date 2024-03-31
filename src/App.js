@@ -14,6 +14,7 @@ import {
 import RootLayout from './RootLayout.js';
 import Account from './Account.js';
 import Edit from './Edit.js';
+import ChangeBar from './ChangeBar.js';
 
 
 
