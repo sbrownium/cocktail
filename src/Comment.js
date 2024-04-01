@@ -30,7 +30,7 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
         text: edit
       }
     e.preventDefault();
-    // handleToggle(); 
+    handleToggle(); 
     updates['/comments/' + commentID] = newEdit;
     updates['/commentVersions/' + newVersionKey] = newVersion;
    
@@ -46,7 +46,15 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
     };
 return (
         <li key={index} id={commentID}>
-            {beingEditted ? <EditBox text={text} edit={edit} handleEdit={handleEdit} handleToggle={handleToggle} handleClick={handleClick}/> : text }
+            {beingEditted ? 
+              <EditBox
+                text={text}
+                edit={edit}
+                handleEdit={handleEdit}
+                handleToggle={handleToggle}
+                handleClick={handleClick}
+              />
+              : text }
              &nbsp;
             {beingEditted ? '' : <> ({userName} &mdash; {date})</>}
         </li>

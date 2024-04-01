@@ -19,14 +19,21 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
         <>
             {beingEditted ?
             <>
-           Your Rating: <span className='emoji'>{ratingToEmoji}</span>
-            <button className='edit' onClick={handleToggle}>
-                <PencilIcon fillColor='black' width='16' heigth='16'/>
-            </button>
+             <NewRating
+                emojiLookUp={emojiLookUp}
+                handleToggle={handleToggle}
+                filterRatings={filterRatings}
+                ratingDrinkID={ratingDrinkID}
+                beingEditted={beingEditted}
+                text='Change Rating '
+            />
             </> :
             <>
-            <NewRating emojiLookUp={emojiLookUp} handleToggle={handleToggle} filterRatings={filterRatings} ratingDrinkID={ratingDrinkID}/>
-            <button onClick={handleToggle}>Never Mind</button>
+            Your Rating: <span className='emoji'>{ratingToEmoji}</span>
+            {/* <button className='edit' onClick={handleToggle}>
+                <PencilIcon fillColor='black' width='16' heigth='16'/>
+            </button> */}
+            {/* <button onClick={handleToggle}>Never Mind</button> */}
             </> }
         </>
     )
@@ -34,7 +41,15 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
     else {
         return(
             <>
-            <NewRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} filterRatings={filterRatings} ratingDrinkID={ratingDrinkID}/>
+            <NewRating
+                emojiLookUp={emojiLookUp}
+                ratings={ratings}
+                drinkName={drinkName}
+                filterRatings={filterRatings}
+                ratingDrinkID={ratingDrinkID}
+                beingEditted={beingEditted}
+                text='New Rating '
+            />
             </>
         )
     }

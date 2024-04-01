@@ -5,7 +5,7 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewRating({emojiLookUp, handleToggle, filterRatings, ratings, drinkName, ratingDrinkID}) {
+export default function NewRating({emojiLookUp, handleToggle, filterRatings, ratings, drinkName, ratingDrinkID, text, beingEditted}) {
     
     const [rating, setRating] = useState('');
     const [user, setUser] = useContext(UserContext);
@@ -69,12 +69,13 @@ if (filterRatings.length === 0)
       .catch((error) => {
         console.log('problem writing')
       })
-    ) }
+    )
+  }
 }
     return (  
       <>
         <form>
-          <label>Rating
+          <label>{text}
           <select name='ratingSelect'
           value={rating.rating} 
           onChange={handleRating}
@@ -85,7 +86,10 @@ if (filterRatings.length === 0)
 )).reverse()}
           </select>
           </label>
-          <Submit handleClick={handleClick} value='add'/>
+          {beingEditted ?
+          <Submit handleClick={handleClick} value='save'/>
+          :
+          <Submit handleClick={handleClick} value='add'/>}
         </form>
       </>
     );

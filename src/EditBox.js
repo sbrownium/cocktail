@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EditBox({edit, handleEdit, handleClick, handleToggle}){
+export default function EditBox({edit, handleEdit, handleClick}){
 return (
   <>
   <form>    
@@ -15,7 +15,6 @@ return (
 <button onClick={handleClick}>
     Save</button> 
   </form>
-<button onClick={handleToggle}>Never Mind</button>
         </> 
 )
 }

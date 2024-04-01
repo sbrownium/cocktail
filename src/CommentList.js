@@ -13,11 +13,22 @@ return (
             // timeStyle: 'short'
           }).format(timeStamp)
         return (
-        <Comment commentDrinkID={commentDrinkID} key={index} timeStamp={timeStamp} userID={userID} commentID={commentID} text={text} userName={userName} date={date} handleToggle={handleToggle} beingEditted={beingEditted}/>   
+        <Comment
+            commentDrinkID={commentDrinkID}
+            key={index}
+            timeStamp={timeStamp}
+            userID={userID}
+            commentID={commentID}
+            text={text}
+            userName={userName}
+            date={date}
+            handleToggle={handleToggle}
+            beingEditted={beingEditted}
+        />   
         )
     }
         )}
-        <NewComment commentDrinkID={commentDrinkID}/>
+        {beingEditted ? '' : <NewComment commentDrinkID={commentDrinkID}/>}
     </ul>
 )
 };
