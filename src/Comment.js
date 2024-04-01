@@ -1,20 +1,12 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
-import EditIcon from './EditIcon';
 import EditBox from './EditBox';
-import { UserContext } from './UserContext.js';
 
 
-export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID}) {
-    const [user, setUser] = useContext(UserContext);
+export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID, handleToggle, beingEditted}) {
     const [edit, setEdit] = useState(text);
-    const [ beingEditted, setBeingEditted ] = useState(false)
  
-    function handleToggle() {
-        setBeingEditted(beingEditted => !beingEditted); 
-    }
-
     function handleEdit (e) {
         e.preventDefault();
         setEdit(e.target.value);
@@ -38,7 +30,7 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
         text: edit
       }
     e.preventDefault();
-    handleToggle(); 
+    // handleToggle(); 
     updates['/comments/' + commentID] = newEdit;
     updates['/commentVersions/' + newVersionKey] = newVersion;
    
@@ -57,7 +49,6 @@ return (
             {beingEditted ? <EditBox text={text} edit={edit} handleEdit={handleEdit} handleToggle={handleToggle} handleClick={handleClick}/> : text }
              &nbsp;
             {beingEditted ? '' : <> ({userName} &mdash; {date})</>}
-            {user.userID === userID ? <EditIcon beingEditted={beingEditted} handleToggle={handleToggle}/> : '' }
         </li>
 )
 };

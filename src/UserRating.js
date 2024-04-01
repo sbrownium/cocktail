@@ -4,16 +4,13 @@ import NewRating from "./NewRating.js";
 import PencilIcon from "./PencilIcon.js";
 
 
-export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrinkID}) {
-    const [beingEditted, setBeingEditted] = useState(true);
+export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrinkID, handleToggle, beingEditted}) {
+    
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user 
     const ratingsArray = Object.values(ratings);
     const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
 
-    function handleToggle () {
-        setBeingEditted(beingEditted => !beingEditted)
-    }
     
     if (filterRatings.length != 0) {
     const emojiKeys = Object.keys(emojiLookUp);
@@ -24,7 +21,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
             <>
            Your Rating: <span className='emoji'>{ratingToEmoji}</span>
             <button className='edit' onClick={handleToggle}>
-                <PencilIcon fillColor='black'/>
+                <PencilIcon fillColor='black' width='16' heigth='16'/>
             </button>
             </> :
             <>

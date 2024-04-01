@@ -5,7 +5,7 @@ import NewRating from './NewRating';
 import UserRating from './UserRating';
 import { UserContext } from './UserContext';
 
-export default function Drink({barID, drinks, comments, ratings}){
+export default function Drink({barID, drinks, comments, ratings, handleToggle, beingEditted}){
   const [user, setUser] = useContext(UserContext);
   // const { userName, userID } = user 
   const emojiLookUp = {
@@ -24,12 +24,11 @@ export default function Drink({barID, drinks, comments, ratings}){
             {description} &mdash;
             ${Number(price).toFixed(2)}
             <AverageRating emojiLookUp={emojiLookUp} ratings={ratings} ratingDrinkID={drinkID}/>
-            {user ? <UserRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} ratingDrinkID={drinkID}/>
+            {user ? <UserRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} ratingDrinkID={drinkID} handleToggle={handleToggle} beingEditted={beingEditted}/>
             : 
             <NewRating emojiLookUp={emojiLookUp} ratings={ratings} drinkName={drinkName} ratingDrinkID={drinkID}/>
             }
-            
-            <CommentList comments={comments} commentDrinkID={drinkID}/>
+            <CommentList comments={comments} commentDrinkID={drinkID} />
           </li>
           ))}
            </ul>   

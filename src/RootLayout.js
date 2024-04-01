@@ -12,7 +12,6 @@ export default function RootLayout () {
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/Account'>Account</NavLink> 
                 <NavLink to='/NewContainer'>New Drink</NavLink> 
-                <NavLink to='/Edit'>Edit</NavLink>
             </nav>
         </footer>
     </>

@@ -2,9 +2,7 @@ import React from 'react';
 import Comment from './Comment';
 import NewComment from './NewComment';
 
-
-
-export default function CommentList ({comments, commentDrinkID}) {
+export default function CommentList ({comments, commentDrinkID, handleToggle, beingEditted}) {
     const commentsArray = Object.values(comments);
     const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
 return (
@@ -15,7 +13,7 @@ return (
             // timeStyle: 'short'
           }).format(timeStamp)
         return (
-        <Comment commentDrinkID={commentDrinkID} key={index} timeStamp={timeStamp} userID={userID} commentID={commentID} text={text} userName={userName} date={date}/>   
+        <Comment commentDrinkID={commentDrinkID} key={index} timeStamp={timeStamp} userID={userID} commentID={commentID} text={text} userName={userName} date={date} handleToggle={handleToggle} beingEditted={beingEditted}/>   
         )
     }
         )}

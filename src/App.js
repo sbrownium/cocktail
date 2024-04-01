@@ -47,7 +47,6 @@ function App() {
         <Route index element={<Bar bars={data.bars} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/>} />
         <Route path="/NewContainer" element={<NewContainer bars={data.bars} drinks={data.drinks} comments={data.comments}/>} />
         <Route path="/Account" element={<Account />} />
-        <Route path="/Edit" element={<Edit />} />
       </Route>
     )
   );
