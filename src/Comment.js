@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
+import DeleteComment from './DeleteComment.js';
 
 
 export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID, handleToggle, beingEditted}) {
@@ -13,7 +14,7 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
     }
 
     function handleClick(e){
-      // const newVersionKey = push(child(ref(db), '/commentVersions/')).key;
+      
       const updates = {};
       const newEdit = {
         commentID: commentID,
@@ -24,16 +25,9 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
         lastTimeStamp: performance.timeOrigin,
         text: edit
       };
-      // const newVersion = {
-      //   commentID: commentID,
-      //   versionID: newVersionKey,
-      //   timeStamp: performance.timeOrigin,
-      //   text: edit
-      // }
     e.preventDefault();
     handleToggle(); 
     updates['/comments/' + commentID] = newEdit;
-    // updates['/commentVersions/' + newVersionKey] = newVersion;
    
     return (
         update(ref(db), updates).then(() => {
@@ -58,6 +52,7 @@ return (
               : text }
              &nbsp;
             {beingEditted ? '' : <> ({userName} &mdash; {date})</>}
+            <DeleteComment commentID={commentID} handleToggle={handleToggle} beingEditted={beingEditted} />
         </li>
 )
 };
