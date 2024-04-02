@@ -4,11 +4,8 @@ import { db } from "./firebase.js";
 import Button from './Button.js';
 
 
-export default function DeleteComment ({commentID, handleToggle, beingEditted}) {
+export default function DeleteComment ({commentID, handleToggle}) {
     
-      
-    
-
     function handleClick(e){
         const updates = {};
       e.preventDefault();

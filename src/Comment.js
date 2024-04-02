@@ -3,6 +3,7 @@ import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
 import DeleteComment from './DeleteComment.js';
+import DeleteButton from './DeleteButton.js';
 
 
 export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID, handleToggle, beingEditted}) {
@@ -52,7 +53,7 @@ return (
               : text }
              &nbsp;
             {beingEditted ? '' : <> ({userName} &mdash; {date})</>}
-            <DeleteComment commentID={commentID} handleToggle={handleToggle} beingEditted={beingEditted} />
+            <DeleteButton nodeID={commentID} nodeName='your comment' handleToggle={handleToggle} />
         </li>
 )
 };
