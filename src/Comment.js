@@ -13,26 +13,27 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
     }
 
     function handleClick(e){
-      const newVersionKey = push(child(ref(db), '/commentVersions/')).key;
+      // const newVersionKey = push(child(ref(db), '/commentVersions/')).key;
       const updates = {};
       const newEdit = {
         commentID: commentID,
         userName: userName,
         userID: userID,
         drinkID: commentDrinkID,
-        timeStamp: timeStamp,
+        initialTimeStamp: timeStamp,
+        lastTimeStamp: performance.timeOrigin,
         text: edit
       };
-      const newVersion = {
-        commentID: commentID,
-        versionID: newVersionKey,
-        timeStamp: performance.timeOrigin,
-        text: edit
-      }
+      // const newVersion = {
+      //   commentID: commentID,
+      //   versionID: newVersionKey,
+      //   timeStamp: performance.timeOrigin,
+      //   text: edit
+      // }
     e.preventDefault();
     handleToggle(); 
     updates['/comments/' + commentID] = newEdit;
-    updates['/commentVersions/' + newVersionKey] = newVersion;
+    // updates['/commentVersions/' + newVersionKey] = newVersion;
    
     return (
         update(ref(db), updates).then(() => {

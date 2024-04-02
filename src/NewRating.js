@@ -30,7 +30,7 @@ export default function NewRating({emojiLookUp, handleToggle, filterRatings, rat
         ratingID: filterRatings[0].ratingID,
         userID: filterRatings[0].userID,
         drinkID: filterRatings[0].drinkID,
-        originalTimeStamp: filterRatings[0].originalTimeStamp,
+        initialTimeStamp: filterRatings[0].originalTimeStamp,
         lastTimeStamp: performance.timeOrigin,
         rating: rating.rating
       };
@@ -55,7 +55,7 @@ if (filterRatings.length === 0)
         ratingID: newRatingKey,
         userID: userID,
         drinkID: ratingDrinkID,
-        originalTimeStamp: performance.timeOrigin,
+        initialTimeStamp: performance.timeOrigin,
         lastTimeStamp: performance.timeOrigin,
         rating: rating.rating
       };
