@@ -3,6 +3,11 @@ import Comment from './Comment';
 import NewComment from './NewComment';
 
 export default function CommentList ({comments, commentDrinkID, handleToggle, beingEditted}) {
+    if (comments === undefined) { //checks in case there are no comments in the entire database
+        return (
+             <NewComment commentDrinkID={commentDrinkID}/>
+        )
+    } else {
     const commentsArray = Object.values(comments);
     const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
 return (
@@ -31,4 +36,6 @@ return (
         {beingEditted ? '' : <NewComment commentDrinkID={commentDrinkID}/>}
     </ul>
 )
+    
+}
 };

@@ -1,14 +1,19 @@
 import React, {useState} from 'react';
-import { ref, child, push, update } from "firebase/database";
+import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
-import DeleteComment from './DeleteComment.js';
 import DeleteButton from './DeleteButton.js';
 
 
 export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID, handleToggle, beingEditted}) {
     const [edit, setEdit] = useState(text);
- 
+    // const [visible, setVisible] = useState(!visible)
+
+    // function toggleVisible (e) {
+    //   e.preventDefault();
+    //   setVisible(visible => !visible);
+    // }
+    
     function handleEdit (e) {
         e.preventDefault();
         setEdit(e.target.value);
@@ -43,6 +48,7 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
 return (
         <li key={index} id={commentID}>
             {beingEditted ? 
+            <>
               <EditBox
                 text={text}
                 edit={edit}
@@ -50,10 +56,16 @@ return (
                 handleToggle={handleToggle}
                 handleClick={handleClick}
               />
+              <DeleteButton
+              nodeID={commentID}
+              nodeName='your comment'
+              handleToggle={handleToggle}
+            />
+            </>
               : text }
              &nbsp;
             {beingEditted ? '' : <> ({userName} &mdash; {date})</>}
-            <DeleteButton nodeID={commentID} nodeName='your comment' handleToggle={handleToggle} />
+            
         </li>
 )
 };

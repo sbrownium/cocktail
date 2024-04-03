@@ -14,8 +14,7 @@ export default function Bar({bars, drinks, comments, ratings}) {
   const barsArray = Object.values(bars);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
 
-  function handleToggle (e) {
-    // e.preventDefault();
+  function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted);
     }
 
