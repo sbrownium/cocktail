@@ -37,14 +37,15 @@ export default function Drink({barID, drinks, comments, ratings, handleToggle, b
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
               />
-              : 
+              : ''}
+              {/* {beingEditted ? '' :
               <NewRating
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
                 drinkName={drinkName}
                 ratingDrinkID={drinkID}
                 beingEditted={beingEditted}
-                />}
+                /> } */}
             <CommentList
               comments={comments}
               commentDrinkID={drinkID}
