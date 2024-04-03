@@ -3,7 +3,7 @@ import { UserContext } from "./UserContext";
 import PencilIcon from "./PencilIcon";
 import Button from "./Button";
 
-export default function Edit ({handleToggle, beingEditted, handleClick, selectedBar}) {
+export default function Edit ({handleToggle, beingEditted, filteredBars, handleClick, selectedBar}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
     // function showEdit(){
@@ -15,7 +15,7 @@ export default function Edit ({handleToggle, beingEditted, handleClick, selected
     // }
     return (
         <>
-    {user ? 
+    {user && filteredBars.length > 0 ? 
        <>
         {beingEditted ? 
       <>

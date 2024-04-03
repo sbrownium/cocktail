@@ -23,62 +23,6 @@ export default function Bar({bars, drinks, comments, ratings}) {
     setSelectedBar(e.target.value);
     };  
     
-//     function handleClick(e) {
-//       e.preventDefault();
-//       if (!user) { 
-//         return (
-//           alert('Please login to rate a drink')
-//         )
-//     } 
-//     if (filterRatings.length != 0) {
-//       const updates = {};
-//       const updatedRating = {
-//         ratingID: filterRatings[0].ratingID,
-//         userID: filterRatings[0].userID,
-//         drinkID: filterRatings[0].drinkID,
-//         originalTimeStamp: filterRatings[0].originalTimeStamp,
-//         lastTimeStamp: performance.timeOrigin,
-//         rating: rating.rating
-//       };
-//     setRating('');
-//     handleToggle();
-//     updates['/ratings/' + filterRatings[0].ratingID] = updatedRating;
-   
-//     return (
-//         update(ref(db), updates).then(() => {
-//             console.log('Data saved successfully!')
-//       })
-//       .catch((error) => {
-//         console.log('problem writing')
-//       })
-//     ) 
-//   }
-// if (filterRatings.length === 0)  
-//    {
-//       const newRatingKey = push(child(ref(db), '/ratings/')).key;
-//       const updates = {};
-//       const newRating = {
-//         ratingID: newRatingKey,
-//         userID: userID,
-//         drinkID: ratingDrinkID,
-//         originalTimeStamp: performance.timeOrigin,
-//         lastTimeStamp: performance.timeOrigin,
-//         rating: rating.rating
-//       };
-//     setRating('');
-//     updates['/ratings/' + newRatingKey] = newRating;
-   
-//     return (
-//         update(ref(db), updates).then(() => {
-//             console.log('Data saved successfully!')
-//       })
-//       .catch((error) => {
-//         console.log('problem writing')
-//       })
-//     )
-//   }
-// }
-    
     return (
       <>
       <ul>
@@ -94,7 +38,6 @@ export default function Bar({bars, drinks, comments, ratings}) {
                   ratings={ratings}
                   handleToggle={handleToggle}
                   beingEditted={beingEditted}
-                  // handleClick={handleClick}
                 />
               </li>
             );
@@ -107,8 +50,8 @@ export default function Bar({bars, drinks, comments, ratings}) {
       <Edit
         handleToggle={handleToggle} 
         beingEditted={beingEditted}
-        // handleClick={handleClick}
         selectedBar={selectedBar}
+        filteredBars={filteredBars}
       />
       </>
     );

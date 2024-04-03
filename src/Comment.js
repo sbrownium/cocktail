@@ -7,12 +7,6 @@ import DeleteButton from './DeleteButton.js';
 
 export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID, handleToggle, beingEditted}) {
     const [edit, setEdit] = useState(text);
-    // const [visible, setVisible] = useState(!visible)
-
-    // function toggleVisible (e) {
-    //   e.preventDefault();
-    //   setVisible(visible => !visible);
-    // }
     
     function handleEdit (e) {
         e.preventDefault();
