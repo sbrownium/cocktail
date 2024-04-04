@@ -51,6 +51,7 @@ return (
                 handleClick={handleClick}
               />
               <DeleteButton
+              path='/comments/'
               nodeID={commentID}
               nodeName='your comment'
               handleToggle={handleToggle}
