@@ -1,7 +1,7 @@
 {
 "drinks": {
     "-NpHWPZX3UPujdq_bWkx": {
-        "addedBy": "kdahofienfakd2930547usklfnd",
+        "addedBy": "-NuevnlTv6iyzS0Fuxfy",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "85% Euphoria",
@@ -10,7 +10,7 @@
         "price": 17
     },
     "-NpHsYVvtj0emdOgk-Mo": {
-        "addedBy": "kdahofienfakd2930547usklfnd",
+        "addedBy": "-NuevnlTv6iyzS0Fuxfy",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "Earthly Tether",
@@ -19,7 +19,7 @@
         "price": 14
     },
     "-NpHrmTBbIekPIk0Fd89": {
-        "addedBy": "kdahofienfakd2930547usklfnd",
+        "addedBy": "-NuevnlTv6iyzS0Fuxfy",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Booryoung",
@@ -28,7 +28,7 @@
         "price": 22
     },
     "-NpHs4DwzB9U8ka98ZFb":{
-        "addedBy": "kdahofienfakd2930547usklfnd",
+        "addedBy": "-NpkK_-xXif57roiJjNh",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Sumnara",
@@ -40,19 +40,18 @@
         "-Nr7lOhIhP11igBsjqOp": {
             "barName": "Stampede Cocktail Club",
             "barID": "-Nr7lOhIhP11igBsjqOp",
-            "addedBy": "kdahofienfakd2930547usklfnd",
+            "addedBy": "-NpkK_-xXif57roiJjNh",
             "timeStamp": 1705790249166
         },
         "-NqtP2KgP0su3VWrXHaf": {
             "barName": "Wero",
             "barID": "-NqtP2KgP0su3VWrXHaf",
-            "addedBy": "kdahofienfakd2930547usklfnd",
+            "addedBy": "-NuevnlTv6iyzS0Fuxfy",
             "timeStamp": 1705790280212
         }},
     "comments": {
         "-NpI6y26xFs-j2y0M7r9": {
-                "userName": "Jessica",
-                "userID": "kdahofienfakd2930547usklfnd",
+                "userID": "-NpkK_-xXif57roiJjNh",
                 "drinkID": "345e52c4-edb8-443e-888a-fed00574f7b9",
                 "initialTimeStamp": 1705790249166,
                 "lastTimeStamp": 1705790249166,
@@ -60,8 +59,7 @@
                 "commentID": "-NpI6y26xFs-j2y0M7r9"
         },
         "-NpI6yy8tu1V6qZvhqnK": {
-            "userName": "Scott Brown",
-            "userID": "113176315869470908948",
+            "userID": "-NuevnlTv6iyzS0Fuxfy",
             "drinkID": "345e52c4-edb8-443e-888a-fed00574f7b9",
             "initialTimeStamp": 1705790280212,
             "lastTimeStamp": 1705790280212,
@@ -69,8 +67,7 @@
             "commentID":"-NpI6yy8tu1V6qZvhqnK"
         },
         "-NpI6znwoOwQ7kFoOAgU": {
-            "userName": "Scott Brown",
-            "userID": "113176315869470908948",
+            "userID": "-NpkK_-xXif57roiJjNh",
             "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
             "initialTimeStamp": 1705798896134,
             "lastTimeStamp": 1705798896134,
@@ -80,7 +77,7 @@
     "ratings": {
         "-NpI6-yPif5j2y0M7r9": {
             "rating": 4,
-            "userID": "113176315869470908948",
+            "userID": "-NuevnlTv6iyzS0Fuxfy",
             "initialTimeStamp": 1705790249166,
             "lastTimeStamp": 1705790249166,
             "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
@@ -88,7 +85,7 @@
         },
         "-NpI6-yPif5j2y0M710": {
             "rating": 2,
-            "userID": "kdahofienfakd2930547usklfnd",
+            "userID": "-NuevnlTv6iyzS0Fuxfy",
             "initialTimeStamp": 1705790249169,
             "lastTimeStamp": 1705790249169,
             "drinkID": "f07f465a-520b-4bb6-b509-3ca83e66f95e",
@@ -97,10 +94,17 @@
     },
     "users": {
         "-NpkK_-xXif57roiJjNh": {
-            "userName": "name",
-            "giveName": "given_name",
-            "familyName": "family_name",
-            "email": "e@mail.com",
-            "userID": "8743215987519223"
+            "userName": "Jessica Wicksnin",
+            "giveName": "Jessica",
+            "familyName": "Wicksnin",
+            "email": "jwicksnin@gmail.com",
+            "userID": "-NpkK_-xXif57roiJjNh"
+    },
+    "-NuevnlTv6iyzS0Fuxfy": {
+            "userName": "Scott Brown",
+            "giveName": "Scott",
+            "familyName": "Brown",
+            "email": "brownscottbrown@gmail.com",
+            "userID": "-NuevnlTv6iyzS0Fuxfy"
     }
 }}

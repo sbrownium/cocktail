@@ -5,9 +5,12 @@ import EditBox from './EditBox';
 import DeleteButton from './DeleteButton.js';
 
 
-export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, userName, date, userID, handleToggle, beingEditted}) {
+export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, users, date, userID, handleToggle, beingEditted}) {
     const [edit, setEdit] = useState(text);
-    
+    const usersArray = Object.values(users);
+    const filteredUsers = usersArray.filter(u => u.userID === userID);
+    const preferredName = filteredUsers[0].giveName
+
     function handleEdit (e) {
         e.preventDefault();
         setEdit(e.target.value);
@@ -18,7 +21,6 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
       const updates = {};
       const newEdit = {
         commentID: commentID,
-        userName: userName,
         userID: userID,
         drinkID: commentDrinkID,
         initialTimeStamp: timeStamp,
@@ -55,11 +57,12 @@ return (
               nodeID={commentID}
               nodeName='your comment'
               handleToggle={handleToggle}
+              value='Delete Comment'
             />
             </>
               : text }
              &nbsp;
-            {beingEditted ? '' : <> ({userName} &mdash; {date})</>}
+            {beingEditted ? '' : <> ({preferredName} &mdash; {date})</>}
             
         </li>
 )

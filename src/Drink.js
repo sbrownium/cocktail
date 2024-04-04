@@ -5,7 +5,7 @@ import NewRating from './NewRating';
 import UserRating from './UserRating';
 import { UserContext } from './UserContext';
 
-export default function Drink({barID, drinks, comments, ratings, handleToggle, beingEditted, handleClick}){
+export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted, handleClick}){
   const [user, setUser] = useContext(UserContext);
   // const { userName, userID } = user 
   const emojiLookUp = {
@@ -37,9 +37,10 @@ export default function Drink({barID, drinks, comments, ratings, handleToggle, b
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
               />
-              : ''}
+              : null }
             <CommentList
               comments={comments}
+              users={users}
               commentDrinkID={drinkID}
               beingEditted={beingEditted}
               handleToggle={handleToggle}

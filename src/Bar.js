@@ -7,7 +7,7 @@ import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
 
 
-export default function Bar({bars, drinks, comments, ratings}) {
+export default function Bar({bars, drinks, comments, ratings, users}) {
   const [ user, setUser] = useContext(UserContext);
   const [beingEditted, setBeingEditted] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
@@ -36,6 +36,7 @@ export default function Bar({bars, drinks, comments, ratings}) {
                   drinks={drinks}
                   comments={comments}
                   ratings={ratings}
+                  users={users}
                   handleToggle={handleToggle}
                   beingEditted={beingEditted}
                 />
