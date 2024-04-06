@@ -31,7 +31,7 @@ export default function NewRating({emojiLookUp, handleToggle, filterRatings, rat
         userID: filterRatings[0].userID,
         drinkID: filterRatings[0].drinkID,
         initialTimeStamp: filterRatings[0].originalTimeStamp,
-        lastTimeStamp: performance.timeOrigin,
+        lastTimeStamp: Date.now(),
         rating: rating.rating
       };
     setRating('');
@@ -55,8 +55,8 @@ if (filterRatings.length === 0)
         ratingID: newRatingKey,
         userID: userID,
         drinkID: ratingDrinkID,
-        initialTimeStamp: performance.timeOrigin,
-        lastTimeStamp: performance.timeOrigin,
+        initialTimeStamp: Date.now(),
+        lastTimeStamp: Date.now(),
         rating: rating.rating
       };
     setRating('');

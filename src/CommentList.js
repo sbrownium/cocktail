@@ -14,21 +14,18 @@ export default function CommentList ({comments, users, commentDrinkID, handleTog
     const filteredComments = commentsArray.filter(comment => comment.drinkID === commentDrinkID);
 return (
     <ul>
-        {filteredComments.map(({timeStamp, text, commentID, userID}, index) => {
-        const date = new Intl.DateTimeFormat('en-US', {
-            dateStyle: 'medium'
-            // timeStyle: 'short'
-          }).format(timeStamp)
+        {filteredComments.map(({initialTimeStamp, text, commentID, userID}, index) => {
         return (
         <Comment
             commentDrinkID={commentDrinkID}
             key={index}
-            timeStamp={timeStamp}
             users={users}
             userID={userID}
             commentID={commentID}
+            initialTimeStamp={initialTimeStamp}
             text={text}
-            date={date}
+            // time={time}
+            // date={date}
             handleToggle={handleToggle}
             beingEditted={beingEditted}
         />   

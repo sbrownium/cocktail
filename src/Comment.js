@@ -3,10 +3,12 @@ import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
 import DeleteButton from './DeleteButton.js';
+import Time from './Time.js';
 
 
-export default function Comment ({ commentDrinkID, index, commentID, timeStamp, text, users, date, userID, handleToggle, beingEditted}) {
+export default function Comment ({ commentDrinkID, index, commentID, initialTimeStamp, text, users, userID, handleToggle, beingEditted}) {
     const [edit, setEdit] = useState(text);
+    // const [time, setTime] = useState('');
     const usersArray = Object.values(users);
     const filteredUsers = usersArray.filter(u => u.userID === userID);
     const preferredName = filteredUsers[0].giveName
@@ -15,7 +17,7 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
         e.preventDefault();
         setEdit(e.target.value);
     }
-
+  
     function handleClick(e){
       
       const updates = {};
@@ -23,8 +25,8 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
         commentID: commentID,
         userID: userID,
         drinkID: commentDrinkID,
-        initialTimeStamp: timeStamp,
-        lastTimeStamp: performance.timeOrigin,
+        initialTimeStamp: initialTimeStamp,
+        lastTimeStamp: Date.now(),
         text: edit
       };
     e.preventDefault();
@@ -41,7 +43,9 @@ export default function Comment ({ commentDrinkID, index, commentID, timeStamp, 
     )
 
     };
+    
 return (
+  
         <li key={index} id={commentID}>
             {beingEditted ? 
             <>
@@ -62,8 +66,8 @@ return (
             </>
               : text }
              &nbsp;
-            {beingEditted ? '' : <> ({preferredName} &mdash; {date})</>}
-            
+            {beingEditted ? '' : <> ({preferredName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
         </li>
 )
 };
+

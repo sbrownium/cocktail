@@ -361,8 +361,8 @@ export default function NewContainer ({bars, drinks, commets}) {
            else {
             const updates = {};   
             const {barID, barName, timeStamp, drinkID, drinkName, description, price} = newDrink
-            const newDrinkObj = {barID, barName, addedBy: userID, timeStamp: performance.timeOrigin, drinkID, drinkName, description, price};
-            const newBarObj = {barID, barName, addedBy: userID, timeStamp: performance.timeOrigin};
+            const newDrinkObj = {barID, barName, addedBy: userID, timeStamp: Date.now(), drinkID, drinkName, description, price};
+            const newBarObj = {barID, barName, addedBy: userID, timeStamp: Date.now()};
             
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
             const matchBar = barsArray.find(ID => ID.barID === newDrink.barID);
