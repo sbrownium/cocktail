@@ -11,7 +11,7 @@ export default function RootLayout () {
             <nav>
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/Account'>Account</NavLink> 
-                <NavLink to='/NewContainer'>New Drink</NavLink> 
+                {/* <NavLink to='/NewContainer'>New Drink</NavLink>  */}
             </nav>
         </footer>
     </>

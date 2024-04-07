@@ -1,4 +1,7 @@
 .icon {
     border: none;
-    background: none;
+    background: none; 
+}
+button {
+    cursor: pointer;
 }

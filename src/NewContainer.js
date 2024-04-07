@@ -6,9 +6,10 @@ import BarSelector from './BarSelector.js';
 import NewBar from './NewBar.js';
 import NewDrink from './NewDrink.js';
 import Submit from './Submit.js';
+import Button from './Button.js';
 
 
-export default function NewContainer ({bars, drinks, commets}) {
+export default function NewContainer ({bars, drinks, commets, handleNewDrinkToggle}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
     const initialValidation = {
@@ -372,6 +373,7 @@ export default function NewContainer ({bars, drinks, commets}) {
         }
             setNewDrink(initialNewDrink);
             setValidation(initialValidation);
+            handleNewDrinkToggle();
             return (
                 update(ref(db), updates).then(() => {
                 console.log('Data saved successfully!')
@@ -391,6 +393,9 @@ export default function NewContainer ({bars, drinks, commets}) {
                 <Submit handleClick={handleClick} value='add'/>
               
             </form>
+            <Button className={null} handleClick={handleNewDrinkToggle}>
+                Never Mind
+            </Button>
        </>
     )         
 }

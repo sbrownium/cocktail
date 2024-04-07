@@ -7,18 +7,24 @@ import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
 import DrinkIcon from "./DrinkIcon.js";
 import Button from "./Button.js";
+import NewContainer from "./NewContainer.js";
 
 
 export default function Bar({bars, drinks, comments, ratings, users}) {
   const [ user, setUser] = useContext(UserContext);
   const [beingEditted, setBeingEditted] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
+  const [showNewDrink, setShowNewDrink] = useState(false);
   const barsArray = Object.values(bars);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
 
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted);
     }
+
+  function handleNewDrinkToggle () {
+    setShowNewDrink(showNewDrink => !showNewDrink)
+  }
 
   function handleSelect (e) {
     e.preventDefault();
@@ -27,6 +33,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     
   function handleClick (e) {
     e.preventDefault();
+    handleNewDrinkToggle();
   }  
     
     return (
@@ -60,9 +67,13 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
         selectedBar={selectedBar}
         filteredBars={filteredBars}
       />
+      {showNewDrink ? 
+       <NewContainer bars={bars} drinks={drinks} comments={comments} handleNewDrinkToggle={handleNewDrinkToggle}/>
+       :
       <Button handleClick={handleClick} className='icon'>
         +<DrinkIcon width='24' height='24' fill='grey'/>
       </Button>
+      }
       </>
     );
   }
