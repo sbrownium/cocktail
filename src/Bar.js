@@ -5,6 +5,8 @@ import { db } from "./firebase.js";
 import Drink from './Drink.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
+import DrinkIcon from "./DrinkIcon.js";
+import Button from "./Button.js";
 
 
 export default function Bar({bars, drinks, comments, ratings, users}) {
@@ -21,7 +23,11 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   function handleSelect (e) {
     e.preventDefault();
     setSelectedBar(e.target.value);
-    };  
+    }; 
+    
+  function handleClick (e) {
+    e.preventDefault();
+  }  
     
     return (
       <>
@@ -54,6 +60,9 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
         selectedBar={selectedBar}
         filteredBars={filteredBars}
       />
+      <Button handleClick={handleClick} className='icon'>
+        +<DrinkIcon width='24' height='24' fill='grey'/>
+      </Button>
       </>
     );
   }

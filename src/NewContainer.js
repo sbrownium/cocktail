@@ -384,7 +384,7 @@ export default function NewContainer ({bars, drinks, commets}) {
     return (
         <>
             <form>
-                <BarSelector bars={bars} newDrink={newDrink} validation={validation} handleExistingBar={handleExistingBar} focusSelector={focusSelector}/>
+                <BarSelector bars={bars} newDrink={newDrink} validation={validation} handleExistingBar={handleExistingBar} focusSelector={focusSelector} />
                 <NewBar newDrink={newDrink} validation={validation} handleNewBar={handleNewBar} focusNewBar={focusNewBar}/>
                 <NewDrink newDrink={newDrink} validation={validation} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}

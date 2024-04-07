@@ -8,7 +8,7 @@ export default function BarSelector({bars, newDrink, validation, handleExistingB
         <>
           <label>Bar
           <select name='barSelect' 
-          className={validation.needsBarID ? 'missing' : '' }
+          className={validation.needsBarID ? 'missing' : null }
           value={newDrink.barID} 
           onChange={handleExistingBar}
           onFocus={focusSelector}>
@@ -21,6 +21,7 @@ export default function BarSelector({bars, newDrink, validation, handleExistingB
                 )
               }})}
             <option isNew={true} className='new' value='new'>New</option>
+            {/* not sure what isNew does <option isNew={true} className='new' value='new'>New</option> */} 
             </select>
             </label>
             </>

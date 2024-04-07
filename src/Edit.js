@@ -16,7 +16,7 @@ export default function Edit ({handleToggle, beingEditted, filteredBars, handleC
     // }
     return (
         <>
-            {user && filteredBars.length > 0 ? // checks if user is logged in and if there are any bars selected before displaying edit icon
+            {(user && filteredBars.length > 0) && // checks if user is logged in and if there are any bars selected before displaying edit icon
                 <>
                     {beingEditted ? 
                     <button onClick={handleToggle}>Never Mind</button>
@@ -26,8 +26,7 @@ export default function Edit ({handleToggle, beingEditted, filteredBars, handleC
                             <PencilIcon fillColor='black' width='26' heigth='26'/>
                         </button>
                     </>}
-                </>
-            : '' }
+                </>}
       </>
     )
 }

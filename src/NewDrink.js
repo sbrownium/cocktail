@@ -3,12 +3,11 @@ import './NewDrink.css'
 
 export default function NewDrink({newDrink, validation, handleName, focusName, handleDescription, focusDescription, handlePrice, focusPrice}){
 
-// const {drinkName, description, price } = newDrink
   return (
     <>
       <label>Name of Drink
       <input
-          className={validation.needsDrinkName ? 'missing' : '' }
+          className={validation.needsDrinkName ? 'missing' : null }
           id='drinkName'
           type="text"
           value={newDrink.drinkName}
@@ -18,7 +17,7 @@ export default function NewDrink({newDrink, validation, handleName, focusName, h
       </label>
       <label>Drink Description (from menu)
       <input
-          className={validation.needsDescription ? 'missing' : '' }
+          className={validation.needsDescription ? 'missing' : null }
           id='description'
           type="text"
           value={newDrink.description}
@@ -28,7 +27,7 @@ export default function NewDrink({newDrink, validation, handleName, focusName, h
       </label>
       <label>Price $
       <input
-          className={validation.needsPrice ? 'missing' : '' }
+          className={validation.needsPrice ? 'missing' : null }
           id='price'
           type='number'
           value={newDrink.price}

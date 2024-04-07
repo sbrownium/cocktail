@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PopOver from "./PopOver";
 import Button from "./Button";
 
-export default function DeleteButton ({path, nodeID, nodeName, handleToggle, value}) {
+export default function DeleteButton ({path, nodeID, nodeName, handleToggle, children, className}) {
     const [visible, setVisible] = useState(false);
 
     function handleClick (e) {
@@ -19,7 +19,9 @@ export default function DeleteButton ({path, nodeID, nodeName, handleToggle, val
             handleToggle={handleToggle}
         />
         :
-        <Button value={value} handleClick={handleClick} />
+        <Button handleClick={handleClick} className={className}>
+            {children}
+        </Button>    
         }
         </>
     )

@@ -31,7 +31,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
                     nodeID={ratingID}
                     nodeName={ratingToEmoji}
                     handleToggle={handleToggle}
-                    value='Delete Rating'
+                    children='Delete Rating'
                 />
             </>
              :

@@ -21,7 +21,9 @@ export default function DeleteComment ({commentID, handleToggle}) {
        ) 
     };
     return (
-        <Button handleClick={handleClick} value='Delete' />
+        <Button handleClick={handleClick} className={null}>
+        Delete
+        </Button>
     )
 
 };

@@ -61,7 +61,8 @@ return (
               nodeID={commentID}
               nodeName='your comment'
               handleToggle={handleToggle}
-              value='Delete Comment'
+              className={null}
+              children='Delete Comment'
             />
             </>
               : text }

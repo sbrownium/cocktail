@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
+import Button from './Button.js';
 // import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 // https://developers.google.com/identity/sign-in/web/sign-in
@@ -61,7 +62,9 @@ function handleClick (e) {
       )}
       else {
         return (
-          <button onClick={handleClick}>log out</button>
+          <Button className={null} handleClick={handleClick}>
+            Log Out
+          </Button>
         )
       }
 };

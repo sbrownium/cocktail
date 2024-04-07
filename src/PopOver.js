@@ -23,10 +23,12 @@ export default function PopOver ({path, nodeID, nodeName, handleToggle, toggleVi
     return (
         <>
             <p>Just double-checking, you do want to delete {nodeName}</p>
-            <Button value='Delete' handleClick={handleClick}/>
-            <button onClick={toggleVisible}>
+            <Button className={null} handleClick={handleClick}>
+            Delete
+            </Button>
+            <Button className={null} handleClick={handleToggle}>
                 Never Mind
-            </button>  
+            </Button>  
         </>
     )
 }
