@@ -15,6 +15,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   const [beingEditted, setBeingEditted] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
+  const [showingBar, setShowingBar] = useState(false);
   const barsArray = Object.values(bars);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
 
@@ -26,9 +27,21 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     setShowNewDrink(showNewDrink => !showNewDrink)
   }
 
+  function handleShowingBarToggle () {
+    setShowingBar(showingBar => !showingBar)
+  }
+
   function handleSelect (e) {
     e.preventDefault();
-    setSelectedBar(e.target.value);
+    if (e.target.value !== "Pick a bar, any bar" && !showingBar ) {
+      setSelectedBar(e.target.value);
+      handleShowingBarToggle();
+    } if (e.target.value !== "Pick a bar, any bar" && showingBar ) {
+      setSelectedBar(e.target.value);
+    } if (e.target.value === "Pick a bar, any bar" && showingBar ) {
+      setSelectedBar(e.target.value);
+      handleShowingBarToggle();
+    }
     }; 
     
   function handleClick (e) {
@@ -61,6 +74,9 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
         bars={bars}
         handleSelect={handleSelect}
       /> 
+      
+      {showingBar &&
+      <>
       <Edit
         handleToggle={handleToggle} 
         beingEditted={beingEditted}
@@ -73,6 +89,8 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       <Button handleClick={handleClick} className='icon'>
         +<DrinkIcon width='24' height='24' fill='grey'/>
       </Button>
+      }
+      </>
       }
       </>
     );
