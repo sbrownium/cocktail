@@ -27,20 +27,13 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     setShowNewDrink(showNewDrink => !showNewDrink)
   }
 
-  function handleShowingBarToggle () {
-    setShowingBar(showingBar => !showingBar)
-  }
-
   function handleSelect (e) {
     e.preventDefault();
-    if (e.target.value !== "Pick a bar, any bar" && !showingBar ) {
-      setSelectedBar(e.target.value);
-      handleShowingBarToggle();
-    } if (e.target.value !== "Pick a bar, any bar" && showingBar ) {
-      setSelectedBar(e.target.value);
-    } if (e.target.value === "Pick a bar, any bar" && showingBar ) {
-      setSelectedBar(e.target.value);
-      handleShowingBarToggle();
+    setSelectedBar(e.target.value);
+    if (e.target.value === "Pick a bar, any bar") {
+      setShowingBar(false);
+    } else {
+      setShowingBar(true);
     }
     }; 
     
