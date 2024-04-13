@@ -1,7 +1,5 @@
 import React, {useContext, useState} from "react";
 import { UserContext } from "./UserContext.js";
-import { ref, child, push, update } from "firebase/database";
-import { db } from "./firebase.js";
 import Drink from './Drink.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
@@ -16,6 +14,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
+
   const barsArray = Object.values(bars);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
 
@@ -41,6 +40,8 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     e.preventDefault();
     handleNewDrinkToggle();
   }  
+
+  
     
     return (
       <>

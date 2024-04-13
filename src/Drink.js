@@ -1,13 +1,15 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import CommentList from './CommentList';
 import AverageRating from './AverageRating';
-import NewRating from './NewRating';
 import UserRating from './UserRating';
 import { UserContext } from './UserContext';
+import Order from './Order';
+
 
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted, handleClick}){
   const [user, setUser] = useContext(UserContext);
-  // const { userName, userID } = user 
+  const [checked, setChecked] = useState("Alphabetical");
+
   const emojiLookUp = {
     '🤢': 1,
     '🤷‍♀️': 2,
@@ -16,7 +18,16 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
 };
   const drinksArray = Object.values(drinks);
   const filteredBars = drinksArray.filter(bar => bar.barID === barID);
+
+  function handleChange (e) {
+    setChecked(e.target.value)
+  }
+
+  
     return (
+      <>
+      <Order checked={checked} handleChange={handleChange}/>
+      {/* <Order handleAlpha={handleAlpha} alphaCheck={alphaCheck} handleDate={handleDate} dateCheck={dateCheck}/> */}
         <ul>
       {filteredBars.map(({drinkName, drinkID, description, price}, index) => (  
           <li key={index}>
@@ -47,6 +58,7 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
             />
           </li>
           ))}
-        </ul>   
+        </ul> 
+        </>  
       )
 }
