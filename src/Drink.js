@@ -23,13 +23,28 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
     setChecked(e.target.value)
   }
 
+  function alphaSort (a,b) {
+    const c = a.drinkName.toLowerCase();
+    const d = b.drinkName.toLowerCase();
+      if ( c < d ){
+        return -1;
+      }
+      if ( c > d ){
+        return 1;
+      }
+      return 0;
+    }
+    
+  //   filteredBars.toSorted(alphaSort)
+  // }
   
     return (
       <>
       <Order checked={checked} handleChange={handleChange}/>
       {/* <Order handleAlpha={handleAlpha} alphaCheck={alphaCheck} handleDate={handleDate} dateCheck={dateCheck}/> */}
         <ul>
-      {filteredBars.map(({drinkName, drinkID, description, price}, index) => (  
+      {/* {filteredBars.map(({drinkName, drinkID, description, price}, index) => (   */}
+      {filteredBars.toSorted(alphaSort).map(({drinkName, drinkID, description, price}, index) => (  
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
