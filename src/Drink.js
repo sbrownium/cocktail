@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useMemo} from 'react';
 import CommentList from './CommentList';
 import AverageRating from './AverageRating';
 import UserRating from './UserRating';
@@ -9,6 +9,8 @@ import Order from './Order';
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted, handleClick}){
   const [user, setUser] = useContext(UserContext);
   const [checked, setChecked] = useState("Alphabetical");
+  //useMemo
+  let sortType = '';
 
   const emojiLookUp = {
     '🤢': 1,
@@ -34,17 +36,26 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
       }
       return 0;
     }
+
+   function dateSort (a,b) {
+   return a.initialTimeStamp - b.initialTimeStamp;
+   } 
+
+   //drinks need initialTimeStamp + lastTimeStamp
     
-  //   filteredBars.toSorted(alphaSort)
-  // }
-  
+ if (checked === 'Alphabetical' ) {
+  sortType = filteredBars.toSorted(alphaSort)
+ } if (checked === 'Date Added') {
+  sortType = filteredBars.toSorted(dateSort)
+ }
     return (
       <>
       <Order checked={checked} handleChange={handleChange}/>
       {/* <Order handleAlpha={handleAlpha} alphaCheck={alphaCheck} handleDate={handleDate} dateCheck={dateCheck}/> */}
         <ul>
       {/* {filteredBars.map(({drinkName, drinkID, description, price}, index) => (   */}
-      {filteredBars.toSorted(alphaSort).map(({drinkName, drinkID, description, price}, index) => (  
+      {/* {filteredBars.toSorted(alphaSort).map(({drinkName, drinkID, description, price}, index) => (   */}
+      {sortType.map(({drinkName, drinkID, description, price}, index) => (    
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
