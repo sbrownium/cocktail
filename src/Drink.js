@@ -8,9 +8,7 @@ import Order from './Order';
 
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted, handleClick}){
   const [user, setUser] = useContext(UserContext);
-  const [checked, setChecked] = useState("Alphabetical");
-  //useMemo
-  let sortType = '';
+  const [checked, setChecked] = useState('Date Added');
 
   const emojiLookUp = {
     '🤢': 1,
@@ -41,21 +39,21 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
    return a.initialTimeStamp - b.initialTimeStamp;
    } 
 
-   //drinks need initialTimeStamp + lastTimeStamp
-    
- if (checked === 'Alphabetical' ) {
-  sortType = filteredBars.toSorted(alphaSort)
- } if (checked === 'Date Added') {
-  sortType = filteredBars.toSorted(dateSort)
- }
+const sortedBars = useMemo(() => {
+  if (checked === 'Alphabetical') {
+    return [...filteredBars].toSorted(alphaSort);
+  } 
+  if (checked === 'Date Added') {
+    return [...filteredBars].toSorted(dateSort);
+  }
+  return filteredBars;
+}, [checked, filteredBars]);
+
     return (
       <>
       <Order checked={checked} handleChange={handleChange}/>
-      {/* <Order handleAlpha={handleAlpha} alphaCheck={alphaCheck} handleDate={handleDate} dateCheck={dateCheck}/> */}
         <ul>
-      {/* {filteredBars.map(({drinkName, drinkID, description, price}, index) => (   */}
-      {/* {filteredBars.toSorted(alphaSort).map(({drinkName, drinkID, description, price}, index) => (   */}
-      {sortType.map(({drinkName, drinkID, description, price}, index) => (    
+      {sortedBars.map(({drinkName, drinkID, description, price}, index) => (    
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
