@@ -12,6 +12,9 @@ import Button from './Button.js';
 export default function NewContainer ({bars, drinks, commets, handleNewDrinkToggle, defaultBar}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
+    const barsArray = Object.values(bars);
+    const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
+    const defaultBarName = defaultBarObj[0].barName;
     const initialValidation = {
         needsDrinkName: false,
         needsBarName: false,
@@ -20,8 +23,8 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
         needsPrice: false,
     }
     const initialNewDrink = {
-        barID: '',
-        barName: '',
+        barID: defaultBar,
+        barName: defaultBarName,
         drinkID: '',
         drinkName: '',
         description: '',
@@ -34,7 +37,7 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
     const [validation, setValidation] = useState(initialValidation);
     const newDrinkKey = push(child(ref(db), '/drinks/')).key;
     const newBarKey = push(child(ref(db), '/bars/')).key;
-    const barsArray = Object.values(bars);
+
 
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
@@ -388,7 +391,7 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
     return (
         <>
             <form>
-                <BarSelector bars={bars} newDrink={newDrink} validation={validation} handleExistingBar={handleExistingBar} focusSelector={focusSelector} defaultBar={defaultBar}/>
+                <BarSelector bars={bars} newDrink={newDrink} validation={validation} handleExistingBar={handleExistingBar} focusSelector={focusSelector} defaultBarID={defaultBar} defaultBarName={defaultBarName}/>
                 <NewBar newDrink={newDrink} validation={validation} handleNewBar={handleNewBar} focusNewBar={focusNewBar}/>
                 <NewDrink newDrink={newDrink} validation={validation} handleName={handleName} focusName={focusName} handleDescription={handleDescription} focusDescription={focusDescription} handlePrice={handlePrice} focusPrice={focusPrice}/>
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}

@@ -40,8 +40,6 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     e.preventDefault();
     handleNewDrinkToggle();
   }  
-
-  
     
     return (
       <>
