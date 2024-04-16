@@ -1,34 +1,35 @@
 import React from "react";
+import RadioButton from "./RadioButton";
 
 export default function Order ({checked, handleChange}) {
-    // export default function Order ({handleAlpha, alphaCheck, handleDate, dateCheck }) {
-
     return (
         <form>
             <fieldset>
                 <legend>Arrange drinks by:</legend>
-                <label>
-                <input
-                    type="radio"
-                    name="arrange"
-                    value="Alphabetical"
-                    // onChange={() => setChecked("Alphabetical")}
-                    onChange={handleChange}
-                    checked={(checked === "Alphabetical")}
-                    />
-                    Alphabetical
-                </label>
-                <label>
-                <input
-                    type="radio"
-                    name="arrange"
-                    value="Date Added"
-                    // onChange={() => setChecked("Date Added")}
-                    onChange={handleChange}
-                    checked={(checked === "Date Added")}
-                    />
-                    Date Added
-                </label>
+                <RadioButton
+                    radioName='arrange'
+                    value='Date Added'
+                    handleChange={handleChange}
+                    checked={checked}
+                />
+                  <RadioButton
+                    radioName='arrange'
+                    value='Alphabetical'
+                    handleChange={handleChange}
+                    checked={checked}
+                />
+                <RadioButton
+                    radioName='arrange'
+                    value='Highest Average Rating'
+                    handleChange={handleChange}
+                    checked={checked}
+                />
+                <RadioButton
+                    radioName='arrange'
+                    value='Lowest Average Rating'
+                    handleChange={handleChange}
+                    checked={checked}
+                />
             </fieldset>
         </form>
     )
