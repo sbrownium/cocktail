@@ -43,10 +43,15 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
 
   function findRating (x) {
     const ratingsArray = Object.values(ratings);
-    const filteredRatings = ratingsArray.filter(drink => drink.drinkID === x.drinkID);
+    let filteredRatings = []
+      if (checked === 'My Highest Rating' || checked === 'My Lowest Rating') {
+        filteredRatings = ratingsArray.filter(rating => rating.userID === user.userID).filter(drink => drink.drinkID === x.drinkID)
+      } else {
+        filteredRatings = ratingsArray.filter(drink => drink.drinkID === x.drinkID);
+      }
     const drinkRatings = [];
 // This logic can probably be simpler
-filteredRatings.forEach((e) => drinkRatings.push(e.rating));
+    filteredRatings.forEach((e) => drinkRatings.push(e.rating));
     if (drinkRatings.length !== 0){
     const ratingTotal = drinkRatings.reduce((accum, current) => accum + current);
     return Math.round(ratingTotal / drinkRatings.length);
@@ -62,12 +67,21 @@ filteredRatings.forEach((e) => drinkRatings.push(e.rating));
       return findRating(a) - findRating(b);
   }
 
+  // function myRateSort (a,b) {
+  //   if ((findRating(a) !== undefined) && (findRating(b) !== undefined))
+  //     return findRating(a) - findRating(b);
+  // }
+
 const sortedBars = useMemo(() => {
   if (checked === 'Alphabetical') {
     return filteredBars.toSorted(alphaSort);
   } if (checked === 'Highest Average Rating') {
     return filteredBars.toSorted(highAverageSort);
   } if (checked === 'Lowest Average Rating') {
+    return filteredBars.toSorted(lowAverageSort);
+  } if (checked === 'My Highest Rating') {
+    return filteredBars.toSorted(highAverageSort);
+  } if (checked === 'My Lowest Rating') {
     return filteredBars.toSorted(lowAverageSort);
   }
     return filteredBars.toSorted(dateSort);
