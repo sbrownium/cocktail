@@ -44,7 +44,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
     else {
         return(
             <>
-            {beingEditted &&
+            {user &&
             <NewRating
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
