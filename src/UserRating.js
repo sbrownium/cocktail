@@ -9,7 +9,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
     const { userName, userID } = user 
     const ratingsArray = Object.values(ratings);
     const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
-
+    
     if (filterRatings.length != 0) {
     const ratingID = filterRatings[0].ratingID;
     const emojiKeys = Object.keys(emojiLookUp);
@@ -44,7 +44,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
     else {
         return(
             <>
-            {beingEditted ? null :
+            {beingEditted &&
             <NewRating
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}

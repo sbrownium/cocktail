@@ -1,14 +1,14 @@
 import React from "react";
 
-export default function RadioButton ({radioName, value, handleChange, checked}) {
+export default function Input ({inputName, type, value, handleChange, checked}) {
     return (
         <label>
                 <input
-                    type="radio"
-                    name={radioName}
+                    type={type}
+                    name={inputName}
                     value={value}
                     onChange={handleChange}
-                    checked={(checked === value)}
+                    checked={checked === value}
                     />
                     {value}
                 </label>

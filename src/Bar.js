@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useMemo} from "react";
 import { UserContext } from "./UserContext.js";
 import Drink from './Drink.js'
 import ChangeBar from './ChangeBar.js';
@@ -14,9 +14,13 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
+  // const [hasRatings, setHasRatings] = useState(false);
 
   const barsArray = Object.values(bars);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
+
+  // const ratingsArray = Object.values(ratings);
+  // const filteredRatings = ratingsArray.filter(rating => rating.barID === selectedBar);
 
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted);
@@ -39,7 +43,19 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   function handleClick (e) {
     e.preventDefault();
     handleNewDrinkToggle();
-  }  
+  } 
+
+  // const withRatings = useMemo(() => {
+  //   if (filteredRatings.length > 0) {
+  //   return true;
+  //   } else {
+  //   return false;
+  //   }
+  // }, [hasRatings, filteredRatings])
+  // const withRatings = () => {
+  //   return console.log('withRatings')
+  // }
+
     
     return (
       <>

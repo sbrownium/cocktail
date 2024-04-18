@@ -1,51 +1,61 @@
 import React, {useContext} from "react";
-import RadioButton from "./RadioButton";
+import Input from "./Input";
 import { UserContext } from "./UserContext";
 
-export default function Order ({checked, handleChange}) {
+export default function Order ({checked, handleChange, hasRating}) {
     const [user, setUser] = useContext(UserContext);
+    
     return (
         <form>
             <fieldset>
                 <legend>Arrange drinks by:</legend>
-                <RadioButton
-                    radioName='arrange'
+                <Input
+                    inputName='arrange'
+                    type='radio'
                     value='Date Added'
                     handleChange={handleChange}
                     checked={checked}
                 />
-                  <RadioButton
-                    radioName='arrange'
+                   <Input
+                    inputName='arrange'
+                    type='radio'
                     value='Alphabetical'
                     handleChange={handleChange}
                     checked={checked}
                 />
-                <RadioButton
-                    radioName='arrange'
+                {hasRating &&
+                <>
+                 <Input
+                    inputName='arrange'
+                    type='radio'
                     value='Highest Average Rating'
                     handleChange={handleChange}
                     checked={checked}
                 />
-                <RadioButton
-                    radioName='arrange'
+                <Input
+                    inputName='arrange'
+                    type='radio'
                     value='Lowest Average Rating'
                     handleChange={handleChange}
                     checked={checked}
                 />
                 {user && 
                 <>
-                <RadioButton
-                    radioName='arrange'
+                <Input
+                    inputName='arrange'
+                    type='radio'
                     value='My Highest Rating'
                     handleChange={handleChange}
                     checked={checked}
                 /> 
-                <RadioButton
-                    radioName='arrange'
+                <Input
+                    inputName='arrange'
+                    type='radio'
                     value='My Lowest Rating'
                     handleChange={handleChange}
                     checked={checked}
                 />
+                </>}
                 </>}
             </fieldset>
         </form>

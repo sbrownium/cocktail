@@ -6,9 +6,12 @@ import { UserContext } from './UserContext';
 import Order from './Order';
 
 
-export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted}){
+export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted }){
   const [user, setUser] = useContext(UserContext);
   const [checked, setChecked] = useState('Date Added');
+  // const ratingsArray = Object.values(ratings);
+  // const filteredRatings = ratingsArray.filter(rating => rating.barID === barID);
+  const [hasRating, setHasRating] = useState(false);
   
 
   const emojiLookUp = {
@@ -23,6 +26,10 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
 
   function handleChange (e) {
     setChecked(e.target.value)
+  }
+
+  function handleRating(binary) {
+    setHasRating(binary);
   }
 
   function alphaSort (a,b) {
@@ -67,10 +74,6 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
       return findRating(a) - findRating(b);
   }
 
-  // function myRateSort (a,b) {
-  //   if ((findRating(a) !== undefined) && (findRating(b) !== undefined))
-  //     return findRating(a) - findRating(b);
-  // }
 
 const sortedBars = useMemo(() => {
   if (checked === 'Alphabetical') {
@@ -87,9 +90,10 @@ const sortedBars = useMemo(() => {
     return filteredBars.toSorted(dateSort);
 }, [checked, filteredBars]);
 
+
     return (
       <>
-      <Order checked={checked} handleChange={handleChange}/>
+      <Order checked={checked} handleChange={handleChange} hasRating={hasRating}/>
         <ul>
       {sortedBars.map(({drinkName, drinkID, description, price}, index) => (    
           <li key={index}>
@@ -100,8 +104,9 @@ const sortedBars = useMemo(() => {
               emojiLookUp={emojiLookUp}
               ratings={ratings}
               ratingDrinkID={drinkID}
+              handleRating={handleRating}
             />
-            {user ?
+            {user &&
               <UserRating
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
@@ -110,7 +115,7 @@ const sortedBars = useMemo(() => {
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
               />
-              : null }
+              }
             <CommentList
               comments={comments}
               users={users}
