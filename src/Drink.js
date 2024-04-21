@@ -93,7 +93,7 @@ const sortedBars = useMemo(() => {
 
     return (
       <>
-      <Order checked={checked} handleChange={handleChange} ratings={ratings} thisBarsDrinks={filteredBars}/>
+      <Order checked={checked} handleChange={handleChange} ratings={ratings} barID={barID}/>
         <ul>
       {sortedBars.map(({drinkName, drinkID, description, price}, index) => (    
           <li key={index}>
