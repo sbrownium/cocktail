@@ -5,7 +5,7 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewComment({commentDrinkID}) {
+export default function NewComment({commentDrinkID, barID}) {
     const [comment, setComment] = useState('');
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user 
@@ -21,9 +21,10 @@ export default function NewComment({commentDrinkID}) {
       const updates = {};
       const newComment = {
         commentID: newCommentKey,
-        userName: userName,
+        // userName: userName,
         userID: userID,
         drinkID: commentDrinkID,
+        barID: barID,
         initialTimeStamp: Date.now(),
         lastTimeStamp: Date.now(),
         text: comment,

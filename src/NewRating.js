@@ -5,7 +5,7 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewRating({emojiLookUp, handleToggle, filterRatings, ratings, drinkName, ratingDrinkID, text, beingEditted}) {
+export default function NewRating({emojiLookUp, handleToggle, filterRatings, barID, ratingDrinkID, text, beingEditted}) {
     
     const [rating, setRating] = useState('');
     const [user, setUser] = useContext(UserContext);
@@ -27,6 +27,7 @@ export default function NewRating({emojiLookUp, handleToggle, filterRatings, rat
     if (filterRatings.length != 0) {
       const updates = {};
       const updatedRating = {
+        barID: filterRatings[0].barID,
         ratingID: filterRatings[0].ratingID,
         userID: filterRatings[0].userID,
         drinkID: filterRatings[0].drinkID,
@@ -52,6 +53,7 @@ if (filterRatings.length === 0)
       const newRatingKey = push(child(ref(db), '/ratings/')).key;
       const updates = {};
       const newRating = {
+        barID: barID,
         ratingID: newRatingKey,
         userID: userID,
         drinkID: ratingDrinkID,

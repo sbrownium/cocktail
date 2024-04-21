@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Comment from './Comment';
 import NewComment from './NewComment';
+import { UserContext } from './UserContext';
 
-export default function CommentList ({comments, users, commentDrinkID, handleToggle, beingEditted}) {
+export default function CommentList ({comments, users, commentDrinkID, handleToggle, beingEditted, barID}) {
+    const [user] = useContext(UserContext)
+    if (!user) {
+        return null
+    }
     if (comments === undefined) { //checks in case there are no comments in the entire database
         return (
             <>
-            {beingEditted ? null : <NewComment commentDrinkID={commentDrinkID}/>}
+            {!beingEditted && <NewComment commentDrinkID={commentDrinkID}/>}
             </>
         )
     } else {
@@ -32,7 +37,7 @@ return (
         )
     }
         )}
-        {beingEditted ? '' : <NewComment commentDrinkID={commentDrinkID}/>}
+        {!beingEditted && <NewComment commentDrinkID={commentDrinkID} barID={barID}/>}
     </ul>
 )
     

@@ -1,10 +1,21 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import Input from "./Input";
 import { UserContext } from "./UserContext";
 
-export default function Order ({checked, handleChange, hasRating}) {
-    const [user, setUser] = useContext(UserContext);
+export default function Order ({checked, handleChange, ratings, barID, thisBarsDrinks}) {
+    const [user] = useContext(UserContext);
+    const [ hasRatings, setHasRatings ] = useState(false);
+    const ratingsArray = Object.values(ratings);
+//   const filteredRatings = ratingsArray.filter(rating => rating.drinkID === filteredBars.includes(barID).includes(rating.drinkID));
+// const logicTest = filteredBars.includes(barID).includes(drinkID);    
+// if (thisBarsDrinks)
+// const filteredRatings = ratingsArray.filter(drink => drink.drinkID === ratingDrinkID);
+// const filteredRatings = ratingsArray.filter(rating => rating.drinkID === barID)
+// const filteredRatings = ratingsArray.filter(drink => drink.drinkID === thisBarsDrinks.filter(drink => drink.drinkID)); 
+// const filteredRatings = ratingsArray.filter(drink => drink.drinkID === thisBarsDrinks.includes(drinkID)); 
     
+// thisBarsDrinks.filter(b => b.drinkID === 
+//     "f07f465a-520b-4bb6-b509-3ca83e66f95e")
     return (
         <form>
             <fieldset>
@@ -23,7 +34,8 @@ export default function Order ({checked, handleChange, hasRating}) {
                     handleChange={handleChange}
                     checked={checked}
                 />
-                {hasRating &&
+                {/* {hasRating && */}
+                {/* {(filteredRatings.length !== 0) && */}
                 <>
                  <Input
                     inputName='arrange'
@@ -56,7 +68,8 @@ export default function Order ({checked, handleChange, hasRating}) {
                     checked={checked}
                 />
                 </>}
-                </>}
+                </>
+                {/* } */}
             </fieldset>
         </form>
     )

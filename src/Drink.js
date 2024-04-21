@@ -11,7 +11,7 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
   const [checked, setChecked] = useState('Date Added');
   // const ratingsArray = Object.values(ratings);
   // const filteredRatings = ratingsArray.filter(rating => rating.barID === barID);
-  const [hasRating, setHasRating] = useState(false);
+  // const [hasRating, setHasRating] = useState(false);
   
 
   const emojiLookUp = {
@@ -28,9 +28,9 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
     setChecked(e.target.value)
   }
 
-  function handleRating(binary) {
-    setHasRating(binary);
-  }
+  // function handleRating(binary) {
+  //   setHasRating(binary);
+  // }
 
   function alphaSort (a,b) {
     const c = a.drinkName.toLowerCase();
@@ -93,7 +93,7 @@ const sortedBars = useMemo(() => {
 
     return (
       <>
-      <Order checked={checked} handleChange={handleChange} hasRating={hasRating}/>
+      <Order checked={checked} handleChange={handleChange} ratings={ratings} thisBarsDrinks={filteredBars}/>
         <ul>
       {sortedBars.map(({drinkName, drinkID, description, price}, index) => (    
           <li key={index}>
@@ -104,7 +104,7 @@ const sortedBars = useMemo(() => {
               emojiLookUp={emojiLookUp}
               ratings={ratings}
               ratingDrinkID={drinkID}
-              handleRating={handleRating}
+              // handleRating={handleRating}
             />
             {user &&
               <UserRating
@@ -114,6 +114,7 @@ const sortedBars = useMemo(() => {
                 ratingDrinkID={drinkID}
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
+                barID={barID}
               />
               }
             <CommentList
@@ -122,6 +123,7 @@ const sortedBars = useMemo(() => {
               commentDrinkID={drinkID}
               beingEditted={beingEditted}
               handleToggle={handleToggle}
+              barID={barID}
             />
           </li>
           ))}

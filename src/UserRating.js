@@ -4,7 +4,7 @@ import NewRating from "./NewRating.js";
 import DeleteButton from "./DeleteButton.js";
 
 
-export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrinkID, handleToggle, beingEditted}) {
+export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrinkID, handleToggle, beingEditted, barID}) {
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user 
     const ratingsArray = Object.values(ratings);
@@ -52,6 +52,7 @@ export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrin
                 filterRatings={filterRatings}
                 ratingDrinkID={ratingDrinkID}
                 beingEditted={beingEditted}
+                barID={barID}
                 text='New Rating'
             />}
             </>
