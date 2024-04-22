@@ -4,11 +4,20 @@ import AverageRating from './AverageRating';
 import UserRating from './UserRating';
 import { UserContext } from './UserContext';
 import Order from './Order';
+import Filter from './Filter';
 
 
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted }){
   const [user, setUser] = useContext(UserContext);
   const [checked, setChecked] = useState('Date Added');
+  // const [topRatedChecked, setTopRatedChecked] = useState(null);
+  // const [withCommentsChecked, setWithCommentsChecked] = useState(null);
+  // const [hasHighRating, setHasHighRating] = useState(false)
+  const initialFilter = {
+    topRated: null,
+    withComments: null
+  }
+  const [ filterChecked, setFilterChecked ] = useState(initialFilter);
   // const ratingsArray = Object.values(ratings);
   // const filteredRatings = ratingsArray.filter(rating => rating.barID === barID);
   // const [hasRating, setHasRating] = useState(false);
@@ -28,9 +37,36 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
     setChecked(e.target.value)
   }
 
-  // function handleRating(binary) {
-  //   setHasRating(binary);
+    // function findChecked (ev) {
+    //   let value = ev.target.value
+    //   if (value === 'Only Top Rated') {
+    //     return ([topRatedChecked, setTopRatedChecked])
+    //   } if (value === 'With Comments') {
+    //     return ([withCommentsChecked, setWithCommentsChecked])
+    //   }
+    // }
+
+  //   function handleFilterChange(e) {
+  //     if (e.target.value === 'Only Top Rated') {
+  //       if (topRatedChecked === 'Only Top Rated') {
+  //         setTopRatedChecked(null);
+  //       } else {
+  //         setTopRatedChecked(e.target.value);
+  //         onlyTopRated();
+  //       }
+  //   } if (e.target.value === 'With Comments') {
+  //     if (withCommentsChecked === 'With Comments') {
+  //       setWithCommentsChecked(null);
+  //     } else {
+  //       setWithCommentsChecked(e.target.value);
+  //    }
   // }
+  // }
+
+  // function onlyTopRated () {
+  //     return filteredBars.filter((a) => findRating(a) === 4);
+  // }
+  
 
   function alphaSort (a,b) {
     const c = a.drinkName.toLowerCase();
@@ -74,6 +110,38 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
       return findRating(a) - findRating(b);
   }
 
+  function handleFilterChange (e) {
+    if (e.target.value === 'Only Top Rated') {
+      if (filterChecked.topRated === 'Only Top Rated') {
+        setFilterChecked({
+          ...filterChecked,
+            topRated: null
+          });
+      } else {
+        setFilterChecked({
+          ...filterChecked,
+            topRated: e.target.value
+          });
+      }
+  } else if (e.target.value === 'With Comments') {
+    if (filterChecked.withComments === 'With Comments') {
+      setFilterChecked({
+        ...filterChecked,
+        withComments: null
+      });
+    } else {
+      setFilterChecked({
+        ...filterChecked,
+        withComments: e.target.value
+      });
+   }
+}}
+
+const userFiltered = useMemo(() => {
+ if (filterChecked.topRated !== null) { // if topRated is checked
+  return (a) => findRating(a) === 4; // return ratings of 4
+ } return (a) => a; // filter by nothing as default
+  }, [filterChecked, filteredBars]);
 
 const sortedBars = useMemo(() => {
   if (checked === 'Alphabetical') {
@@ -93,9 +161,18 @@ const sortedBars = useMemo(() => {
 
     return (
       <>
-      <Order checked={checked} handleChange={handleChange} ratings={ratings} barID={barID}/>
+      <Order
+        checked={checked}
+        handleChange={handleChange}
+        ratings={ratings}
+        barID={barID}
+      />
+       <Filter
+        filterChecked={filterChecked}
+        handleFilterChange={handleFilterChange}
+      />
         <ul>
-      {sortedBars.map(({drinkName, drinkID, description, price}, index) => (    
+      {sortedBars.filter(userFiltered).map(({drinkName, drinkID, description, price}, index) => (    
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
@@ -104,7 +181,6 @@ const sortedBars = useMemo(() => {
               emojiLookUp={emojiLookUp}
               ratings={ratings}
               ratingDrinkID={drinkID}
-              // handleRating={handleRating}
             />
             {user &&
               <UserRating

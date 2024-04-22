@@ -25,7 +25,7 @@ export default function Order ({checked, handleChange, ratings, barID}) {
                     handleChange={handleChange}
                     checked={checked}
                 />
-                {(filteredRatings.length > 0) &&
+                {(filteredRatings.length > 0) && // determines if there are any drink ratings for this bar
                 <>
                  <Input
                     inputName='arrange'
@@ -41,7 +41,7 @@ export default function Order ({checked, handleChange, ratings, barID}) {
                     handleChange={handleChange}
                     checked={checked}
                 />
-                {user && 
+                {user && // determines if a user is logged in
                 <>
                 <Input
                     inputName='arrange'
