@@ -5,9 +5,7 @@ import { UserContext } from './UserContext';
 
 export default function CommentList ({comments, users, commentDrinkID, handleToggle, beingEditted, barID}) {
     const [user] = useContext(UserContext)
-    if (!user) {
-        return null
-    }
+
     if (comments === undefined) { //checks in case there are no comments in the entire database
         return (
             <>
@@ -29,15 +27,13 @@ return (
             commentID={commentID}
             initialTimeStamp={initialTimeStamp}
             text={text}
-            // time={time}
-            // date={date}
             handleToggle={handleToggle}
             beingEditted={beingEditted}
         />   
         )
     }
         )}
-        {!beingEditted && <NewComment commentDrinkID={commentDrinkID} barID={barID}/>}
+        {(!beingEditted && user) && <NewComment commentDrinkID={commentDrinkID} barID={barID}/>}
     </ul>
 )
     

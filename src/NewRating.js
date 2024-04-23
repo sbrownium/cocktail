@@ -31,7 +31,7 @@ export default function NewRating({emojiLookUp, handleToggle, filterRatings, bar
         ratingID: filterRatings[0].ratingID,
         userID: filterRatings[0].userID,
         drinkID: filterRatings[0].drinkID,
-        initialTimeStamp: filterRatings[0].originalTimeStamp,
+        initialTimeStamp: filterRatings[0].initialTimeStamp,
         lastTimeStamp: Date.now(),
         rating: rating.rating
       };

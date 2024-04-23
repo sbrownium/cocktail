@@ -8,20 +8,13 @@ import Filter from './Filter';
 
 
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted }){
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [checked, setChecked] = useState('Date Added');
-  // const [topRatedChecked, setTopRatedChecked] = useState(null);
-  // const [withCommentsChecked, setWithCommentsChecked] = useState(null);
-  // const [hasHighRating, setHasHighRating] = useState(false)
   const initialFilter = {
     topRated: null,
     withComments: null
   }
   const [ filterChecked, setFilterChecked ] = useState(initialFilter);
-  // const ratingsArray = Object.values(ratings);
-  // const filteredRatings = ratingsArray.filter(rating => rating.barID === barID);
-  // const [hasRating, setHasRating] = useState(false);
-  
 
   const emojiLookUp = {
     '🤢': 1,
@@ -31,42 +24,14 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
 };
     
   const drinksArray = Object.values(drinks);
-  const filteredBars = drinksArray.filter(bar => bar.barID === barID);
+  const filteredDrinks = drinksArray.filter(drink => drink.barID === barID);
+
+  const commentsArray = Object.values(comments);
+  const filteredComments = commentsArray.filter(comment => comment.barID === barID);
 
   function handleChange (e) {
     setChecked(e.target.value)
   }
-
-    // function findChecked (ev) {
-    //   let value = ev.target.value
-    //   if (value === 'Only Top Rated') {
-    //     return ([topRatedChecked, setTopRatedChecked])
-    //   } if (value === 'With Comments') {
-    //     return ([withCommentsChecked, setWithCommentsChecked])
-    //   }
-    // }
-
-  //   function handleFilterChange(e) {
-  //     if (e.target.value === 'Only Top Rated') {
-  //       if (topRatedChecked === 'Only Top Rated') {
-  //         setTopRatedChecked(null);
-  //       } else {
-  //         setTopRatedChecked(e.target.value);
-  //         onlyTopRated();
-  //       }
-  //   } if (e.target.value === 'With Comments') {
-  //     if (withCommentsChecked === 'With Comments') {
-  //       setWithCommentsChecked(null);
-  //     } else {
-  //       setWithCommentsChecked(e.target.value);
-  //    }
-  // }
-  // }
-
-  // function onlyTopRated () {
-  //     return filteredBars.filter((a) => findRating(a) === 4);
-  // }
-  
 
   function alphaSort (a,b) {
     const c = a.drinkName.toLowerCase();
@@ -137,27 +102,38 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
    }
 }}
 
-const userFiltered = useMemo(() => {
- if (filterChecked.topRated !== null) { // if topRated is checked
-  return (a) => findRating(a) === 4; // return ratings of 4
- } return (a) => a; // filter by nothing as default
-  }, [filterChecked, filteredBars]);
-
-const sortedBars = useMemo(() => {
-  if (checked === 'Alphabetical') {
-    return filteredBars.toSorted(alphaSort);
-  } if (checked === 'Highest Average Rating') {
-    return filteredBars.toSorted(highAverageSort);
-  } if (checked === 'Lowest Average Rating') {
-    return filteredBars.toSorted(lowAverageSort);
-  } if (checked === 'My Highest Rating') {
-    return filteredBars.toSorted(highAverageSort);
-  } if (checked === 'My Lowest Rating') {
-    return filteredBars.toSorted(lowAverageSort);
+const sortedDrinks = useMemo(() => {
+  function getSortedDrinks (){
+    if (checked === 'Alphabetical') {
+      return filteredDrinks.toSorted(alphaSort);
+    } if (checked === 'Highest Average Rating') {
+      return filteredDrinks.toSorted(highAverageSort);
+    } if (checked === 'Lowest Average Rating') {
+      return filteredDrinks.toSorted(lowAverageSort);
+    } if (checked === 'My Highest Rating') {
+      return filteredDrinks.toSorted(highAverageSort);
+    } if (checked === 'My Lowest Rating') {
+      return filteredDrinks.toSorted(lowAverageSort);
+    }
+      return filteredDrinks.toSorted(dateSort);
   }
-    return filteredBars.toSorted(dateSort);
-}, [checked, filteredBars]);
+  const drinks = getSortedDrinks();
 
+  function onlyTopRated (drink) {
+    return findRating(drink) === 4; 
+  }
+  function onlyWithComments (drink) {
+    return (filteredComments.some(comment => comment.drinkID === drink.drinkID))
+  }
+  if ((filterChecked.topRated !== null) && (filterChecked.withComments === null)) {
+    return drinks.filter(onlyTopRated)
+  } if ((filterChecked.withComments !== null) && (filterChecked.topRated === null)) {
+    return drinks.filter(onlyWithComments)
+  } if ((filterChecked.withComments !== null) && (filterChecked.topRated !== null)) {
+    return drinks.filter(onlyTopRated).filter(onlyWithComments)
+  } 
+  return drinks;
+}, [checked, filterChecked, filteredDrinks, filteredComments]);
 
     return (
       <>
@@ -172,7 +148,7 @@ const sortedBars = useMemo(() => {
         handleFilterChange={handleFilterChange}
       />
         <ul>
-      {sortedBars.filter(userFiltered).map(({drinkName, drinkID, description, price}, index) => (    
+          {sortedDrinks.map(({drinkName, drinkID, description, price}, index) => (  
           <li key={index}>
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
@@ -182,25 +158,22 @@ const sortedBars = useMemo(() => {
               ratings={ratings}
               ratingDrinkID={drinkID}
             />
-            {user &&
-              <UserRating
+           {user && 
+           <UserRating
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
                 drinkName={drinkName}
                 ratingDrinkID={drinkID}
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
-                barID={barID}
-              />
-              }
+                barID={barID} />}
             <CommentList
               comments={comments}
               users={users}
               commentDrinkID={drinkID}
               beingEditted={beingEditted}
               handleToggle={handleToggle}
-              barID={barID}
-            />
+              barID={barID}/>
           </li>
           ))}
         </ul> 
