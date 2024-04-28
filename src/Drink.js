@@ -9,10 +9,13 @@ import Filter from './Filter';
 
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted }){
   const [user] = useContext(UserContext);
+  const {userID} = user;
   const [checked, setChecked] = useState('Date Added');
   const initialFilter = {
     topRated: null,
-    withComments: null
+    withComments: null,
+    myTop: null,
+    myComments: null
   }
   const [ filterChecked, setFilterChecked ] = useState(initialFilter);
 
@@ -23,11 +26,12 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
     '🎉': 4
 };
     
-  const drinksArray = Object.values(drinks);
+  const drinksArray = Object.values(drinks).filter(drink => drink.archived === false);
   const filteredDrinks = drinksArray.filter(drink => drink.barID === barID);
 
   const commentsArray = Object.values(comments);
   const filteredComments = commentsArray.filter(comment => comment.barID === barID);
+  const myfilteredComments = filteredComments.filter(comment => comment.userID === userID);
 
   function handleChange (e) {
     setChecked(e.target.value)
@@ -52,7 +56,7 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
   function findRating (x) {
     const ratingsArray = Object.values(ratings);
     let filteredRatings = []
-      if (checked === 'My Highest Rating' || checked === 'My Lowest Rating') {
+      if (checked === 'My Highest Rating' || checked === 'My Lowest Rating' || filterChecked.myTop === 'My Top Rated') {
         filteredRatings = ratingsArray.filter(rating => rating.userID === user.userID).filter(drink => drink.drinkID === x.drinkID)
       } else {
         filteredRatings = ratingsArray.filter(drink => drink.drinkID === x.drinkID);
@@ -100,7 +104,65 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
         withComments: e.target.value
       });
    }
-}}
+} else if (e.target.value === 'My Top Rated') {
+  if (filterChecked.myTop === 'My Top Rated') {
+    setFilterChecked({
+      ...filterChecked,
+      myTop: null
+    });
+  } else {
+    setFilterChecked({
+      ...filterChecked,
+      myTop: e.target.value
+    });
+ }
+} else if (e.target.value === 'My Comments') {
+  if (filterChecked.myComments === 'My Comments') {
+    setFilterChecked({
+      ...filterChecked,
+      myComments: null
+    });
+  } else {
+    setFilterChecked({
+      ...filterChecked,
+      myComments: e.target.value
+    });
+ }
+}
+}
+
+// const sortedDrinks = useMemo(() => {
+//   function getSortedDrinks (){
+//     if (checked === 'Alphabetical') {
+//       return filteredDrinks.toSorted(alphaSort);
+//     } if (checked === 'Highest Average Rating') {
+//       return filteredDrinks.toSorted(highAverageSort);
+//     } if (checked === 'Lowest Average Rating') {
+//       return filteredDrinks.toSorted(lowAverageSort);
+//     } if (checked === 'My Highest Rating') {
+//       return filteredDrinks.toSorted(highAverageSort);
+//     } if (checked === 'My Lowest Rating') {
+//       return filteredDrinks.toSorted(lowAverageSort);
+//     }
+//       return filteredDrinks.toSorted(dateSort);
+//   }
+//   const drinks = getSortedDrinks();
+
+//   function onlyTopRated (drink) {
+//     return findRating(drink) === 4; 
+//   }
+//   function onlyWithComments (drink) {
+//     return (filteredComments.some(comment => comment.drinkID === drink.drinkID))
+//   }
+//   if ((filterChecked.topRated !== null) && (filterChecked.withComments === null)) {
+//     return drinks.filter(onlyTopRated)
+//   } if ((filterChecked.withComments !== null) && (filterChecked.topRated === null)) {
+//     return drinks.filter(onlyWithComments)
+//   } if ((filterChecked.withComments !== null) && (filterChecked.topRated !== null)) {
+//     return drinks.filter(onlyTopRated).filter(onlyWithComments)
+//   } 
+//   return drinks;
+// }, [checked, filterChecked, filteredDrinks, filteredComments]);
 
 const sortedDrinks = useMemo(() => {
   function getSortedDrinks (){
@@ -119,11 +181,23 @@ const sortedDrinks = useMemo(() => {
   }
   const drinks = getSortedDrinks();
 
+  // function getMySortedDrinks(drink) {
+  //   return drink.filter(drink => drink.userID === userID)
+  // }
+
+  // const myDrinks = getSortedDrinks().filter(drink => drink.userID === userID);
+
   function onlyTopRated (drink) {
     return findRating(drink) === 4; 
   }
+  // function myTopRated (drink) {
+  //   return findRating(drink) === 4; 
+  // }
   function onlyWithComments (drink) {
     return (filteredComments.some(comment => comment.drinkID === drink.drinkID))
+  }
+  function onlyMyComments (drink) {
+    return (myfilteredComments.some(comment => comment.drinkID === drink.drinkID))
   }
   if ((filterChecked.topRated !== null) && (filterChecked.withComments === null)) {
     return drinks.filter(onlyTopRated)
@@ -132,8 +206,15 @@ const sortedDrinks = useMemo(() => {
   } if ((filterChecked.withComments !== null) && (filterChecked.topRated !== null)) {
     return drinks.filter(onlyTopRated).filter(onlyWithComments)
   } 
+  if ((filterChecked.myTop !== null) && (filterChecked.myComments === null)) {
+    return drinks.filter(onlyTopRated)
+  } if ((filterChecked.myComments !== null) && (filterChecked.myTop === null)) {
+    return drinks.filter(onlyMyComments) 
+  } if ((filterChecked.myComments !== null) && (filterChecked.myTop !== null)) {
+    return drinks.filter(onlyMyComments).filter(onlyTopRated)
+  }
   return drinks;
-}, [checked, filterChecked, filteredDrinks, filteredComments]);
+}, [checked, filterChecked, filteredDrinks, filteredComments, myfilteredComments]);
 
     return (
       <>
@@ -146,6 +227,8 @@ const sortedDrinks = useMemo(() => {
        <Filter
         filterChecked={filterChecked}
         handleFilterChange={handleFilterChange}
+        comments={comments}
+        barID={barID}
       />
         <ul>
           {sortedDrinks.map(({drinkName, drinkID, description, price}, index) => (  

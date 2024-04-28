@@ -16,7 +16,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   const [showingBar, setShowingBar] = useState(false);
   // const [hasRatings, setHasRatings] = useState(false);
 
-  const barsArray = Object.values(bars);
+  const barsArray = Object.values(bars).filter(bar => bar.archived === false);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
 
   // const ratingsArray = Object.values(ratings);

@@ -23,6 +23,7 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
         needsPrice: false,
     }
     const initialNewDrink = {
+        archived: false,
         barID: defaultBar,
         barName: defaultBarName,
         drinkID: '',
@@ -366,9 +367,9 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
         }
            else {
             const updates = {};   
-            const {barID, barName, drinkID, drinkName, description, price} = newDrink
-            const newDrinkObj = {barID, barName, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID, drinkName, description, price};
-            const newBarObj = {barID, barName, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(),};
+            const {archived, barID, barName, drinkID, drinkName, description, price} = newDrink
+            const newDrinkObj = {archived, barID, barName, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID, drinkName, description, price};
+            const newBarObj = {archived, barID, barName, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(),};
             
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
             const matchBar = barsArray.find(ID => ID.barID === newDrink.barID);

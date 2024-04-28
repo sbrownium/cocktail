@@ -1,7 +1,8 @@
 {
 "drinks": {
     "-NpHWPZX3UPujdq_bWkx": {
-        "addedBy": "-NuevnlTv6iyzS0Fuxfy",
+        "archived": false,
+        "addedBy": "113176315869470908948",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "85% Euphoria",
@@ -12,7 +13,8 @@
         "price": 17
     },
     "-NpHsYVvtj0emdOgk-Mo": {
-        "addedBy": "-NuevnlTv6iyzS0Fuxfy",
+        "archived": false,
+        "addedBy": "113176315869470908948",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "Earthly Tether",
@@ -23,7 +25,8 @@
         "price": 14
     },
     "-NpHrmTBbIekPIk0Fd89": {
-        "addedBy": "-NuevnlTv6iyzS0Fuxfy",
+        "archived": false,
+        "addedBy": "113176315869470908948",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Booryoung",
@@ -34,6 +37,7 @@
         "price": 22
     },
     "-NpHs4DwzB9U8ka98ZFb":{
+        "archived": false,
         "addedBy": "-NpkK_-xXif57roiJjNh",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
@@ -46,6 +50,7 @@
     }},
     "bars": {
         "-Nr7lOhIhP11igBsjqOp": {
+            "archived": false,
             "barName": "Stampede Cocktail Club",
             "barID": "-Nr7lOhIhP11igBsjqOp",
             "addedBy": "-NpkK_-xXif57roiJjNh",
@@ -53,9 +58,10 @@
             "lastTimeStamp": 1712429843768
         },
         "-NqtP2KgP0su3VWrXHaf": {
+            "archived": false,
             "barName": "Wero",
             "barID": "-NqtP2KgP0su3VWrXHaf",
-            "addedBy": "-NuevnlTv6iyzS0Fuxfy",
+            "addedBy": "113176315869470908948",
             "initialTimeStamp": 1712429866572,
             "lastTimeStamp": 1712429866572
         }},
@@ -70,7 +76,7 @@
                 "commentID": "-NpI6y26xFs-j2y0M7r9"
         },
         "-NpI6yy8tu1V6qZvhqnK": {
-            "userID": "-NuevnlTv6iyzS0Fuxfy",
+            "userID": "113176315869470908948",
             "drinkID": "-NpHsYVvtj0emdOgk-Mo",
             "barID": "-Nr7lOhIhP11igBsjqOp",
             "initialTimeStamp": 1706818796,
@@ -90,7 +96,7 @@
     "ratings": {
         "-NpI6-yPif5j2y0M7r9": {
             "rating": 4,
-            "userID": "-NuevnlTv6iyzS0Fuxfy",
+            "userID": "113176315869470908948",
             "initialTimeStamp": 1712429936409,
             "lastTimeStamp": 1712429936409,
             "barID": "-NqtP2KgP0su3VWrXHaf",
@@ -99,7 +105,7 @@
         },
         "-NpI6-yPif5j2y0M710": {
             "rating": 2,
-            "userID": "-NuevnlTv6iyzS0Fuxfy",
+            "userID": "113176315869470908948",
             "initialTimeStamp": 1712429954891,
             "lastTimeStamp": 1712429954891,
             "drinkID": "-NpHsYVvtj0emdOgk-Mo",
@@ -120,6 +126,6 @@
             "giveName": "Scott",
             "familyName": "Brown",
             "email": "brownscottbrown@gmail.com",
-            "userID": "-NuevnlTv6iyzS0Fuxfy"
+            "userID": "113176315869470908948"
     }
 }}

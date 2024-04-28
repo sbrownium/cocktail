@@ -16,6 +16,9 @@ export default function NewComment({commentDrinkID, barID}) {
         return (
           alert('Please login to add a comment')
         )}
+        if (comment.length < 1) {
+          alert ('Please add your comment before submitting')
+        }
         else {
       const newCommentKey = push(child(ref(db), '/comments/')).key;
       const updates = {};
