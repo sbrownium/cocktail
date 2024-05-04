@@ -11,7 +11,7 @@ export default function Comment ({ commentDrinkID, index, commentID, initialTime
     // const [time, setTime] = useState('');
     const usersArray = Object.values(users);
     const filteredUsers = usersArray.filter(u => u.userID === userID);
-    const preferredName = filteredUsers[0].giveName
+    const userName = filteredUsers[0].userName
 
     function handleEdit (e) {
         e.preventDefault();
@@ -67,7 +67,8 @@ return (
             </>
               : text }
              &nbsp;
-            {beingEditted ? '' : <> ({preferredName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
+             {/* {beingEditted ? '' : <> ( <Time initialTimeStamp={initialTimeStamp}/>)</>}   */}
+            {beingEditted ? '' : <> ({userName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
         </li>
 )
 };

@@ -2,7 +2,7 @@
 "drinks": {
     "-NpHWPZX3UPujdq_bWkx": {
         "archived": false,
-        "addedBy": "113176315869470908948",
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "85% Euphoria",
@@ -14,7 +14,7 @@
     },
     "-NpHsYVvtj0emdOgk-Mo": {
         "archived": false,
-        "addedBy": "113176315869470908948",
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
         "barName": "Stampede Cocktail Club",
         "barID": "-Nr7lOhIhP11igBsjqOp",
         "drinkName": "Earthly Tether",
@@ -26,7 +26,7 @@
     },
     "-NpHrmTBbIekPIk0Fd89": {
         "archived": false,
-        "addedBy": "113176315869470908948",
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Booryoung",
@@ -38,7 +38,7 @@
     },
     "-NpHs4DwzB9U8ka98ZFb":{
         "archived": false,
-        "addedBy": "-NpkK_-xXif57roiJjNh",
+        "addedBy": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
         "barName": "Wero",
         "barID": "-NqtP2KgP0su3VWrXHaf",
         "drinkName": "Sumnara",
@@ -53,7 +53,7 @@
             "archived": false,
             "barName": "Stampede Cocktail Club",
             "barID": "-Nr7lOhIhP11igBsjqOp",
-            "addedBy": "-NpkK_-xXif57roiJjNh",
+            "addedBy": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
             "initialTimeStamp": 1712429843768,
             "lastTimeStamp": 1712429843768
         },
@@ -61,13 +61,13 @@
             "archived": false,
             "barName": "Wero",
             "barID": "-NqtP2KgP0su3VWrXHaf",
-            "addedBy": "113176315869470908948",
+            "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
             "initialTimeStamp": 1712429866572,
             "lastTimeStamp": 1712429866572
         }},
     "comments": {
         "-NpI6y26xFs-j2y0M7r9": {
-                "userID": "-NpkK_-xXif57roiJjNh",
+                "userID": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
                 "drinkID": "-NpHsYVvtj0emdOgk-Mo",
                 "barID": "-Nr7lOhIhP11igBsjqOp",
                 "initialTimeStamp": 1712429881132,
@@ -76,7 +76,7 @@
                 "commentID": "-NpI6y26xFs-j2y0M7r9"
         },
         "-NpI6yy8tu1V6qZvhqnK": {
-            "userID": "113176315869470908948",
+            "userID": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
             "drinkID": "-NpHsYVvtj0emdOgk-Mo",
             "barID": "-Nr7lOhIhP11igBsjqOp",
             "initialTimeStamp": 1706818796,
@@ -85,7 +85,7 @@
             "commentID":"-NpI6yy8tu1V6qZvhqnK"
         },
         "-NpI6znwoOwQ7kFoOAgU": {
-            "userID": "-NpkK_-xXif57roiJjNh",
+            "userID": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
             "barID": "-NqtP2KgP0su3VWrXHaf",
             "drinkID": "-NpHrmTBbIekPIk0Fd89",
             "initialTimeStamp": 1712429917760,
@@ -96,7 +96,7 @@
     "ratings": {
         "-NpI6-yPif5j2y0M7r9": {
             "rating": 4,
-            "userID": "113176315869470908948",
+            "userID": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
             "initialTimeStamp": 1712429936409,
             "lastTimeStamp": 1712429936409,
             "barID": "-NqtP2KgP0su3VWrXHaf",
@@ -105,7 +105,7 @@
         },
         "-NpI6-yPif5j2y0M710": {
             "rating": 2,
-            "userID": "113176315869470908948",
+            "userID": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
             "initialTimeStamp": 1712429954891,
             "lastTimeStamp": 1712429954891,
             "drinkID": "-NpHsYVvtj0emdOgk-Mo",
@@ -113,19 +113,15 @@
             "ratingID": "-NpI6-yPif5j2y0M710"
         }
     },
-    "users": {
-        "-NpkK_-xXif57roiJjNh": {
-            "userName": "Jessica Wicksnin",
-            "giveName": "Jessica",
-            "familyName": "Wicksnin",
-            "email": "jwicksnin@gmail.com",
-            "userID": "-NpkK_-xXif57roiJjNh"
-    },
-    "-NuevnlTv6iyzS0Fuxfy": {
-            "userName": "Scott Brown",
-            "giveName": "Scott",
-            "familyName": "Brown",
+    "users": {    
+        "-Nx4BqRgWYzLCiNZu0ed": {
             "email": "brownscottbrown@gmail.com",
-            "userID": "113176315869470908948"
+            "userID" : "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+            "userName":"Scott Brown"
+        },
+        "-NuevnlTv6iyzS0Fuxfy": {
+            "email": "jessicascottseattle@gmail.com",
+            "userID" : "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
+            "userName":"Jessica And Scott Wicksnin Brown"
     }
 }}
