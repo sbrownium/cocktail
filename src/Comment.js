@@ -8,10 +8,9 @@ import Time from './Time.js';
 
 export default function Comment ({ commentDrinkID, index, commentID, initialTimeStamp, text, users, userID, handleToggle, beingEditted}) {
     const [edit, setEdit] = useState(text);
-    // const [time, setTime] = useState('');
     const usersArray = Object.values(users);
     const filteredUsers = usersArray.filter(u => u.userID === userID);
-    const userName = filteredUsers[0].userName
+    const preferredName = filteredUsers[0].preferredName
 
     function handleEdit (e) {
         e.preventDefault();
@@ -67,8 +66,7 @@ return (
             </>
               : text }
              &nbsp;
-             {/* {beingEditted ? '' : <> ( <Time initialTimeStamp={initialTimeStamp}/>)</>}   */}
-            {beingEditted ? '' : <> ({userName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
+            {beingEditted ? '' : <> ({preferredName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
         </li>
 )
 };

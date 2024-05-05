@@ -116,11 +116,13 @@
     "users": {    
         "-Nx4BqRgWYzLCiNZu0ed": {
             "email": "brownscottbrown@gmail.com",
+            "preferredName": "Scott",
             "userID" : "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
             "userName":"Scott Brown"
         },
         "-NuevnlTv6iyzS0Fuxfy": {
             "email": "jessicascottseattle@gmail.com",
+            "preferredName": "Jessica",
             "userID" : "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
             "userName":"Jessica And Scott Wicksnin Brown"
     }
