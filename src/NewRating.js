@@ -19,11 +19,6 @@ export default function NewRating({emojiLookUp, handleToggle, filterRatings, bar
 }
     function handleClick(e) {
       e.preventDefault();
-      if (!user) { 
-        return (
-          alert('Please login to rate a drink')
-        )
-    } 
     if (filterRatings.length != 0) {
       const updates = {};
       const updatedRating = {

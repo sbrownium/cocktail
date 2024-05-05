@@ -7,7 +7,7 @@ import NewBar from './NewBar.js';
 import NewDrink from './NewDrink.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
-import Alert from './Alert.js';
+// import Alert from './Alert.js';
 import SignIn from './SignIn.js';
 
 
@@ -19,7 +19,9 @@ export default function NewContainer (
     defaultBar}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
-     const [logInAlert, setLogInAlert] = useState(false);
+    const [logInAlert, setLogInAlert] = useState(false);
+    const [repeatAlert, setRepeatAlert] = useState(false);
+    const [missingAlert, setMissingAlert] = useState(false);
     const barsArray = Object.values(bars);
     const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
     const defaultBarName = defaultBarObj[0].barName;
@@ -192,9 +194,7 @@ export default function NewContainer (
             return setLogInAlert(true)
           }
            if (matchDrink) {
-            return (
-                alert('It looks like ' + newDrink.barName + ' already has a drink called ' + newDrink.drinkName)
-            );
+            return setRepeatAlert(true)
         } 
         if (newDrink.drinkName === '' || newDrink.description === '' || newDrink.price === '' || newDrink.barID === '' || newDrink.barName === '') {
             if (newDrink.barName === '') {
@@ -372,9 +372,7 @@ export default function NewContainer (
                     needsPrice: true
                 });
             }
-            return (
-                alert('Missing Stuff')
-            )
+            return setMissingAlert(true)
         }
            else {
             const updates = {};   
@@ -413,18 +411,35 @@ export default function NewContainer (
             <Button className={null} handleClick={handleNewDrinkToggle}>
                 Never Mind
             </Button>
-            
-            {logInAlert &&
+
+            {(logInAlert && !user) && // user conditional removes alert after signin 
             <>
-            <SignIn users={users}/>
+            <p>Please sign in to add a drink</p>
+            <SignIn users={users} />
             <Button className={null} handleClick={() => setLogInAlert(false)} >
             Got it, but I don't want to sign in
             </Button> 
             </>
             }
+
+            {repeatAlert &&
+            <>
+            <p>It looks like {newDrink.barName} already has a drink called {newDrink.drinkName}</p>
+            <Button className={null} handleClick={() => setRepeatAlert(false)} >
+             OK
+            </Button> 
+            </>
+            }
+
+            {missingAlert &&
+            <>
+            <p>Missing stuff</p>
+            <Button className={null} handleClick={() => setMissingAlert(false)} >
+             OK
+            </Button> 
+            </>
+            }
             
-        
-        
        </>
     )         
 }

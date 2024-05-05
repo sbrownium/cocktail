@@ -3,11 +3,13 @@ import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
+import Button from './Button.js';
 
 
 
 export default function NewComment({commentDrinkID, barID}) {
     const [comment, setComment] = useState('');
+    const [commentAlert, setCommentAlert] = useState(false);
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user;
 
@@ -15,16 +17,8 @@ export default function NewComment({commentDrinkID, barID}) {
 
     function handleClick(e) {
       e.preventDefault();
-      // if (!user) { 
-      //   return (
-      //     <Alert
-      //     text={'Please login to add a comment'}
-      //     signIn={true}
-      //     handleClick={handleToggle}
-      //   />
-      //   )}
         if (comment.length < 1) {
-          alert ('Please add your comment before submitting')
+          return setCommentAlert(true);
         }
         else {
       const newCommentKey = push(child(ref(db), '/comments/')).key;
@@ -61,6 +55,14 @@ export default function NewComment({commentDrinkID, barID}) {
           />
           <Submit handleClick={handleClick} value='add'/>
         </form>
+        {commentAlert &&
+            <>
+            <p>Please add your comment before submitting</p>
+            <Button className={null} handleClick={() => setCommentAlert(false)} >
+             OK
+            </Button> 
+            </>
+          }
       </>
     );
   }
