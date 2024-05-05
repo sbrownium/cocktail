@@ -5,17 +5,24 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
+
 export default function NewComment({commentDrinkID, barID}) {
     const [comment, setComment] = useState('');
     const [user, setUser] = useContext(UserContext);
-    const { userName, userID } = user 
+    const { userName, userID } = user;
+
+
 
     function handleClick(e) {
       e.preventDefault();
-      if (!user) { 
-        return (
-          alert('Please login to add a comment')
-        )}
+      // if (!user) { 
+      //   return (
+      //     <Alert
+      //     text={'Please login to add a comment'}
+      //     signIn={true}
+      //     handleClick={handleToggle}
+      //   />
+      //   )}
         if (comment.length < 1) {
           alert ('Please add your comment before submitting')
         }
@@ -24,7 +31,6 @@ export default function NewComment({commentDrinkID, barID}) {
       const updates = {};
       const newComment = {
         commentID: newCommentKey,
-        // userName: userName,
         userID: userID,
         drinkID: commentDrinkID,
         barID: barID,

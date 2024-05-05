@@ -7,11 +7,19 @@ import NewBar from './NewBar.js';
 import NewDrink from './NewDrink.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
+import Alert from './Alert.js';
+import SignIn from './SignIn.js';
 
 
-export default function NewContainer ({bars, drinks, commets, handleNewDrinkToggle, defaultBar}) {
+export default function NewContainer (
+    {bars,
+    drinks,
+    users,
+    handleNewDrinkToggle,
+    defaultBar}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
+     const [logInAlert, setLogInAlert] = useState(false);
     const barsArray = Object.values(bars);
     const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
     const defaultBarName = defaultBarObj[0].barName;
@@ -169,6 +177,11 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
             needsPrice: false
         })
     }}
+
+    // function setAlert (setState, state) {
+    //     setState(state);
+    // }
+    
    
     function handleClick(e){
         const drinksArray = Object.values(drinks);
@@ -176,9 +189,7 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
        
         e.preventDefault();
         if (!user) { 
-            return (
-              alert('Please login to add a drink')
-            )
+            return setLogInAlert(true)
           }
            if (matchDrink) {
             return (
@@ -402,6 +413,18 @@ export default function NewContainer ({bars, drinks, commets, handleNewDrinkTogg
             <Button className={null} handleClick={handleNewDrinkToggle}>
                 Never Mind
             </Button>
+            
+            {logInAlert &&
+            <>
+            <SignIn users={users}/>
+            <Button className={null} handleClick={() => setLogInAlert(false)} >
+            Got it, but I don't want to sign in
+            </Button> 
+            </>
+            }
+            
+        
+        
        </>
     )         
 }

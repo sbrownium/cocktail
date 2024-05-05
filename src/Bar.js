@@ -92,7 +92,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
         filteredBars={filteredBars}
       />
       {showNewDrink ? 
-       <NewContainer bars={bars} drinks={drinks} comments={comments} handleNewDrinkToggle={handleNewDrinkToggle}  defaultBar={selectedBar}/>
+       <NewContainer users={users} bars={bars} drinks={drinks} comments={comments} handleNewDrinkToggle={handleNewDrinkToggle}  defaultBar={selectedBar}/>
        :
       <Button handleClick={handleClick} className='icon'>
         +<DrinkIcon width='24' height='24' fill='grey'/>

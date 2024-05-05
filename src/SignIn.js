@@ -13,8 +13,8 @@ const usersArray = Object.values(users);
 const provider = new GoogleAuthProvider();
 
 function findPreferredName (name) {
-  const space = name.indexOf(' ');
-  return name.substring(0, space)
+  const space = name.indexOf(' '); // finds first space
+  return name.substring(0, space) // makes new string from index 0 through first space
 }
 
 function handleLogOut (e) {
