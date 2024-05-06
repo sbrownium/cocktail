@@ -16,7 +16,8 @@ export default function NewContainer (
     drinks,
     users,
     handleNewDrinkToggle,
-    defaultBar}) {
+    defaultBar,
+    setSelectedBar}) {
     const [user, setUser] = useContext(UserContext);
     const { userID } = user
     const [logInAlert, setLogInAlert] = useState(false);
@@ -385,10 +386,12 @@ export default function NewContainer (
         
             if (!matchBar) {
             updates['/bars/' + newBarKey] = newBarObj;
+            setSelectedBar(barID);
         }
             setNewDrink(initialNewDrink);
             setValidation(initialValidation);
             handleNewDrinkToggle();
+            
             return (
                 update(ref(db), updates).then(() => {
                 console.log('Data saved successfully!')

@@ -14,13 +14,9 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
-  // const [hasRatings, setHasRatings] = useState(false);
 
   const barsArray = Object.values(bars).filter(bar => bar.archived === false);
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
-
-  // const ratingsArray = Object.values(ratings);
-  // const filteredRatings = ratingsArray.filter(rating => rating.barID === selectedBar);
 
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted);
@@ -44,19 +40,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     e.preventDefault();
     handleNewDrinkToggle();
   } 
-
-  // const withRatings = useMemo(() => {
-  //   if (filteredRatings.length > 0) {
-  //   return true;
-  //   } else {
-  //   return false;
-  //   }
-  // }, [hasRatings, filteredRatings])
-  // const withRatings = () => {
-  //   return console.log('withRatings')
-  // }
-
-    
+  
     return (
       <>
       <ul>
@@ -92,7 +76,15 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
         filteredBars={filteredBars}
       />
       {showNewDrink ? 
-       <NewContainer users={users} bars={bars} drinks={drinks} comments={comments} handleNewDrinkToggle={handleNewDrinkToggle}  defaultBar={selectedBar}/>
+       <NewContainer
+        users={users}
+        bars={bars}
+        drinks={drinks}
+        comments={comments}
+        handleNewDrinkToggle={handleNewDrinkToggle} 
+        defaultBar={selectedBar}
+        setSelectedBar={setSelectedBar}
+      />
        :
       <Button handleClick={handleClick} className='icon'>
         +<DrinkIcon width='24' height='24' fill='grey'/>
