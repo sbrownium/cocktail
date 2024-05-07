@@ -13,6 +13,7 @@ const thisDrink = drinks.filter(drink => drink.drinkID === nodeID);
         const newArchive = {
             ...thisDrink[0],
             archived: true,
+            lastTimeStamp: Date.now()
           };
           updates[path + nodeID] = newArchive;
 return (
