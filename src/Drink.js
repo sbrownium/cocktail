@@ -5,6 +5,7 @@ import UserRating from './UserRating';
 import { UserContext } from './UserContext';
 import Order from './Order';
 import Filter from './Filter';
+import ArchiveButton from './ArchiveButton';
 
 
 export default function Drink({barID, drinks, comments, ratings, users, handleToggle, beingEditted }){
@@ -250,6 +251,15 @@ const sortedDrinks = useMemo(() => {
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
                 barID={barID} />}
+            <ArchiveButton 
+              path={'/drinks/'}
+              nodeID={drinkID}
+              drinks={drinksArray}
+              nodeName='this drink'
+              handleToggle={handleToggle}
+              className={null}
+              children='Archive Drink'
+            />
             <CommentList
               comments={comments}
               users={users}
