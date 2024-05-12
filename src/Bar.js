@@ -1,5 +1,4 @@
-import React, {useContext, useState, useMemo} from "react";
-import { UserContext } from "./UserContext.js";
+import React, {useState, useMemo} from "react";
 import Drink from './Drink.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
@@ -9,15 +8,16 @@ import NewContainer from "./NewContainer.js";
 
 
 export default function Bar({bars, drinks, comments, ratings, users}) {
-  const [ user, setUser] = useContext(UserContext);
   const [beingEditted, setBeingEditted] = useState(false);
+  const [showArchive, setShowArchive] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
 
-  const barsArray = Object.values(bars).filter(bar => bar.archived === false);
-  const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
 
+  function toggleShowArchive () {
+    setShowArchive(showArchive => !showArchive)
+  }
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted);
     }
@@ -40,7 +40,14 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     e.preventDefault();
     handleNewDrinkToggle();
   } 
+  const barsArray = useMemo(() => {
+  if (showArchive === true) {
+    return Object.values(bars)
+  } 
+    return Object.values(bars).filter(bar => bar.archived === false);
   
+  }, [showArchive, bars])
+  const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
     return (
       <>
       <ul>
@@ -63,7 +70,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
           })}
       </ul>
       <ChangeBar
-        bars={bars}
+        barsArray={barsArray}
         handleSelect={handleSelect}
       /> 
       
@@ -92,6 +99,9 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       }
       </>
       }
+      <Button handleClick={toggleShowArchive}>
+        Show Bars Archive
+      </Button>
       </>
     );
   }

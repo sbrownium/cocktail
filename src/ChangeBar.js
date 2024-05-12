@@ -1,8 +1,6 @@
 import React from "react";
 
-export default function ChangeBar ({bars, handleSelect}) {
-    const barsArray = Object.values(bars);
-    
+export default function ChangeBar ({barsArray, handleSelect}) {
       return (
         <>
           <select name='barSelect'

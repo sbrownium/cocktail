@@ -181,19 +181,9 @@ const sortedDrinks = useMemo(() => {
       return filteredDrinks.toSorted(dateSort);
   }
   const drinks = getSortedDrinks();
-
-  // function getMySortedDrinks(drink) {
-  //   return drink.filter(drink => drink.userID === userID)
-  // }
-
-  // const myDrinks = getSortedDrinks().filter(drink => drink.userID === userID);
-
   function onlyTopRated (drink) {
     return findRating(drink) === 4; 
   }
-  // function myTopRated (drink) {
-  //   return findRating(drink) === 4; 
-  // }
   function onlyWithComments (drink) {
     return (filteredComments.some(comment => comment.drinkID === drink.drinkID))
   }
