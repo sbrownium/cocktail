@@ -41,7 +41,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     handleNewDrinkToggle();
   } 
   const barsArray = useMemo(() => {
-  if (showArchive === true) {
+  if (showArchive) {
     return Object.values(bars)
   } 
     return Object.values(bars).filter(bar => bar.archived === false);
@@ -100,7 +100,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       </>
       }
       <Button handleClick={toggleShowArchive}>
-        Show Bars Archive
+        {!showArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
       </Button>
       </>
     );
