@@ -210,9 +210,9 @@ const sortedDrinks = useMemo(() => {
               ratings={ratings}
               ratingDrinkID={drinkID}
             />
-           {(user && !{archived}) && 
+           {(user && !{archived}) && // checks for logged in user and that drink is not archived
            <>
-           <UserRating // needs user to show
+           <UserRating 
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
                 drinkName={drinkName}
@@ -221,9 +221,8 @@ const sortedDrinks = useMemo(() => {
                 beingEditted={beingEditted}
                 barID={barID} 
                 />
-  
-            {beingEditted && // needs user and beingEditted to show 
-            <ArchiveButton // need to remove edit options from archived drinks
+            {beingEditted && // checks that it is being editted in addition to user and archived
+            <ArchiveButton 
               path={'/drinks/'}
               nodeID={drinkID}
               drinks={Object.values(drinks)}
@@ -241,7 +240,9 @@ const sortedDrinks = useMemo(() => {
               commentDrinkID={drinkID}
               beingEditted={beingEditted}
               handleToggle={handleToggle}
-              barID={barID}/>
+              barID={barID}
+              archived={archived}
+            />
           </li>
           ))}
         </ul> 
