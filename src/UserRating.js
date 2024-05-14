@@ -4,9 +4,17 @@ import NewRating from "./NewRating.js";
 import DeleteButton from "./DeleteButton.js";
 
 
-export default function UserRating ({emojiLookUp, ratings, drinkName, ratingDrinkID, handleToggle, beingEditted, barID}) {
-    const [user, setUser] = useContext(UserContext);
-    const { userName, userID } = user 
+export default function UserRating ({
+    emojiLookUp,
+    ratings,
+    drinkName,
+    ratingDrinkID,
+    handleToggle,
+    beingEditted,
+    barID
+}) {
+    const [user] = useContext(UserContext);
+    const { userID } = user 
     const ratingsArray = Object.values(ratings);
     const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === ratingDrinkID);
     

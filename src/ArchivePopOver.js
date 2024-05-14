@@ -9,13 +9,14 @@ const thisDrink = drinks.filter(drink => drink.drinkID === nodeID);
     function handleClick(e){
         const updates = {};
         e.preventDefault();
-        handleToggle(); 
+         //handleToggle not firing after archiving drink?
         const newArchive = {
             ...thisDrink[0],
             archived: true,
             lastTimeStamp: Date.now()
           };
           updates[path + nodeID] = newArchive;
+          handleToggle();
 return (
   update(ref(db), updates).then(() => {
         console.log("Data saved successfully!");
@@ -23,8 +24,8 @@ return (
          console.error("Error updating data:", error);
 })
 )
+
 }
-    
     return (
         <>
             <p>Just double-checking, you do want to archive {nodeName}</p>

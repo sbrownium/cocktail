@@ -9,14 +9,14 @@ import NewContainer from "./NewContainer.js";
 
 export default function Bar({bars, drinks, comments, ratings, users}) {
   const [beingEditted, setBeingEditted] = useState(false);
-  const [showArchive, setShowArchive] = useState(false);
+  const [showBarArchive, setShowBarArchive] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
 
 
-  function toggleShowArchive () {
-    setShowArchive(showArchive => !showArchive)
+  function toggleShowBarArchive () {
+    setShowBarArchive(showBarArchive => !showBarArchive)
   }
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted);
@@ -41,12 +41,12 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     handleNewDrinkToggle();
   } 
   const barsArray = useMemo(() => {
-  if (showArchive) {
+  if (showBarArchive) {
     return Object.values(bars)
   } 
     return Object.values(bars).filter(bar => bar.archived === false);
   
-  }, [showArchive, bars])
+  }, [showBarArchive, bars])
   const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
     return (
       <>
@@ -99,9 +99,10 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       }
       </>
       }
-      <Button handleClick={toggleShowArchive}>
-        {!showArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
-      </Button>
+      {(Object.values(bars).some(bar => bar.archived === true)) &&
+      <Button handleClick={toggleShowBarArchive}>
+        {!showBarArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
+      </Button>}
       </>
     );
   }

@@ -4,8 +4,7 @@ import './AverageRating.css';
 export default function AverageRating({
     emojiLookUp,
     ratings,
-    ratingDrinkID,
-    setHasHighRating
+    ratingDrinkID
     }) {
 
     const ratingsArray = Object.values(ratings);
