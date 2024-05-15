@@ -4,6 +4,7 @@ import { db } from "./firebase.js";
 import EditBox from './EditBox';
 import DeleteButton from './DeleteButton.js';
 import Time from './Time.js';
+import Form from './Form.js';
 
 
 export default function Comment ({ commentDrinkID, index, commentID, initialTimeStamp, text, users, userID, handleToggle, beingEditted}) {
@@ -18,7 +19,6 @@ export default function Comment ({ commentDrinkID, index, commentID, initialTime
     }
   
     function handleClick(e){
-      
       const updates = {};
       const newEdit = {
         commentID: commentID,
@@ -48,11 +48,9 @@ return (
         <li key={index} id={commentID}>
             {beingEditted ? 
             <>
-              <EditBox
-                text={text}
+              <Form
                 edit={edit}
                 handleEdit={handleEdit}
-                handleToggle={handleToggle}
                 handleClick={handleClick}
               />
               <DeleteButton
@@ -66,7 +64,7 @@ return (
             </>
               : text }
              &nbsp;
-            {beingEditted ? '' : <> ({preferredName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
+            {!beingEditted && <> ({preferredName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
         </li>
 )
 };

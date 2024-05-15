@@ -135,7 +135,6 @@ export default function Drink({barID, drinks, comments, ratings, users, handleTo
 }
 }
 
-
 const sortedDrinks = useMemo(() => {
   const drinksArray = () => {
   if (showDrinkArchive) {

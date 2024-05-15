@@ -9,7 +9,6 @@ const thisDrink = drinks.filter(drink => drink.drinkID === nodeID);
     function handleClick(e){
         const updates = {};
         e.preventDefault();
-         //handleToggle not firing after archiving drink?
         const newArchive = {
             ...thisDrink[0],
             archived: true,
