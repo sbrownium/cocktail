@@ -4,7 +4,7 @@ import { db } from "./firebase.js";
 import EditBox from './EditBox';
 import DeleteButton from './DeleteButton.js';
 import Time from './Time.js';
-import Form from './Form.js';
+import Button from './Button.js';
 
 
 export default function Comment ({ commentDrinkID, index, commentID, initialTimeStamp, text, users, userID, handleToggle, beingEditted}) {
@@ -48,11 +48,19 @@ return (
         <li key={index} id={commentID}>
             {beingEditted ? 
             <>
-              <Form
-                edit={edit}
-                handleEdit={handleEdit}
-                handleClick={handleClick}
-              />
+                <form>
+                  <EditBox
+                      type='text'
+                      id='commentEdit'
+                      edit={edit}
+                      handleEdit={handleEdit}
+                  />
+                  <Button
+                    handleClick={handleClick}
+                    children='Save'
+                    className={null}
+                  />
+                </form>            
               <DeleteButton
               path='/comments/'
               nodeID={commentID}

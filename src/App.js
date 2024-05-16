@@ -10,11 +10,13 @@ import {
   createRoutesFromElements,
   Route,
   RouterProvider,
+  Link
 } from "react-router-dom";
 import RootLayout from './RootLayout.js';
 import Account from './Account.js';
 import Edit from './Edit.js';
 import ChangeBar from './ChangeBar.js';
+import GitHub from './GitHub.js';
 
 
 
@@ -45,9 +47,9 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Bar bars={data.bars} users={data.users} drinks={data.drinks} comments={data.comments} ratings={data.ratings}/>} />
-        {/* <Route path="/NewContainer" element={<NewContainer bars={data.bars} drinks={data.drinks} comments={data.comments}/>} /> */}
         <Route path="/Account" element={<Account />} />
       </Route>
+      
     )
   );
   return (
@@ -57,6 +59,9 @@ function App() {
         <UserProvider>
           <SignIn users={data.users}/>
           <RouterProvider router={router} />
+          <a href="https://github.com/sbrownium/cocktail">
+            <GitHub width='24.5px' height='24px' fillColor='black'/>
+          </a>
         </UserProvider>
         </>
       )}
