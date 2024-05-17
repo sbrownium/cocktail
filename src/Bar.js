@@ -1,5 +1,5 @@
 import React, {useState, useMemo} from "react";
-import Drink from './Drink.js'
+import DrinkList from './DrinkList.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
 import DrinkIcon from "./DrinkIcon.js";
@@ -55,7 +55,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
             return (
               <li key={index}>
                  <h1>{barName}</h1>
-                <Drink
+                <DrinkList
                   barID={barID}
                   barsArray={barsArray}
                   drinks={drinks}

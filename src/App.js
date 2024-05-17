@@ -4,18 +4,14 @@ import { db } from "./firebase.js";
 import { UserProvider } from './UserContext';
 import SignIn from './SignIn.js';
 import Bar from './Bar.js'
-import NewContainer from './NewContainer.js';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
-  Link
+  RouterProvider
 } from "react-router-dom";
 import RootLayout from './RootLayout.js';
 import Account from './Account.js';
-import Edit from './Edit.js';
-import ChangeBar from './ChangeBar.js';
 import GitHub from './GitHub.js';
 
 

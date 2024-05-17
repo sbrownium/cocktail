@@ -50,7 +50,6 @@ return (
             <>
                 <form>
                   <EditBox
-                      type='text'
                       id='commentEdit'
                       edit={edit}
                       handleEdit={handleEdit}
