@@ -198,9 +198,10 @@ const sortedDrinks = useMemo(() => {
         barID={barID}
       />
         <ul>
-          {sortedDrinks.map(({archived, drinkName, drinkID, description, price}, index) => ( 
+          {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li key={index}>
              <Drink
+              addedBy={addedBy}
               archived={archived}
               barID={barID}
               beingEditted={beingEditted}
@@ -210,6 +211,7 @@ const sortedDrinks = useMemo(() => {
               drinks={drinks}
               description={description}
               handleToggle={handleToggle}
+              initialTimeStamp={initialTimeStamp}
               price={price}
               ratings={ratings}
               users={users}

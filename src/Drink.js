@@ -1,4 +1,6 @@
 import React, {useContext, useState} from 'react';
+import { ref, update } from "firebase/database";
+import { db } from "./firebase.js";
 import CommentList from './CommentList';
 import AverageRating from './AverageRating';
 import UserRating from './UserRating';
@@ -8,6 +10,7 @@ import Button from './Button';
 import EditBox from './EditBox';
 
 export default function Drink({
+  addedBy,
   archived,
   barID,
   beingEditted,
@@ -17,6 +20,7 @@ export default function Drink({
   drinks,
   description,
   handleToggle,
+  initialTimeStamp,
   price,
   ratings,
   users 
@@ -24,6 +28,7 @@ export default function Drink({
   const [user] = useContext(UserContext);
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
+  const [editDrinkPrice, setEditDrinkPrice] = useState(price);
   
   const emojiLookUp = {
     '🤢': 1,
@@ -42,8 +47,44 @@ function handleDrinkDescriptionEdit (e) {
   setEditDrinkDescription(e.target.value);
 }
 
-function handleClick (e) {
-  console.log('click handled')
+function handleDrinkPriceEdit (e) {
+  e.preventDefault();
+  setEditDrinkPrice(e.target.value);
+}
+
+function handleClick(e){
+  const updates = {};
+  const newEdit = {
+    addedBy: addedBy,
+    archived: archived,
+    barID: barID,
+    description: editDrinkDescription,
+    drinkID: drinkID,
+    drinkName: editDrinkName,
+    initialTimeStamp: initialTimeStamp,
+    lastTimeStamp: Date.now(),
+    price: editDrinkPrice
+  };
+
+if ((editDrinkName !== drinkName) ||
+    (editDrinkDescription !== description) ||
+    (editDrinkPrice !== price)) {
+  e.preventDefault();
+  handleToggle(); 
+  updates['/drinks/' + drinkID] = newEdit;
+
+return (
+    update(ref(db), updates).then(() => {
+        console.log('Data saved successfully!')
+  })
+  .catch((error) => {
+    console.log('problem writing')
+  })
+  
+)
+} else {
+  handleToggle(); 
+}
 }
 
     return (
@@ -56,11 +97,17 @@ function handleClick (e) {
                       edit={editDrinkName}
                       handleEdit={handleDrinkNameEdit}
                   />
-                  &mdash;&nbsp;
+                  &nbsp;&mdash;&nbsp;
                   <EditBox
                       id='drinkDescriptionEdit'
                       edit={editDrinkDescription}
                       handleEdit={handleDrinkDescriptionEdit}
+                  />
+                  &nbsp;&mdash;&nbsp;$
+                   <EditBox
+                      id='drinkPriceEdit'
+                      edit={editDrinkPrice}
+                      handleEdit={handleDrinkPriceEdit}
                   />
                  <Button
                     handleClick={handleClick}

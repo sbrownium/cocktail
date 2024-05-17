@@ -18,7 +18,7 @@ export default function NewContainer (
     handleNewDrinkToggle,
     defaultBar,
     setSelectedBar}) {
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
     const { userID } = user
     const [logInAlert, setLogInAlert] = useState(false);
     const [repeatAlert, setRepeatAlert] = useState(false);
@@ -180,11 +180,6 @@ export default function NewContainer (
             needsPrice: false
         })
     }}
-
-    // function setAlert (setState, state) {
-    //     setState(state);
-    // }
-    
    
     function handleClick(e){
         const drinksArray = Object.values(drinks);
@@ -378,7 +373,7 @@ export default function NewContainer (
            else {
             const updates = {};   
             const {archived, barID, barName, drinkID, drinkName, description, price} = newDrink
-            const newDrinkObj = {archived, barID, barName, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID, drinkName, description, price};
+            const newDrinkObj = {archived, barID, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID, drinkName, description, price};
             const newBarObj = {archived, barID, barName, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(),};
             
             updates['/drinks/' + newDrinkKey] = newDrinkObj;
