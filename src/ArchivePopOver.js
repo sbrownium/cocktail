@@ -3,7 +3,13 @@ import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import Button from "./Button";
 
-export default function ArchivePopOver ({path, nodeID, nodeName, handleToggle, drinks}) {
+export default function ArchivePopOver ({
+    path,
+    nodeID,
+    nodeName,
+    handleToggle,
+    drinks
+}) {
 const thisDrink = drinks.filter(drink => drink.drinkID === nodeID);
 
     function handleClick(e){

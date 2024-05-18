@@ -8,7 +8,8 @@ import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
-import ArchivePopOver from './ArchivePopOver.js';
+import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
+
 
 export default function Drink({
   addedBy,
@@ -33,11 +34,11 @@ export default function Drink({
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
   // const [missingAlert, setMissingAlert] = useState(false);
 
-  const initialValidation = {
-    needsDrinkName: false,
-    needsDescription: false,
-    needsPrice: false
-  }
+  // const initialValidation = {
+  //   needsDrinkName: false,
+  //   needsDescription: false,
+  //   needsPrice: false
+  // }
   // const [validation, setValidation] = useState(initialValidation)
   
   const emojiLookUp = {
@@ -82,10 +83,14 @@ function handleDrinkPriceEdit (e) {
 
 function handleNeverMind (e) {
   e.preventDefault();
+  resetDrinks();
+  handleToggle();
+}
+
+function resetDrinks () {
   setEditDrinkName(drinkName);
   setEditDrinkDescription(description);
   setEditDrinkPrice(price);
-  handleToggle();
 }
 
 function handleClick(e){
@@ -140,7 +145,14 @@ return (
                       handleEdit={handleDrinkPriceEdit}
                   />
                   {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
-                  <p>popover</p> :
+                  <ArchiveOrDeletePopOver
+                  drinks={drinks}
+                  path='/drinks/'
+                  nodeID={drinkID}
+                  nodeName={drinkName}
+                  handleToggle={handleToggle}
+                  resetDrinks={resetDrinks}
+                  />:
                   <>
                    {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
                     //.missing from NewDrink.css
