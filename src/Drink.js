@@ -8,6 +8,7 @@ import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
+import ArchivePopOver from './ArchivePopOver.js';
 
 export default function Drink({
   addedBy,
@@ -79,6 +80,14 @@ function handleDrinkPriceEdit (e) {
   setEditDrinkPrice(e.target.value);
 }
 
+function handleNeverMind (e) {
+  e.preventDefault();
+  setEditDrinkName(drinkName);
+  setEditDrinkDescription(description);
+  setEditDrinkPrice(price);
+  handleToggle();
+}
+
 function handleClick(e){
   const updates = {};
   const newEdit = {
@@ -130,8 +139,12 @@ return (
                       edit={editDrinkPrice}
                       handleEdit={handleDrinkPriceEdit}
                   />
+                  {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
+                  <p>popover</p> :
+                  <>
                    {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
-                    <p className='missing'>Please fill out all the fields to save</p> //.missing from NewDrink.css
+                    //.missing from NewDrink.css
+                    <p className='missing'>Please fill out all the fields to save</p> 
                     :
                  <Button
                     handleClick={handleClick}
@@ -139,6 +152,10 @@ return (
                     className={null}
                  />
                    }
+                   </>}
+                   {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
+                   <button onClick={handleNeverMind}>Never Mind</button>
+                  }
                </form> 
              </>   
             :
