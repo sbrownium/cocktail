@@ -25,10 +25,19 @@ export default function Drink({
   ratings,
   users 
  }) {
+  
   const [user] = useContext(UserContext);
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
+  // const [missingAlert, setMissingAlert] = useState(false);
+
+  const initialValidation = {
+    needsDrinkName: false,
+    needsDescription: false,
+    needsPrice: false
+  }
+  // const [validation, setValidation] = useState(initialValidation)
   
   const emojiLookUp = {
     '🤢': 1,
@@ -39,16 +48,34 @@ export default function Drink({
     
 function handleDrinkNameEdit (e) {
     e.preventDefault();
+    // if (editDrinkName !== '') {
+    //   setValidation({
+    //         ...validation,
+    //         needsDrinkName: false
+    //       });
+    // }    
     setEditDrinkName(e.target.value);
 }
 
 function handleDrinkDescriptionEdit (e) {
   e.preventDefault();
+  // if (editDrinkDescription !== '') {
+  //   setValidation({
+  //         ...validation,
+  //         needsDrinkDescription: false
+  //       });
+  // }
   setEditDrinkDescription(e.target.value);
 }
 
 function handleDrinkPriceEdit (e) {
   e.preventDefault();
+  // if (editDrinkPrice !== '') {
+  //   setValidation({
+  //         ...validation,
+  //         needsDrinkPrice: false
+  //       });
+  // }
   setEditDrinkPrice(e.target.value);
 }
 
@@ -66,13 +93,9 @@ function handleClick(e){
     price: editDrinkPrice
   };
 
-if ((editDrinkName !== drinkName) ||
-    (editDrinkDescription !== description) ||
-    (editDrinkPrice !== price)) {
   e.preventDefault();
-  handleToggle(); 
   updates['/drinks/' + drinkID] = newEdit;
-
+  handleToggle();
 return (
     update(ref(db), updates).then(() => {
         console.log('Data saved successfully!')
@@ -80,40 +103,42 @@ return (
   .catch((error) => {
     console.log('problem writing')
   })
-  
 )
-} else {
-  handleToggle(); 
 }
-}
-
     return (
       <>
         {beingEditted ? 
             <>
                 <form>
                   <EditBox
+                      className={(editDrinkName === '') && 'missing'}
                       id='drinkNameEdit'
                       edit={editDrinkName}
                       handleEdit={handleDrinkNameEdit}
                   />
                   &nbsp;&mdash;&nbsp;
                   <EditBox
+                      className={(editDrinkDescription === '') && 'missing'}
                       id='drinkDescriptionEdit'
                       edit={editDrinkDescription}
                       handleEdit={handleDrinkDescriptionEdit}
                   />
                   &nbsp;&mdash;&nbsp;$
                    <EditBox
+                      className={(editDrinkPrice === '') && 'missing'}
                       id='drinkPriceEdit'
                       edit={editDrinkPrice}
                       handleEdit={handleDrinkPriceEdit}
                   />
+                   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
+                    <p className='missing'>Please fill out all the fields to save</p> //.missing from NewDrink.css
+                    :
                  <Button
                     handleClick={handleClick}
                     children='Save'
                     className={null}
                  />
+                   }
                </form> 
              </>   
             :
