@@ -51,7 +51,7 @@ export default function Drink({
     '👍': 3,
     '🎉': 4
 };
-    
+ console.log(drinkName, archived)   
 function handleDrinkNameEdit (e) {
     e.preventDefault();  
     setEditDrinkName(e.target.value);
@@ -107,9 +107,11 @@ return (
 }
     return (
       <>
-        {beingEditted ? 
+        {beingEditted ?
             <>
                 <form>
+                {!archived &&
+                <>
                   <EditBox
                       className={(editDrinkName === '') && 'missing'}
                       id='drinkNameEdit'
@@ -130,6 +132,7 @@ return (
                       edit={editDrinkPrice}
                       handleEdit={handleDrinkPriceEdit}
                   />
+                 
                   {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
                   <ArchiveOrDeletePopOver
                   drinks={drinks}
@@ -154,6 +157,8 @@ return (
                    {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
                    <button onClick={handleNeverMind}>Never Mind</button>
                   }
+                   </>
+                  }
                </form> 
              </>   
             :
@@ -163,13 +168,24 @@ return (
             ${Number(price).toFixed(2)}
             </>
             }
-            {(user && !{archived}) && // checks for logged in user and that drink is not archived
+            {!archived && // checks for logged in user and that drink is not archived 
+             <>
+               {(user && beingEditted) && // checks that it is being editted in addition to user and archived */}
+              <ArchiveButton 
+                path={'/drinks/'}
+                nodeID={drinkID}
+                drinks={Object.values(drinks)}
+                nodeName='this drink'
+                handleToggle={handleToggle}
+                className={null}
+                children='Archive Drink'
+              />
+            }
             <AverageRating
               emojiLookUp={emojiLookUp}
               ratings={ratings}
               ratingDrinkID={drinkID}
             />
-          }
            <UserRating 
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
@@ -179,21 +195,6 @@ return (
                 beingEditted={beingEditted}
                 barID={barID} 
                 />
-              {(user && !{archived}) && // checks for logged in user and that drink is not archived
-            <>   
-            {beingEditted && // checks that it is being editted in addition to user and archived
-            <ArchiveButton 
-              path={'/drinks/'}
-              nodeID={drinkID}
-              drinks={Object.values(drinks)}
-              nodeName='this drink'
-              handleToggle={handleToggle}
-              className={null}
-              children='Archive Drink'
-            />
-            }
-            </>
-           }
             <CommentList
               comments={comments}
               users={users}
@@ -203,6 +204,8 @@ return (
               barID={barID}
               archived={archived}
             />
+          </>
+       }
           </>
       )    
 }
