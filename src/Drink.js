@@ -9,6 +9,7 @@ import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
 import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
+import Unarchive from './Unarchive.js';
 
 
 export default function Drink({
@@ -51,7 +52,7 @@ export default function Drink({
     '👍': 3,
     '🎉': 4
 };
- console.log(drinkName, archived)   
+ 
 function handleDrinkNameEdit (e) {
     e.preventDefault();  
     setEditDrinkName(e.target.value);
@@ -166,6 +167,19 @@ return (
             {drinkName} &mdash;&nbsp;
             {description} &mdash;
             ${Number(price).toFixed(2)}
+            </>
+            }
+            {(archived && user && beingEditted) &&
+            <>    
+            {drinkName} &mdash;&nbsp;
+            {description} &mdash;
+            ${Number(price).toFixed(2)}
+            <Unarchive
+              path={'/drinks/'}
+              nodeID={drinkID}
+              IDType='drinkID'
+              arrayOfThings={Object.values(drinks)}
+            />
             </>
             }
             {!archived && // checks for logged in user and that drink is not archived 
