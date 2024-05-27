@@ -47,18 +47,20 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     return Object.values(bars).filter(bar => bar.archived === false);
   
   }, [showBarArchive, bars])
-  const filteredBars = barsArray.filter(bar => bar.barID === selectedBar);
+  const filteredBar = barsArray.filter(bar => bar.barID === selectedBar);
+  const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar)
     return (
       <>
       <ul>
-        {filteredBars.map(({ barName, barID }, index) => {
+        {filteredBar.map(({ barName, barID }, index) => {
             return (
               <li key={index}>
                  <h1>{barName}</h1>
                 <DrinkList
                   barID={barID}
-                  barsArray={barsArray}
-                  drinks={drinks}
+                  // barsArray={barsArray}
+                  barsDrinks={barsDrinks}
+                  // drinks={drinks}
                   comments={comments}
                   ratings={ratings}
                   users={users}
@@ -79,8 +81,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       <Edit
         handleToggle={handleToggle} 
         beingEditted={beingEditted}
-        selectedBar={selectedBar}
-        filteredBars={filteredBars}
+        filteredBar={filteredBar}
       />
       {showNewDrink ? 
        <NewContainer

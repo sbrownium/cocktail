@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, { useContext } from "react";
 import { UserContext } from './UserContext.js';
 import NewRating from "./NewRating.js";
 import DeleteButton from "./DeleteButton.js";

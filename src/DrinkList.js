@@ -10,7 +10,8 @@ export default function DrinkList({
     barID,
     beingEditted,
     comments,
-    drinks,
+    // drinks,
+    barsDrinks,
     ratings,
     handleToggle,
     users
@@ -137,9 +138,9 @@ export default function DrinkList({
 const sortedDrinks = useMemo(() => {
   const drinksArray = () => {
   if (showDrinkArchive) {
-    return Object.values(drinks);
+    return barsDrinks;
   } else {
-    return Object.values(drinks).filter(drink => drink.archived === false);
+    return barsDrinks.filter(drink => drink.archived === false);
   }}
   const filteredDrinks = drinksArray().filter(drink => drink.barID === barID);
 
@@ -182,7 +183,7 @@ const sortedDrinks = useMemo(() => {
     return sortedDrinks.filter(onlyMyComments).filter(onlyTopRated)
   }
   return sortedDrinks;
-}, [drinks, showDrinkArchive, checked, filterChecked, filteredComments, myfilteredComments]);
+}, [barsDrinks, showDrinkArchive, beingEditted, checked, filterChecked, filteredComments, myfilteredComments]);
     return (
       <>
       <Order
@@ -207,8 +208,10 @@ const sortedDrinks = useMemo(() => {
               beingEditted={beingEditted}
               comments={comments}
               drinkName={drinkName}
+              // drinkName="All Drinks are Scott"
               drinkID={drinkID}
-              drinks={drinks}
+              // drinks={drinks}
+              drinks={barsDrinks}
               description={description}
               handleToggle={handleToggle}
               initialTimeStamp={initialTimeStamp}
@@ -219,7 +222,7 @@ const sortedDrinks = useMemo(() => {
           </li>
           ))}
         </ul> 
-        {(Object.values(drinks).filter(drink => drink.barID === barID).some((drink) => drink.archived === true)) &&
+        {(barsDrinks.filter(drink => drink.barID === barID).some((drink) => drink.archived === true)) &&
         // Object.values... checks if there is an archived drink to determine to show button
         <Button handleClick={toggleShowDrinkArchive}>
         {!showDrinkArchive ? 'Show Archived Drinks' : 'Hide Archived Drinks'}

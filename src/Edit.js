@@ -4,12 +4,16 @@ import PencilIcon from "./PencilIcon";
 import Button from "./Button";
 
 
-export default function Edit ({handleToggle, beingEditted, filteredBars, handleClick, selectedBar}) {
-    const [user ] = useContext(UserContext);
+export default function Edit ({
+    handleToggle,
+    beingEditted,
+    filteredBar
+}) {
+    const [user] = useContext(UserContext);
    
     return (
         <>
-            {(user && filteredBars.length > 0) && // checks if user is logged in and if there are any bars selected before displaying edit icon
+            {(user && filteredBar.length > 0) && // checks if user is logged in and if there are any bars selected before displaying edit icon
                 <>
                     {beingEditted ? 
                     <Button className={null} handleClick={handleToggle}>

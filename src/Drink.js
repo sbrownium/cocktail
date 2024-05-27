@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import CommentList from './CommentList';
@@ -32,15 +32,19 @@ export default function Drink({
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
-  // const [missingAlert, setMissingAlert] = useState(false);
-
-  // const initialValidation = {
-  //   needsDrinkName: false,
-  //   needsDescription: false,
-  //   needsPrice: false
-  // }
-  // const [validation, setValidation] = useState(initialValidation)
   
+  useEffect(() => {
+    setEditDrinkName(drinkName);
+  }, [drinkName]);
+
+  useEffect(() => {
+    setEditDrinkDescription(description);
+  }, [description]);
+
+  useEffect(() => {
+    setEditDrinkPrice(price);
+  }, [price]);
+
   const emojiLookUp = {
     '🤢': 1,
     '🤷‍♀️': 2,
@@ -49,35 +53,17 @@ export default function Drink({
 };
     
 function handleDrinkNameEdit (e) {
-    e.preventDefault();
-    // if (editDrinkName !== '') {
-    //   setValidation({
-    //         ...validation,
-    //         needsDrinkName: false
-    //       });
-    // }    
+    e.preventDefault();  
     setEditDrinkName(e.target.value);
 }
 
 function handleDrinkDescriptionEdit (e) {
   e.preventDefault();
-  // if (editDrinkDescription !== '') {
-  //   setValidation({
-  //         ...validation,
-  //         needsDrinkDescription: false
-  //       });
-  // }
   setEditDrinkDescription(e.target.value);
 }
 
 function handleDrinkPriceEdit (e) {
   e.preventDefault();
-  // if (editDrinkPrice !== '') {
-  //   setValidation({
-  //         ...validation,
-  //         needsDrinkPrice: false
-  //       });
-  // }
   setEditDrinkPrice(e.target.value);
 }
 
@@ -94,22 +80,22 @@ function resetDrinks () {
 }
 
 function handleClick(e){
+  e.preventDefault();
   const updates = {};
   const newEdit = {
-    addedBy: addedBy,
-    archived: archived,
-    barID: barID,
+    addedBy,
+    archived,
+    barID,
     description: editDrinkDescription,
-    drinkID: drinkID,
+    drinkID,
     drinkName: editDrinkName,
-    initialTimeStamp: initialTimeStamp,
+    initialTimeStamp,
     lastTimeStamp: Date.now(),
     price: editDrinkPrice
   };
-
-  e.preventDefault();
-  updates['/drinks/' + drinkID] = newEdit;
+  resetDrinks();
   handleToggle();
+  updates['/drinks/' + drinkID] = newEdit;
 return (
     update(ref(db), updates).then(() => {
         console.log('Data saved successfully!')
@@ -177,13 +163,13 @@ return (
             ${Number(price).toFixed(2)}
             </>
             }
+            {(user && !{archived}) && // checks for logged in user and that drink is not archived
             <AverageRating
               emojiLookUp={emojiLookUp}
               ratings={ratings}
               ratingDrinkID={drinkID}
             />
-           {(user && !{archived}) && // checks for logged in user and that drink is not archived
-           <>
+          }
            <UserRating 
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
@@ -193,6 +179,8 @@ return (
                 beingEditted={beingEditted}
                 barID={barID} 
                 />
+              {(user && !{archived}) && // checks for logged in user and that drink is not archived
+            <>   
             {beingEditted && // checks that it is being editted in addition to user and archived
             <ArchiveButton 
               path={'/drinks/'}
