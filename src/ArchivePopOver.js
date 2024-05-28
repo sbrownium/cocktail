@@ -8,15 +8,17 @@ export default function ArchivePopOver ({
     nodeID,
     nodeName,
     handleToggle,
-    drinks
+    arrayOfThings,
+    IDType
 }) {
-const thisDrink = drinks.filter(drink => drink.drinkID === nodeID);
+
+const thisThing = arrayOfThings.filter(a => a[IDType] === nodeID);
 
     function handleClick(e){
         const updates = {};
         e.preventDefault();
         const newArchive = {
-            ...thisDrink[0],
+            ...thisThing[0],
             archived: true,
             lastTimeStamp: Date.now()
           };

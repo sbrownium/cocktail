@@ -7,7 +7,8 @@ export default function Unarchive({
     path,
     nodeID,
     IDType,
-    arrayOfThings
+    arrayOfThings,
+    handleToggle
 }){
     const thisThing = arrayOfThings.filter(a => a[IDType] === nodeID);
 
@@ -20,6 +21,7 @@ export default function Unarchive({
             lastTimeStamp: Date.now()
           };
           updates[path + nodeID] = newUnarchive;
+          handleToggle();
 return (
   update(ref(db), updates).then(() => {
         console.log("Data saved successfully!");

@@ -2,7 +2,16 @@ import React, { useState } from "react";
 import ArchivePopOver from "./ArchivePopOver";
 import Button from "./Button";
 
-export default function ArchiveButton ({path, nodeID, nodeName, handleToggle, children, className, drinks}) {
+export default function ArchiveButton ({
+    path,
+    nodeID,
+    nodeName,
+    handleToggle,
+    buttonText,
+    className,
+    arrayOfThings,
+    IDType
+}) {
     const [visible, setVisible] = useState(false);
 
     function handleClick (e) {
@@ -13,15 +22,16 @@ export default function ArchiveButton ({path, nodeID, nodeName, handleToggle, ch
         <>
         {visible ? 
         <ArchivePopOver
-            drinks={drinks}
+            arrayOfThings={arrayOfThings}
             path={path}
             nodeID={nodeID}
             nodeName={nodeName}
             handleToggle={handleToggle}
+            IDType={IDType}
         />
         :
         <Button handleClick={handleClick} className={className}>
-            {children}
+            {buttonText}
         </Button>    
         }
         </>

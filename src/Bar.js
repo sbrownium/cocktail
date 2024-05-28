@@ -5,6 +5,8 @@ import Edit from "./Edit.js";
 import DrinkIcon from "./DrinkIcon.js";
 import Button from "./Button.js";
 import NewContainer from "./NewContainer.js";
+import ArchiveButton from "./ArchiveButton.js";
+import Unarchive from "./Unarchive.js";
 
 
 export default function Bar({bars, drinks, comments, ratings, users}) {
@@ -52,10 +54,32 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     return (
       <>
       <ul>
-        {filteredBar.map(({ barName, barID }, index) => {
+        {filteredBar.map(({ archived, barName, barID }, index) => {
             return (
               <li key={index}>
                  <h1>{barName}</h1>
+                 {beingEditted &&
+                 <>
+                 {!archived ?
+                 <ArchiveButton
+                    path={'/bars/'}
+                    nodeID={barID}
+                    IDType='barID'
+                    arrayOfThings={Object.values(bars)}
+                    nodeName={barName}
+                    handleToggle={handleToggle}
+                    className={null}
+                    buttonText='Archive Bar'
+                 /> :
+                 <Unarchive
+                  path={'/bars/'}
+                  nodeID={barID}
+                  IDType='barID'
+                  arrayOfThings={Object.values(bars)}
+                  handleToggle={handleToggle}
+                />}
+                </>
+                }
                 <DrinkList
                   barID={barID}
                   // barsArray={barsArray}

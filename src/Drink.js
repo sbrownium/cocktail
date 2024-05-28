@@ -179,6 +179,7 @@ return (
               nodeID={drinkID}
               IDType='drinkID'
               arrayOfThings={Object.values(drinks)}
+              handleToggle={handleToggle}
             />
             </>
             }
@@ -188,11 +189,12 @@ return (
               <ArchiveButton 
                 path={'/drinks/'}
                 nodeID={drinkID}
-                drinks={Object.values(drinks)}
-                nodeName='this drink'
+                IDType='drinkID'
+                arrayOfThings={Object.values(drinks)}
+                nodeName={drinkName}
                 handleToggle={handleToggle}
                 className={null}
-                children='Archive Drink'
+                buttonText='Archive Drink'
               />
             }
             <AverageRating
