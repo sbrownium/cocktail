@@ -82,9 +82,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
                 }
                 <DrinkList
                   barID={barID}
-                  // barsArray={barsArray}
                   barsDrinks={barsDrinks}
-                  // drinks={drinks}
                   comments={comments}
                   ratings={ratings}
                   users={users}
