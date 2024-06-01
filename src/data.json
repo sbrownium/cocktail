@@ -117,16 +117,24 @@
             "ratingID": "-NpI6-yPif5j2y0M710"
         }
     },
-    "users": {    
+    "usersPublic": {    
+        "-Nx4BqRgWYzLCiNZu0db": {
+            "preferredName": "Scott",
+            "userID" : "0MQKnC8zA3W81GAT6gfVfrdLkQD2"
+        },
+        "-NuevnlTv6iyzS0FuxxP": {
+            "preferredName": "Jessica",
+            "userID" : "CwtQ51DnbjaPn0ndYplJUOE4rsH2"
+    }
+},
+"usersPrivate": {    
         "-Nx4BqRgWYzLCiNZu0ed": {
             "email": "brownscottbrown@gmail.com",
-            "preferredName": "Scott",
             "userID" : "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
             "userName":"Scott Brown"
         },
         "-NuevnlTv6iyzS0Fuxfy": {
             "email": "jessicascottseattle@gmail.com",
-            "preferredName": "Jessica",
             "userID" : "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
             "userName":"Jessica And Scott Wicksnin Brown"
     }

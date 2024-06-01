@@ -9,10 +9,12 @@ import Button from './Button.js';
 
 export default function SignIn ({users}) {
 const [user, setUser] = useContext(UserContext);
+
+
 const usersArray = Object.values(users);
 const provider = new GoogleAuthProvider();
 
-function findPreferredName (name) {
+function findPreferredName (name) { // removes last name from UI
   const space = name.indexOf(' '); // finds first space
   return name.substring(0, space) // makes new string from index 0 through first space
 }
@@ -68,4 +70,3 @@ signInWithPopup(auth, provider)
         )
       }
 };
-

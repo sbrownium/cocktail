@@ -26,19 +26,19 @@ export default function CommentList ({
 return (
     <ul>
         {filteredComments.map(({initialTimeStamp, text, commentID, userID}, index) => {
-        // return (
-        // <Comment
-        //     commentDrinkID={commentDrinkID}
-        //     key={index}
-        //     users={users}
-        //     userID={userID}
-        //     commentID={commentID}
-        //     initialTimeStamp={initialTimeStamp}
-        //     text={text}
-        //     handleToggle={handleToggle}
-        //     beingEditted={beingEditted}
-        // />   
-        // )
+        return (
+        <Comment
+            commentDrinkID={commentDrinkID}
+            key={index}
+            users={users}
+            userID={userID}
+            commentID={commentID}
+            initialTimeStamp={initialTimeStamp}
+            text={text}
+            handleToggle={handleToggle}
+            beingEditted={beingEditted}
+        />   
+        )
     }
         )}
         {(!beingEditted && user && !archived) &&
