@@ -4,25 +4,28 @@ import { db } from "./firebase.js";
 import Button from "./Button";
 
 export default function ArchiveOrDeletePopOver ({
-    drinks,
     path,
     nodeID,
     nodeName,
     handleToggle,
-    resetDrinks
-}) {
-    const thisDrink = Object.values(drinks).filter(drink => drink.drinkID === nodeID); 
+    reset,
+    arrayOfThings,
+    IDType
+}) { 
+    const thisThing = arrayOfThings.filter(a => a[IDType] === nodeID);
+
     
     function handleArchive(e){
         const updates = {};
         e.preventDefault();
         const newArchive = {
-            ...thisDrink[0],
+            ...thisThing[0],
             archived: true,
             lastTimeStamp: Date.now()
           };
           updates[path + nodeID] = newArchive;
           handleToggle();
+          reset();
 return (
   update(ref(db), updates).then(() => {
         console.log("Data saved successfully!");
@@ -36,7 +39,7 @@ return (
         const updates = {};
         e.preventDefault(); 
         handleToggle();
-        resetDrinks(); 
+        reset(); 
         updates[path + nodeID] = null;
         return (
             update(ref(db), updates).then(() => {

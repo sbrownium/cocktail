@@ -17,7 +17,8 @@ export default function NewContainer (
     users,
     handleNewDrinkToggle,
     defaultBar,
-    setSelectedBar}) {
+    setSelectedBar
+}) {
     const [user] = useContext(UserContext);
     const { userID } = user
     const [logInAlert, setLogInAlert] = useState(false);
@@ -392,10 +393,12 @@ export default function NewContainer (
                 updates['/bars/' + newBarKey] = newBarObj;
                 updates['/drinks/' + newDrinkKey] = newDrinkObj;
                 setSelectedBar(newBarKey);
+                
             } else {
                 const newDrinkObj = {archived, barID, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID:newDrinkKey, drinkName, description, price};
                 updates['/drinks/' + newDrinkKey] = newDrinkObj; 
                 setSelectedBar(barID);
+    
             }
             
             setNewDrink(initialNewDrink);

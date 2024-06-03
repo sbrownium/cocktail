@@ -136,12 +136,13 @@ return (
                  
                   {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
                   <ArchiveOrDeletePopOver
-                  drinks={drinks}
-                  path='/drinks/'
-                  nodeID={drinkID}
-                  nodeName={drinkName}
-                  handleToggle={handleToggle}
-                  resetDrinks={resetDrinks}
+                    path='/drinks/'
+                    nodeID={drinkID}
+                    nodeName={drinkName}
+                    handleToggle={handleToggle}
+                    reset={resetDrinks}
+                    arrayOfThings={Object.values(drinks)}
+                    IDType='drinkID'
                   />:
                   <>
                    {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 

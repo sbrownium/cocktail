@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useMemo, useContext} from "react";
 import DrinkList from './DrinkList.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
@@ -7,15 +7,20 @@ import Button from "./Button.js";
 import NewContainer from "./NewContainer.js";
 import ArchiveButton from "./ArchiveButton.js";
 import Unarchive from "./Unarchive.js";
+import { UserContext } from "./UserContext.js";
+import EditBox from "./EditBox.js";
+import ArchiveOrDeletePopOver from "./ArchiveOrDeletePopOver.js";
+
 
 
 export default function Bar({bars, drinks, comments, ratings, users}) {
+  const [user] = useContext(UserContext);
   const [beingEditted, setBeingEditted] = useState(false);
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
-
+  const [editBarName, setEditBarName] = useState('');
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive)
@@ -28,6 +33,21 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     setShowNewDrink(showNewDrink => !showNewDrink)
   }
 
+  function handleBarNameEdit (e) {
+    e.preventDefault();
+    setEditBarName(e.target.value);
+  }
+
+  function resetBarName () {
+    setEditBarName((Object.values(bars).filter(bar => bar.barID === selectedBar)[0].barName))
+  }
+
+  function handleNeverMind (e) {
+    e.preventDefault();
+    resetBarName();
+    handleToggle();
+  }
+
   function handleSelect (e) {
     e.preventDefault();
     setSelectedBar(e.target.value);
@@ -35,6 +55,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       setShowingBar(false);
     } else {
       setShowingBar(true);
+      setEditBarName(Object.values(bars).filter(bar => bar.barID === e.target.value)[0].barName); // sets the bar name for the edit state
     }
     }; 
     
@@ -54,12 +75,51 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
     return (
       <>
       <ul>
-        {filteredBar.map(({ archived, barName, barID }, index) => {
+        {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
+      
             return (
               <li key={index}>
-                 <h1>{barName}</h1>
-                 {beingEditted &&
+                {beingEditted ? 
                  <>
+                 <form>
+                  <EditBox
+                    className={(editBarName === '') && 'missing'}
+                    id='barNameEdit'
+                    edit={editBarName}
+                    handleEdit={handleBarNameEdit}
+                  />
+                 
+                
+                  {(editBarName === '') &&  
+                  <>
+                {(user.userID === addedBy) ?
+                <> 
+                  <ArchiveOrDeletePopOver
+                    path='/bars/'
+                    nodeID={barID}
+                    nodeName={barName}
+                    handleToggle={handleToggle}
+                    reset={resetBarName}
+                    arrayOfThings={Object.values(bars)}
+                    IDType='barID'
+                  />
+                  <Button
+                    handleClick={handleNeverMind}
+                    children='Never Mind'
+                    className={null}
+                    />
+                    </>  
+                  :
+                    <p className='missing'>Please fill out all the fields to save</p> }
+                    </>} 
+                    {(editBarName !== '') &&
+                    <Button
+                    handleClick={handleClick}
+                    children='Save'
+                    className={null}
+                 />
+                    }
+                </form>
                  {!archived ?
                  <ArchiveButton
                     path={'/bars/'}
@@ -78,7 +138,8 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
                   arrayOfThings={Object.values(bars)}
                   handleToggle={handleToggle}
                 />}
-                </>
+                </> :
+                <h1>{barName}</h1>
                 }
                 <DrinkList
                   barID={barID}
