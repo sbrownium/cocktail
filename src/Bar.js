@@ -45,7 +45,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   function handleNeverMind (e) {
     e.preventDefault();
     resetBarName();
-    handleToggle();
+    handleToggle(); 
   }
 
   function handleSelect (e) {
@@ -79,7 +79,7 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       
             return (
               <li key={index}>
-                {beingEditted ? 
+                {(beingEditted && !archived)? 
                  <>
                  <form>
                   <EditBox
@@ -88,8 +88,6 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
                     edit={editBarName}
                     handleEdit={handleBarNameEdit}
                   />
-                 
-                
                   {(editBarName === '') &&  
                   <>
                 {(user.userID === addedBy) ?
@@ -102,6 +100,8 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
                     reset={resetBarName}
                     arrayOfThings={Object.values(bars)}
                     IDType='barID'
+                    childArray={Object.values(drinks)}
+                    childIDType='barID'
                   />
                   <Button
                     handleClick={handleNeverMind}

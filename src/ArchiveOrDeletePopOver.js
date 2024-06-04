@@ -10,11 +10,14 @@ export default function ArchiveOrDeletePopOver ({
     handleToggle,
     reset,
     arrayOfThings,
-    IDType
+    IDType,
+    childArray,
+    childIDType
 }) { 
     const thisThing = arrayOfThings.filter(a => a[IDType] === nodeID);
+    const childrenOfThing = childArray.filter(a => a[childIDType] === nodeID)
 
-    
+    console.log(childrenOfThing);
     function handleArchive(e){
         const updates = {};
         e.preventDefault();
@@ -52,10 +55,15 @@ return (
     }
     return (
         <>
+        {(childrenOfThing.length === 0) ? 
+            <>
             <p>Do you want to archive or delete {nodeName}?</p>
             <Button className={null} handleClick={handleDelete}>
             Delete
             </Button>
+            </> :
+            <p>Do you want to archive {nodeName}?</p>
+            }
             <Button className={null} handleClick={handleArchive}>
             Archive
             </Button>
