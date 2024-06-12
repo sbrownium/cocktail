@@ -7,10 +7,11 @@ export default function ArchiveButton ({
     nodeID,
     nodeName,
     handleToggle,
-    buttonText,
     className,
     arrayOfThings,
-    IDType
+    IDType,
+    reset,
+    buttonText
 }) {
     const [visible, setVisible] = useState(false);
 
@@ -28,10 +29,11 @@ export default function ArchiveButton ({
             nodeName={nodeName}
             handleToggle={handleToggle}
             IDType={IDType}
+            reset={reset}
         />
         :
         <Button handleClick={handleClick} className={className}>
-            {buttonText}
+             {buttonText}
         </Button>    
         }
         </>

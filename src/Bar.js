@@ -6,10 +6,10 @@ import DrinkIcon from "./DrinkIcon.js";
 import Button from "./Button.js";
 import NewContainer from "./NewContainer.js";
 import ArchiveButton from "./ArchiveButton.js";
+import DeleteButton from "./DeleteButton.js";
 import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
 import EditBox from "./EditBox.js";
-import ArchiveOrDeletePopOver from "./ArchiveOrDeletePopOver.js";
 
 
 
@@ -79,7 +79,9 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
       
             return (
               <li key={index}>
-                {(beingEditted && !archived)? 
+                {beingEditted ?
+                <>
+                {!archived ? 
                  <>
                  <form>
                   <EditBox
@@ -88,56 +90,46 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
                     edit={editBarName}
                     handleEdit={handleBarNameEdit}
                   />
-                  {(editBarName === '') &&  
-                  <>
-                {(user.userID === addedBy) ?
-                <> 
-                  <ArchiveOrDeletePopOver
+                  {(editBarName !== '') ? 
+                  <Button
+                  handleClick={handleClick}
+                  children='Save'
+                  className={null}
+                  /> 
+                  : 
+               <p className='missing'>Please give the bar a name to save</p>
+                }
+                </form>
+                  <ArchiveButton 
+                    path='/bars/'
+                    nodeID={barID}
+                    IDType='barID'
+                    arrayOfThings={Object.values(bars)}
+                    nodeName={barName}
+                    handleToggle={handleToggle}
+                    className={null}
+                    reset={resetBarName}
+                    buttonText='Archive Bar'
+                  />
+                  {(addedBy === user.userID) &&
+                  <DeleteButton 
                     path='/bars/'
                     nodeID={barID}
                     nodeName={barName}
                     handleToggle={handleToggle}
+                    className={null}
                     reset={resetBarName}
-                    arrayOfThings={Object.values(bars)}
-                    IDType='barID'
-                    childArray={Object.values(drinks)}
-                    childIDType='barID'
+                    buttonText='Delete Bar'
                   />
-                  <Button
-                    handleClick={handleNeverMind}
-                    children='Never Mind'
-                    className={null}
-                    />
-                    </>  
-                  :
-                    <p className='missing'>Please fill out all the fields to save</p> }
-                    </>} 
-                    {(editBarName !== '') &&
-                    <Button
-                    handleClick={handleClick}
-                    children='Save'
-                    className={null}
-                 />
-                    }
-                </form>
-                 {!archived ?
-                 <ArchiveButton
-                    path={'/bars/'}
-                    nodeID={barID}
-                    IDType='barID'
-                    arrayOfThings={Object.values(bars)}
-                    nodeName={barName}
-                    handleToggle={handleToggle}
-                    className={null}
-                    buttonText='Archive Bar'
-                 /> :
+                  } 
+                 </> :
                  <Unarchive
-                  path={'/bars/'}
+                  path='/bars/'
                   nodeID={barID}
                   IDType='barID'
                   arrayOfThings={Object.values(bars)}
                   handleToggle={handleToggle}
-                />}
+                /> }
                 </> :
                 <h1>{barName}</h1>
                 }

@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import DeletePopOver from "./DeletePopOver";
+import ArchiveOrDeletePopOver from "./ArchiveOrDeletePopOver";
 import Button from "./Button";
 
-export default function DeleteButton ({
+export default function ArchiveOrDeleteButton ({
     path,
     nodeID,
     nodeName,
     handleToggle,
+    reset,
+    arrayOfThings,
+    IDType,
+    childArray,
+    childIDType,
+    action,
     buttonText,
-    className,
-    reset
+    className
 }) {
     const [visible, setVisible] = useState(false);
 
@@ -20,17 +25,24 @@ export default function DeleteButton ({
     return (
         <>
         {visible ? 
-        <DeletePopOver
+        <ArchiveOrDeletePopOver
             path={path}
             nodeID={nodeID}
             nodeName={nodeName}
             handleToggle={handleToggle}
             reset={reset}
-        />
+            arrayOfThings={arrayOfThings}
+            IDType={IDType}
+            childArray={childArray}
+            childIDType={childIDType}
+            action={action}
+      />
         :
+       
         <Button handleClick={handleClick} className={className}>
             {buttonText}
-        </Button>    
+        </Button>
+        
         }
         </>
     )

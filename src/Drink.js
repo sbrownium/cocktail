@@ -8,7 +8,8 @@ import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
-import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
+import DeleteButton from './DeleteButton.js';
+// import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
 import Unarchive from './Unarchive.js';
 
 
@@ -134,7 +135,7 @@ return (
                       handleEdit={handleDrinkPriceEdit}
                   />
                  
-                  {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
+                  {/* {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
                   <ArchiveOrDeletePopOver
                     path='/drinks/'
                     nodeID={drinkID}
@@ -143,7 +144,8 @@ return (
                     reset={resetDrinks}
                     arrayOfThings={Object.values(drinks)}
                     IDType='drinkID'
-                  />:
+                  />
+                  : */}
                   <>
                    {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
                     //.missing from NewDrink.css
@@ -155,7 +157,8 @@ return (
                     className={null}
                  />
                    }
-                   </>}
+                   </>
+                   {/* } */}
                    {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
                    <button onClick={handleNeverMind}>Never Mind</button>
                   }
@@ -187,16 +190,30 @@ return (
             {!archived && // checks for logged in user and that drink is not archived 
              <>
                {(user && beingEditted) && // checks that it is being editted in addition to user and archived */}
-              <ArchiveButton 
-                path={'/drinks/'}
+             <>
+             <ArchiveButton 
+                path='/drinks/'
                 nodeID={drinkID}
                 IDType='drinkID'
                 arrayOfThings={Object.values(drinks)}
                 nodeName={drinkName}
                 handleToggle={handleToggle}
                 className={null}
+                reset={resetDrinks}
                 buttonText='Archive Drink'
               />
+              {(addedBy === user.userID) &&
+              <DeleteButton 
+                path='/drinks/'
+                nodeID={drinkID}
+                nodeName={drinkName}
+                handleToggle={handleToggle}
+                className={null}
+                reset={resetDrinks}
+                buttonText='Delete Drink'
+              />
+              }
+              </>
             }
             <AverageRating
               emojiLookUp={emojiLookUp}

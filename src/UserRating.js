@@ -39,7 +39,9 @@ export default function UserRating ({
                     nodeID={ratingID}
                     nodeName={ratingToEmoji}
                     handleToggle={handleToggle}
-                    children='Delete Rating'
+                    className={null}
+                    reset={null}
+                    buttonText='Delete Rating'
                 />
             </>
              :
