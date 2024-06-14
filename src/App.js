@@ -13,6 +13,8 @@ import {
 import RootLayout from './RootLayout.js';
 import Account from './Account.js';
 import GitHub from './GitHub.js';
+import CocktalesLogo from './CocktalesLogo.js';
+import LinkedIn from './LinkedIn.js';
 // import { UserContext } from './UserContext';
 
 
@@ -167,11 +169,15 @@ function App() {
   return (
     <>  
         <>
+        <CocktalesLogo width='300px' fillColor='black'/>
         <UserProvider>
           <SignIn users={users}/>
           <RouterProvider router={router} />
           <a href="https://github.com/sbrownium/cocktail">
             <GitHub width='24.5px' height='24px' fillColor='black'/>
+          </a>
+          <a href="https://linkedin.com/in/sbrownium">
+            <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
           </a>
         </UserProvider>
         </>
