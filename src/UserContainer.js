@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import Comment from "./Comment";
 import UserRating from "./UserRating";
+import { UserContext } from "./UserContext";
+import NewComment from "./NewComment";
 
 export default function UserContainer ({
+    archived,
+    barID,
     filteredComments,
     filteredRatings,
     drinkID,
@@ -17,7 +21,7 @@ export default function UserContainer ({
     emojiLookUp,
     index  
 }) {
-
+    const user = useContext(UserContext);  
     const usersArray = Object.values(users);
     const filteredUsers = usersArray.filter(u => u.userID === userID);
     const preferredName = filteredUsers[0].preferredName
@@ -46,7 +50,13 @@ export default function UserContainer ({
             handleToggle={handleToggle}
             beingEditted={beingEditted}
         />
-        }
+    }
+        {(!beingEditted && user && !archived) && 
+              <NewComment
+                drinkID={drinkID}
+                barID={barID}
+            />
+            }
         {preferredName}
         </div>
         </>   

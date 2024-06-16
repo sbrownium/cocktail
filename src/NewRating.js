@@ -5,7 +5,15 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 
 
-export default function NewRating({emojiLookUp, handleToggle, filterRatings, barID, ratingDrinkID, text, beingEditted}) {
+export default function NewRating({
+  emojiLookUp,
+  handleToggle,
+  filterRatings,
+  barID,
+  ratingDrinkID,
+  text,
+  beingEditted
+}) {
     
     const [rating, setRating] = useState('');
     const [user, setUser] = useContext(UserContext);
