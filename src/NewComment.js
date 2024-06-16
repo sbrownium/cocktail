@@ -7,7 +7,7 @@ import Button from './Button.js';
 
 
 
-export default function NewComment({commentDrinkID, barID}) {
+export default function NewComment({drinkID, barID}) {
     const [comment, setComment] = useState('');
     const [commentAlert, setCommentAlert] = useState(false);
     const [user, setUser] = useContext(UserContext);
@@ -26,7 +26,7 @@ export default function NewComment({commentDrinkID, barID}) {
       const newComment = {
         commentID: newCommentKey,
         userID: userID,
-        drinkID: commentDrinkID,
+        drinkID: drinkID,
         barID: barID,
         initialTimeStamp: Date.now(),
         lastTimeStamp: Date.now(),

@@ -20,7 +20,8 @@ export default function AverageRating({
    
     return (
         <>
-            Average Rating: <span className='emoji'>{ratingToEmoji}</span>
+            {/* Average Rating:  */}
+            <span className='emoji'>{ratingToEmoji}</span>
         </>
     )} 
     // else {

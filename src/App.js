@@ -152,7 +152,7 @@ function App() {
   }
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayout />}>
+      <Route path="/" element={<RootLayout users={users} />}>
       <Route index element={
         <Bar
           bars={bars}  
@@ -171,14 +171,14 @@ function App() {
         <>
         <CocktalesLogo width='300px' fillColor='black'/>
         <UserProvider>
-          <SignIn users={users}/>
+          {/* <SignIn users={users}/> */}
           <RouterProvider router={router} />
-          <a href="https://github.com/sbrownium/cocktail">
+          {/* <a href="https://github.com/sbrownium/cocktail">
             <GitHub width='24.5px' height='24px' fillColor='black'/>
           </a>
           <a href="https://linkedin.com/in/sbrownium">
             <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
-          </a>
+          </a> */}
         </UserProvider>
         </>
     </>

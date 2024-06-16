@@ -1,0 +1,54 @@
+import React from "react";
+import Comment from "./Comment";
+import UserRating from "./UserRating";
+
+export default function UserContainer ({
+    filteredComments,
+    filteredRatings,
+    drinkID,
+    users,
+    userID,
+    commentID,
+    initialTimeStamp,
+    text,
+    handleToggle,
+    beingEditted,
+    ratingsArray,
+    emojiLookUp,
+    index  
+}) {
+
+    const usersArray = Object.values(users);
+    const filteredUsers = usersArray.filter(u => u.userID === userID);
+    const preferredName = filteredUsers[0].preferredName
+    
+    return (
+        <>
+        <div>
+        {(filteredRatings.filter(rating => rating.userID === userID).length !== 0) &&    
+        <UserRating
+            userID={userID}
+            drinkID={drinkID}
+            ratingsArray={ratingsArray}
+            emojiLookUp={emojiLookUp}
+          />
+        }
+        {(filteredComments.filter(comment => comment.userID === userID).length !== 0)  &&    
+        <Comment
+            filteredComments={filteredComments}
+            drinkID={drinkID}
+            key={index}
+            users={users}
+            userID={userID}
+            commentID={commentID}
+            initialTimeStamp={initialTimeStamp}
+            text={text}
+            handleToggle={handleToggle}
+            beingEditted={beingEditted}
+        />
+        }
+        {preferredName}
+        </div>
+        </>   
+    )
+}

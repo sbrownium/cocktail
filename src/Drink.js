@@ -1,9 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
-import CommentList from './CommentList';
 import AverageRating from './AverageRating';
-import UserRating from './UserRating';
+import MyRating from './MyRating';
 import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
@@ -11,6 +10,7 @@ import EditBox from './EditBox';
 import DeleteButton from './DeleteButton.js';
 // import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
 import Unarchive from './Unarchive.js';
+import FeedbackList from './FeedbackList.js';
 
 
 export default function Drink({
@@ -108,7 +108,7 @@ return (
 )
 }
     return (
-      <>
+      <> 
         {beingEditted ?
             <>
                 <form>
@@ -120,6 +120,11 @@ return (
                       edit={editDrinkName}
                       handleEdit={handleDrinkNameEdit}
                   />
+                  <AverageRating
+                  emojiLookUp={emojiLookUp}
+                  ratings={ratings}
+                  ratingDrinkID={drinkID}
+                />
                   &nbsp;&mdash;&nbsp;
                   <EditBox
                       className={(editDrinkDescription === '') && 'missing'}
@@ -134,18 +139,6 @@ return (
                       edit={editDrinkPrice}
                       handleEdit={handleDrinkPriceEdit}
                   />
-                 
-                  {/* {((editDrinkName === '') && (editDrinkDescription === '') && (editDrinkPrice === '')) ? 
-                  <ArchiveOrDeletePopOver
-                    path='/drinks/'
-                    nodeID={drinkID}
-                    nodeName={drinkName}
-                    handleToggle={handleToggle}
-                    reset={resetDrinks}
-                    arrayOfThings={Object.values(drinks)}
-                    IDType='drinkID'
-                  />
-                  : */}
                   <>
                    {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
                     //.missing from NewDrink.css
@@ -167,8 +160,16 @@ return (
                </form> 
              </>   
             :
-            <>    
-            {drinkName} &mdash;&nbsp;
+            <> 
+            <div>  
+            {drinkName}
+            &nbsp;
+            <AverageRating
+              emojiLookUp={emojiLookUp}
+              ratings={ratings}
+              ratingDrinkID={drinkID}
+            />
+              </div>   
             {description} &mdash;
             ${Number(price).toFixed(2)}
             </>
@@ -215,12 +216,7 @@ return (
               }
               </>
             }
-            <AverageRating
-              emojiLookUp={emojiLookUp}
-              ratings={ratings}
-              ratingDrinkID={drinkID}
-            />
-           <UserRating 
+           <MyRating 
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
                 drinkName={drinkName}
@@ -229,14 +225,16 @@ return (
                 beingEditted={beingEditted}
                 barID={barID} 
                 />
-            <CommentList
+            <FeedbackList
               comments={comments}
               users={users}
-              commentDrinkID={drinkID}
+              drinkID={drinkID}
               beingEditted={beingEditted}
               handleToggle={handleToggle}
               barID={barID}
               archived={archived}
+              ratings={ratings}
+              emojiLookUp={emojiLookUp}
             />
           </>
        }

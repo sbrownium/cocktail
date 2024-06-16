@@ -7,23 +7,22 @@ import Time from './Time.js';
 import Button from './Button.js';
 import { UserContext } from './UserContext.js';
 
-
 export default function Comment ({
   commentDrinkID,
+  filteredComments,
   index,
-  commentID,
-  initialTimeStamp,
-  text,
-  users,
+  // commentID,
+  // initialTimeStamp,
+  // text,
   userID,
   handleToggle,
-  beingEditted
+  beingEditted,
 }) {
+    const usersComment = filteredComments.filter(comment => comment.userID === userID)[0]
     const [user] = useContext(UserContext);
+    const {barID, commentID, drinkID, initialTimeStamp, lastTimeStamp, text } = usersComment;
     const [edit, setEdit] = useState(text);
-    const usersArray = Object.values(users);
-    const filteredUsers = usersArray.filter(u => u.userID === userID);
-    const preferredName = filteredUsers[0].preferredName
+
 
     function handleEdit (e) {
         e.preventDefault();
@@ -83,7 +82,7 @@ return (
             </>
               : text }
              &nbsp;
-            {!beingEditted && <> ({preferredName} &mdash; <Time initialTimeStamp={initialTimeStamp}/>)</>}  
+            {!beingEditted && <> (<Time initialTimeStamp={initialTimeStamp}/>)</>}  
         </li>
 )
 };

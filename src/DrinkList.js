@@ -4,6 +4,8 @@ import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
+import FilterIcon from './FilterIcon';
+import XIcon from './XIcon';
 
 
 export default function DrinkList({
@@ -20,6 +22,7 @@ export default function DrinkList({
   const {userID} = user;
   const [checked, setChecked] = useState('Date Added');
   const [showDrinkArchive, setShowDrinkArchive] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   
   const initialFilter = {
     topRated: null,
@@ -39,6 +42,10 @@ export default function DrinkList({
 
   function toggleShowDrinkArchive () {
     setShowDrinkArchive(showDrinkArchive => !showDrinkArchive)
+  }
+
+  function toggleFilter () {
+    setShowFilter(showFilter => !showFilter)
   }
 
   function alphaSort (a,b) {
@@ -186,6 +193,15 @@ const sortedDrinks = useMemo(() => {
 }, [barsDrinks, showDrinkArchive, beingEditted, checked, filterChecked, filteredComments, myfilteredComments]);
     return (
       <>
+      {showFilter ?
+      <>
+       <Button className='edit icon' handleClick={toggleFilter}>
+          <XIcon
+            width='22px'
+            height='22px'
+            fill='black'
+          />
+        </Button>
       <Order
         checked={checked}
         handleChange={handleChange}
@@ -198,6 +214,17 @@ const sortedDrinks = useMemo(() => {
         comments={comments}
         barID={barID}
       />
+      </> :
+      <>
+        <Button className='edit icon' handleClick={toggleFilter}>
+          <FilterIcon
+            width='25px'
+            height='25px'
+            fill='black'
+            />
+        </Button>
+      </>
+}
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li key={index}>
@@ -208,9 +235,7 @@ const sortedDrinks = useMemo(() => {
               beingEditted={beingEditted}
               comments={comments}
               drinkName={drinkName}
-              // drinkName="All Drinks are Scott"
               drinkID={drinkID}
-              // drinks={drinks}
               drinks={barsDrinks}
               description={description}
               handleToggle={handleToggle}
