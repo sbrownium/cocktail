@@ -12,8 +12,11 @@ export default function NewComment({drinkID, barID}) {
     const [commentAlert, setCommentAlert] = useState(false);
     const [user, setUser] = useContext(UserContext);
     const { userName, userID } = user;
+    const [ showAdd, setShowAdd ] = useState(false);
 
-
+  function handleToggle () {
+    setShowAdd(showAdd => !showAdd);
+  }
 
     function handleClick(e) {
       e.preventDefault();
@@ -46,6 +49,12 @@ export default function NewComment({drinkID, barID}) {
 }
     return (
       <>
+      {!showAdd ?
+       <Button className='icon' handleClick={handleToggle}>
+       + 💬
+     </Button>
+      :
+      <>
         <form>
           <label>New:</label>
           <input
@@ -55,6 +64,11 @@ export default function NewComment({drinkID, barID}) {
           />
           <Submit handleClick={handleClick} value='add'/>
         </form>
+        <Button handleClick={handleToggle}>
+          Nah
+        </Button>
+        </>
+        }
         {commentAlert &&
             <>
             <p>Please add your comment before submitting</p>

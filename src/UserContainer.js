@@ -21,7 +21,7 @@ export default function UserContainer ({
     emojiLookUp,
     index  
 }) {
-    const user = useContext(UserContext);  
+    const [user] = useContext(UserContext);  
     const usersArray = Object.values(users);
     const filteredUsers = usersArray.filter(u => u.userID === userID);
     const preferredName = filteredUsers[0].preferredName
@@ -51,7 +51,7 @@ export default function UserContainer ({
             beingEditted={beingEditted}
         />
     }
-        {(!beingEditted && user && !archived) && 
+        {(!beingEditted && !archived && (user.userID === userID)) && 
               <NewComment
                 drinkID={drinkID}
                 barID={barID}
