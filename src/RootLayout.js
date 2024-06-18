@@ -5,7 +5,10 @@ import LinkedIn from "./LinkedIn";
 import SignIn from "./SignIn";
 import { UserContext } from "./UserContext";
 
-export default function RootLayout ({users}) {
+export default function RootLayout ({
+    users,
+    handleToggle
+}) {
 const [user] = useContext(UserContext)
     return (
     <>
@@ -15,7 +18,10 @@ const [user] = useContext(UserContext)
         <footer>
             <nav>
                 <NavLink to='/'>🏠</NavLink>
-                <SignIn users={users}/>
+                <SignIn
+                    users={users}
+                    handleToggle={handleToggle}
+                />
                 {user &&
                 <NavLink to='/Account'>😎</NavLink>} 
                 {/* <NavLink to='/NewContainer'>New Drink</NavLink>  */}

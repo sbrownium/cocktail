@@ -13,9 +13,17 @@ import EditBox from "./EditBox.js";
 
 
 
-export default function Bar({bars, drinks, comments, ratings, users}) {
+export default function Bar({
+  bars,
+  drinks,
+  comments,
+  ratings,
+  users,
+  beingEditted,
+  handleToggle
+}) {
   const [user] = useContext(UserContext);
-  const [beingEditted, setBeingEditted] = useState(false);
+  
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
@@ -25,9 +33,6 @@ export default function Bar({bars, drinks, comments, ratings, users}) {
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive)
   }
-  function handleToggle () {
-    setBeingEditted(beingEditted => !beingEditted);
-    }
 
   function handleNewDrinkToggle () {
     setShowNewDrink(showNewDrink => !showNewDrink)

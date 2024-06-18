@@ -7,7 +7,10 @@ import { UserContext } from './UserContext.js';
 import Button from './Button.js';
 
 
-export default function SignIn ({users}) {
+export default function SignIn ({
+  users,
+  handleToggle
+}) {
 const [user, setUser] = useContext(UserContext);
 
 
@@ -23,6 +26,7 @@ function handleLogOut (e) {
   e.preventDefault();
   googleLogout();
   setUser('');
+  handleToggle();
 }
 
 function handleClick (e) {

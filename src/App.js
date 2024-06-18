@@ -40,34 +40,12 @@ function App() {
   const [errorComments, setErrorComments] = useState(null);
   const [errorRatings, setErrorRatings] = useState(null);
   const [errorUsers, setErrorUsers] = useState(null);
+  const [beingEditted, setBeingEditted] = useState(false); //editing state
   
-
-  // const db = getDatabase();
-  // const starCountRef = ref(db, 'posts/' + postId + '/starCount');
-  // onValue(starCountRef, (snapshot) => {
-  //   const data = snapshot.val();
-  //   updateStarCount(postElement, data);
-  // });
-
-
-  // useEffect(() => {
-  //   const barsRef = ref(db, 'bars');
-  //   const drinksRef = ref(db, 'drinks');
-  //    return onValue(barsRef, (snapshot) => {
-  //     const bars = snapshot.val();
-  //         setData(() => bars);
-  //         setLoading(() => false);
-  //       }, (error) => {
-  //         setError(() => error);
-  //         setLoading(() => false);
-  //       });
-  // }, []);
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-  // if (error) {
-  //   return <div>Error: {error.message}</div>;
-  // }
+  // turns editting state on or off
+  function handleToggle () {
+    setBeingEditted(beingEditted => !beingEditted); 
+    }
 
   useEffect(() => {
     const barsRef = ref(db, 'bars');
@@ -152,7 +130,11 @@ function App() {
   }
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayout users={users} />}>
+      <Route path="/"
+      element={<RootLayout 
+      users={users}
+      handleToggle={handleToggle}
+      />}>
       <Route index element={
         <Bar
           bars={bars}  
@@ -160,6 +142,8 @@ function App() {
           drinks={drinks}
           comments={comments}
           ratings={ratings}
+          handleToggle={handleToggle}
+          beingEditted={beingEditted}
          />} />
         <Route path="/Account" element={<Account />} />
       </Route>
