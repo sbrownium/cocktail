@@ -166,6 +166,20 @@ function App() {
           handleToggle={handleToggle}
           beingEditted={beingEditted}
          />
+         <footer>
+            <nav>
+              <SignIn
+                users={users}
+                handleToggle={handleToggle}
+              />
+              <a href="https://github.com/sbrownium/cocktail">
+                <GitHub width='24.5px' height='24px' fillColor='black'/>
+              </a>
+              <a href="https://linkedin.com/in/sbrownium">
+                <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
+              </a>
+            </nav>
+         </footer>
           {/* <a href="https://github.com/sbrownium/cocktail">
             <GitHub width='24.5px' height='24px' fillColor='black'/>
           </a>
