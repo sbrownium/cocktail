@@ -10,6 +10,7 @@ import DeleteButton from "./DeleteButton.js";
 import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
 import EditBox from "./EditBox.js";
+import './Bar.css';
 
 
 
@@ -150,6 +151,7 @@ export default function Bar({
             );
           })}
       </ul>
+      <div className="controlsContainer">
       <ChangeBar
         barsArray={barsArray}
         handleSelect={handleSelect}
@@ -183,6 +185,7 @@ export default function Bar({
       <Button handleClick={toggleShowBarArchive}>
         {!showBarArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
       </Button>}
+      </div>
       </>
     );
   }

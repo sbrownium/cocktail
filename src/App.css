@@ -65,18 +65,30 @@ footer nav {
   display: flex;
 }
 #root,
-body {
+body,
+main {
   flex-direction: column;
 }
 
-html, body {
+/* html, body {
   height: 100%;
 }
 main {
-  flex: 1 0 auto;
-}
+  flex-direction: column;
+} */
 footer {
-  flex-shrink: 0;
+  position: fixed;
+  bottom: 0;
+  background: whitesmoke;
+  padding: .5em .75em; 
+}
+footer nav {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  max-width: 500px;
 }
 
 

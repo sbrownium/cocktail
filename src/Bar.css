@@ -1,0 +1,4 @@
+.controlsContainer {
+    display: flex;
+    flex-direction: row;
+}
