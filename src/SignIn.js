@@ -5,6 +5,8 @@ import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import Button from './Button.js';
+import GoogleSignInButton from './GoogleSignInButton.js';
+import GoogleSignOutButton from './GoogleSignOutButton.js';
 
 
 export default function SignIn ({
@@ -61,16 +63,22 @@ signInWithPopup(auth, provider)
 }
     if (!user) {
       return (
-        <Button className={null} handleClick={handleClick}>
-            Sign In
-          </Button>
+        // <Button className={null} handleClick={handleClick}>
+        //     Sign In
+        //   </Button>
+        <GoogleSignInButton 
+          handleClick={handleClick}
+        />
       )
     }
       else {
         return (
-          <Button className={null} handleClick={handleLogOut}>
-            Log Out
-          </Button>
+          <GoogleSignOutButton 
+          handleClick={handleLogOut}
+        />
+          // <Button className={null} handleClick={handleLogOut}>
+          //   Log Out
+          // </Button>
         )
       }
 };

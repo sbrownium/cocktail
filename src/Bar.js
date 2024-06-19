@@ -81,7 +81,6 @@ export default function Bar({
       <>
       <ul>
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
-      
             return (
               <li key={index}>
                 {beingEditted ?

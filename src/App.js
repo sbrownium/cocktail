@@ -15,6 +15,8 @@ import Account from './Account.js';
 import GitHub from './GitHub.js';
 import CocktalesLogo from './CocktalesLogo.js';
 import LinkedIn from './LinkedIn.js';
+import './App.css';
+
 // import { UserContext } from './UserContext';
 
 
@@ -153,19 +155,23 @@ function App() {
   return (
     <>  
         <>
-        <CocktalesLogo width='300px' fillColor='black'/>
         <UserProvider>
+        <header>
+          <CocktalesLogo width='300px' fillColor='black'/>
+        </header>
           {/* <SignIn users={users}/> */}
           {/* <RouterProvider router={router} /> */}
-          <Bar
-          bars={bars}  
-          users={users}
-          drinks={drinks}
-          comments={comments}
-          ratings={ratings}
-          handleToggle={handleToggle}
-          beingEditted={beingEditted}
-         />
+          <body>
+            <Bar
+              bars={bars}  
+              users={users}
+              drinks={drinks}
+              comments={comments}
+              ratings={ratings}
+              handleToggle={handleToggle}
+              beingEditted={beingEditted}
+          />
+         </body>
          <footer>
             <nav>
               <SignIn

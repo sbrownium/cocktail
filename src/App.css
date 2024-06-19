@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,25 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 100vh;
+  align-content: center;
+  align-items: flex-start;
 }
+#root footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100vw;
+    max-width: 500px;
+    align-items: center;
+}
+
+
