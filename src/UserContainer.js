@@ -58,7 +58,9 @@ export default function UserContainer ({
                 barID={barID}
             />
             }
-        {preferredName}
+            {preferredName &&
+        preferredName
+            }
         </div>
         </>   
     )
