@@ -156,7 +156,16 @@ function App() {
         <CocktalesLogo width='300px' fillColor='black'/>
         <UserProvider>
           {/* <SignIn users={users}/> */}
-          <RouterProvider router={router} />
+          {/* <RouterProvider router={router} /> */}
+          <Bar
+          bars={bars}  
+          users={users}
+          drinks={drinks}
+          comments={comments}
+          ratings={ratings}
+          handleToggle={handleToggle}
+          beingEditted={beingEditted}
+         />
           {/* <a href="https://github.com/sbrownium/cocktail">
             <GitHub width='24.5px' height='24px' fillColor='black'/>
           </a>
