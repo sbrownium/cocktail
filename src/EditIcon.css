@@ -1,0 +1,9 @@
+.hidden {
+    display: none;
+}
+
+button.edit {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

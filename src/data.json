@@ -1,0 +1,141 @@
+{
+"drinks": {
+    "-NpHWPZX3UPujdq_bWkx": {
+        "archived": false,
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+        "barID": "-Nr7lOhIhP11igBsjqOp",
+        "drinkName": "85% Euphoria",
+        "drinkID": "-NpHWPZX3UPujdq_bWkx",
+        "description": "Laphroaig, Brennevin Aquavit, Lemon, House-Made Cardamom Ginger Vanilla Syrup, Angostura Bitters",
+        "initialTimeStamp": 1712429843768,
+        "lastTimeStamp": 1712429843768,
+        "price": 17
+    },
+    "-NpHsYVvtj0emdOgk-Mo": {
+        "archived": false,
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+        "barID": "-Nr7lOhIhP11igBsjqOp",
+        "drinkName": "Earthly Tether",
+        "drinkID": "-NpHsYVvtj0emdOgk-Mo",
+        "description": "Maitake Mushroom Infused Bourbon, Cynar, House-Made Thyme Tincture, Black Walnut Bitters",
+        "initialTimeStamp": 1712429843600,
+        "lastTimeStamp": 1712429843600,
+        "price": 14
+    },
+    "-NpHrmTBbIekPIk0Fd89": {
+        "archived": false,
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+        "barID": "-NqtP2KgP0su3VWrXHaf",
+        "drinkName": "Booryoung",
+        "drinkID": "-NpHrmTBbIekPIk0Fd89",
+        "description": "High West Double Rye, Amargo Vallet, Amaro Brovo Kim, Banana, Honey, Angostura",
+        "initialTimeStamp": 1712429843100,
+        "lastTimeStamp": 1712429843100,
+        "price": 22
+    },
+    "-NpHs4DwzB9U8ka98ZFb":{
+        "archived": false,
+        "addedBy": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
+        "barID": "-NqtP2KgP0su3VWrXHaf",
+        "drinkName": "Sumnara",
+        "drinkID": "-NpHs4DwzB9U8ka98ZFb",
+        "description": "Haku Vodka, Jinro Ilpoom Soju, Vanilla, Coconut, Honey, Lemon, Matcha, Fever Tree Mediterranean Ginger Beer",
+        "initialTimeStamp": 1712429844400,
+        "lastTimeStamp": 1712429844400,
+        "price": 20
+    }},
+    "bars": {
+        "-Nr7lOhIhP11igBsjqOp": {
+            "archived": false,
+            "barName": "Stampede Cocktail Club",
+            "barID": "-Nr7lOhIhP11igBsjqOp",
+            "addedBy": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
+            "initialTimeStamp": 1712429843768,
+            "lastTimeStamp": 1712429843768
+        },
+        "-NqtP2KgP0su3VWrXHaf": {
+            "archived": false,
+            "barName": "Wero",
+            "barID": "-NqtP2KgP0su3VWrXHaf",
+            "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+            "initialTimeStamp": 1712429866572,
+            "lastTimeStamp": 1712429866572
+        },
+    "-NxVS5-2Ih6RDuWMmPcr": {
+        "archived": true,
+        "barName": "Bar Oso",
+        "barID": "-NxVS5-2Ih6RDuWMmPcr",
+        "addedBy": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+        "initialTimeStamp": 1715310191763,
+        "lastTimeStamp": 1715310191763
+    }},
+    "comments": {
+        "-NpI6y26xFs-j2y0M7r9": {
+                "userID": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
+                "drinkID": "-NpHsYVvtj0emdOgk-Mo",
+                "barID": "-Nr7lOhIhP11igBsjqOp",
+                "initialTimeStamp": 1712429881132,
+                "lastTimeStamp": 1712429881132,
+                "text": "A delicious old fashioned that feels syrupy but only a little sweet. I loved it!",
+                "commentID": "-NpI6y26xFs-j2y0M7r9"
+        },
+        "-NpI6yy8tu1V6qZvhqnK": {
+            "userID": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+            "drinkID": "-NpHsYVvtj0emdOgk-Mo",
+            "barID": "-Nr7lOhIhP11igBsjqOp",
+            "initialTimeStamp": 1706818796,
+            "lastTimeStamp": 1706818796,
+            "text": "I concur!",
+            "commentID":"-NpI6yy8tu1V6qZvhqnK"
+        },
+        "-NpI6znwoOwQ7kFoOAgU": {
+            "userID": "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
+            "barID": "-NqtP2KgP0su3VWrXHaf",
+            "drinkID": "-NpHrmTBbIekPIk0Fd89",
+            "initialTimeStamp": 1712429917760,
+            "lastTimeStamp": 1712429917760,
+            "text": "Cinnamon smell, not really banana, sweet Manhattan, served up. I like more than the Shim Bwat Da",
+            "commentID":"-NpI6znwoOwQ7kFoOAgU"
+        }},
+    "ratings": {
+        "-NpI6-yPif5j2y0M7r9": {
+            "rating": 4,
+            "userID": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+            "initialTimeStamp": 1712429936409,
+            "lastTimeStamp": 1712429936409,
+            "barID": "-NqtP2KgP0su3VWrXHaf",
+            "drinkID": "-NpHrmTBbIekPIk0Fd89",
+            "ratingID": "-NpI6-yPif5j2y0M7r9"
+        },
+        "-NpI6-yPif5j2y0M710": {
+            "rating": 2,
+            "userID": "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+            "initialTimeStamp": 1712429954891,
+            "lastTimeStamp": 1712429954891,
+            "drinkID": "-NpHsYVvtj0emdOgk-Mo",
+            "barID": "-Nr7lOhIhP11igBsjqOp",
+            "ratingID": "-NpI6-yPif5j2y0M710"
+        }
+    },
+    "usersPublic": {    
+        "-Nx4BqRgWYzLCiNZu0db": {
+            "preferredName": "Scott",
+            "userID" : "0MQKnC8zA3W81GAT6gfVfrdLkQD2"
+        },
+        "-NuevnlTv6iyzS0FuxxP": {
+            "preferredName": "Jessica",
+            "userID" : "CwtQ51DnbjaPn0ndYplJUOE4rsH2"
+    }
+},
+"usersPrivate": {    
+        "-Nx4BqRgWYzLCiNZu0ed": {
+            "email": "brownscottbrown@gmail.com",
+            "userID" : "0MQKnC8zA3W81GAT6gfVfrdLkQD2",
+            "userName":"Scott Brown"
+        },
+        "-NuevnlTv6iyzS0Fuxfy": {
+            "email": "jessicascottseattle@gmail.com",
+            "userID" : "CwtQ51DnbjaPn0ndYplJUOE4rsH2",
+            "userName":"Jessica And Scott Wicksnin Brown"
+    }
+}}
