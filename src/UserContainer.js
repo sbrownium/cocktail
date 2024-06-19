@@ -37,7 +37,8 @@ export default function UserContainer ({
             emojiLookUp={emojiLookUp}
           />
         }
-        {(filteredComments.filter(comment => comment.userID === userID).length !== 0)  &&    
+        {(filteredComments.filter(comment => comment.userID === userID).length !== 0)  &&  
+        // currently only can only show one comment per user  
         <Comment
             filteredComments={filteredComments}
             drinkID={drinkID}
