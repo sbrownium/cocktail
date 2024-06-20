@@ -153,7 +153,7 @@ function App() {
     )
   );
   return (
-    <>  
+    
         <>
         <UserProvider>
         <body>
@@ -174,7 +174,6 @@ function App() {
               beingEditted={beingEditted}
           />
           </main>
-        
          <footer>
             <nav>
               <SignIn
@@ -198,7 +197,7 @@ function App() {
           </a> */}
         </UserProvider>
         </>
-    </>
+ 
   )
 }
 export default App;
