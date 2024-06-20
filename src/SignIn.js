@@ -37,17 +37,22 @@ const auth = getAuth();
 signInWithPopup(auth, provider)
   .then((result) => {    
     const currentUser = {
-            email: result.user.email,
             preferredName: findPreferredName(result.user.displayName),
-            userID: result.user.uid,
-            userName: result.user.displayName
-          }  
+            userID: result.user.uid
+          };
+    const newUserPrivate = {
+      email: result.user.email,
+      userID: result.user.uid,
+      userName: result.user.displayName
+    }        
           setUser(currentUser);
           const existingUser = usersArray.find((u) => u.userID === currentUser.userID )
       if (!existingUser) {
-      const newUserKey = push(child(ref(db), '/users/')).key;
+      const newUserPublicKey = push(child(ref(db), '/usersPublic/')).key;
+      const newUserPrivateKey = push(child(ref(db), '/usersPrivate/')).key;
       const updates = {};
-      updates['/users/' + newUserKey] = currentUser;
+      updates['/usersPublic/' + newUserPublicKey] = currentUser;
+      // updates['/usersPrivate/' + newUserPrivateKey] = newUserPrivate;
   return (
       update(ref(db), updates).then(() => {
           console.log('Data saved successfully!');
