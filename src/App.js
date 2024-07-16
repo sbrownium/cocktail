@@ -160,6 +160,9 @@ function App() {
         <body>
         <header>
           <CocktalesLogo
+          // use logo and text props to define how much of the logo is used
+            logo='yes'
+            text='yes'
             width='300px'
             liquidColor='#7A00FF'
             textColorStop1='#FF00FF'
