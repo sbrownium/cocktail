@@ -1,3 +1,7 @@
+.barContainer {
+    display: flex;
+    flex-direction: column;
+}
 .controlsContainer {
     display: flex;
     flex-direction: row;

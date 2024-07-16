@@ -79,7 +79,7 @@ export default function Bar({
   const filteredBar = barsArray.filter(bar => bar.barID === selectedBar);
   const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar)
     return (
-      <>
+      <div className="barContainer">
       <ul>
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
             return (
@@ -186,7 +186,7 @@ export default function Bar({
         {!showBarArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
       </Button>}
       </div>
-      </>
+      </div>
     );
   }
   

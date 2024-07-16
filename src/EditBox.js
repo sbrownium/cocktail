@@ -1,16 +1,19 @@
 import React from "react";
+import './EditBox.css'
 
 export default function EditBox({
   className,
   edit,
   handleEdit,
-  id
+  id,
+  textareaRef
 }){
     return (    
-      <input
+      <textarea
           id={id}
           className={className}
-          size={edit.length}
+          ref={textareaRef}
+          // size={edit.length}
           type='text'
           value={edit}
           onChange={handleEdit}

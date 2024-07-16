@@ -43,6 +43,7 @@ function App() {
   const [errorRatings, setErrorRatings] = useState(null);
   const [errorUsers, setErrorUsers] = useState(null);
   const [beingEditted, setBeingEditted] = useState(false); //editing state
+
   
   // turns editting state on or off
   function handleToggle () {
@@ -158,7 +159,16 @@ function App() {
         <UserProvider>
         <body>
         <header>
-          <CocktalesLogo width='300px' fillColor='black'/>
+          <CocktalesLogo
+            width='300px'
+            liquidColor='#7A00FF'
+            textColorStop1='#FF00FF'
+            textColorStop2='#7A00FF'
+            textColorStop3='#0000FF'
+            tailColor='#FF00FF'
+            tipColor='white'
+            glassColor='#FF00FF'  
+          />
         </header>
           {/* <SignIn users={users}/> */}
           {/* <RouterProvider router={router} /> */}
