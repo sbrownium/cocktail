@@ -1,0 +1,8 @@
+.drinkNameContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}
+.drinkNameContainer h2 {
+    margin: 0 .125em 0 0;
+}

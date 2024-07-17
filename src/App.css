@@ -18,7 +18,6 @@ main {
 
 footer {
   background: whitesmoke;
-  padding: .5em .75em; 
   position: fixed;
   bottom: 0;
   margin: 1em 0 0;
@@ -29,6 +28,7 @@ footer nav {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  padding: 1em; 
   width: 100vw;
   max-width: 500px;
 }

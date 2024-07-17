@@ -4,8 +4,8 @@ import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
-import FilterIcon from './FilterIcon';
-import XIcon from './XIcon';
+import OliveFilterIcon from './OliveFilterIcon';
+import OliveXIcon from './OliveXIcon';
 
 
 export default function DrinkList({
@@ -196,10 +196,8 @@ const sortedDrinks = useMemo(() => {
       {showFilter ?
       <>
        <Button className='edit icon' handleClick={toggleFilter}>
-          <XIcon
-            width='22px'
-            height='22px'
-            fill='black'
+          <OliveXIcon
+            width='35px'
           />
         </Button>
       <Order
@@ -217,10 +215,8 @@ const sortedDrinks = useMemo(() => {
       </> :
       <>
         <Button className='edit icon' handleClick={toggleFilter}>
-          <FilterIcon
-            width='25px'
-            height='25px'
-            fill='black'
+          <OliveFilterIcon
+            width='45px'
             />
         </Button>
       </>

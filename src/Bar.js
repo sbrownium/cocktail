@@ -136,7 +136,9 @@ export default function Bar({
                   handleToggle={handleToggle}
                 /> }
                 </> :
-                <h1>{barName}</h1>
+                <div className="barNameContainer">
+                  <h1>{barName}</h1>
+                </div>
                 }
                 <DrinkList
                   barID={barID}

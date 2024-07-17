@@ -11,6 +11,7 @@ import DeleteButton from './DeleteButton.js';
 // import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
 import Unarchive from './Unarchive.js';
 import FeedbackList from './FeedbackList.js';
+import './Drink.css';
 
 
 export default function Drink({
@@ -161,22 +162,21 @@ return (
              </>   
             :
             <> 
-            <div>  
-            {drinkName}
-            &nbsp;
-            <AverageRating
-              emojiLookUp={emojiLookUp}
-              ratings={ratings}
-              ratingDrinkID={drinkID}
-            />
-              </div>   
+            <div className='drinkNameContainer'>
+              <h2>{drinkName}</h2>
+              <AverageRating
+                emojiLookUp={emojiLookUp}
+                ratings={ratings}
+                ratingDrinkID={drinkID}
+              />
+             </div> 
             {description} &mdash;
             ${Number(price).toFixed(2)}
             </>
             }
             {(archived && user && beingEditted) &&
             <>    
-            {drinkName} &mdash;&nbsp;
+            <h2>{drinkName}</h2> &mdash;&nbsp;
             {description} &mdash;
             ${Number(price).toFixed(2)}
             <Unarchive
