@@ -4,8 +4,8 @@ import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
-import OliveFilterIcon from './OliveFilterIcon';
-import OliveXIcon from './OliveXIcon';
+// import OliveFilterIcon from './OliveFilterIcon';
+// import OliveXIcon from './OliveXIcon';
 
 
 export default function DrinkList({
@@ -16,13 +16,15 @@ export default function DrinkList({
     barsDrinks,
     ratings,
     handleToggle,
-    users
+    users,
+    // toggleFilter,
+    showFilter
 }){
   const [user] = useContext(UserContext);
   const {userID} = user;
   const [checked, setChecked] = useState('Date Added');
   const [showDrinkArchive, setShowDrinkArchive] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
+  // const [showFilter, setShowFilter] = useState(false);
   
   const initialFilter = {
     topRated: null,
@@ -44,9 +46,9 @@ export default function DrinkList({
     setShowDrinkArchive(showDrinkArchive => !showDrinkArchive)
   }
 
-  function toggleFilter () {
-    setShowFilter(showFilter => !showFilter)
-  }
+  // function toggleFilter () {
+  //   setShowFilter(showFilter => !showFilter)
+  // }
 
   function alphaSort (a,b) {
     const c = a.drinkName.toLowerCase();
@@ -193,13 +195,13 @@ const sortedDrinks = useMemo(() => {
 }, [barsDrinks, showDrinkArchive, beingEditted, checked, filterChecked, filteredComments, myfilteredComments]);
     return (
       <>
-      {showFilter ?
+      {showFilter &&
       <>
-       <Button className='edit icon' handleClick={toggleFilter}>
+       {/* <Button className='edit icon' handleClick={toggleFilter}>
           <OliveXIcon
             width='35px'
           />
-        </Button>
+        </Button> */}
       <Order
         checked={checked}
         handleChange={handleChange}
@@ -212,14 +214,14 @@ const sortedDrinks = useMemo(() => {
         comments={comments}
         barID={barID}
       />
-      </> :
-      <>
-        <Button className='edit icon' handleClick={toggleFilter}>
-          <OliveFilterIcon
-            width='45px'
-            />
-        </Button>
-      </>
+      </> 
+      // <>
+      //   <Button className='edit icon' handleClick={toggleFilter}>
+      //     <OliveFilterIcon
+      //       width='45px'
+      //       />
+      //   </Button>
+      // </>
 }
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 

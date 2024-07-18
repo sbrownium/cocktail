@@ -11,6 +11,8 @@ import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
 import EditBox from "./EditBox.js";
 import './Bar.css';
+import OliveXIcon from "./OliveXIcon.js";
+import OliveFilterIcon from "./OliveFilterIcon.js";
 
 
 
@@ -24,15 +26,19 @@ export default function Bar({
   handleToggle
 }) {
   const [user] = useContext(UserContext);
-  
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
   const [editBarName, setEditBarName] = useState('');
+  const [showFilter, setShowFilter] = useState(false);
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive)
+  }
+
+  function toggleFilter () {
+    setShowFilter(showFilter => !showFilter)
   }
 
   function handleNewDrinkToggle () {
@@ -138,6 +144,20 @@ export default function Bar({
                 </> :
                 <div className="barNameContainer">
                   <h1>{barName}</h1>
+                  {showFilter ?
+                  <Button className='edit icon' handleClick={toggleFilter}>
+                    <OliveXIcon
+                      width='35px'
+                    />
+                  </Button> : 
+                  <>
+                  <Button className='edit icon' handleClick={toggleFilter}>
+                    <OliveFilterIcon
+                      width='45px'
+                      />
+                  </Button>
+                </>
+                  }
                 </div>
                 }
                 <DrinkList
@@ -148,6 +168,8 @@ export default function Bar({
                   users={users}
                   handleToggle={handleToggle}
                   beingEditted={beingEditted}
+                  // toggleFilter={toggleFilter}
+                  showFilter={showFilter}
                 />
               </li>
             );
