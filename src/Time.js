@@ -52,9 +52,9 @@ export default function Time ({initialTimeStamp}) {
     }
           
     return (
-        <>
+        <time>
             {timeSince}<sup>{suffix}</sup>
-        </>
+        </time> 
     )              
 }
   

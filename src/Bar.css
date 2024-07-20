@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: column;
 }
+.barNameContainer,
 .controlsContainer {
     display: flex;
     flex-direction: row;
+}
+.barNameContainer button {
+    margin: .5em 0 0 2em;
 }

@@ -1,7 +1,15 @@
 import React from 'react';
 import './BarSelector.css';
 
-export default function BarSelector({bars, newDrink, validation, handleExistingBar, focusSelector, defaultBarID, defaultBarName}) {
+export default function BarSelector({
+  bars,
+  newDrink,
+  validation,
+  handleExistingBar,
+  focusSelector,
+  defaultBarID,
+  defaultBarName
+}) {
     const barsArray = Object.values(bars);
     const uniqueBars = new Set();
     uniqueBars.add(defaultBarID);

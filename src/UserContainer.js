@@ -3,6 +3,7 @@ import Comment from "./Comment";
 import UserRating from "./UserRating";
 import { UserContext } from "./UserContext";
 import NewComment from "./NewComment";
+import "./UserContainer.css";
 
 export default function UserContainer ({
     archived,

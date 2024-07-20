@@ -4,28 +4,23 @@ import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
-// import OliveFilterIcon from './OliveFilterIcon';
-// import OliveXIcon from './OliveXIcon';
-
 
 export default function DrinkList({
+    barName,
     barID,
     beingEditted,
     comments,
-    // drinks,
     barsDrinks,
     ratings,
     handleToggle,
     users,
-    // toggleFilter,
     showFilter
 }){
   const [user] = useContext(UserContext);
   const {userID} = user;
   const [checked, setChecked] = useState('Date Added');
   const [showDrinkArchive, setShowDrinkArchive] = useState(false);
-  // const [showFilter, setShowFilter] = useState(false);
-  
+
   const initialFilter = {
     topRated: null,
     withComments: null,
@@ -45,10 +40,6 @@ export default function DrinkList({
   function toggleShowDrinkArchive () {
     setShowDrinkArchive(showDrinkArchive => !showDrinkArchive)
   }
-
-  // function toggleFilter () {
-  //   setShowFilter(showFilter => !showFilter)
-  // }
 
   function alphaSort (a,b) {
     const c = a.drinkName.toLowerCase();
@@ -197,11 +188,6 @@ const sortedDrinks = useMemo(() => {
       <>
       {showFilter &&
       <>
-       {/* <Button className='edit icon' handleClick={toggleFilter}>
-          <OliveXIcon
-            width='35px'
-          />
-        </Button> */}
       <Order
         checked={checked}
         handleChange={handleChange}
@@ -215,14 +201,8 @@ const sortedDrinks = useMemo(() => {
         barID={barID}
       />
       </> 
-      // <>
-      //   <Button className='edit icon' handleClick={toggleFilter}>
-      //     <OliveFilterIcon
-      //       width='45px'
-      //       />
-      //   </Button>
-      // </>
 }
+<h1>{barName}</h1>
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li key={index}>

@@ -65,7 +65,6 @@ export default function Comment ({
     };
     
 return (
-  
         <li key={index} id={commentID}>
             {(beingEditted && userID === user.userID) ? 
             <>

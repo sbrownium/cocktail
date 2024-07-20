@@ -3,6 +3,7 @@ import NewComment from './NewComment';
 import { UserContext } from './UserContext';
 import UserContainer from './UserContainer';
 import NewRating from './NewRating';
+import './FeedBackList.css'
 
 export default function FeedbackList({
   comments,
@@ -49,7 +50,7 @@ export default function FeedbackList({
     return (
       <ul>
         {uniqueIDs.map((userID, index) => (
-          <li key={index}>
+          <li className="userContainer" key={index}>
             <UserContainer
                 archived={archived}
                 barID={barID}
