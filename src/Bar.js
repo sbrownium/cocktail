@@ -13,6 +13,7 @@ import EditBox from "./EditBox.js";
 import './Bar.css';
 import OliveXIcon from "./OliveXIcon.js";
 import OliveFilterIcon from "./OliveFilterIcon.js";
+import TimeOfDay from "./TimeOfDay.js";
 
 
 
@@ -35,6 +36,11 @@ export default function Bar({
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive)
+    // resets if an archived bar is selected when hide archived bars is fired
+    // checks to make sure a bar is showing before checking if it is archived
+    if (showingBar && (Object.values(bars).filter(bar => bar.barID === selectedBar)[0].archived === true)) {
+      setShowingBar(false)
+    }
   }
 
   function toggleFilter () {
@@ -89,6 +95,7 @@ export default function Bar({
       <ul>
         <li>
         <div className="controlsContainer">
+          {!showingBar && <TimeOfDay/>}
         {showingBar &&
         <>  
         {showFilter ?
