@@ -16,6 +16,7 @@ import GitHub from './GitHub.js';
 import CocktalesLogo from './CocktalesLogo.js';
 import LinkedIn from './LinkedIn.js';
 import './App.css';
+import EmojiLogo from './EmojiLogo.js';
 
 // import { UserContext } from './UserContext';
 
@@ -159,7 +160,7 @@ function App() {
         <UserProvider>
         <body>
         <header>
-          <CocktalesLogo
+          {/* <CocktalesLogo
           // use logo and text props to define how much of the logo is used
             logo='yes'
             text='yes'
@@ -171,7 +172,13 @@ function App() {
             tailColor='#FF00FF'
             tipColor='white'
             glassColor='#FF00FF'  
-          />
+          /> */}
+          <EmojiLogo
+          // use logo and text props to define how much of the logo is used
+            logo='yes'
+            text='yes'
+            width='300px'
+            />
         </header>
           {/* <SignIn users={users}/> */}
           {/* <RouterProvider router={router} /> */}

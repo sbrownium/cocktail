@@ -16,7 +16,8 @@ export default function TimeOfDay () {
         } if ((hours >= 12) && (hours <= 17)) {
             setDayPart('this afternoon');
             // 6:00 pm - 4:59 am
-        } if ((hours >= 18) && (hours <= 4)) {
+        } else {
+        //  if ((hours >= 18) || (hours <= 4)) {
             setDayPart('tonight');
         }
     }, [])
