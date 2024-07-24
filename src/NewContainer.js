@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import { UserContext } from './UserContext.js';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
@@ -26,7 +26,12 @@ export default function NewContainer (
     const [missingAlert, setMissingAlert] = useState(false);
     const barsArray = Object.values(bars);
     const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
-    const defaultBarName = defaultBarObj[0].barName;
+    // checks if a bar is already selected
+    const defaultBarName = useMemo(()=> {
+        if (defaultBar !== '') {
+            return defaultBarObj[0].barName;
+           }
+    },[defaultBar])
     const initialValidation = {
         needsDrinkName: false,
         needsBarName: false,
@@ -48,9 +53,9 @@ export default function NewContainer (
     }
     const [newDrink, setNewDrink] = useState(initialNewDrink);
     const [validation, setValidation] = useState(initialValidation);
+
+
     
-
-
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
             setNewDrink({

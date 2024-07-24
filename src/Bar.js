@@ -24,12 +24,15 @@ export default function Bar({
   ratings,
   users,
   beingEditted,
-  handleToggle
+  handleToggle,
+  selectedBar,
+  setSelectedBar,
+  handleClick
 }) {
   const [user] = useContext(UserContext);
   const [showBarArchive, setShowBarArchive] = useState(false);
-  const [selectedBar, setSelectedBar] = useState('');
-  const [showNewDrink, setShowNewDrink] = useState(false);
+  // const [selectedBar, setSelectedBar] = useState('');
+  // const [showNewDrink, setShowNewDrink] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
@@ -47,9 +50,9 @@ export default function Bar({
     setShowFilter(showFilter => !showFilter)
   }
 
-  function handleNewDrinkToggle () {
-    setShowNewDrink(showNewDrink => !showNewDrink)
-  }
+  // function handleNewDrinkToggle () {
+  //   setShowNewDrink(showNewDrink => !showNewDrink)
+  // }
 
   function handleBarNameEdit (e) {
     e.preventDefault();
@@ -77,10 +80,10 @@ export default function Bar({
     }
     }; 
     
-  function handleClick (e) {
-    e.preventDefault();
-    handleNewDrinkToggle();
-  } 
+  // function handleClick (e) {
+  //   e.preventDefault();
+  //   handleNewDrinkToggle();
+  // } 
   const barsArray = useMemo(() => {
   if (showBarArchive) {
     return Object.values(bars)
@@ -94,8 +97,8 @@ export default function Bar({
       <div className="barContainer"> 
       <ul>
         <li>
-        <div className="controlsContainer">
-          {!showingBar && <TimeOfDay/>}
+        {!showingBar && <TimeOfDay/>}
+        <div className="controlsContainer"> 
         {showingBar &&
         <>  
         {showFilter ?
@@ -208,7 +211,7 @@ export default function Bar({
         beingEditted={beingEditted}
         filteredBar={filteredBar}
       />
-      {showNewDrink ? 
+      {/* {showNewDrink ? 
        <NewContainer
         users={users}
         bars={bars}
@@ -222,7 +225,7 @@ export default function Bar({
       <Button handleClick={handleClick} className='icon'>
         +<DrinkIcon width='24' height='24' fill='grey'/>
       </Button>
-      }
+      } */}
       </>
       }
       </div>

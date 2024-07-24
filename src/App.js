@@ -17,6 +17,9 @@ import CocktalesLogo from './CocktalesLogo.js';
 import LinkedIn from './LinkedIn.js';
 import './App.css';
 import EmojiLogo from './EmojiLogo.js';
+import NewContainer from './NewContainer.js';
+import Button from './Button.js';
+import DrinkIcon from './DrinkIcon.js';
 
 // import { UserContext } from './UserContext';
 
@@ -44,12 +47,22 @@ function App() {
   const [errorRatings, setErrorRatings] = useState(null);
   const [errorUsers, setErrorUsers] = useState(null);
   const [beingEditted, setBeingEditted] = useState(false); //editing state
+  const [selectedBar, setSelectedBar] = useState('');
+  const [showNewDrink, setShowNewDrink] = useState(false);
 
   
   // turns editting state on or off
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted); 
     }
+
+    function handleNewDrinkToggle () {
+      setShowNewDrink(showNewDrink => !showNewDrink)
+    } 
+    function handleClick (e) {
+      e.preventDefault();
+      handleNewDrinkToggle();
+    } 
 
   useEffect(() => {
     const barsRef = ref(db, 'bars');
@@ -192,7 +205,25 @@ function App() {
               ratings={ratings}
               handleToggle={handleToggle}
               beingEditted={beingEditted}
+              selectedBar={selectedBar}
+              setSelectedBar={setSelectedBar}
+              handleClick={handleClick}
           />
+          {showNewDrink ? 
+       <NewContainer
+        users={users}
+        bars={bars}
+        drinks={drinks}
+        comments={comments}
+        handleNewDrinkToggle={handleNewDrinkToggle} 
+        defaultBar={selectedBar}
+        setSelectedBar={setSelectedBar}
+      />
+       :
+      <Button handleClick={handleClick} className='icon'>
+        +<DrinkIcon width='24' height='24' fill='grey'/>
+      </Button>
+      }
           </main>
          <footer>
             <nav>
