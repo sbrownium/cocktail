@@ -49,6 +49,12 @@ textarea {
   border-radius: 4px;
   /* overflow: hidden; */
 }
+.drinkButton {
+  background: #00ffd1;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
 
 
 

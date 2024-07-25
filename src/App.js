@@ -20,6 +20,7 @@ import EmojiLogo from './EmojiLogo.js';
 import NewContainer from './NewContainer.js';
 import Button from './Button.js';
 import DrinkIcon from './DrinkIcon.js';
+import TropicalDrinkIcon from './TropicalDrinkIcon.js';
 
 // import { UserContext } from './UserContext';
 
@@ -220,8 +221,9 @@ function App() {
         setSelectedBar={setSelectedBar}
       />
        :
-      <Button handleClick={handleClick} className='icon'>
-        +<DrinkIcon width='24' height='24' fill='grey'/>
+      <Button handleClick={handleClick} className='icon drinkButton'>
+        <TropicalDrinkIcon width='80px'/>
+        {/* +<DrinkIcon width='24' height='24' fill='grey'/> */}
       </Button>
       }
           </main>
