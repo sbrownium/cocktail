@@ -28,6 +28,8 @@ export default function Bar({
   selectedBar,
   setSelectedBar,
   handleClick
+  // showingBar,
+  // setShowingBar
 }) {
   const [user] = useContext(UserContext);
   const [showBarArchive, setShowBarArchive] = useState(false);
@@ -38,11 +40,11 @@ export default function Bar({
   const [showFilter, setShowFilter] = useState(false);
 
   function toggleShowBarArchive () {
-    setShowBarArchive(showBarArchive => !showBarArchive)
+    setShowBarArchive(showBarArchive => !showBarArchive);
     // resets if an archived bar is selected when hide archived bars is fired
     // checks to make sure a bar is showing before checking if it is archived
     if (showingBar && (Object.values(bars).filter(bar => bar.barID === selectedBar)[0].archived === true)) {
-      setShowingBar(false)
+      setShowingBar(false);
     }
   }
 

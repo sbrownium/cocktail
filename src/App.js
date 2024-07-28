@@ -50,6 +50,7 @@ function App() {
   const [beingEditted, setBeingEditted] = useState(false); //editing state
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
+  // const [showingBar, setShowingBar] = useState(false);
 
   
   // turns editting state on or off
@@ -64,6 +65,12 @@ function App() {
       e.preventDefault();
       handleNewDrinkToggle();
     } 
+
+    function reset (e) {
+      e.preventDefault();
+      setSelectedBar('');
+      setBeingEditted(false);
+    }
 
   useEffect(() => {
     const barsRef = ref(db, 'bars');
@@ -162,6 +169,8 @@ function App() {
           ratings={ratings}
           handleToggle={handleToggle}
           beingEditted={beingEditted}
+          // showingBar={showingBar}
+          // setShowingBar={setShowingBar}
          />} />
         <Route path="/Account" element={<Account />} />
       </Route>
@@ -187,12 +196,14 @@ function App() {
             tipColor='white'
             glassColor='#FF00FF'  
           /> */}
+          <Button handleClick={reset} className='icon'>
           <EmojiLogo
           // use logo and text props to define how much of the logo is used
             logo='yes'
             text='yes'
             width='300px'
             />
+            </Button>
         </header>
           {/* <SignIn users={users}/> */}
           {/* <RouterProvider router={router} /> */}
@@ -222,6 +233,7 @@ function App() {
       />
        :
       <Button handleClick={handleClick} className='icon drinkButton'>
+        🍹
         <TropicalDrinkIcon width='80px'/>
         {/* +<DrinkIcon width='24' height='24' fill='grey'/> */}
       </Button>
