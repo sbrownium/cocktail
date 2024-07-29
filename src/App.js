@@ -19,19 +19,11 @@ import './App.css';
 import EmojiLogo from './EmojiLogo.js';
 import NewContainer from './NewContainer.js';
 import Button from './Button.js';
-import DrinkIcon from './DrinkIcon.js';
-import TropicalDrinkIcon from './TropicalDrinkIcon.js';
 
-// import { UserContext } from './UserContext';
 
 
 
 function App() {
-  // const [data, setData] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-  // const [user] = useContext(UserContext);
-
   const [bars, setBars] = useState(null);
   const [drinks, setDrinks] = useState(null);
   const [comments, setComments] = useState(null);
@@ -50,8 +42,8 @@ function App() {
   const [beingEditted, setBeingEditted] = useState(false); //editing state
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
-  // const [showingBar, setShowingBar] = useState(false);
-
+  const [showBars, setShowBars] = useState(false);
+  const [showBarsOption, setShowBarsOption] = useState(true);
   
   // turns editting state on or off
   function handleToggle () {
@@ -64,12 +56,20 @@ function App() {
     function handleClick (e) {
       e.preventDefault();
       handleNewDrinkToggle();
+      setShowBarsOption(false);
     } 
 
-    function reset (e) {
+    function handleReset (e) {
       e.preventDefault();
       setSelectedBar('');
       setBeingEditted(false);
+      setShowNewDrink(false);
+      setShowBars(false);
+      setShowBarsOption(true);
+    }
+
+    function handleToGoBars () {
+      setShowBars(showBars => !showBars);
     }
 
   useEffect(() => {
@@ -196,7 +196,7 @@ function App() {
             tipColor='white'
             glassColor='#FF00FF'  
           /> */}
-          <Button handleClick={reset} className='icon'>
+          <Button handleClick={handleReset} className='icon'>
           <EmojiLogo
           // use logo and text props to define how much of the logo is used
             logo='yes'
@@ -205,10 +205,15 @@ function App() {
             />
             </Button>
         </header>
-          {/* <SignIn users={users}/> */}
-          {/* <RouterProvider router={router} /> */}
           
             <main>
+              <div className='initialSelectionContainer'>
+              {/* {showBarsOption &&
+              <> */}
+              {!showBars ?
+            <Button handleClick={handleToGoBars} className={!showBars ? 'icon barButton initialSelect' : 'icon barButton'}>
+            🪩
+            </Button> :
             <Bar
               bars={bars}  
               users={users}
@@ -220,7 +225,9 @@ function App() {
               selectedBar={selectedBar}
               setSelectedBar={setSelectedBar}
               handleClick={handleClick}
-          />
+          />}
+          {/* </>
+              } */}
           {showNewDrink ? 
        <NewContainer
         users={users}
@@ -232,12 +239,13 @@ function App() {
         setSelectedBar={setSelectedBar}
       />
        :
-      <Button handleClick={handleClick} className='icon drinkButton'>
-        🍹
-        <TropicalDrinkIcon width='80px'/>
+      <Button handleClick={handleClick} className={!showBars ? 'icon drinkButton initialSelect' : 'icon drinkButton'}>
+        +🍹
+        {/* <TropicalDrinkIcon width='80px'/> */}
         {/* +<DrinkIcon width='24' height='24' fill='grey'/> */}
       </Button>
       }
+      </div>
           </main>
          <footer>
             <nav>

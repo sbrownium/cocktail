@@ -49,11 +49,38 @@ textarea {
   border-radius: 4px;
   /* overflow: hidden; */
 }
+.drinkButton,
+.barButton {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 2em;
+}
 .drinkButton {
   background: #00ffd1;
-  border-radius: 50%;
+  letter-spacing: -.25rem;
+  padding: 0 .25rem 0 0;
+}
+.barButton {
+  background: #0055ff;
+}
+.drinkButton.initialSelect {
+  letter-spacing: -1rem;
+  padding: 0 1rem 0 0;
+}
+.initialSelect {
+  font-size: 8em;
   width: 200px;
   height: 200px;
+}
+.initialSelectionContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.initialSelectionContainer button{
+  margin: 1rem;
 }
 
 
