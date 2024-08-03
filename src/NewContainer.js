@@ -9,15 +9,18 @@ import Submit from './Submit.js';
 import Button from './Button.js';
 // import Alert from './Alert.js';
 import SignIn from './SignIn.js';
+import './NewContainer.css';
 
 
-export default function NewContainer (
-    {bars,
+export default function NewContainer ({
+    bars,
     drinks,
     users,
     handleNewDrinkToggle,
     defaultBar,
-    setSelectedBar
+    setSelectedBar,
+    newDrinkRef
+    // closeModal
 }) {
     const [user] = useContext(UserContext);
     const { userID } = user
@@ -421,6 +424,7 @@ export default function NewContainer (
     }    
     return (
         <>
+        <dialog ref={newDrinkRef} className='overlay'>
             <form>
                 <BarSelector
                     bars={bars}
@@ -482,7 +486,7 @@ export default function NewContainer (
             </Button> 
             </>
             }
-            
+           </dialog> 
        </>
     )         
 }

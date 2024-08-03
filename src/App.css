@@ -82,6 +82,9 @@ textarea {
 .initialSelectionContainer button{
   margin: 1rem;
 }
+.backgroundOverlay {
+  background: #ccc;
+}
 
 
 

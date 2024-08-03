@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserProvider } from './UserContext';
@@ -13,7 +13,6 @@ import {
 import RootLayout from './RootLayout.js';
 import Account from './Account.js';
 import GitHub from './GitHub.js';
-import CocktalesLogo from './CocktalesLogo.js';
 import LinkedIn from './LinkedIn.js';
 import './App.css';
 import EmojiLogo from './EmojiLogo.js';
@@ -44,15 +43,32 @@ function App() {
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showBars, setShowBars] = useState(false);
   const [showBarsOption, setShowBarsOption] = useState(true);
-  
+  const newDrinkRef = useRef(null);
+
+
+function openModal (modal) {
+    modal.current.showModal();
+}
+ 
+function closeModal (modal) {
+  modal.current.close();
+}
   // turns editting state on or off
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted); 
-    }
+  }
 
-    function handleNewDrinkToggle () {
-      setShowNewDrink(showNewDrink => !showNewDrink)
+  function handleNewDrinkToggle () {
+      if (!newDrinkRef.current.open) {
+        openModal(newDrinkRef); // open modal
+        setShowNewDrink(true); // hide button
+      } 
+      else {
+        closeModal(newDrinkRef); // close modal
+        setShowNewDrink(false); // show button
+      }
     } 
+
     function handleClick (e) {
       e.preventDefault();
       handleNewDrinkToggle();
@@ -182,20 +198,8 @@ function App() {
         <>
         <UserProvider>
         <body>
+          <div className='backgroundOverlay'></div>
         <header>
-          {/* <CocktalesLogo
-          // use logo and text props to define how much of the logo is used
-            logo='yes'
-            text='yes'
-            width='300px'
-            liquidColor='#7A00FF'
-            textColorStop1='#FF00FF'
-            textColorStop2='#7A00FF'
-            textColorStop3='#0000FF'
-            tailColor='#FF00FF'
-            tipColor='white'
-            glassColor='#FF00FF'  
-          /> */}
           <Button handleClick={handleReset} className='icon'>
           <EmojiLogo
           // use logo and text props to define how much of the logo is used
@@ -208,8 +212,6 @@ function App() {
           
             <main>
               <div className='initialSelectionContainer'>
-              {/* {showBarsOption &&
-              <> */}
               {!showBars ?
             <Button handleClick={handleToGoBars} className={!showBars ? 'icon barButton initialSelect' : 'icon barButton'}>
             🪩
@@ -226,10 +228,9 @@ function App() {
               setSelectedBar={setSelectedBar}
               handleClick={handleClick}
           />}
-          {/* </>
-              } */}
-          {showNewDrink ? 
        <NewContainer
+       newDrinkRef={newDrinkRef}
+       closeModal={closeModal}
         users={users}
         bars={bars}
         drinks={drinks}
@@ -238,11 +239,9 @@ function App() {
         defaultBar={selectedBar}
         setSelectedBar={setSelectedBar}
       />
-       :
+       {!showNewDrink &&
       <Button handleClick={handleClick} className={!showBars ? 'icon drinkButton initialSelect' : 'icon drinkButton'}>
         +🍹
-        {/* <TropicalDrinkIcon width='80px'/> */}
-        {/* +<DrinkIcon width='24' height='24' fill='grey'/> */}
       </Button>
       }
       </div>
@@ -261,13 +260,8 @@ function App() {
               </a>
             </nav>
          </footer>
+         
          </body>
-          {/* <a href="https://github.com/sbrownium/cocktail">
-            <GitHub width='24.5px' height='24px' fillColor='black'/>
-          </a>
-          <a href="https://linkedin.com/in/sbrownium">
-            <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
-          </a> */}
         </UserProvider>
         </>
  
