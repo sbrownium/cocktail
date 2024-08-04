@@ -10,6 +10,7 @@ import Button from './Button.js';
 // import Alert from './Alert.js';
 import SignIn from './SignIn.js';
 import './NewContainer.css';
+import XIcon from './XIcon.js';
 
 
 export default function NewContainer ({
@@ -425,6 +426,14 @@ export default function NewContainer ({
     return (
         <>
         <dialog ref={newDrinkRef} className='overlay'>
+            <div className='buttonHolder'>
+                <Button className='modalBtn' handleClick={handleNewDrinkToggle}>
+                    <XIcon
+                    height='1.25rem'
+                    fillColor='blue'
+                    />
+                </Button>
+            </div>
             <form>
                 <BarSelector
                     bars={bars}
@@ -452,12 +461,14 @@ export default function NewContainer ({
                     focusPrice={focusPrice}
                 />
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
-                <Submit handleClick={handleClick} value='add'/>
-              
+                <fieldset className='formButtons'>
+                    <Submit className='positive' handleClick={handleClick} value='Add'/>
+                    <Button className='negative' handleClick={handleNewDrinkToggle}>
+                        Never Mind
+                    </Button>
+                </fieldset>
             </form>
-            <Button className={null} handleClick={handleNewDrinkToggle}>
-                Never Mind
-            </Button>
+           
 
             {(logInAlert && !user) && // user conditional removes alert after signin 
             <>
