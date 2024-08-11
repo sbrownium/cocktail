@@ -100,7 +100,7 @@ export default function Bar({
       <ul>
         <li>
         {!showingBar && <TimeOfDay/>}
-        <div className="controlsContainer"> 
+        <div className={!showingBar ? "noBars controlsContainer" : "controlsContainer"}> 
         {showingBar &&
         <>  
         {showFilter ?
@@ -118,18 +118,21 @@ export default function Bar({
           }
           </>}
         {(!showingBar || showFilter) &&
-        <>
+        <div className="selectContainer">
         <ChangeBar
           barsArray={barsArray}
           handleSelect={handleSelect}
           selectedBar={selectedBar}
           showingBar={showingBar}
+          showBarArchive={showBarArchive}
+          className='negative'
         />
         {(Object.values(bars).some(bar => bar.archived === true)) &&
-          <Button handleClick={toggleShowBarArchive}>
+          <Button className={!showBarArchive ? 'positive' : 'negative'}
+            handleClick={toggleShowBarArchive}>
             {!showBarArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
           </Button>} 
-      </>
+      </div>
       }
       </div>
         </li>

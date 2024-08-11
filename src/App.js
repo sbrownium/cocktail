@@ -214,7 +214,9 @@ function closeModal (modal) {
               <div className='initialSelectionContainer'>
               {!showBars ?
             <Button handleClick={handleToGoBars} className={!showBars ? 'icon barButton initialSelect' : 'icon barButton'}>
-            🪩
+              <p>See</p>
+              <p className='startEmoji'>🪩</p>
+              <p>Bars</p>
             </Button> :
             <Bar
               bars={bars}  
@@ -241,7 +243,9 @@ function closeModal (modal) {
       />
        {!showNewDrink &&
       <Button handleClick={handleClick} className={!showBars ? 'icon drinkButton initialSelect' : 'icon drinkButton'}>
-        +🍹
+        <p>Add</p>
+        <p className='startEmoji'>🍹</p>
+        <p>Drink</p>
       </Button>
       }
       </div>

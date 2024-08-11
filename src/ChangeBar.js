@@ -4,13 +4,15 @@ export default function ChangeBar ({
   barsArray,
   handleSelect,
   selectedBar,
-  showingBar
+  showingBar,
+  showBarArchive
 }) {
   
   if(showingBar){ // once a bar has been selected
       return (
         <>
           <select name='barSelect'
+            className={showBarArchive && "negative"}
             onChange={handleSelect}
             value={selectedBar}
           >
@@ -29,6 +31,7 @@ export default function ChangeBar ({
       return (
         <>
           <select name='barSelect'
+            className={showBarArchive && "negative"}
             onChange={handleSelect}
           >
             <option value='Pick a bar, any bar'>Pick a bar, any bar</option>

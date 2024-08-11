@@ -430,7 +430,7 @@ export default function NewContainer ({
                 <Button className='modalBtn' handleClick={handleNewDrinkToggle}>
                     <XIcon
                     height='1.25rem'
-                    fillColor='blue'
+                    fillColor='#303030'
                     />
                 </Button>
             </div>

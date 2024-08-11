@@ -48,7 +48,7 @@ dialog.overlay::backdrop {
     background: rgb(175 231 255 / 15%);
     backdrop-filter: blur(3px);
 }
-.positive {
+/* .positive {
     background: #39AEA9;
 }
 .negative {
@@ -60,7 +60,7 @@ dialog.overlay::backdrop {
     border: none;
     padding: .5em 1em;
     border-radius: 5px;
-}
+} */
 .overlay form input.positive,
 .overlay form button.negative {
     font-size: 1.15em;

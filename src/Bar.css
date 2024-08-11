@@ -1,12 +1,39 @@
-.barContainer {
+
+.barContainer,
+.barNameContainer,
+.controlsContainer,
+.selectContainer {
     display: flex;
+}
+.barContainer,
+.selectContainer {
     flex-direction: column;
 }
-.barNameContainer,
-.controlsContainer {
-    display: flex;
+.barNameContainer {
     flex-direction: row;
+}
+.controlsContainer {
+flex-direction: row-reverse;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+}
+.controlsContainer.noBars {
+    justify-content: center;
 }
 .barNameContainer button {
     margin: .5em 0 0 2em;
 }
+.selectContainer {
+    align-items: center;
+}
+.selectContainer select {
+    font-size: 1.25em;
+    padding: .5em;
+    border-radius: 10px;
+}
+.selectContainer button {
+    font-size: 1.15em;
+}
+/* padding: .5em 1em;
+    border-radius: 5px; */
