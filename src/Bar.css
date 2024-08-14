@@ -34,16 +34,20 @@ align-items: flex-start;
 .selectContainer button {
     font-size: 1.15em;
 }
-.archiveBtn,
-.archiveTextContainer {
-    display: flex;
+button.archiveBtn {
+    display: inline-flex;
+    font-size: 1.85em;
+    padding: .125em .25em;
+    background: none;
+    border: none;
+    
 }
-.archiveBtn {
+/* .archiveBtn {
     flex-direction: row;
 }
 .archiveTextContainer {
     flex-direction: column;
-}
+} */
 
 /* Typogrpahy */
 .archiveTextContainer p {

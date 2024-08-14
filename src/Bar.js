@@ -77,8 +77,9 @@ export default function Bar({
 
   function handleSelect (e) {
     e.preventDefault();
-    setSelectedBar(e.target.value);
-    if (e.target.value === "Pick a bar, any bar") {
+    setSelectedBar(e.target.value); 
+    if ((e.target.value === 'Current Bars') || (e.target.value === 'All Bars')) {
+    // if (e.target.value === "Pick a bar, any bar") {
       setShowingBar(false);
     } else {
       setShowingBar(true);
@@ -129,7 +130,14 @@ export default function Bar({
                 fillColor='#303030'
                 />
             </Button>
+            {(Object.values(bars).some(bar => bar.archived === true)) &&
+          <Button
+            className='archiveBtn'
+            handleClick={toggleShowBarArchive}>
+              {!showBarArchive ? '🗄️' : '🗃️' }
+          </Button>} 
         </div>
+        <div className="formContainer">
            {!showingBar && <TimeOfDay/>}
            <form>
         <ChangeBar
@@ -142,29 +150,7 @@ export default function Bar({
           className='negative'
         />
         </form>
-        {(Object.values(bars).some(bar => bar.archived === true)) &&
-          <Button
-            className={!showBarArchive ? 'archiveBtn color-1' : 'archiveBtn color-3'}
-            // className='archiveBtn'
-            handleClick={toggleShowBarArchive}>
-              {!showBarArchive ?
-              <>
-                <div className="archiveTextContainer">
-                  <p>Show</p>
-                  <p>Archive</p>
-                </div>
-                <p className="archiveEmoji">🗄️</p> 
-              </>
-              :
-              <>
-                <div className="archiveTextContainer">
-                  <p>Hide</p>
-                  <p>Archive</p>
-                </div>
-                <p className="archiveEmoji">🗃️</p> 
-              </>
-              }
-          </Button>} 
+        </div>
       </dialog>
       } 
       </div>

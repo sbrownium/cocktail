@@ -434,6 +434,7 @@ export default function NewContainer ({
                     />
                 </Button>
             </div>
+            <div className="formContainer">
             <form>
                 <BarSelector
                     bars={bars}
@@ -497,6 +498,7 @@ export default function NewContainer ({
             </Button> 
             </>
             }
+            </div>
            </dialog> 
        </>
     )         
