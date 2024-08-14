@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import { UserContext } from "./UserContext";
 import PencilIcon from "./PencilIcon";
 import Button from "./Button";
+import './Edit.css'
 
 
 export default function Edit ({
@@ -21,8 +22,9 @@ export default function Edit ({
                     </Button>
                     :
                     <>
-                        <Button className='edit icon' handleClick={handleToggle}>
-                            <PencilIcon fillColor='black' width='26' heigth='26'/>
+                        <Button className='edit icon emoji' handleClick={handleToggle}>
+                        ✏️
+                            {/* <PencilIcon fillColor='black' width='26' heigth='26'/> */}
                         </Button>
                     </>}
                 </>}

@@ -429,7 +429,7 @@ export default function NewContainer ({
             <div className='buttonHolder'>
                 <Button className='modalBtn' handleClick={handleNewDrinkToggle}>
                     <XIcon
-                    height='1.25rem'
+                    height='1.25em'
                     fillColor='#303030'
                     />
                 </Button>
@@ -462,15 +462,15 @@ export default function NewContainer ({
                 />
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <fieldset className='formButtons'>
-                    <Submit className='positive' handleClick={handleClick} value='Add'/>
-                    <Button className='negative' handleClick={handleNewDrinkToggle}>
+                    <Submit className='color-1' handleClick={handleClick} value='Add'/>
+                    <Button className='color-4' handleClick={handleNewDrinkToggle}>
                         Never Mind
                     </Button>
                 </fieldset>
             </form>
            
 
-            {(logInAlert && !user) && // user conditional removes alert after signin 
+            {(logInAlert && !user) && // user conditional emoves alert after signin 
             <>
             <p>Please sign in to add a drink</p>
             <SignIn users={users} />

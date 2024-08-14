@@ -44,6 +44,7 @@ function App() {
   const [showBars, setShowBars] = useState(false);
   const [showBarsOption, setShowBarsOption] = useState(true);
   const newDrinkRef = useRef(null);
+  const changeBarRef = useRef(null);
 
 
 function openModal (modal) {
@@ -58,16 +59,24 @@ function closeModal (modal) {
     setBeingEditted(beingEditted => !beingEditted); 
   }
 
-  function handleNewDrinkToggle () {
-      if (!newDrinkRef.current.open) {
-        openModal(newDrinkRef); // open modal
-        setShowNewDrink(true); // hide button
-      } 
-      else {
-        closeModal(newDrinkRef); // close modal
-        setShowNewDrink(false); // show button
-      }
+
+function handleChangeBarToggle () {
+  handleModalToggle(changeBarRef, setShowBars);
+}
+function handleNewDrinkToggle () {
+  handleModalToggle(newDrinkRef, setShowNewDrink);
+}
+
+  function handleModalToggle (ref, setState) {
+    if (!ref.current.open) {
+      openModal(ref); // open modal
+      setState(true); // hide button
     } 
+    else {
+      closeModal(ref); // close modal
+      setState(false); // show button
+    }
+  } 
 
     function handleClick (e) {
       e.preventDefault();
@@ -83,9 +92,12 @@ function closeModal (modal) {
       setShowBars(false);
       setShowBarsOption(true);
     }
-
-    function handleToGoBars () {
-      setShowBars(showBars => !showBars);
+    
+    function handleToGoBars (e) {
+      e.preventDefault();
+      handleChangeBarToggle();
+      // setShowBars(false);
+      // setShowBars(showBars => !showBars);
     }
 
   useEffect(() => {
@@ -185,6 +197,7 @@ function closeModal (modal) {
           ratings={ratings}
           handleToggle={handleToggle}
           beingEditted={beingEditted}
+          handleChangeBarToggle={handleChangeBarToggle}
           // showingBar={showingBar}
           // setShowingBar={setShowingBar}
          />} />
@@ -212,12 +225,12 @@ function closeModal (modal) {
           
             <main>
               <div className='initialSelectionContainer'>
-              {!showBars ?
+              {!showBars &&
             <Button handleClick={handleToGoBars} className={!showBars ? 'icon barButton initialSelect' : 'icon barButton'}>
               <p>See</p>
               <p className='startEmoji'>🪩</p>
               <p>Bars</p>
-            </Button> :
+            </Button> }
             <Bar
               bars={bars}  
               users={users}
@@ -229,15 +242,16 @@ function closeModal (modal) {
               selectedBar={selectedBar}
               setSelectedBar={setSelectedBar}
               handleClick={handleClick}
-          />}
+              changeBarRef={changeBarRef}
+              handleChangeBarToggle={handleChangeBarToggle}
+          />
        <NewContainer
-       newDrinkRef={newDrinkRef}
-       closeModal={closeModal}
+        newDrinkRef={newDrinkRef}
         users={users}
         bars={bars}
         drinks={drinks}
         comments={comments}
-        handleNewDrinkToggle={handleNewDrinkToggle} 
+        handleNewDrinkToggle={handleNewDrinkToggle}
         defaultBar={selectedBar}
         setSelectedBar={setSelectedBar}
       />
@@ -245,7 +259,7 @@ function closeModal (modal) {
       <Button handleClick={handleClick} className={!showBars ? 'icon drinkButton initialSelect' : 'icon drinkButton'}>
         <p>Add</p>
         <p className='startEmoji'>🍹</p>
-        <p>Drink</p>
+        <p>Drinks</p>
       </Button>
       }
       </div>

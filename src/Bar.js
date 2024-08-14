@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useContext} from "react";
+import React, {useState, useMemo, useContext, useEffect} from "react";
 import DrinkList from './DrinkList.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
@@ -14,6 +14,7 @@ import './Bar.css';
 import OliveXIcon from "./OliveXIcon.js";
 import OliveFilterIcon from "./OliveFilterIcon.js";
 import TimeOfDay from "./TimeOfDay.js";
+import XIcon from "./XIcon";
 
 
 
@@ -27,7 +28,9 @@ export default function Bar({
   handleToggle,
   selectedBar,
   setSelectedBar,
-  handleClick
+  handleClick,
+  changeBarRef,
+  handleChangeBarToggle
   // showingBar,
   // setShowingBar
 }) {
@@ -38,6 +41,7 @@ export default function Bar({
   const [showingBar, setShowingBar] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
+
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive);
@@ -96,10 +100,9 @@ export default function Bar({
   const filteredBar = barsArray.filter(bar => bar.barID === selectedBar);
   const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar);
     return (
-      <div className="barContainer"> 
+      <div className="barContainer">   
       <ul>
         <li>
-        {!showingBar && <TimeOfDay/>}
         <div className={!showingBar ? "noBars controlsContainer" : "controlsContainer"}> 
         {showingBar &&
         <>  
@@ -118,22 +121,52 @@ export default function Bar({
           }
           </>}
         {(!showingBar || showFilter) &&
-        <div className="selectContainer">
+         <dialog ref={changeBarRef} className='overlay'>
+        <div className='buttonHolder'>
+            <Button className='modalBtn' handleClick={handleChangeBarToggle}>
+                <XIcon
+                height='1.25em'
+                fillColor='#303030'
+                />
+            </Button>
+        </div>
+           {!showingBar && <TimeOfDay/>}
+           <form>
         <ChangeBar
           barsArray={barsArray}
           handleSelect={handleSelect}
           selectedBar={selectedBar}
           showingBar={showingBar}
           showBarArchive={showBarArchive}
+          changeBarRef={changeBarRef}
           className='negative'
         />
+        </form>
         {(Object.values(bars).some(bar => bar.archived === true)) &&
-          <Button className={!showBarArchive ? 'positive' : 'negative'}
+          <Button
+            className={!showBarArchive ? 'archiveBtn color-1' : 'archiveBtn color-3'}
+            // className='archiveBtn'
             handleClick={toggleShowBarArchive}>
-            {!showBarArchive ? 'Show Bars Archive' : 'Hide Bars Archive'}
+              {!showBarArchive ?
+              <>
+                <div className="archiveTextContainer">
+                  <p>Show</p>
+                  <p>Archive</p>
+                </div>
+                <p className="archiveEmoji">🗄️</p> 
+              </>
+              :
+              <>
+                <div className="archiveTextContainer">
+                  <p>Hide</p>
+                  <p>Archive</p>
+                </div>
+                <p className="archiveEmoji">🗃️</p> 
+              </>
+              }
           </Button>} 
-      </div>
-      }
+      </dialog>
+      } 
       </div>
         </li>
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 export default function ChangeBar ({
   barsArray,
@@ -10,7 +10,6 @@ export default function ChangeBar ({
   
   if(showingBar){ // once a bar has been selected
       return (
-        <>
           <select name='barSelect'
             className={showBarArchive && "negative"}
             onChange={handleSelect}
@@ -25,11 +24,9 @@ export default function ChangeBar ({
             )
               }
             </select>
-         </>
       )
     } else { // before a bar has been selected or if an archived bar is selected and toggling archive
       return (
-        <>
           <select name='barSelect'
             className={showBarArchive && "negative"}
             onChange={handleSelect}
@@ -42,8 +39,7 @@ export default function ChangeBar ({
               }
             )
               }
-            </select>
-         </>
+            </select>  
       )
     }
 };

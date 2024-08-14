@@ -19,7 +19,7 @@ const [user, setUser] = useContext(UserContext);
 const usersArray = Object.values(users);
 const provider = new GoogleAuthProvider();
 
-function findPreferredName (name) { // removes last name from UI
+function findPreferredName (name) { // emoves last name from UI
   const space = name.indexOf(' '); // finds first space
   return name.substring(0, space) // makes new string from index 0 through first space
 }

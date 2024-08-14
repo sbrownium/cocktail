@@ -1,4 +1,4 @@
-
+/* Layout */
 .barContainer,
 .barNameContainer,
 .controlsContainer,
@@ -28,12 +28,31 @@ align-items: flex-start;
     align-items: center;
 }
 .selectContainer select {
-    font-size: 1.25em;
     padding: .5em;
     border-radius: 10px;
 }
 .selectContainer button {
     font-size: 1.15em;
 }
-/* padding: .5em 1em;
-    border-radius: 5px; */
+.archiveBtn,
+.archiveTextContainer {
+    display: flex;
+}
+.archiveBtn {
+    flex-direction: row;
+}
+.archiveTextContainer {
+    flex-direction: column;
+}
+
+/* Typogrpahy */
+.archiveTextContainer p {
+    margin: 0;
+}
+p.archiveEmoji {
+    font-size: 2em;
+    margin: 0 0 0 .25em;
+}
+.selectContainer select {
+    font-size: 1.25em;
+}

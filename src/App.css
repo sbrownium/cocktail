@@ -47,7 +47,8 @@ header svg {
   flex-wrap: wrap;
   justify-content: center;
 }
-.initialSelectionContainer button {
+.initialSelectionContainer button.barButton,
+.initialSelectionContainer button.drinkButton {
   margin: 3em 4em;
 }
 
@@ -67,15 +68,15 @@ textarea {
 
 
 /* .drinkButton {
-  letter-spacing: -.25rem;
-  padding: 0 .25rem 0 0;
+  letter-spacing: -.25em;
+  padding: 0 .25em 0 0;
 } */
 /* .barButton {
   background: #78D1D2; 
 } */
 /* .drinkButton.initialSelect {
-  letter-spacing: -1rem;
-  padding: 0 1rem 0 0;
+  letter-spacing: -1em;
+  padding: 0 1em 0 0;
 } */
 
 .backgroundOverlay {
@@ -89,23 +90,28 @@ textarea {
 .negative {
   background: #CDE4AD;
 }
-.positive,
-.negative {
+button,
+input[type=submit] {
+  font-size: 1.1em;
   border: none;
   padding: .5em 1em;
   border-radius: 5px;
   border: 1px solid black;
 }
+.formButtons button,
+.formButtons input[type=submit] {
+  margin: .75em 1em .5em;
+}
 
-/* Type */
+/* Typogrpahy */
 button.initialSelect p {
   color: black;
   margin: 0;
-  font-size: 6em;
+  font-size: 4em;
   line-height: 1.1em;
 }
 button.initialSelect p.startEmoji {
-  font-size: 9em;
+  font-size: 7em;
 }
 
 /* Fonts */
@@ -176,7 +182,9 @@ h2,
 
 /* Colors */
 .color-1 {
-  background: #dca4df;
+  /* background: #dca4df; 
+  background: #e86588; */
+  background: #f1abc9;
 }
 .color-2 {
   background: #c3ecf3;
@@ -193,5 +201,60 @@ h2,
 .color-6 {
   background: #003e56;
 }
+.color-4,
+.color-5,
+.color-6 {
+  color: white;
+}
 
+dialog.overlay {
+  border: 1px solid #8080802b;
+  border-radius: 10px;
+}
+.buttonHolder {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.initialSelectionContainer .buttonHolder button {
+  margin: 0;
+}
+.modalBtn {
+  border: none;
+  background: none;
+}
 
+.overlay form {
+  display: flex;
+  flex-direction: column;
+  margin: .5em 2em;
+  width: 350px;
+  max-width: 100vw;
+}
+.overlay form select,
+.overlay form input {
+  font-size: 1.1em;
+}
+.overlay form label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: 1.25em;
+  line-height: 1.55em;
+  margin: .25em 0;
+}
+.overlay form label:last-of-type {
+  margin: .25em 0 .75em;
+}
+.overlay form fieldset.formButtons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border: none;
+}
+
+dialog.overlay::backdrop {
+  background: rgb(175 231 255 / 15%);
+  backdrop-filter: blur(3px);
+}
