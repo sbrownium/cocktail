@@ -42,6 +42,7 @@ function App() {
   const [selectedBar, setSelectedBar] = useState('');
   const [showNewDrink, setShowNewDrink] = useState(false);
   const [showBars, setShowBars] = useState(false);
+  const [showingBar, setShowingBar] = useState(false);
   const [showBarsOption, setShowBarsOption] = useState(true);
   const newDrinkRef = useRef(null);
   const changeBarRef = useRef(null);
@@ -90,6 +91,7 @@ function handleNewDrinkToggle () {
       setBeingEditted(false);
       setShowNewDrink(false);
       setShowBars(false);
+      setShowingBar(false);
       setShowBarsOption(true);
     }
     
@@ -198,8 +200,8 @@ function handleNewDrinkToggle () {
           handleToggle={handleToggle}
           beingEditted={beingEditted}
           handleChangeBarToggle={handleChangeBarToggle}
-          // showingBar={showingBar}
-          // setShowingBar={setShowingBar}
+          showingBar={showingBar}
+          setShowingBar={setShowingBar}
          />} />
         <Route path="/Account" element={<Account />} />
       </Route>
@@ -244,6 +246,8 @@ function handleNewDrinkToggle () {
               handleClick={handleClick}
               changeBarRef={changeBarRef}
               handleChangeBarToggle={handleChangeBarToggle}
+              showingBar={showingBar}
+              setShowingBar={setShowingBar}
           />
        <NewContainer
         newDrinkRef={newDrinkRef}

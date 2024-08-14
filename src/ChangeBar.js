@@ -12,7 +12,8 @@ export default function ChangeBar ({
   if(showingBar){ // once a bar has been selected
       return (
           <select name='barSelect'
-            className={showBarArchive ? 'changeBars border-3' : 'changeBars'}
+             // className={showBarArchive ? 'changeBars border-3' : 'changeBars'}
+            className={showBarArchive && 'border-3'}
             onChange={handleSelect}
             value={selectedBar}
           >
@@ -30,7 +31,8 @@ export default function ChangeBar ({
     } else { // before a bar has been selected or if an archived bar is selected and toggling archive
       return (
           <select name='barSelect'
-          className={showBarArchive ? 'changeBars border-3' : 'changeBars'}
+          // className={showBarArchive ? 'changeBars border-3' : 'changeBars'}
+          className={showBarArchive && 'border-3'}
             onChange={handleSelect}
           >
             <option value={!showBarArchive ? 'Current Bars' : 'All Bars'}>{!showBarArchive ? 'Current Bars' : 'All Bars'}</option>  

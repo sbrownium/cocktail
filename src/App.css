@@ -240,6 +240,9 @@ dialog.overlay {
   flex-direction: column;
   align-items: center;
 }
+.changeBars .formContainer {
+  margin: 0 0 1em;
+}
 .buttonHolder {
   display: flex;
   flex-direction: row-reverse;
@@ -263,6 +266,11 @@ dialog.overlay {
 .overlay form select,
 .overlay form input {
   font-size: 1.1em;
+}
+.overlay.changeBars form select {
+  font-size: 1.25em;
+  padding: .5em;
+  border-radius: 5px;
 }
 .overlay form label {
   display: inline-flex;

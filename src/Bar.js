@@ -30,15 +30,12 @@ export default function Bar({
   setSelectedBar,
   handleClick,
   changeBarRef,
-  handleChangeBarToggle
-  // showingBar,
-  // setShowingBar
+  handleChangeBarToggle,
+  showingBar,
+  setShowingBar
 }) {
   const [user] = useContext(UserContext);
   const [showBarArchive, setShowBarArchive] = useState(false);
-  // const [selectedBar, setSelectedBar] = useState('');
-  // const [showNewDrink, setShowNewDrink] = useState(false);
-  const [showingBar, setShowingBar] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
 
@@ -101,11 +98,16 @@ export default function Bar({
   const filteredBar = barsArray.filter(bar => bar.barID === selectedBar);
   const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar);
     return (
+      // {showingBar &&
       <div className="barContainer">   
       <ul>
         <li>
-        <div className={!showingBar ? "noBars controlsContainer" : "controlsContainer"}> 
+         {/* <div className={!showingBar ? "noBars controlsContainer" : "controlsContainer"}>  */}
+         <>
         {showingBar &&
+       
+
+        <div className="controlsContainer"> 
         <>  
         {showFilter ?
           <Button className='edit icon' handleClick={toggleFilter}>
@@ -120,9 +122,12 @@ export default function Bar({
             />
           </Button>
           }
-          </>}
+          </>
+          </div>
+    
+        }
         {(!showingBar || showFilter) &&
-         <dialog ref={changeBarRef} className='overlay'>
+         <dialog ref={changeBarRef} className='overlay changeBars'>
         <div className='buttonHolder'>
             <Button className='modalBtn' handleClick={handleChangeBarToggle}>
                 <XIcon
@@ -153,7 +158,8 @@ export default function Bar({
         </div>
       </dialog>
       } 
-      </div>
+     
+      </>
         </li>
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
             return (
@@ -253,7 +259,7 @@ export default function Bar({
       </>
       }
       </div>
-     
+
     );
   }
   
