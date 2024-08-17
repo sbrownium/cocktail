@@ -8,13 +8,14 @@ import './Edit.css'
 export default function Edit ({
     handleToggle,
     beingEditted,
-    filteredBar
+    // filteredBar
 }) {
     const [user] = useContext(UserContext);
    
     return (
         <>
-            {(user && filteredBar.length > 0) && // checks if user is logged in and if there are any bars selected before displaying edit icon
+        {/* {(user && filteredBar.length > 0) && */}
+            {user  && // checks if user is logged in and if there are any bars selected before displaying edit icon
                 <>
                     {beingEditted ? 
                     <Button className={null} handleClick={handleToggle}>

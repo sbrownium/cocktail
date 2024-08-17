@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 
 export default function TimeOfDay () {
     const [dayPart, setDayPart] = useState('');
+    const [happyHour, setHappyHour] = useState(false);
 
     // useEffect to only mount on load 
     useEffect(() => {
@@ -15,16 +16,22 @@ export default function TimeOfDay () {
             // 12:00 pm - 5:59 pm
         } if ((hours >= 12) && (hours <= 17)) {
             setDayPart('this afternoon');
-            // 6:00 pm - 4:59 am
-        } 
+            // happy hour message 3:00 pm - 5:59 pm
+        } if ((hours >= 15 ) && (hours <= 17)){
+            setHappyHour(true);
+        }
         // else {
+        // 6:00 pm - 4:59 am
          if ((hours >= 18) || (hours <= 4)) {
             setDayPart('tonight');
         }
     }, [])
 
     return (
-        <h1>Where ya drinkin' {dayPart}?</h1>
+        <>
+            <h1>Where ya drinkin' {dayPart}?</h1>
+            {happyHour && <p><em>Heads up, it might could be happy hour, just sayin'</em></p>}
+        </>
     )
     
 }

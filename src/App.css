@@ -39,19 +39,35 @@ header svg {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-   align-items: center;
+  align-items: center;
 }
-.initialSelectionContainer {
+.initialSelect button {
+  background: none;
+  border: none;
+}
+.selectionContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-.initialSelectionContainer button.barButton,
-.initialSelectionContainer button.drinkButton {
+.selectionContainer button.barButton,
+.selectionContainer button.drinkButton {
   margin: 3em 4em;
 }
-
+dialog.selectionOverlay[open] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.selectionBtn .emoji {
+  margin: 0;
+}
+.selectionBtn {
+  display: inline-flex;
+  align-items: center;
+}
 textarea {
   width: 90%;
   max-width: 100%;
@@ -104,13 +120,13 @@ input[type=submit] {
 }
 
 /* Typogrpahy */
-button.initialSelect p {
+.initialSelect button p {
   color: black;
   margin: 0;
   font-size: 4em;
   line-height: 1.1em;
 }
-button.initialSelect p.startEmoji {
+.initialSelect button p.startEmoji {
   font-size: 7em;
 }
 
@@ -248,7 +264,7 @@ dialog.overlay {
   flex-direction: row-reverse;
   justify-content: space-between;
 }
-.initialSelectionContainer .buttonHolder button {
+.selectionContainer .buttonHolder button {
   margin: 0;
 }
 .modalBtn {

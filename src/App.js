@@ -18,6 +18,8 @@ import './App.css';
 import EmojiLogo from './EmojiLogo.js';
 import NewContainer from './NewContainer.js';
 import Button from './Button.js';
+import Edit from './Edit.js';
+import SelectionContainer from './SelectionContainer.js';
 
 
 
@@ -44,8 +46,10 @@ function App() {
   const [showBars, setShowBars] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
   const [showBarsOption, setShowBarsOption] = useState(true);
+  const [showSelectionModal, setShowSelectionModal] = useState(false)
   const newDrinkRef = useRef(null);
   const changeBarRef = useRef(null);
+  const selectionRef = useRef(null);
 
 
 function openModal (modal) {
@@ -55,17 +59,30 @@ function openModal (modal) {
 function closeModal (modal) {
   modal.current.close();
 }
+
+// function openSelectionContainer () {
+//   openModal(selectionRef);
+// }
   // turns editting state on or off
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted); 
   }
 
-
 function handleChangeBarToggle () {
   handleModalToggle(changeBarRef, setShowBars);
 }
+
 function handleNewDrinkToggle () {
   handleModalToggle(newDrinkRef, setShowNewDrink);
+  // handleModalToggle(newDrinkRef);
+}
+
+function handleSelectionContainerToggle () {
+  handleModalToggle(selectionRef, setShowSelectionModal);
+}
+function handleSelectionContainer (e) {
+  e.preventDefault();
+  handleSelectionContainerToggle();
 }
 
   function handleModalToggle (ref, setState) {
@@ -226,13 +243,7 @@ function handleNewDrinkToggle () {
         </header>
           
             <main>
-              <div className='initialSelectionContainer'>
-              {!showBars &&
-            <Button handleClick={handleToGoBars} className={!showBars ? 'icon barButton initialSelect' : 'icon barButton'}>
-              <p>See</p>
-              <p className='startEmoji'>🪩</p>
-              <p>Bars</p>
-            </Button> }
+             
             <Bar
               bars={bars}  
               users={users}
@@ -259,14 +270,47 @@ function handleNewDrinkToggle () {
         defaultBar={selectedBar}
         setSelectedBar={setSelectedBar}
       />
+      <SelectionContainer 
+        selectionRef={selectionRef}
+        showingBar={showingBar}
+        handleToGoBars={handleToGoBars}
+        showNewDrink={showNewDrink}
+        handleToggle={handleToggle} 
+        beingEditted={beingEditted}
+        handleClick={handleClick}
+        handleSelectionContainer={handleSelectionContainer}
+        showSelectionModal={showSelectionModal}
+        handleSelectionContainerToggle={handleSelectionContainerToggle}
+      />
+       {/* <div className={!showingBar ? 'initialSelect selectionContainer' : 'selectionContainer'}>
+      <Button handleClick={handleToGoBars} className={!showingBar ? 'barButton' : 'selectionBtn barButton color-1'}>
+      {!showingBar ?
+          <>
+          <p>See</p>
+          <p className='startEmoji'>🪩</p>
+          <p>Bars</p>
+          </> :
+          <>See Bars <span className='emoji'>🪩</span></>}
+        </Button>
        {!showNewDrink &&
-      <Button handleClick={handleClick} className={!showBars ? 'icon drinkButton initialSelect' : 'icon drinkButton'}>
+      <Button handleClick={handleClick} className={!showingBar ? 'drinkButton' : 'selectionBtn drinkButton color-2'}>
+        {!showingBar ?
+          <>
         <p>Add</p>
         <p className='startEmoji'>🍹</p>
         <p>Drinks</p>
+        </> :
+        <>Add Drinks <span className='emoji'>🍹</span></>}
       </Button>
       }
-      </div>
+       {showingBar &&
+      <Edit
+        handleToggle={handleToggle} 
+        beingEditted={beingEditted}
+        // filteredBar={filteredBar}
+      />
+      }
+      </div> */}
           </main>
          <footer>
             <nav>

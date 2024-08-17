@@ -82,6 +82,7 @@ export default function Bar({
       setShowingBar(true);
       setEditBarName(Object.values(bars).filter(bar => bar.barID === e.target.value)[0].barName); // sets the bar name for the edit state
     }
+    handleChangeBarToggle();
     }; 
     
   // function handleClick (e) {
@@ -126,7 +127,7 @@ export default function Bar({
           </div>
     
         }
-        {(!showingBar || showFilter) &&
+    
          <dialog ref={changeBarRef} className='overlay changeBars'>
         <div className='buttonHolder'>
             <Button className='modalBtn' handleClick={handleChangeBarToggle}>
@@ -157,7 +158,7 @@ export default function Bar({
         </form>
         </div>
       </dialog>
-      } 
+     
      
       </>
         </li>
@@ -234,30 +235,13 @@ export default function Bar({
           })}
       </ul>
      
-      {showingBar &&
-      <>
+      {/* {showingBar &&
       <Edit
         handleToggle={handleToggle} 
         beingEditted={beingEditted}
         filteredBar={filteredBar}
       />
-      {/* {showNewDrink ? 
-       <NewContainer
-        users={users}
-        bars={bars}
-        drinks={drinks}
-        comments={comments}
-        handleNewDrinkToggle={handleNewDrinkToggle} 
-        defaultBar={selectedBar}
-        setSelectedBar={setSelectedBar}
-      />
-       :
-      <Button handleClick={handleClick} className='icon'>
-        +<DrinkIcon width='24' height='24' fill='grey'/>
-      </Button>
       } */}
-      </>
-      }
       </div>
 
     );
