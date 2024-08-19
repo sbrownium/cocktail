@@ -20,6 +20,7 @@ import NewContainer from './NewContainer.js';
 import Button from './Button.js';
 import Edit from './Edit.js';
 import SelectionContainer from './SelectionContainer.js';
+import MoreContainer from './MoreContainer.js';
 
 
 
@@ -77,12 +78,13 @@ function handleNewDrinkToggle () {
   // handleModalToggle(newDrinkRef);
 }
 
-function handleSelectionContainerToggle () {
-  handleModalToggle(selectionRef, setShowSelectionModal);
-}
+// function handleSelectionContainerToggle () {
+//   handleModalToggle(selectionRef, setShowSelectionModal);
+//   selectionRef.current.className.toggle('close')
+// }
 function handleSelectionContainer (e) {
   e.preventDefault();
-  handleSelectionContainerToggle();
+  handleModalToggle(selectionRef, setShowSelectionModal);
 }
 
   function handleModalToggle (ref, setState) {
@@ -280,7 +282,6 @@ function handleSelectionContainer (e) {
         handleClick={handleClick}
         handleSelectionContainer={handleSelectionContainer}
         showSelectionModal={showSelectionModal}
-        handleSelectionContainerToggle={handleSelectionContainerToggle}
       />
        {/* <div className={!showingBar ? 'initialSelect selectionContainer' : 'selectionContainer'}>
       <Button handleClick={handleToGoBars} className={!showingBar ? 'barButton' : 'selectionBtn barButton color-1'}>
@@ -318,12 +319,31 @@ function handleSelectionContainer (e) {
                 users={users}
                 handleToggle={handleToggle}
               />
-              <a href="https://github.com/sbrownium/cocktail">
+              <Button
+                handleClick={handleToGoBars}
+                className='emoji footerEmoji'
+                >
+                  🪩
+                </Button>
+                <Button
+                  handleClick={handleClick}
+                  className='emoji footerEmoji'
+                >
+                  🍹
+                </Button>
+                <Edit
+                  handleToggle={handleToggle} 
+                  beingEditted={beingEditted}
+                />
+                <MoreContainer
+                  handleModalToggle={handleModalToggle}
+                />
+              {/* <a href="https://github.com/sbrownium/cocktail">
                 <GitHub width='24.5px' height='24px' fillColor='black'/>
               </a>
               <a href="https://linkedin.com/in/sbrownium">
                 <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
-              </a>
+              </a> */}
             </nav>
          </footer>
          

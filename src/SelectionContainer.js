@@ -7,22 +7,12 @@ export default function SelectionContainer ({
     selectionRef,
     showingBar,
     handleToGoBars,
-    showNewDrink,
     handleToggle, 
     beingEditted,
     handleClick,
     handleSelectionContainer,
-    showSelectionModal,
-    openSelectionContainer,
-    handleSelectionContainerToggle
+    showSelectionModal
 }) {
-    function openModal () {
-        selectionRef.current.showModal();
-    }
-     
-    function closeModal () {
-        selectionRef.current.close();
-    }
     return (
         <>
         {!showingBar ?
@@ -49,22 +39,28 @@ export default function SelectionContainer ({
             :
             <>
             {!showSelectionModal &&
-                    <div>
+                    <div className="bottomSheet">
                         <div className='buttonHolder'>
                             <Button className='modalBtn'
-                            handleClick={openModal}>
-                                I'm a bottom sheet
+                            handleClick={handleSelectionContainer}>
+                                <div className="tabTopContainer">
+                                    <div className="tabTop color-3">
+                                        <div className="bar"></div>
+                                    </div>
+                                </div>
+                                <div className="tabBottom color-3"></div>
                             </Button>
                     </div>
                     </div>  
 }
     <dialog
         ref={selectionRef}
-        className='selectionOverlay overlay'
+        // className={showSelectionModal ? 'selectionOverlay overlay' : 'selectionOverlay overlay closing'}
+        className="selectionOverlay overlay"
     >
     <div className='buttonHolder'>
         <Button className='modalBtn'
-        handleClick={closeModal}>
+        handleClick={handleSelectionContainer}>
             <XIcon
             height='1.25em'
             fillColor='#303030'

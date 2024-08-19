@@ -55,11 +55,88 @@ header svg {
 .selectionContainer button.drinkButton {
   margin: 3em 4em;
 }
-dialog.selectionOverlay[open] {
+.bottomSheet {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0 0 -1em 0;
+}
+.bottomSheet .modalBtn {
+  padding: 0;
+}
+.tabTopContainer {
+  display: flex;
+  justify-content: center;
+}
+.bottomSheet .buttonHolder,
+.bottomSheet button {
+  width: 100%;
+}
+.tabTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  width: 160px;
+  border-radius: 5px 5px 0 0;
+}
+.bar {
+  height: 3px;
+  width: 100px;
+  background: black;
+  border-radius: 2px;
+}
+.tabBottom {
+  height: 16px;
+}
+/* dialog.selectionOverlay[open] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  transform: translateY(100%);
+  position: fixed;
+  top: auto;
+  animation-name: sliding-vertically;
+  animation-duration: 2s;
+} */
+
+/* Keyframes for the animation */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%); /* Start off-screen at the bottom */
+     /* Start fully transparent */
+  }
+  to {
+    transform: translateY(0); /* End at its original position */
+     /* End fully visible */
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(0); /* Start from the original position */
+  }
+  to {
+    transform: translateY(100%); /* End off-screen at the bottom */
+  }
+}
+
+/* Applying the reverse animation to the dialog */
+dialog.selectionOverlay {
+  animation: slideDown .25s ease-in forwards; /* Apply the reverse animation */
+}
+
+/* Applying the animation to the dialog */
+dialog.selectionOverlay[open] {
+  position: fixed;
+  top: calc(100% - 280px);
+  animation: slideUp 0.25s ease-out forwards;
+}
+.emoji.footerEmoji {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
 }
 .selectionBtn .emoji {
   margin: 0;
