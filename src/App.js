@@ -314,30 +314,30 @@ function handleSelectionContainer (e) {
       </div> */}
           </main>
          <footer>
+          <div className='footContainer'>
             <nav>
-              <SignIn
-                users={users}
-                handleToggle={handleToggle}
-              />
-              <Button
-                handleClick={handleToGoBars}
-                className='emoji footerEmoji'
-                >
-                  🪩
-                </Button>
+  
+                <SignIn
+                  users={users}
+                  handleToggle={handleToggle}
+                />
                 <Button
-                  handleClick={handleClick}
+                  handleClick={handleToGoBars}
                   className='emoji footerEmoji'
-                >
-                  🍹
-                </Button>
-                <Edit
-                  handleToggle={handleToggle} 
-                  beingEditted={beingEditted}
-                />
-                <MoreContainer
-                  handleModalToggle={handleModalToggle}
-                />
+                  >
+                    🪩
+                  </Button>
+                  <Button
+                    handleClick={handleClick}
+                    className='emoji footerEmoji'
+                  >
+                    🍹
+                  </Button>
+                  <Edit
+                    handleToggle={handleToggle} 
+                    beingEditted={beingEditted}
+                  />
+              <MoreContainer />
               {/* <a href="https://github.com/sbrownium/cocktail">
                 <GitHub width='24.5px' height='24px' fillColor='black'/>
               </a>
@@ -345,6 +345,9 @@ function handleSelectionContainer (e) {
                 <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
               </a> */}
             </nav>
+            
+                <div className='background'> </div>
+                </div>
          </footer>
          
          </body>

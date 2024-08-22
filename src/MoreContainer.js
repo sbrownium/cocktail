@@ -1,43 +1,47 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import GitHub from "./GitHub";
 import LinkedIn from "./LinkedIn";
 import Button from "./Button";
 import './MoreContainer.css';
+import XIcon from "./XIcon";
 
-export default function MoreContainer ({
-    handleModalToggle
-}) {
+export default function MoreContainer () {
     const [moreSelected, setMoreSelected] = useState(false);
-    const moreSelectionsRef = useRef();
 
-    function handleMoreSelectedToggle (e) {
-        e.preventDefault();
-        moreSelectionsRef.current.togglePopover();
+        function handleMoreSelectedToggle () {
+        setMoreSelected(moreSelected => !moreSelected);
     }
 
     return (
         <>
-            {!moreSelected &&
-            <Button
+            <div
+                className='moreSelectionsContainer'
+            >  
+            {moreSelected &&
+                <>
+                    <a href="https://github.com/sbrownium/cocktail">
+                        <GitHub width='24.5px' height='24px' fillColor='black'/>
+                    </a>
+                    <a href="https://linkedin.com/in/sbrownium">
+                        <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
+                    </a>
+                </>
+                }
+                <Button
                 handleClick={handleMoreSelectedToggle}
                 className="dotContainer"
             >
-                <div className="dot"></div>
-                <div className="dot"></div>
-                <div className="dot"></div>
+                {!moreSelected ? 
+                <>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                </> :
+                <XIcon
+                height='1.25em'
+                fillColor='#303030'
+                />}
             </Button>
-            }
-            <div
-                popover="auto"
-                ref={moreSelectionsRef}
-                className="overlay"
-            >
-                <a href="https://github.com/sbrownium/cocktail">
-                    <GitHub width='24.5px' height='24px' fillColor='black'/>
-                </a>
-                <a href="https://linkedin.com/in/sbrownium">
-                    <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
-                </a>
             </div>
         </>
     )

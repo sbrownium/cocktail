@@ -13,23 +13,48 @@ main {
 }
 main {
   margin:0 0 80px 0;
+  padding: 0 1em;
 }
 
 footer {
-  background: whitesmoke;
   position: fixed;
   bottom: 0;
   margin: 1em 0 0;
   width: 100%;
-}
-footer nav {
-  flex-direction: row;
+  /* background: whitesmoke; */
+  /* flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding: 1em; 
   width: 100vw;
-  max-width: 500px;
+  max-width: 500px; */
+}
+.background {
+  background: whitesmoke;
+  /* border-top: 1px solid #80808029; */
+  width: 100vw;
+  position: absolute;
+  width: 100vw;
+  max-height: 4.75em;
+  height: 4.75em;
+  z-index: -1;
+}
+.footContainer {
+  position: relative;
+  display: grid;
+  align-items: end
+}
+footer nav {
+  position: absolute;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1em; 
+  width: 100vw;
+  max-width: 500px; 
+  /* background: whitesmoke; */
 }
 header svg {
   margin: 1em;
