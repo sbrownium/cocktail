@@ -1,4 +1,4 @@
-.dotContainer {
+.menuButtonContainer {
     display: flex;
     flex-direction: column;
     border: none;
@@ -8,69 +8,49 @@
     height: 4px;
     width: 4px;
     border-radius: 50%;
-    margin: 3px 0;
+    margin: 7px 0;
     background: black;
 }
-/* #moreSelectionsPopover:popover-open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
+.dot:first-of-type {
+    margin: 0 0 7px 0; 
 }
-.popoverHolder {
-    position: relative;
-} */
+.dot:last-of-type {
+    margin: 7px 0 0 0; 
+}
+.dotHolder {
+    padding: 0 9px;
+}
+.menuButtonContainer svg {
+    padding: 2px 0;
+}
  .moreSelectionsContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 2em;
     margin: 0 1em 0 0;
-    padding: .25em .75em 0 .75em;
-    background: whitesmoke;
-    border-radius: 8px;
-    /* transition: all 1s ease;
-    transform: translateY(5%); */
-    /* opacity: 0; */
  }
- /* .moreSelectionsContainer.expanded {
-    transition: all 1s ease;
-    transform: translateY(-5%);
-    opacity: 1;
-    transition-property: display;
-    transition-duration: 1s;
+ .moreButtonsHolder {
     display: flex;
- } */
- /* .moreHolder {
-    transition: 0.5s;
-    transform: translateY(-50%);
-    width: 2em;
- } */
- /* .moreSelectionsExpanded::after {
-        content: ""; 
-        display: block; 
-        margin: 0 auto;
-        width: 50%; 
-        padding-top: 20px; 
-        border-bottom: 1px solid black;
-    } */
-
-    
-    
+    flex-direction: column;
+    position: absolute;
+    top: 5em;
+    border-radius: 8px 8px 0 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: whitesmoke;
+    transition: all .35s ease-in-out;
+ }
+ .moreButtonsHolder.expanded {
+    transform: translateY(-12.53em);
+    border-top: 1px solid #80808029;
+    border-left: 1px solid #80808029;
+    border-right: 1px solid #80808029;
+ }
+ button.menuButton {
+    padding: 0;
+ }      
  .moreSelectionsContainer a {
     padding: 1em;
     position: relative;
-    /* transition: all 1s ease;
-    display: none; */
  }
-/* .moreSelectionsContainer.expanded a {
-    transition: all 1s ease;
-    display: block;
- } */
- /* .moreSelectionsExpanded a.top::after {
-    content: '';
-    position: absolute;
-    bottom: 102%;
-    right: 0%;
-    width: 100%;
-    border-top: 1px solid #80808029;
- } */

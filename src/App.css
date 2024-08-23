@@ -32,7 +32,7 @@ footer {
 }
 .background {
   background: whitesmoke;
-  /* border-top: 1px solid #80808029; */
+  border-top: 1px solid #80808029;
   width: 100vw;
   position: absolute;
   width: 100vw;
@@ -50,7 +50,7 @@ footer nav {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   padding: 1em; 
   width: 100vw;
   max-width: 500px; 

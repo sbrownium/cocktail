@@ -17,29 +17,28 @@ export default function MoreContainer () {
             <div
                 className='moreSelectionsContainer'
             >  
-            {moreSelected &&
-                <>
+         
+                <div className={!moreSelected ? "moreButtonsHolder": "moreButtonsHolder expanded"}>
                     <a href="https://github.com/sbrownium/cocktail">
                         <GitHub width='24.5px' height='24px' fillColor='black'/>
                     </a>
                     <a href="https://linkedin.com/in/sbrownium">
                         <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
                     </a>
-                </>
-                }
+                </div>
                 <Button
                 handleClick={handleMoreSelectedToggle}
-                className="dotContainer"
+                className="menuButtonContainer"
             >
                 {!moreSelected ? 
-                <>
+                <div className="dotHolder">
                     <div className="dot"></div>
                     <div className="dot"></div>
                     <div className="dot"></div>
-                </> :
+                </div> :
                 <XIcon
-                height='1.25em'
-                fillColor='#303030'
+                    height='1.25em'
+                    fillColor='#303030'
                 />}
             </Button>
             </div>
