@@ -126,25 +126,8 @@ header svg {
   animation-duration: 2s;
 } */
 
-/* Keyframes for the animation */
-@keyframes slideUp {
-  from {
-    transform: translateY(100%); /* Start off-screen at the bottom */
-     /* Start fully transparent */
-  }
-  to {
-    transform: translateY(0); /* End at its original position */
-     /* End fully visible */
-  }
-}
-@keyframes slideDown {
-  from {
-    transform: translateY(0); /* Start from the original position */
-  }
-  to {
-    transform: translateY(100%); /* End off-screen at the bottom */
-  }
-}
+
+
 
 /* Applying the reverse animation to the dialog */
 dialog.selectionOverlay {
@@ -296,6 +279,15 @@ h2,
   font-family: "Proza Libre", sans-serif;
   font-weight: 800;
   font-style: italic;
+}
+
+.initialSelect p{
+  font-family: "Kumbh Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "YOPQ" 300;
 }
 
 /* Colors */

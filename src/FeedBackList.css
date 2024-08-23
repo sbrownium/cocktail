@@ -6,15 +6,23 @@
 }
 /* Color */
 .userContainer {
-    background: lightblue;
+    /* background: lightblue; */
+    /* border: 1px solid #c3ecf3; */
+    /* background: #c3ecf320; */
+    border: 1px solid #003e56;
 }
 .userContainer:first-of-type,
 .userContainer:nth-of-type(4),
 .userContainer:nth-of-type(7) {
-    background: lightcoral;
+    /* background: lightcoral; */
+    border: 1px solid #f1abc9;
+    /* background: #f1abc920; */
 }
 .userContainer:nth-of-type(2),
 .userContainer:nth-of-type(5),
 .userContainer:nth-of-type(8) {
-    background: lightgoldenrodyellow;
+    border: 1px solid #01747e;
+    /* background: #01747e20; */
+    
+    /* background: lightgoldenrodyellow; */
 }
