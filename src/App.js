@@ -50,7 +50,7 @@ function App() {
   const [showSelectionModal, setShowSelectionModal] = useState(false)
   const newDrinkRef = useRef(null);
   const changeBarRef = useRef(null);
-  const selectionRef = useRef(null);
+  // const selectionRef = useRef(null);
 
 
 function openModal (modal) {
@@ -82,10 +82,10 @@ function handleNewDrinkToggle () {
 //   handleModalToggle(selectionRef, setShowSelectionModal);
 //   selectionRef.current.className.toggle('close')
 // }
-function handleSelectionContainer (e) {
-  e.preventDefault();
-  handleModalToggle(selectionRef, setShowSelectionModal);
-}
+// function handleSelectionContainer (e) {
+//   e.preventDefault();
+//   handleModalToggle(selectionRef, setShowSelectionModal);
+// }
 
   function handleModalToggle (ref, setState) {
     if (!ref.current.open) {
@@ -273,14 +273,14 @@ function handleSelectionContainer (e) {
         setSelectedBar={setSelectedBar}
       />
       <SelectionContainer 
-        selectionRef={selectionRef}
+        // selectionRef={selectionRef}
         showingBar={showingBar}
         handleToGoBars={handleToGoBars}
         showNewDrink={showNewDrink}
         handleToggle={handleToggle} 
         beingEditted={beingEditted}
         handleClick={handleClick}
-        handleSelectionContainer={handleSelectionContainer}
+        // handleSelectionContainer={handleSelectionContainer}
         showSelectionModal={showSelectionModal}
       />
        {/* <div className={!showingBar ? 'initialSelect selectionContainer' : 'selectionContainer'}>

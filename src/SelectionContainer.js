@@ -10,12 +10,11 @@ export default function SelectionContainer ({
     handleToggle, 
     beingEditted,
     handleClick,
-    handleSelectionContainer,
-    showSelectionModal
+    handleSelectionContainer
 }) {
     return (
         <>
-        {!showingBar ?
+        {!showingBar &&
             <div
              className="initialSelect selectionContainer"
              >
@@ -35,27 +34,9 @@ export default function SelectionContainer ({
         <p className='startEmoji'>🍹</p>
         <p>Drinks</p>
       </Button>
-        </div>
-            :
-            <>
-            {!showSelectionModal &&
-                    <div className="bottomSheet">
-                        <div className='buttonHolder'>
-                            <Button className='modalBtn'
-                            handleClick={handleSelectionContainer}>
-                                <div className="tabTopContainer">
-                                    <div className="tabTop color-3">
-                                        <div className="bar"></div>
-                                    </div>
-                                </div>
-                                <div className="tabBottom color-3"></div>
-                            </Button>
-                    </div>
-                    </div>  
-}
-    <dialog
+        </div>}
+    {/* <dialog
         ref={selectionRef}
-        // className={showSelectionModal ? 'selectionOverlay overlay' : 'selectionOverlay overlay closing'}
         className="selectionOverlay overlay"
     >
     <div className='buttonHolder'>
@@ -73,21 +54,18 @@ className='selectionBtn barButton color-1'
 >
   Change Bars <span className='emoji'>🪩</span>
 </Button>
-{/* {!showNewDrink && */}
 <Button
 handleClick={handleClick}
 className='selectionBtn drinkButton color-2'
 >
 Add Drinks <span className='emoji'>🍹</span>
 </Button>
-{/* } */}
 <Edit
 handleToggle={handleToggle} 
 beingEditted={beingEditted}
-// filteredBar={filteredBar}
 />
-</dialog>
-</>}
-    </>
+</dialog> */}
+</>
+
     ) 
 }
