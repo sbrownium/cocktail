@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import NewComment from './NewComment';
 import { UserContext } from './UserContext';
 import UserContainer from './UserContainer';
@@ -25,6 +25,7 @@ export default function FeedbackList({
     const usersArray = filteredComments.concat(filteredRatings);
     const userIDArray = usersArray.map(item => item.userID);
     const uniqueIDs = [...new Set(userIDArray)];
+    const [isExpanded, setIsExpanded] = useState(false);
 
   if ((comments === undefined) && (ratings === undefined)) { // checks in case there are no comments or ratings in the entire database
     return (
@@ -45,12 +46,10 @@ export default function FeedbackList({
       </>
     );
   } else {
-    
-
     return (
-      <ul>
+      <ul className={!isExpanded && "ratingsView"}>
         {uniqueIDs.map((userID, index) => (
-          <li className="userContainer" key={index}>
+          <li className={isExpanded && "userContainer"} key={index}>
             <UserContainer
                 archived={archived}
                 barID={barID}
@@ -64,6 +63,7 @@ export default function FeedbackList({
               handleToggle={handleToggle}
               beingEditted={beingEditted}
               emojiLookUp={emojiLookUp}
+              isExpanded={isExpanded}
             />
           </li>
         ))}

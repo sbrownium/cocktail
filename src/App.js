@@ -202,31 +202,31 @@ function handleNewDrinkToggle () {
   if (errorUsers) {
     return <div>Error loading users: {errorUsers.message}</div>;
   }
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/"
-      element={<RootLayout 
-      users={users}
-      handleToggle={handleToggle}
-      />}>
-      <Route index element={
-        <Bar
-          bars={bars}  
-          users={users}
-          drinks={drinks}
-          comments={comments}
-          ratings={ratings}
-          handleToggle={handleToggle}
-          beingEditted={beingEditted}
-          handleChangeBarToggle={handleChangeBarToggle}
-          showingBar={showingBar}
-          setShowingBar={setShowingBar}
-         />} />
-        <Route path="/Account" element={<Account />} />
-      </Route>
+  // const router = createBrowserRouter(
+  //   createRoutesFromElements(
+  //     <Route path="/"
+  //     element={<RootLayout 
+  //     users={users}
+  //     handleToggle={handleToggle}
+  //     />}>
+  //     <Route index element={
+  //       <Bar
+  //         bars={bars}  
+  //         users={users}
+  //         drinks={drinks}
+  //         comments={comments}
+  //         ratings={ratings}
+  //         handleToggle={handleToggle}
+  //         beingEditted={beingEditted}
+  //         handleChangeBarToggle={handleChangeBarToggle}
+  //         showingBar={showingBar}
+  //         setShowingBar={setShowingBar}
+  //        />} />
+  //       <Route path="/Account" element={<Account />} />
+  //     </Route>
       
-    )
-  );
+  //   )
+  // );
   return (
     
         <>

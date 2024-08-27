@@ -4,6 +4,9 @@
     border-radius: 1em;
     margin: 1em 0;
 }
+.ratingsView {
+    display: flex;
+}
 /* Color */
 .userContainer {
     /* background: lightblue; */

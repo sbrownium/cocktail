@@ -406,3 +406,7 @@ dialog.overlay::backdrop {
   background: rgb(175 231 255 / 15%);
   backdrop-filter: blur(3px);
 }
+button.emoji {
+  padding: 0;
+  margin: 0;
+}

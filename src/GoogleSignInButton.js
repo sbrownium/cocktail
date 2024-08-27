@@ -25,7 +25,7 @@ export default function GoogleSignInButton ({
         <path fill="none" d="M0 0h48v48H0z"></path>
       </svg>
     </div>
-    <span class="gsi-material-button-contents">Sign in with Google</span>
+    <span class="gsi-material-button-contents">Sign In</span>
     {/* <span style="display: none;">Sign in with Google</span> */}
   </div>
 </button>
