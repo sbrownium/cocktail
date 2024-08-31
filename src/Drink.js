@@ -164,11 +164,11 @@ return (
             <> 
             <div className='drinkNameContainer'>
               <h2>{drinkName}</h2>
-              <AverageRating
+              {/* <AverageRating
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
                 ratingDrinkID={drinkID}
-              />
+              /> */}
              </div> 
             {description} &mdash;
             ${Number(price).toFixed(2)}
@@ -216,7 +216,7 @@ return (
               }
               </>
             }
-           <MyRating 
+           {/* <MyRating 
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
                 drinkName={drinkName}
@@ -224,7 +224,7 @@ return (
                 handleToggle={handleToggle}
                 beingEditted={beingEditted}
                 barID={barID} 
-                />
+                /> */}
             <FeedbackList
               comments={comments}
               users={users}

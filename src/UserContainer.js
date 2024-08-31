@@ -4,6 +4,7 @@ import UserRating from "./UserRating";
 import { UserContext } from "./UserContext";
 import NewComment from "./NewComment";
 import "./UserContainer.css";
+import Button from "./Button";
 
 export default function UserContainer ({
     archived,
@@ -72,6 +73,7 @@ export default function UserContainer ({
             emojiLookUp={emojiLookUp}
         />
             }
+            
         </>   
     )
 }
