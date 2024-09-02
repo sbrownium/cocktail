@@ -9,6 +9,13 @@
 }
 .ratingsView .emoji {
     font-size: 1.5em;
+    margin: 0 .25em;
+}
+.ratingsView .emoji:first-of-type {
+    margin: 0 .25em 0 0;
+}
+.ratingsView .emoji:last-of-type {
+    margin: 0 0 0 .25em;
 }
 /* Color */
 .userContainer {
