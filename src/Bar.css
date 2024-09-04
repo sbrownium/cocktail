@@ -1,0 +1,62 @@
+/* Layout */
+.barContainer,
+.barNameContainer,
+.controlsContainer,
+.selectContainer {
+    display: flex;
+}
+.barContainer,
+.selectContainer {
+    flex-direction: column;
+}
+.barNameContainer {
+    flex-direction: row;
+}
+.controlsContainer {
+flex-direction: row-reverse;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: flex-start;
+}
+.controlsContainer.noBars {
+    justify-content: center;
+}
+.barNameContainer button {
+    margin: .5em 0 0 2em;
+}
+.selectContainer {
+    align-items: center;
+}
+.selectContainer select {
+    padding: .5em;
+    border-radius: 10px;
+}
+.selectContainer button {
+    font-size: 1.15em;
+}
+button.archiveBtn {
+    display: inline-flex;
+    font-size: 1.85em;
+    padding: .125em .25em;
+    background: none;
+    border: none;
+    
+}
+/* .archiveBtn {
+    flex-direction: row;
+}
+.archiveTextContainer {
+    flex-direction: column;
+} */
+
+/* Typogrpahy */
+.archiveTextContainer p {
+    margin: 0;
+}
+p.archiveEmoji {
+    font-size: 2em;
+    margin: 0 0 0 .25em;
+}
+.selectContainer select {
+    font-size: 1.25em;
+}

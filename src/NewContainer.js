@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 import { UserContext } from './UserContext.js';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
@@ -9,15 +9,19 @@ import Submit from './Submit.js';
 import Button from './Button.js';
 // import Alert from './Alert.js';
 import SignIn from './SignIn.js';
+import './NewContainer.css';
+import XIcon from './XIcon.js';
 
 
-export default function NewContainer (
-    {bars,
+export default function NewContainer ({
+    bars,
     drinks,
     users,
     handleNewDrinkToggle,
     defaultBar,
-    setSelectedBar
+    setSelectedBar,
+    newDrinkRef
+    // closeModal
 }) {
     const [user] = useContext(UserContext);
     const { userID } = user
@@ -26,7 +30,12 @@ export default function NewContainer (
     const [missingAlert, setMissingAlert] = useState(false);
     const barsArray = Object.values(bars);
     const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
-    const defaultBarName = defaultBarObj[0].barName;
+    // checks if a bar is already selected
+    const defaultBarName = useMemo(()=> {
+        if (defaultBar !== '') {
+            return defaultBarObj[0].barName;
+           }
+    },[defaultBar])
     const initialValidation = {
         needsDrinkName: false,
         needsBarName: false,
@@ -48,9 +57,9 @@ export default function NewContainer (
     }
     const [newDrink, setNewDrink] = useState(initialNewDrink);
     const [validation, setValidation] = useState(initialValidation);
+
+
     
-
-
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
             setNewDrink({
@@ -416,6 +425,16 @@ export default function NewContainer (
     }    
     return (
         <>
+        <dialog ref={newDrinkRef} className='overlay'>
+            <div className='buttonHolder'>
+                <Button className='modalBtn' handleClick={handleNewDrinkToggle}>
+                    <XIcon
+                    height='1.25em'
+                    fillColor='#303030'
+                    />
+                </Button>
+            </div>
+            <div className="formContainer">
             <form>
                 <BarSelector
                     bars={bars}
@@ -443,14 +462,16 @@ export default function NewContainer (
                     focusPrice={focusPrice}
                 />
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
-                <Submit handleClick={handleClick} value='add'/>
-              
+                <fieldset className='formButtons'>
+                    <Submit className='color-1' handleClick={handleClick} value='Add'/>
+                    <Button className='color-4' handleClick={handleNewDrinkToggle}>
+                        Never Mind
+                    </Button>
+                </fieldset>
             </form>
-            <Button className={null} handleClick={handleNewDrinkToggle}>
-                Never Mind
-            </Button>
+           
 
-            {(logInAlert && !user) && // user conditional removes alert after signin 
+            {(logInAlert && !user) && // user conditional emoves alert after signin 
             <>
             <p>Please sign in to add a drink</p>
             <SignIn users={users} />
@@ -477,7 +498,8 @@ export default function NewContainer (
             </Button> 
             </>
             }
-            
+            </div>
+           </dialog> 
        </>
     )         
 }

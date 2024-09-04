@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import NewComment from './NewComment';
 import { UserContext } from './UserContext';
 import UserContainer from './UserContainer';
 import NewRating from './NewRating';
+import Button from './Button';
+import UserRating from './UserRating';
+import './FeedBackList.css'
 
 export default function FeedbackList({
   comments,
@@ -24,6 +27,11 @@ export default function FeedbackList({
     const usersArray = filteredComments.concat(filteredRatings);
     const userIDArray = usersArray.map(item => item.userID);
     const uniqueIDs = [...new Set(userIDArray)];
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    function toggleExpanded () {
+      setIsExpanded(isExpanded => !isExpanded);
+    }
 
   if ((comments === undefined) && (ratings === undefined)) { // checks in case there are no comments or ratings in the entire database
     return (
@@ -44,12 +52,22 @@ export default function FeedbackList({
       </>
     );
   } else {
-    
-
     return (
+    <>
+    <div className='ratingsView'>
+    {uniqueIDs.map((userID, index) => (
+     <UserRating
+            userID={userID}
+            drinkID={drinkID}
+            ratingsArray={ratingsArray}
+            emojiLookUp={emojiLookUp}
+          />
+    ))}
+    </div>
+    {isExpanded &&
       <ul>
         {uniqueIDs.map((userID, index) => (
-          <li key={index}>
+          <li className="userContainer" key={index}>
             <UserContainer
                 archived={archived}
                 barID={barID}
@@ -63,10 +81,15 @@ export default function FeedbackList({
               handleToggle={handleToggle}
               beingEditted={beingEditted}
               emojiLookUp={emojiLookUp}
+              isExpanded={isExpanded}
             />
           </li>
         ))}
-      </ul>
+      </ul>}
+      <Button className='icon' handleClick={toggleExpanded}>
+     {!isExpanded ? 'Comments 💬' : 'Close 💬'}
+ </Button>
+ </>
     );
   }
 };

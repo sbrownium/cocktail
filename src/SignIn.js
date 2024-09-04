@@ -5,6 +5,8 @@ import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import Button from './Button.js';
+import GoogleSignInButton from './GoogleSignInButton.js';
+import GoogleSignOutButton from './GoogleSignOutButton.js';
 
 
 export default function SignIn ({
@@ -17,7 +19,7 @@ const [user, setUser] = useContext(UserContext);
 const usersArray = Object.values(users);
 const provider = new GoogleAuthProvider();
 
-function findPreferredName (name) { // removes last name from UI
+function findPreferredName (name) { // emoves last name from UI
   const space = name.indexOf(' '); // finds first space
   return name.substring(0, space) // makes new string from index 0 through first space
 }
@@ -35,17 +37,22 @@ const auth = getAuth();
 signInWithPopup(auth, provider)
   .then((result) => {    
     const currentUser = {
-            email: result.user.email,
             preferredName: findPreferredName(result.user.displayName),
-            userID: result.user.uid,
-            userName: result.user.displayName
-          }  
+            userID: result.user.uid
+          };
+    const newUserPrivate = {
+      email: result.user.email,
+      userID: result.user.uid,
+      userName: result.user.displayName
+    }        
           setUser(currentUser);
           const existingUser = usersArray.find((u) => u.userID === currentUser.userID )
       if (!existingUser) {
-      const newUserKey = push(child(ref(db), '/users/')).key;
+      const newUserPublicKey = push(child(ref(db), '/usersPublic/')).key;
+      const newUserPrivateKey = push(child(ref(db), '/usersPrivate/')).key;
       const updates = {};
-      updates['/users/' + newUserKey] = currentUser;
+      updates['/usersPublic/' + newUserPublicKey] = currentUser;
+      // updates['/usersPrivate/' + newUserPrivateKey] = newUserPrivate;
   return (
       update(ref(db), updates).then(() => {
           console.log('Data saved successfully!');
@@ -61,16 +68,22 @@ signInWithPopup(auth, provider)
 }
     if (!user) {
       return (
-        <Button className={null} handleClick={handleClick}>
-            Sign In
-          </Button>
+        // <Button className={null} handleClick={handleClick}>
+        //     Sign In
+        //   </Button>
+        <GoogleSignInButton 
+          handleClick={handleClick}
+        />
       )
     }
       else {
         return (
-          <Button className={null} handleClick={handleLogOut}>
-            Log Out
-          </Button>
+          <GoogleSignOutButton 
+          handleClick={handleLogOut}
+        />
+          // <Button className={null} handleClick={handleLogOut}>
+          //   Log Out
+          // </Button>
         )
       }
 };

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
@@ -22,12 +22,22 @@ export default function Comment ({
     const [user] = useContext(UserContext);
     const {barID, commentID, drinkID, initialTimeStamp, lastTimeStamp, text } = usersComment;
     const [edit, setEdit] = useState(text);
+    const textareaRef = useRef(null);
 
 
     function handleEdit (e) {
         e.preventDefault();
         setEdit(e.target.value);
     }
+
+    useEffect(() => {
+     if (textareaRef.current){
+        // Reset height to auto to correctly calculate scrollHeight
+        textareaRef.current.style.height = 'auto';
+        // Set height to scrollHeight to fit content
+       textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+     }
+    }, [edit]);
   
     function handleClick(e){
       const updates = {};
@@ -55,13 +65,14 @@ export default function Comment ({
     };
     
 return (
-  
         <li key={index} id={commentID}>
             {(beingEditted && userID === user.userID) ? 
             <>
                 <form>
                   <EditBox
                       id='commentEdit'
+                      className='textEdit'
+                      textareaRef={textareaRef}
                       edit={edit}
                       handleEdit={handleEdit}
                   />

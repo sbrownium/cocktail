@@ -1,9 +1,15 @@
 import React from 'react';
 import './Button.css'
 
-export default function Button({handleClick, children, className}) {
+export default function Button({
+    handleClick,
+    children,
+    className,
+    reference
+}) {
     return (
         <button
+            ref={reference}
             className={className}
             onClick={handleClick}
             onKeyDown={(e) =>

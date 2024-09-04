@@ -4,26 +4,23 @@ import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
-import FilterIcon from './FilterIcon';
-import XIcon from './XIcon';
-
 
 export default function DrinkList({
+    barName,
     barID,
     beingEditted,
     comments,
-    // drinks,
     barsDrinks,
     ratings,
     handleToggle,
-    users
+    users,
+    showFilter
 }){
   const [user] = useContext(UserContext);
   const {userID} = user;
   const [checked, setChecked] = useState('Date Added');
   const [showDrinkArchive, setShowDrinkArchive] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
-  
+
   const initialFilter = {
     topRated: null,
     withComments: null,
@@ -42,10 +39,6 @@ export default function DrinkList({
 
   function toggleShowDrinkArchive () {
     setShowDrinkArchive(showDrinkArchive => !showDrinkArchive)
-  }
-
-  function toggleFilter () {
-    setShowFilter(showFilter => !showFilter)
   }
 
   function alphaSort (a,b) {
@@ -193,15 +186,8 @@ const sortedDrinks = useMemo(() => {
 }, [barsDrinks, showDrinkArchive, beingEditted, checked, filterChecked, filteredComments, myfilteredComments]);
     return (
       <>
-      {showFilter ?
+      {showFilter &&
       <>
-       <Button className='edit icon' handleClick={toggleFilter}>
-          <XIcon
-            width='22px'
-            height='22px'
-            fill='black'
-          />
-        </Button>
       <Order
         checked={checked}
         handleChange={handleChange}
@@ -214,17 +200,9 @@ const sortedDrinks = useMemo(() => {
         comments={comments}
         barID={barID}
       />
-      </> :
-      <>
-        <Button className='edit icon' handleClick={toggleFilter}>
-          <FilterIcon
-            width='25px'
-            height='25px'
-            fill='black'
-            />
-        </Button>
-      </>
+      </> 
 }
+<h1>{barName}</h1>
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li key={index}>

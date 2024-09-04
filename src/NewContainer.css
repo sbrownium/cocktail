@@ -1,0 +1,18 @@
+
+/* .positive {
+    background: #39AEA9;
+}
+.negative {
+    background: #557B83;
+    color: white;
+}
+.positive,
+.negative {
+    border: none;
+    padding: .5em 1em;
+    border-radius: 5px;
+} */
+.overlay form input.positive,
+.overlay form button.negative {
+    font-size: 1.15em;
+}

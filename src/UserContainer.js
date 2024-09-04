@@ -3,6 +3,8 @@ import Comment from "./Comment";
 import UserRating from "./UserRating";
 import { UserContext } from "./UserContext";
 import NewComment from "./NewComment";
+import "./UserContainer.css";
+import Button from "./Button";
 
 export default function UserContainer ({
     archived,
@@ -19,7 +21,8 @@ export default function UserContainer ({
     beingEditted,
     ratingsArray,
     emojiLookUp,
-    index  
+    index,
+    isExpanded 
 }) {
     const [user] = useContext(UserContext);  
     const usersArray = Object.values(users);
@@ -28,6 +31,7 @@ export default function UserContainer ({
     
     return (
         <>
+        {isExpanded ? 
         <div>
         {(filteredRatings.filter(rating => rating.userID === userID).length !== 0) &&    
         <UserRating
@@ -58,8 +62,18 @@ export default function UserContainer ({
                 barID={barID}
             />
             }
-        {preferredName}
-        </div>
+            {preferredName &&
+        preferredName
+            }
+        </div> :
+            <UserRating
+            userID={userID}
+            drinkID={drinkID}
+            ratingsArray={ratingsArray}
+            emojiLookUp={emojiLookUp}
+        />
+            }
+            
         </>   
     )
 }
