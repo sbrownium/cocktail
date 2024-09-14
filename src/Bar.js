@@ -9,6 +9,7 @@ import ArchiveButton from "./ArchiveButton.js";
 import DeleteButton from "./DeleteButton.js";
 import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
+import { BarContext } from "./BarContext.js";
 import EditBox from "./EditBox.js";
 import './Bar.css';
 import OliveXIcon from "./OliveXIcon.js";
@@ -26,8 +27,6 @@ export default function Bar({
   users,
   beingEditted,
   handleToggle,
-  selectedBar,
-  setSelectedBar,
   handleClick,
   changeBarRef,
   handleChangeBarToggle,
@@ -35,6 +34,7 @@ export default function Bar({
   setShowingBar
 }) {
   const [user] = useContext(UserContext);
+  const { selectedBar, setSelectedBar } = useContext(BarContext)
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
@@ -44,7 +44,7 @@ export default function Bar({
     setShowBarArchive(showBarArchive => !showBarArchive);
     // resets if an archived bar is selected when hide archived bars is fired
     // checks to make sure a bar is showing before checking if it is archived
-    if (showingBar && (Object.values(bars).filter(bar => bar.barID === selectedBar)[0].archived === true)) {
+    if (showingBar && (Object.values(bars).filter(bar => bar.barID === selectedBar.barID)[0].archived === true)) {
       setShowingBar(false);
     }
   }
@@ -62,9 +62,9 @@ export default function Bar({
     setEditBarName(e.target.value);
   }
 
-  function resetBarName () {
-    setEditBarName((Object.values(bars).filter(bar => bar.barID === selectedBar)[0].barName))
-  }
+  // function resetBarName () {
+  //   setEditBarName((Object.values(bars).filter(bar => bar.barID === selectedBar)[0].barName))
+  // }
 
   // function handleNeverMind (e) {
   //   e.preventDefault();
@@ -80,7 +80,8 @@ export default function Bar({
       setShowingBar(false);
     } else {
       setShowingBar(true);
-      setEditBarName(Object.values(bars).filter(bar => bar.barID === e.target.value)[0].barName); // sets the bar name for the edit state
+      setEditBarName(selectedBar.barName)
+      // setEditBarName(Object.values(bars).filter(bar => bar.barID === e.target.value)[0].barName); // sets the bar name for the edit state
     }
     handleChangeBarToggle();
     }; 
@@ -96,8 +97,8 @@ export default function Bar({
     return Object.values(bars).filter(bar => bar.archived === false);
   
   }, [showBarArchive, bars])
-  const filteredBar = barsArray.filter(bar => bar.barID === selectedBar);
-  const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar);
+  const filteredBar = barsArray.filter(bar => bar.barID === selectedBar.barID);
+  const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar.barID);
     return (
       // {showingBar &&
       <div className="barContainer">   
@@ -149,7 +150,6 @@ export default function Bar({
         <ChangeBar
           barsArray={barsArray}
           handleSelect={handleSelect}
-          selectedBar={selectedBar}
           showingBar={showingBar}
           showBarArchive={showBarArchive}
           changeBarRef={changeBarRef}
@@ -194,7 +194,7 @@ export default function Bar({
                     nodeName={barName}
                     handleToggle={handleToggle}
                     className={null}
-                    reset={resetBarName}
+                    // reset={resetBarName}
                     buttonText='Archive Bar'
                   />
                   {(addedBy === user.userID) &&
@@ -204,7 +204,7 @@ export default function Bar({
                     nodeName={barName}
                     handleToggle={handleToggle}
                     className={null}
-                    reset={resetBarName}
+                    // reset={resetBarName}
                     buttonText='Delete Bar'
                   />
                   } 

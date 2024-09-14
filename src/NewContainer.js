@@ -1,5 +1,6 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from './UserContext.js';
+import { BarContext } from './BarContext.js';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import BarSelector from './BarSelector.js';
@@ -18,24 +19,26 @@ export default function NewContainer ({
     drinks,
     users,
     handleNewDrinkToggle,
-    defaultBar,
-    setSelectedBar,
-    newDrinkRef
-    // closeModal
+    // defaultBar,
+    // setSelectedBar,
+    newDrinkRef,
+    setShowingBar
 }) {
     const [user] = useContext(UserContext);
     const { userID } = user
+    const { selectedBar, setSelectedBar } = useContext(BarContext);
     const [logInAlert, setLogInAlert] = useState(false);
     const [repeatAlert, setRepeatAlert] = useState(false);
     const [missingAlert, setMissingAlert] = useState(false);
     const barsArray = Object.values(bars);
-    const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
+    // const defaultBarObj = barsArray.filter((ID) => ID.barID === selectedBar.barID);
+    // const defaultBarName = "defaultBarName"
     // checks if a bar is already selected
-    const defaultBarName = useMemo(()=> {
-        if (defaultBar !== '') {
-            return defaultBarObj[0].barName;
-           }
-    },[defaultBar])
+    // const defaultBarName = useMemo(()=> {
+    //     if (selectedBar.barID !== '') {
+    //         return defaultBarObj[0].barName;
+    //        }
+    // },[selectedBar.barID])
     const initialValidation = {
         needsDrinkName: false,
         needsBarName: false,
@@ -45,8 +48,8 @@ export default function NewContainer ({
     }
     const initialNewDrink = {
         archived: false,
-        barID: defaultBar,
-        barName: defaultBarName,
+        barID: selectedBar.barID,
+        barName: selectedBar.barName,
         // drinkID: '',
         drinkName: '',
         description: '',
@@ -401,11 +404,13 @@ export default function NewContainer ({
                 const newDrinkObj = {archived, barID: newBarKey, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID:newDrinkKey, drinkName, description, price};
                 updates['/bars/' + newBarKey] = newBarObj;
                 updates['/drinks/' + newDrinkKey] = newDrinkObj;
+            
                 setSelectedBar(newBarKey);
                 
             } else {
                 const newDrinkObj = {archived, barID, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID:newDrinkKey, drinkName, description, price};
                 updates['/drinks/' + newDrinkKey] = newDrinkObj; 
+               
                 setSelectedBar(barID);
     
             }
@@ -413,6 +418,7 @@ export default function NewContainer ({
             setNewDrink(initialNewDrink);
             setValidation(initialValidation);
             handleNewDrinkToggle();
+            setShowingBar(true);
             
             return (
                 update(ref(db), updates).then(() => {
@@ -442,8 +448,8 @@ export default function NewContainer ({
                     validation={validation}
                     handleExistingBar={handleExistingBar}
                     // focusSelector={focusSelector}
-                    defaultBarID={defaultBar}
-                    defaultBarName={defaultBarName}
+                    // defaultBarID={selectedBar}
+                    // defaultBarName={defaultBarName}
                 />
                 <NewBar
                     newDrink={newDrink}

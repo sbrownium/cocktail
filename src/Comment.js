@@ -6,6 +6,7 @@ import DeleteButton from './DeleteButton.js';
 import Time from './Time.js';
 import Button from './Button.js';
 import { UserContext } from './UserContext.js';
+import './Comment.css';
 
 export default function Comment ({
   commentDrinkID,
@@ -91,9 +92,17 @@ return (
               children='Delete Comment'
             />
             </>
-              : text }
-             &nbsp;
-            {!beingEditted && <> (<Time initialTimeStamp={initialTimeStamp}/>)</>}  
+              : 
+              <div className='commentContainer'>
+                <div className='textContainer'>
+                  {text}
+                </div>
+                <div className='timeContainer'>
+                  {!beingEditted &&
+                    <Time initialTimeStamp={initialTimeStamp}/>
+                  }
+                </div>
+            </div>}  
         </li>
 )
 };

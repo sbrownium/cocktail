@@ -1,0 +1,42 @@
+/* Layout */
+.commentContainer,
+.textContainer,
+.timeContainer {
+    display: flex;
+}
+.commentContainer {
+    flex-direction: column;
+}
+.textContainer,
+.timeContainer {
+    flex-direction: row;
+}
+.timeContainer {
+    justify-content: flex-end;
+}
+.commentContainer {
+    padding: 1em .75em .5em .75em;
+    border-radius: 12px;
+}
+/* Color */
+.commentContainer {
+    /* background: lightblue; */
+    /* border: 1px solid #c3ecf3; */
+    /* background: #c3ecf320; */
+    border: 1px solid #003e56;
+}
+.commentContainer:first-of-type,
+.commentContainer:nth-of-type(4),
+.commentContainer:nth-of-type(7) {
+    /* background: lightcoral; */
+    border: 1px solid #f1abc9;
+    /* background: #f1abc920; */
+}
+.commentContainer:nth-of-type(2),
+.commentContainer:nth-of-type(5),
+.commentContainer:nth-of-type(8) {
+    border: 1px solid #01747e;
+    /* background: #01747e20; */
+    
+    /* background: lightgoldenrodyellow; */
+}

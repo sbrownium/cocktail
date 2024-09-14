@@ -63,11 +63,16 @@ export default function FeedbackList({
             emojiLookUp={emojiLookUp}
           />
     ))}
+    {!isExpanded &&
+    <Button className='buttonEmoji' handleClick={toggleExpanded}>
+     💬
+ </Button>}
     </div>
     {isExpanded &&
+    <>
       <ul>
         {uniqueIDs.map((userID, index) => (
-          <li className="userContainer" key={index}>
+          <li key={index}>
             <UserContainer
                 archived={archived}
                 barID={barID}
@@ -85,10 +90,11 @@ export default function FeedbackList({
             />
           </li>
         ))}
-      </ul>}
-      <Button className='icon' handleClick={toggleExpanded}>
-     {!isExpanded ? 'Comments 💬' : 'Close 💬'}
+      </ul>
+      <Button className='buttonEmoji' handleClick={toggleExpanded}>
+     🙅💬
  </Button>
+ </>}
  </>
     );
   }

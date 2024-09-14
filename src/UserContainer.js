@@ -32,7 +32,8 @@ export default function UserContainer ({
     return (
         <>
         {isExpanded ? 
-        <div>
+        <div className='userContainer'>
+            <div className='feedbackContainer'>
         {(filteredRatings.filter(rating => rating.userID === userID).length !== 0) &&    
         <UserRating
             userID={userID}
@@ -41,7 +42,10 @@ export default function UserContainer ({
             emojiLookUp={emojiLookUp}
           />
         }
-        {(filteredComments.filter(comment => comment.userID === userID).length !== 0)  &&  
+        
+       
+        {(filteredComments.filter(comment => comment.userID === userID).length !== 0)  && 
+        //  <div className="commentContainer"> 
         // currently only can only show one comment per user  
         <Comment
             filteredComments={filteredComments}
@@ -55,6 +59,7 @@ export default function UserContainer ({
             handleToggle={handleToggle}
             beingEditted={beingEditted}
         />
+        // </div> 
     }
         {(!beingEditted && !archived && (user.userID === userID)) && 
               <NewComment
@@ -62,10 +67,10 @@ export default function UserContainer ({
                 barID={barID}
             />
             }
-            {preferredName &&
-        preferredName
-            }
-        </div> :
+            </div>
+            {preferredName}
+            </div>
+        :
             <UserRating
             userID={userID}
             drinkID={drinkID}
@@ -74,6 +79,8 @@ export default function UserContainer ({
         />
             }
             
-        </>   
+        </> 
+        
     )
+    
 }

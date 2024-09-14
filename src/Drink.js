@@ -121,11 +121,11 @@ return (
                       edit={editDrinkName}
                       handleEdit={handleDrinkNameEdit}
                   />
-                  <AverageRating
+                  {/* <AverageRating
                   emojiLookUp={emojiLookUp}
                   ratings={ratings}
                   ratingDrinkID={drinkID}
-                />
+                /> */}
                   &nbsp;&mdash;&nbsp;
                   <EditBox
                       className={(editDrinkDescription === '') && 'missing'}

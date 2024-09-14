@@ -4,6 +4,7 @@ import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
+import './DrinkList.css';
 
 export default function DrinkList({
     barName,
@@ -205,7 +206,7 @@ const sortedDrinks = useMemo(() => {
 <h1>{barName}</h1>
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
-          <li key={index}>
+          <li className='drinkContainer' key={index}>
              <Drink
               addedBy={addedBy}
               archived={archived}
