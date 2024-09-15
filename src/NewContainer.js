@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext.js';
 import { BarContext } from './BarContext.js';
 import { ref, child, push, update } from "firebase/database";
@@ -48,8 +48,8 @@ export default function NewContainer ({
     }
     const initialNewDrink = {
         archived: false,
-        barID: selectedBar.barID,
-        barName: selectedBar.barName,
+        barID: '',
+        barName: '',
         // drinkID: '',
         drinkName: '',
         description: '',
@@ -61,6 +61,13 @@ export default function NewContainer ({
     const [newDrink, setNewDrink] = useState(initialNewDrink);
     const [validation, setValidation] = useState(initialValidation);
 
+    useEffect(() => {
+        setNewDrink((newDrink) => ({
+          ...newDrink,
+          barID: selectedBar.barID || '',
+          barName: selectedBar.barName || '',
+        }));
+      }, [selectedBar]);
 
     
     function handleExistingBar (e) {
