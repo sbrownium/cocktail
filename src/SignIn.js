@@ -4,7 +4,6 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
-import Button from './Button.js';
 import GoogleSignInButton from './GoogleSignInButton.js';
 import GoogleSignOutButton from './GoogleSignOutButton.js';
 

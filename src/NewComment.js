@@ -2,16 +2,20 @@ import React, { useState, useContext } from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
+import { BarContext } from './BarContext.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
 
 
 
-export default function NewComment({drinkID, barID}) {
+export default function NewComment({
+  drinkID
+}) {
     const [comment, setComment] = useState('');
     const [commentAlert, setCommentAlert] = useState(false);
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
     const { userName, userID } = user;
+    const { selectedBar } = useContext(BarContext);
     const [ showAdd, setShowAdd ] = useState(false);
 
   function handleToggle () {
@@ -30,7 +34,7 @@ export default function NewComment({drinkID, barID}) {
         commentID: newCommentKey,
         userID: userID,
         drinkID: drinkID,
-        barID: barID,
+        barID: selectedBar.barID,
         initialTimeStamp: Date.now(),
         lastTimeStamp: Date.now(),
         text: comment,
@@ -51,7 +55,7 @@ export default function NewComment({drinkID, barID}) {
       <>
       {!showAdd ?
        <Button className='icon' handleClick={handleToggle}>
-       + 💬
+       New Comment
      </Button>
       :
       <>

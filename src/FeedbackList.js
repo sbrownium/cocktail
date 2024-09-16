@@ -68,6 +68,7 @@ export default function FeedbackList({
      💬
  </Button>}
     </div>
+    <NewComment drinkID={drinkID} />
     {isExpanded &&
     <>
       <ul>

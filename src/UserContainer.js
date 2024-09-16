@@ -61,12 +61,12 @@ export default function UserContainer ({
         />
         // </div> 
     }
-        {(!beingEditted && !archived && (user.userID === userID)) && 
+        {/* {(!beingEditted && !archived && (user.userID === userID)) && 
               <NewComment
                 drinkID={drinkID}
                 barID={barID}
             />
-            }
+            } */}
             </div>
             {preferredName}
             </div>
