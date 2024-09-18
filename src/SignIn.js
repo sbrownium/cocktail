@@ -10,12 +10,13 @@ import GoogleSignOutButton from './GoogleSignOutButton.js';
 
 export default function SignIn ({
   users,
-  handleToggle
+  handleToggle,
+  handleModuleToggle
 }) {
 const [user, setUser] = useContext(UserContext);
 
 
-const usersArray = Object.values(users);
+
 const provider = new GoogleAuthProvider();
 
 function findPreferredName (name) { // emoves last name from UI
@@ -45,6 +46,7 @@ signInWithPopup(auth, provider)
       userName: result.user.displayName
     }        
           setUser(currentUser);
+          const usersArray = Object.values(users);
           const existingUser = usersArray.find((u) => u.userID === currentUser.userID )
       if (!existingUser) {
       const newUserPublicKey = push(child(ref(db), '/usersPublic/')).key;
@@ -52,6 +54,7 @@ signInWithPopup(auth, provider)
       const updates = {};
       updates['/usersPublic/' + newUserPublicKey] = currentUser;
       // updates['/usersPrivate/' + newUserPrivateKey] = newUserPrivate;
+      handleModuleToggle();
   return (
       update(ref(db), updates).then(() => {
           console.log('Data saved successfully!');

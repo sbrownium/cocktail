@@ -38,7 +38,10 @@ export default function FeedbackList({
       <>
         {!beingEditted && 
         <>
-            <NewComment drinkID={drinkID} />
+            <NewComment
+              drinkID={drinkID}
+              users={users}
+              />
             <NewRating
                 emojiLookUp={emojiLookUp}
                 handleToggle={handleToggle}

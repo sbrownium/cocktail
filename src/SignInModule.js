@@ -6,13 +6,14 @@ import SignIn from "./SignIn";
 export default function SignInModule ({
     message,
     reference,
-    handleCloseModule
+    handleModuleToggle,
+    users
 }){
 
     return (
         <dialog ref={reference} className='overlay'>
             <div className='buttonHolder'>
-                <Button className='modalBtn' handleClick={handleCloseModule}>
+                <Button className='modalBtn' handleClick={handleModuleToggle}>
                     <XIcon
                     height='1.25em'
                     fillColor='#303030'
@@ -20,7 +21,10 @@ export default function SignInModule ({
                 </Button>
             </div>
             {message}
-            <SignIn/>
+            <SignIn
+                users={users}
+                handleModuleToggle={handleModuleToggle}
+            />
         </dialog>
     )
 }

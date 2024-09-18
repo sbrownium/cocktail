@@ -1,15 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import { BarContext } from './BarContext.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
+import SignInModule from './SignInModule.js';
 
 
 
 export default function NewComment({
-  drinkID
+  drinkID,
+  users
 }) {
     const [comment, setComment] = useState('');
     const [commentAlert, setCommentAlert] = useState(false);
@@ -17,14 +19,29 @@ export default function NewComment({
     const { userName, userID } = user;
     const { selectedBar } = useContext(BarContext);
     const [ showAdd, setShowAdd ] = useState(false);
+    const newCommentRef = useRef(null);
 
   function handleToggle () {
     setShowAdd(showAdd => !showAdd);
   }
 
+  function handleSignInModule () {
+    if (!newCommentRef.current.open) {
+      newCommentRef.current.showModal(); // open modal
+      // setState(true); // hide button
+    } 
+    else {
+      newCommentRef.current.close(); // close modal
+      // setState(false); // show button
+    }
+  }
+
     function handleClick(e) {
       e.preventDefault();
-        if (comment.length < 1) {
+      if (!user) {
+        handleSignInModule ()
+      }
+        else if (comment.length < 1) {
           return setCommentAlert(true);
         }
         else {
@@ -81,6 +98,12 @@ export default function NewComment({
             </Button> 
             </>
           }
+          <SignInModule
+            message='Please signin to leave a comment'
+            reference={newCommentRef}
+            handleModuleToggle={handleSignInModule}
+            users={users}
+          />
       </>
     );
   }
