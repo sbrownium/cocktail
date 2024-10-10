@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'; 
+import React, { useContext, useEffect } from 'react'; 
 import { googleLogout } from '@react-oauth/google';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { ref, child, push, update } from "firebase/database";
@@ -10,12 +10,13 @@ import GoogleSignOutButton from './GoogleSignOutButton.js';
 
 export default function SignIn ({
   users,
-  handleToggle,
-  handleModuleToggle
+  setBeingEditted
 }) {
 const [user, setUser] = useContext(UserContext);
 
-
+// useEffect(() => {
+//   handleModuleToggle();
+// }, [user]);
 
 const provider = new GoogleAuthProvider();
 
@@ -28,7 +29,11 @@ function handleLogOut (e) {
   e.preventDefault();
   googleLogout();
   setUser('');
-  handleToggle();
+  setBeingEditted(false);
+}
+
+function handleSignIn () {
+  handleClick();
 }
 
 function handleClick (e) {
@@ -47,17 +52,19 @@ signInWithPopup(auth, provider)
     }        
           setUser(currentUser);
           const usersArray = Object.values(users);
-          const existingUser = usersArray.find((u) => u.userID === currentUser.userID )
+          const existingUser = usersArray.find((u) => u.userID === currentUser.userID)
       if (!existingUser) {
       const newUserPublicKey = push(child(ref(db), '/usersPublic/')).key;
       const newUserPrivateKey = push(child(ref(db), '/usersPrivate/')).key;
       const updates = {};
       updates['/usersPublic/' + newUserPublicKey] = currentUser;
       // updates['/usersPrivate/' + newUserPrivateKey] = newUserPrivate;
-      handleModuleToggle();
+      
   return (
       update(ref(db), updates).then(() => {
           console.log('Data saved successfully!');
+          
+          
     })
     .catch((error) => {
       console.log('problem writing')
@@ -67,6 +74,7 @@ signInWithPopup(auth, provider)
   }).catch((error) => {
   
   })
+  
 }
     if (!user) {
       return (

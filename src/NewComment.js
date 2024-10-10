@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
@@ -6,12 +6,13 @@ import { BarContext } from './BarContext.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
 import SignInModule from './SignInModule.js';
-
-
+import XIcon from './XIcon.js';
+import './NewComment.css';
 
 export default function NewComment({
   drinkID,
-  users
+  users,
+  setIsExpanded
 }) {
     const [comment, setComment] = useState('');
     const [commentAlert, setCommentAlert] = useState(false);
@@ -21,31 +22,31 @@ export default function NewComment({
     const [ showAdd, setShowAdd ] = useState(false);
     const newCommentRef = useRef(null);
 
+    // If user tries to leave comment before signing in,
+    // controls closing SignInModal after signing in
+    useEffect(() => {
+        if(user && (comment.length > 1)) { // needs to use comment.length to make sure someone is trying to leave comment
+          // or else it will try to run handleCommentSubmit whenever someone logs in anytime in app
+          newCommentRef.current?.close(); // closes modal
+          handleCommentSubmit(); // submits comment            
+        }
+      }, [user]);
+
+    // removes alert onces user adds comment
+      useEffect(() => {
+        if ((comment.length > 1))
+        setCommentAlert(false)
+      }, [comment]);
+
   function handleToggle () {
     setShowAdd(showAdd => !showAdd);
   }
 
-  function handleSignInModule () {
-    if (!newCommentRef.current.open) {
-      newCommentRef.current.showModal(); // open modal
-      // setState(true); // hide button
-    } 
-    else {
-      newCommentRef.current.close(); // close modal
-      // setState(false); // show button
+  function handleCommentSubmit () {
+    if (comment.length < 1) {// If there isn't a comment, 
+      return setCommentAlert(true); //show an alert and stop submission
     }
-  }
-
-    function handleClick(e) {
-      e.preventDefault();
-      if (!user) {
-        handleSignInModule ()
-      }
-        else if (comment.length < 1) {
-          return setCommentAlert(true);
-        }
-        else {
-      const newCommentKey = push(child(ref(db), '/comments/')).key;
+    const newCommentKey = push(child(ref(db), '/comments/')).key;
       const updates = {};
       const newComment = {
         commentID: newCommentKey,
@@ -56,8 +57,9 @@ export default function NewComment({
         lastTimeStamp: Date.now(),
         text: comment,
       };
-    setComment('');
-    updates['/comments/' + newCommentKey] = newComment;
+    setComment(''); // reset comment state
+    updates['/comments/' + newCommentKey] = newComment; // syntax for database
+    setIsExpanded(true); // opens comment toggle from FeedbackList so user sees new comment immediately
    
     return (
         update(ref(db), updates).then(() => {
@@ -66,7 +68,28 @@ export default function NewComment({
       .catch((error) => {
         console.log('problem writing')
       })
-    ) }
+    ) 
+  }
+
+  function handleSignInModule () {
+    if (!newCommentRef.current.open) {
+      newCommentRef.current.showModal(); // open modal
+     } 
+  }
+
+async function handleClick(e) {
+e.preventDefault();
+  if (!user) {
+    handleSignInModule();
+    return; // stop further execution until the user signs in
+  }
+  try {
+    // Handle comment submission asynchronously
+    await handleCommentSubmit();
+    console.log('Comment submitted successfully');
+  } catch (error) {
+    console.log('Error submitting the comment:', error);
+  }
 }
     return (
       <>
@@ -91,18 +114,23 @@ export default function NewComment({
         </>
         }
         {commentAlert &&
-            <>
+            <div className='commentAlert'>
+            <Button className='icon' handleClick={() => setCommentAlert(false)} >
+              <XIcon 
+                width='15px'
+                height='15px'
+                fill='black'
+              />
+             </Button> 
             <p>Please add your comment before submitting</p>
-            <Button className={null} handleClick={() => setCommentAlert(false)} >
-             OK
-            </Button> 
-            </>
+            </div>
           }
           <SignInModule
             message='Please signin to leave a comment'
             reference={newCommentRef}
             handleModuleToggle={handleSignInModule}
             users={users}
+            handleCommentSubmit={handleCommentSubmit}
           />
       </>
     );

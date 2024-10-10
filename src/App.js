@@ -249,7 +249,7 @@ function handleNewDrinkToggle () {
   
                 <SignIn
                   users={users}
-                  handleToggle={handleToggle}
+                  setBeingEditted={setBeingEditted}
                 />
                 <Button
                   handleClick={handleToGoBars}

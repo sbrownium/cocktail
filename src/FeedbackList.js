@@ -38,10 +38,10 @@ export default function FeedbackList({
       <>
         {!beingEditted && 
         <>
-            <NewComment
+            {/* <NewComment
               drinkID={drinkID}
               users={users}
-              />
+              /> */}
             <NewRating
                 emojiLookUp={emojiLookUp}
                 handleToggle={handleToggle}
@@ -71,7 +71,7 @@ export default function FeedbackList({
      💬
  </Button>}
     </div>
-    <NewComment drinkID={drinkID} />
+    
     {isExpanded &&
     <>
       <ul>
@@ -99,6 +99,11 @@ export default function FeedbackList({
      🙅💬
  </Button>
  </>}
+ <NewComment
+  drinkID={drinkID}
+  users={users}
+  setIsExpanded={setIsExpanded}
+  />
  </>
     );
   }

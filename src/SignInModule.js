@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { UserContext } from "./UserContext";
 import Button from "./Button";
 import XIcon from "./XIcon";
 import SignIn from "./SignIn";
@@ -7,9 +8,16 @@ export default function SignInModule ({
     message,
     reference,
     handleModuleToggle,
-    users
+    users,
+    handleCommentSubmit
 }){
-
+    const [user] = useContext(UserContext)
+    useEffect(() => {
+        if(user) {
+            reference.current.close();
+        }
+      }, [user]);
+  
     return (
         <dialog ref={reference} className='overlay'>
             <div className='buttonHolder'>
@@ -24,6 +32,7 @@ export default function SignInModule ({
             <SignIn
                 users={users}
                 handleModuleToggle={handleModuleToggle}
+                handleCommentSubmit={handleCommentSubmit}
             />
         </dialog>
     )
