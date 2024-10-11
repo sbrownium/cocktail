@@ -96,16 +96,18 @@ e.preventDefault();
 }
     return (
       <>
+      <div className="commentForm">
         <form>
-          <label>New Comment:</label>
           <input
             type="text"
             value={comment}
+            placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
           />
-          <Submit handleClick={handleClick} value='add'/>
+          <Submit className="color-1" handleClick={handleClick} value='Add'/>
         </form>
-        <Button handleClick={clearComment}>Clear</Button>
+        <Button className="color-4" handleClick={clearComment}>Clear</Button>
+        </div>
         {commentAlert &&
             <div className='commentAlert'>
             <Button className='icon' handleClick={() => setCommentAlert(false)} >
