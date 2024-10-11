@@ -70,6 +70,9 @@ export default function NewComment({
       })
     ) 
   }
+ function clearComment () {
+  setComment(''); // reset comment state
+ }
 
   function handleSignInModule () {
     if (!newCommentRef.current.open) {
@@ -93,14 +96,8 @@ e.preventDefault();
 }
     return (
       <>
-      {!showAdd ?
-       <Button className='icon' handleClick={handleToggle}>
-       New Comment
-     </Button>
-      :
-      <>
         <form>
-          <label>New:</label>
+          <label>New Comment:</label>
           <input
             type="text"
             value={comment}
@@ -108,11 +105,7 @@ e.preventDefault();
           />
           <Submit handleClick={handleClick} value='add'/>
         </form>
-        <Button handleClick={handleToggle}>
-          Nah
-        </Button>
-        </>
-        }
+        <Button handleClick={clearComment}>Clear</Button>
         {commentAlert &&
             <div className='commentAlert'>
             <Button className='icon' handleClick={() => setCommentAlert(false)} >
