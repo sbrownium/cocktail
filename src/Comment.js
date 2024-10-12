@@ -9,19 +9,18 @@ import { UserContext } from './UserContext.js';
 import './Comment.css';
 
 export default function Comment ({
-  commentDrinkID,
-  filteredComments,
-  index,
-  // commentID,
-  // initialTimeStamp,
-  // text,
+  commentID,
+  drinkID,
+  initialTimeStamp,
+  text,
   userID,
+  index,
   handleToggle,
-  beingEditted,
+  beingEditted
 }) {
-    const usersComment = filteredComments.filter(comment => comment.userID === userID)[0]
+    // const usersComment = filteredComments.filter(comment => comment.userID === userID)[0]
     const [user] = useContext(UserContext);
-    const {barID, commentID, drinkID, initialTimeStamp, lastTimeStamp, text } = usersComment;
+    // const {barID, commentID, drinkID, initialTimeStamp, lastTimeStamp, text } = usersComment;
     const [edit, setEdit] = useState(text);
     const textareaRef = useRef(null);
 
@@ -45,7 +44,7 @@ export default function Comment ({
       const newEdit = {
         commentID: commentID,
         userID: userID,
-        drinkID: commentDrinkID,
+        drinkID: drinkID,
         initialTimeStamp: initialTimeStamp,
         lastTimeStamp: Date.now(),
         text: edit
@@ -104,6 +103,7 @@ return (
                 </div>
             </div>}  
         </li>
+       
 )
 };
 

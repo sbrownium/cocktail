@@ -12,6 +12,7 @@ import DeleteButton from './DeleteButton.js';
 import Unarchive from './Unarchive.js';
 import FeedbackList from './FeedbackList.js';
 import './Drink.css';
+import CommentList from './CommentList.js';
 
 
 export default function Drink({
@@ -225,7 +226,7 @@ return (
                 beingEditted={beingEditted}
                 barID={barID} 
                 /> */}
-            <FeedbackList
+            {/* <FeedbackList
               comments={comments}
               users={users}
               drinkID={drinkID}
@@ -235,6 +236,10 @@ return (
               archived={archived}
               ratings={ratings}
               emojiLookUp={emojiLookUp}
+            /> */}
+            <CommentList
+              comments={comments}
+              drinkID={drinkID}
             />
           </>
        }
