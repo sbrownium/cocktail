@@ -1,8 +1,18 @@
+.drinkContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+}
+
 .nameRatingsContainer,
 .nameRatingsContainer ul {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+}
+.nameRatingsContainer {
+    height: 4.4em;
 }
 .nameRatingsContainer h2 {
     margin: 0 .125em 0 0;

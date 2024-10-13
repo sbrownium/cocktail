@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
 import Button from "./Button";
+import "./CommentList.css";
 
 export default function CommentList ({
         comments,
@@ -23,7 +24,7 @@ export default function CommentList ({
             {isExpanded ?
                 <>
                 <Button className='buttonEmoji' handleClick={toggleExpanded}>
-                    🙅💬
+                comments 🙈
                 </Button>
                 <ul>
                     {filteredComments.map(({commentID, initialTimeStamp, text, userID}, index) => (
@@ -40,16 +41,17 @@ export default function CommentList ({
                         />
                     ))}
             </ul>
-            </> :
-            <Button className='buttonEmoji' handleClick={toggleExpanded}>
-                💬
-            </Button>
-            }
             <NewComment
                 drinkID={drinkID}
                 users={users}
                 setIsExpanded={setIsExpanded}
             />
+            </> :
+            <Button className='buttonEmoji' handleClick={toggleExpanded}>
+                comments 🐵
+            </Button>
+            }
+            
     </>
     )
 }

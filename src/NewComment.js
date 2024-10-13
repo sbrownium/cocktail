@@ -104,9 +104,9 @@ e.preventDefault();
             placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
           />
-          <Submit className="color-1" handleClick={handleClick} value='Add'/>
+          <Submit className="color-4" handleClick={handleClick} value='Add'/>
         </form>
-        <Button className="color-4" handleClick={clearComment}>Clear</Button>
+        {/* <Button className="color-4" handleClick={clearComment}>Clear</Button> */}
         </div>
         {commentAlert &&
             <div className='commentAlert'>

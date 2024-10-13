@@ -1,12 +1,13 @@
 button span.myRating {
-    text-decoration: underline wavy #7bc9d4;
+    text-decoration: underline solid #017480;
     text-underline-offset: 0.25em;
 }
 .remove {
     background: none;
     border: none;
     padding: 0;
-    margin: 0;
+    margin: 0 .125em;
+    max-width: 35px;
 }
 li.emoji {
     display: flex;
@@ -14,5 +15,6 @@ li.emoji {
 }
 li.emoji p {
     font-size: .4em;
+    color: #003e56;
     margin: 0;
 }
