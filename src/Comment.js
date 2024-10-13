@@ -16,13 +16,15 @@ export default function Comment ({
   userID,
   index,
   handleToggle,
-  beingEditted
+  beingEditted,
+  users
 }) {
-    // const usersComment = filteredComments.filter(comment => comment.userID === userID)[0]
-    const [user] = useContext(UserContext);
-    // const {barID, commentID, drinkID, initialTimeStamp, lastTimeStamp, text } = usersComment;
-    const [edit, setEdit] = useState(text);
-    const textareaRef = useRef(null);
+  const [user] = useContext(UserContext);  
+  const usersArray = Object.values(users);
+  const filteredUsers = usersArray.filter(u => u.userID === userID);
+  const preferredName = filteredUsers[0].preferredName
+  const [edit, setEdit] = useState(text);
+  const textareaRef = useRef(null);
 
 
     function handleEdit (e) {
@@ -98,7 +100,10 @@ return (
                 </div>
                 <div className='timeContainer'>
                   {!beingEditted &&
-                    <Time initialTimeStamp={initialTimeStamp}/>
+                    <>
+                      {preferredName}
+                      <Time initialTimeStamp={initialTimeStamp}/>
+                    </>
                   }
                 </div>
             </div>}  

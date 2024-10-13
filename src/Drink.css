@@ -1,8 +1,12 @@
-.drinkNameContainer {
+.nameRatingsContainer,
+.nameRatingsContainer ul {
     display: flex;
     flex-direction: row;
-    align-items: center
+    align-items: flex-end;
 }
-.drinkNameContainer h2 {
+.nameRatingsContainer h2 {
     margin: 0 .125em 0 0;
+}
+.nameRatingsContainer ul {
+    padding: 0 0 0 .5em;
 }

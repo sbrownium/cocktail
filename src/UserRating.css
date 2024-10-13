@@ -1,4 +1,18 @@
-/* .myRating {
+button span.myRating {
     text-decoration: underline wavy #7bc9d4;
     text-underline-offset: 0.25em;
-} */
+}
+.remove {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+li.emoji {
+    display: flex;
+    flex-direction: column;
+}
+li.emoji p {
+    font-size: .4em;
+    margin: 0;
+}

@@ -13,6 +13,7 @@ import Unarchive from './Unarchive.js';
 import FeedbackList from './FeedbackList.js';
 import './Drink.css';
 import CommentList from './CommentList.js';
+import RatingsList from './RatingsList.js';
 
 
 export default function Drink({
@@ -163,21 +164,31 @@ return (
              </>   
             :
             <> 
-            <div className='drinkNameContainer'>
-              <h2>{drinkName}</h2>
-              {/* <AverageRating
-                emojiLookUp={emojiLookUp}
+            <div className='nameRatingsContainer'>  
+              <h2>{drinkName}</h2> 
+              <RatingsList 
+                drinkID={drinkID}
                 ratings={ratings}
-                ratingDrinkID={drinkID}
-              /> */}
+                users={users}
+                emojiLookUp={emojiLookUp}
+              />
              </div> 
             {description} &mdash;
             ${Number(price).toFixed(2)}
             </>
             }
             {(archived && user && beingEditted) &&
-            <>    
-            <h2>{drinkName}</h2> &mdash;&nbsp;
+            <>  
+            <div className='nameRatingsContainer'>  
+              <h2>{drinkName}</h2> 
+              <RatingsList 
+                drinkID={drinkID}
+                ratings={ratings}
+                users={users}
+                emojiLookUp={emojiLookUp}
+              />
+             </div> 
+            {/* &mdash;&nbsp; */}
             {description} &mdash;
             ${Number(price).toFixed(2)}
             <Unarchive
@@ -240,6 +251,7 @@ return (
             <CommentList
               comments={comments}
               drinkID={drinkID}
+              users={users}
             />
           </>
        }

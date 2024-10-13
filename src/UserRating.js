@@ -1,25 +1,37 @@
-import React, {useContext} from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from './UserContext.js';
 import './UserRating.css'
-
+import Button from "./Button.js";
 
 export default function UserRating ({
     userID,
-    drinkID,
-    ratingsArray,
-    emojiLookUp
+    rating,
+    emojiLookUp,
+    index,
+    users
 }) {
     const [user] = useContext(UserContext);
-    // const { userID } = user; 
-    const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === drinkID);
-    
-    if (filterRatings.length !== 0) {
-    // const ratingID = filterRatings[0].ratingID;
+    const usersArray = Object.values(users);
+    const filteredUsers = usersArray.filter(u => u.userID === userID);
+    const preferredName = filteredUsers[0].preferredName
+    const [ showName, setShowName ] = useState(false)
     const emojiKeys = Object.keys(emojiLookUp);
-    const ratingToEmoji = emojiKeys.find(key => emojiLookUp[key] === filterRatings[0].rating);
+    const ratingToEmoji = emojiKeys.find(key => emojiLookUp[key] === rating);
+
+    function toggleShowName () {
+        setShowName(showName => !showName);
+    }
     
     return (
-        <span className={filterRatings[0].userID === user.userID ? 'emoji myRating' : 'emoji'}>{ratingToEmoji}</span>
+        <li key={index} className='emoji'>
+            <Button className='remove' handleClick={toggleShowName}>
+                {showName ?
+                    <p>{preferredName}</p>
+                    :
+                    <p>&nbsp;</p>
+                }
+                <span className={(user.userID === userID) && 'myRating'}>{ratingToEmoji}</span>
+            </Button>
+        </li>
     ) 
-    }
 }
