@@ -7,6 +7,7 @@ import Time from './Time.js';
 import Button from './Button.js';
 import { UserContext } from './UserContext.js';
 import './Comment.css';
+import MoreEditMenu from './MoreEditMenu.js';
 
 export default function Comment ({
   commentID,
@@ -23,6 +24,7 @@ export default function Comment ({
   const usersArray = Object.values(users);
   const filteredUsers = usersArray.filter(u => u.userID === userID);
   const preferredName = filteredUsers[0].preferredName
+  const [commentsBeingEditted, setCommentsBeingEditted] = useState(false);
   const [edit, setEdit] = useState(text);
   const textareaRef = useRef(null);
 
@@ -30,6 +32,10 @@ export default function Comment ({
     function handleEdit (e) {
         e.preventDefault();
         setEdit(e.target.value);
+    }
+
+    function toggleCommentsBeingEditted (){
+      setCommentsBeingEditted(commentsBeingEditted => !commentsBeingEditted)
     }
 
     useEffect(() => {
@@ -68,7 +74,7 @@ export default function Comment ({
     
 return (
         <li key={index} id={commentID}>
-            {(beingEditted && userID === user.userID) ? 
+            {(commentsBeingEditted && userID === user.userID) ? 
             <>
                 <form>
                   <EditBox
@@ -105,7 +111,17 @@ return (
                       <Time initialTimeStamp={initialTimeStamp}/>
                     </>
                   }
+                  <MoreEditMenu 
+                    deletePath='/comments/'
+                    deleteNodeID={commentID}
+                    deleteNodeName='your comment'
+                    deleteHandleToggle={handleToggle}
+                    deleteClassName={null}
+                    deleteButtonText='Delete'
+                    toggleCommentsBeingEditted={toggleCommentsBeingEditted}
+                  />
                 </div>
+                
             </div>}  
         </li>
        

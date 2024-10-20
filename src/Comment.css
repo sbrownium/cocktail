@@ -6,6 +6,7 @@
 }
 .commentContainer {
     flex-direction: column;
+    position: relative;
 }
 .textContainer,
 .timeContainer {
@@ -13,6 +14,8 @@
 }
 .timeContainer {
     justify-content: flex-end;
+    align-items: baseline;
+    margin: 0 1em 0 0;
 }
 .commentContainer {
     padding: 1em .75em .5em .75em;

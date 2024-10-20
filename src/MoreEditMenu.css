@@ -1,0 +1,45 @@
+.moreSelectionsContainer.comments {
+    align-items: flex-end;
+    position: absolute;
+    right: -1em;
+    bottom: .45em;
+}
+.disabled {
+    color: #808080;
+    cursor: default;
+    border: none;
+    background: none;
+}
+.commentsButtonsHolder.expanded {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    bottom: 2.1em;
+    padding: .5em .5em .5em 0;
+    border-top: 1px solid #80808029;
+    /* border-bottom: none; */
+    border-left: 1px solid #80808029;
+    border-right: 1px solid #80808029;
+    border-radius: 8px 8px 0 0;
+}
+.commentsButtonsHolder.expanded button {
+    padding: .5em 0 .5em 1em;
+}
+.comments .expanded,
+.menuButtonContainer.comments.expanded {
+    background: whitesmoke;
+}
+.menuButtonContainer.comments.expanded {
+    border-bottom: 1px solid #80808029;
+    border-left: 1px solid #80808029;
+    border-right: 1px solid #80808029;
+    border-radius: 0 0 8px 8px;
+}  
+.menuButtonContainer.comments {
+    background: none;
+    border: none;
+    padding: .25em .5em .25em 2.59em;
+    margin: 0;
+}
+
