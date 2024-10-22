@@ -10,6 +10,9 @@
     border: none;
     background: none;
 }
+.disabled .dot {
+    background: #CCC;
+}
 .commentsButtonsHolder.expanded {
     position: absolute;
     display: flex;

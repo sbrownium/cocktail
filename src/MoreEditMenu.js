@@ -13,7 +13,8 @@ export default function MoreEditMenu ({
     deleteHandleToggle,
     deleteClassName,
     deleteButtonText,
-    toggleCommentsBeingEditted
+    toggleCommentsBeingEditted,
+    userID
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
@@ -51,12 +52,18 @@ export default function MoreEditMenu ({
                 }
             </div> // End isExpanded
             } 
+
              <Button
                 className={!isExpanded ? 'menuButtonContainer comments' : 'expanded menuButtonContainer comments'}
-                handleClick={toggleExpand}
+                // If there is a user logged in, but not the owner of the comment
+                // disable click handler
+                handleClick={(user && (userID !== user.userID)) ? null : toggleExpand}
+                // update aria
+                aria-disabled={(user && (userID !== user.userID)) && "true"}
             >
             {!isExpanded ?
-                <div className="dotHolder">
+                // add disabled class
+                <div className={(user && (userID !== user.userID)) ? "disabled dotHolder" : "dotHolder"}>
                     <div className="dot"></div>
                     <div className="dot"></div>
                     <div className="dot"></div>
@@ -67,38 +74,7 @@ export default function MoreEditMenu ({
                     fillColor='#303030'
                 />
             }
-            </Button> 
+            </Button>
         </div> 
     )
 }
-
-{/* <>
-<div
-    className='moreSelectionsContainer'
->  
-
-    <div className={!moreSelected ? "moreButtonsHolder": "moreButtonsHolder expanded"}>
-        <a href="https://github.com/sbrownium/cocktail">
-            <GitHub width='24.5px' height='24px' fillColor='black'/>
-        </a>
-        <a href="https://linkedin.com/in/sbrownium">
-            <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
-        </a>
-    </div>
-    <Button
-    handleClick={handleMoreSelectedToggle}
-    className="menuButtonContainer"
->
-    {!moreSelected ? 
-    <div className="dotHolder">
-        <div className="dot"></div>
-        <div className="dot"></div>
-        <div className="dot"></div>
-    </div> :
-    <XIcon
-        height='1.25em'
-        fillColor='#303030'
-    />}
-</Button>
-</div>
-</> */}

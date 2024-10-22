@@ -119,6 +119,7 @@ return (
                     deleteClassName={null}
                     deleteButtonText='Delete'
                     toggleCommentsBeingEditted={toggleCommentsBeingEditted}
+                    userID={userID}
                   />
                 </div>
                 
