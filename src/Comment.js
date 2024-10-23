@@ -116,7 +116,7 @@ return (
                     deleteNodeID={commentID}
                     deleteNodeName='your comment'
                     deleteHandleToggle={handleToggle}
-                    deleteClassName={null}
+                    deleteClassName='textButton'
                     deleteButtonText='Delete'
                     toggleCommentsBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}

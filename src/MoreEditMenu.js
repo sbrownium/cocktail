@@ -45,7 +45,10 @@ export default function MoreEditMenu ({
                         className={deleteClassName}
                         buttonText={deleteButtonText}
                     />
-                    <Button handleClick={toggleCommentsBeingEditted}>
+                    <Button 
+                        handleClick={toggleCommentsBeingEditted}
+                        className='textButton'
+                    >
                         Edit
                     </Button>
                 </> // End !user
