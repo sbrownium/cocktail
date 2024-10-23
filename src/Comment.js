@@ -38,6 +38,10 @@ export default function Comment ({
       setCommentsBeingEditted(commentsBeingEditted => !commentsBeingEditted)
     }
 
+    function handleNeverMind () {
+      toggleCommentsBeingEditted()
+      setEdit(text);
+    }
     useEffect(() => {
      if (textareaRef.current){
         // Reset height to auto to correctly calculate scrollHeight
@@ -58,7 +62,7 @@ export default function Comment ({
         text: edit
       };
     e.preventDefault();
-    handleToggle(); 
+    toggleCommentsBeingEditted();
     updates['/comments/' + commentID] = newEdit;
    
     return (
@@ -89,15 +93,12 @@ return (
                     children='Save'
                     className={null}
                   />
+                  <Button
+                    handleClick={handleNeverMind}
+                    children='Never Mind'
+                    className={null}
+                  />
                 </form>            
-              <DeleteButton
-              path='/comments/'
-              nodeID={commentID}
-              nodeName='your comment'
-              handleToggle={handleToggle}
-              className={null}
-              children='Delete Comment'
-            />
             </>
               : 
               <div className='commentContainer'>
@@ -111,6 +112,7 @@ return (
                       <Time initialTimeStamp={initialTimeStamp}/>
                     </>
                   }
+                  </div>
                   <MoreEditMenu 
                     deletePath='/comments/'
                     deleteNodeID={commentID}
@@ -121,7 +123,7 @@ return (
                     toggleCommentsBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
                   />
-                </div>
+                
                 
             </div>}  
         </li>
