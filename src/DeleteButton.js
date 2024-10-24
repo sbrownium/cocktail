@@ -1,37 +1,45 @@
 import React, { useState } from "react";
-import DeletePopOver from "./DeletePopOver";
+import Delete from "./Delete";
 import Button from "./Button";
+import Modal from "./Modal";
 
 export default function DeleteButton ({
-    path,
-    nodeID,
-    nodeName,
+    deletePath,
+    deleteNodeID,
     handleToggle,
     buttonText,
     className,
-    reset
+    reference,
+    message,
+    toggleExpand
 }) {
-    const [visible, setVisible] = useState(false);
 
-    function handleClick (e) {
-        e.preventDefault();
-        setVisible(visible => !visible);
-      }
+    function handleModalToggle () {
+        if (!reference.current.open) {
+            reference.current.showModal(); // open modal
+        } 
+        else {
+            reference.current.close(); // close modal
+            toggleExpand(); 
+        }
+    } 
     return (
         <>
-        {visible ? 
-        <DeletePopOver
-            path={path}
-            nodeID={nodeID}
-            nodeName={nodeName}
-            handleToggle={handleToggle}
-            reset={reset}
-        />
-        :
-        <Button handleClick={handleClick} className={className}>
-            {buttonText}
-        </Button>    
-        }
+            <Button 
+                handleClick={handleModalToggle}
+                className='textButton'
+            >
+                Delete
+            </Button>
+            <Modal
+                className={className}
+                reference={reference}
+                message={message}
+                deletePath={deletePath}
+                deleteNodeID={deleteNodeID}
+                handleModalToggle={handleModalToggle}
+                toggleExpand={toggleExpand}
+            />
         </>
     )
 }

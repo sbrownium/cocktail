@@ -14,7 +14,10 @@ export default function MoreEditMenu ({
     deleteClassName,
     deleteButtonText,
     toggleCommentsBeingEditted,
-    userID
+    userID,
+    modalReference,
+    modalMessage,
+    modalAffirm
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
@@ -38,12 +41,14 @@ export default function MoreEditMenu ({
                 :
                 <>
                     <DeleteButton
-                        path={deletePath}
-                        nodeID={deleteNodeID}
-                        nodeName={deleteNodeName}
+                        deletePath={deletePath}
+                        deleteNodeID={deleteNodeID}
                         handleToggle={deleteHandleToggle}
-                        className={deleteClassName}
+                        className='textButton'
                         buttonText={deleteButtonText}
+                        reference={modalReference}
+                        affirm={modalAffirm}
+                        toggleExpand={toggleExpand}
                     />
                     <Button 
                         handleClick={toggleCommentsBeingEditted}

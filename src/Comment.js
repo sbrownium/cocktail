@@ -27,6 +27,7 @@ export default function Comment ({
   const [commentsBeingEditted, setCommentsBeingEditted] = useState(false);
   const [edit, setEdit] = useState(text);
   const textareaRef = useRef(null);
+  const commentRef = useRef(null);
 
 
     function handleEdit (e) {
@@ -122,6 +123,7 @@ return (
                     deleteButtonText='Delete'
                     toggleCommentsBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
+                    modalReference={commentRef}
                   />
             </div>}  
         </li>
