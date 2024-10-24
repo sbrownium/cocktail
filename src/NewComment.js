@@ -5,7 +5,7 @@ import { UserContext } from './UserContext.js';
 import { BarContext } from './BarContext.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
-import SignInModule from './SignInModule.js';
+import SignInModal from './SignInModal.js';
 import XIcon from './XIcon.js';
 import './NewComment.css';
 
@@ -74,7 +74,7 @@ export default function NewComment({
   setComment(''); // reset comment state
  }
 
-  function handleSignInModule () {
+  function handleSignInModal () {
     if (!newCommentRef.current.open) {
       newCommentRef.current.showModal(); // open modal
      } 
@@ -83,7 +83,7 @@ export default function NewComment({
 async function handleClick(e) {
 e.preventDefault();
   if (!user) {
-    handleSignInModule();
+    handleSignInModal();
     return; // stop further execution until the user signs in
   }
   try {
@@ -120,10 +120,10 @@ e.preventDefault();
             <p>Please add your comment before submitting</p>
             </div>
           }
-          <SignInModule
+          <SignInModal
             message='Please signin to leave a comment'
             reference={newCommentRef}
-            handleModuleToggle={handleSignInModule}
+            handleModuleToggle={handleSignInModal}
             users={users}
             handleCommentSubmit={handleCommentSubmit}
           />

@@ -4,7 +4,7 @@ import Button from "./Button";
 import XIcon from "./XIcon";
 import SignIn from "./SignIn";
 
-export default function SignInModule ({
+export default function SignInModal ({
     message,
     reference,
     handleModuleToggle,

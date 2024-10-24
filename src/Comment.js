@@ -123,8 +123,6 @@ return (
                     toggleCommentsBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
                   />
-                
-                
             </div>}  
         </li>
        
