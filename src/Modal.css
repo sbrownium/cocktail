@@ -3,3 +3,6 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+.commentsButtonsHolder.expanded .actionBtnHolder button {
+    padding: .5em 1em;
+}

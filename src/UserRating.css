@@ -1,6 +1,10 @@
-button span.myRating {
-    text-decoration: underline solid #017480;
-    text-underline-offset: 0.25em;
+li.emoji button p.emojiRating.myRating {
+   background: #003e56;
+   padding: .25em;
+   border-radius: 50%;
+}
+li.emoji button p.emojiRating {
+    font-size: 1.1em;
 }
 .remove {
     background: none;

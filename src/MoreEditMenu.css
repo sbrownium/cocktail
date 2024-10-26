@@ -13,6 +13,7 @@
 .textButton {
     border: none;
     background: none;
+    text-transform: capitalize;
 }
 .disabled .dot {
     background: #CCC;

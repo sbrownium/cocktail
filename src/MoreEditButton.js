@@ -3,16 +3,22 @@ import Delete from "./Delete";
 import Button from "./Button";
 import Modal from "./Modal";
 
-export default function DeleteButton ({
-    deletePath,
-    deleteNodeID,
-    handleToggle,
-    buttonText,
-    className,
+export default function MoreEditButton ({
+    path,
+    nodeID,
     reference,
-    message,
-    toggleExpand
+    toggleExpand,
+    arrayOfThings
 }) {
+    const type = path.replaceAll('/', '');
+
+    const action = () => {
+        if(arrayOfThings) {
+            return 'archive';
+         } else {
+            return 'delete';
+         }
+    };
 
     function handleModalToggle () {
         if (!reference.current.open) {
@@ -29,16 +35,16 @@ export default function DeleteButton ({
                 handleClick={handleModalToggle}
                 className='textButton'
             >
-                Delete
+                {action()}
             </Button>
             <Modal
-                className={className}
                 reference={reference}
-                message={message}
-                deletePath={deletePath}
-                deleteNodeID={deleteNodeID}
+                path={path}
+                nodeID={nodeID}
                 handleModalToggle={handleModalToggle}
                 toggleExpand={toggleExpand}
+                type={type}
+                action={action}
             />
         </>
     )

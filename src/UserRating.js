@@ -31,7 +31,7 @@ export default function UserRating ({
                     :
                     <p>&nbsp;</p>
                 }
-                <span className={(user.userID === userID) && 'myRating'}>{ratingToEmoji}</span>
+                <p className={(user.userID === userID) ? 'myRating emojiRating' : 'emojiRating'}>{ratingToEmoji}</p>
             </Button>
         </li>
     ) 

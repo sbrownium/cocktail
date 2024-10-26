@@ -6,7 +6,7 @@ import DrinkIcon from "./DrinkIcon.js";
 import Button from "./Button.js";
 import NewContainer from "./NewContainer.js";
 import ArchiveButton from "./ArchiveButton.js";
-import DeleteButton from "./DeleteButton.js";
+import MoreEditButton from "./MoreEditButton.js";
 import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
 import { BarContext } from "./BarContext.js";
@@ -198,7 +198,7 @@ export default function Bar({
                     buttonText='Archive Bar'
                   />
                   {(addedBy === user.userID) &&
-                  <DeleteButton 
+                  <MoreEditButton 
                     path='/bars/'
                     nodeID={barID}
                     nodeName={barName}

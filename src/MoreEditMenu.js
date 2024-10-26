@@ -1,23 +1,18 @@
 import React, { useState, useContext } from "react";
 import Button from "./Button";
 import XIcon from "./XIcon";
-import DeleteButton from "./DeleteButton";
+import MoreEditButton from "./MoreEditButton";
 import { UserContext } from "./UserContext";
 import "./MoreEditMenu.css";
 
 
 export default function MoreEditMenu ({
-    deletePath,
-    deleteNodeID,
-    deleteNodeName,
-    deleteHandleToggle,
-    deleteClassName,
-    deleteButtonText,
+    path,
+    nodeID,
     toggleCommentsBeingEditted,
     userID,
-    modalReference,
-    modalMessage,
-    modalAffirm
+    reference,
+    arrayOfThings
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
@@ -37,19 +32,26 @@ export default function MoreEditMenu ({
                     <>
                         <Button className='disabled' aria-disabled="true">Delete</Button>
                         <Button className='disabled' aria-disabled="true">Edit</Button>
+                        {(arrayOfThings !== null) &&
+                        <Button className='disabled' aria-disabled="true">Archive</Button>
+                        }
                     </>
                 :
                 <>
-                    <DeleteButton
-                        deletePath={deletePath}
-                        deleteNodeID={deleteNodeID}
-                        handleToggle={deleteHandleToggle}
-                        className='textButton'
-                        buttonText={deleteButtonText}
-                        reference={modalReference}
-                        affirm={modalAffirm}
+                    <MoreEditButton // Delete Button
+                        path={path}
+                        nodeID={nodeID}
                         toggleExpand={toggleExpand}
+                        reference={reference}
                     />
+                     {(arrayOfThings !== null) &&
+                    <MoreEditButton // Archive Button
+                        path={path}
+                        nodeID={nodeID}
+                        toggleExpand={toggleExpand}
+                        reference={reference}
+                        arrayOfThings={arrayOfThings} // only for Archive
+                    />}
                     <Button 
                         handleClick={toggleCommentsBeingEditted}
                         className='textButton'

@@ -2,7 +2,7 @@ import React, {useState, useContext, useRef, useEffect} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
-import DeleteButton from './DeleteButton.js';
+import MoreEditButton from './MoreEditButton.js';
 import Time from './Time.js';
 import Button from './Button.js';
 import { UserContext } from './UserContext.js';
@@ -115,15 +115,12 @@ return (
                   }
                   </div>
                   <MoreEditMenu 
-                    deletePath='/comments/'
-                    deleteNodeID={commentID}
-                    deleteNodeName='your comment'
-                    deleteHandleToggle={handleToggle}
-                    deleteClassName='textButton'
-                    deleteButtonText='Delete'
+                    path='/comments/'
+                    nodeID={commentID}
                     toggleCommentsBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
-                    modalReference={commentRef}
+                    reference={commentRef}
+                    arrayOfThings={null} // for archiving
                   />
             </div>}  
         </li>

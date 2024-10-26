@@ -4,16 +4,19 @@ import { db } from "./firebase.js";
 import Button from "./Button";
 
 export default function Delete ({
-    deletePath,
-    deleteNodeID,
-    handleModalToggle
+    path,
+    nodeID,
+    className,
+    handleModalToggle,
+    toggleExpand
 }) {
     
      function handleDelete(e){
         const updates = {};
         e.preventDefault(); 
         handleModalToggle();
-        updates[deletePath + deleteNodeID] = null;
+        toggleExpand();
+        updates[path + nodeID] = null;
         return (
             update(ref(db), updates).then(() => {
                 console.log('Data saved successfully!')
@@ -25,7 +28,7 @@ export default function Delete ({
     }
     return (
         <>
-            <Button className={null} handleClick={handleDelete}>
+            <Button className={className} handleClick={handleDelete}>
             Delete
             </Button>
         </>

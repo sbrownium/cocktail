@@ -2,17 +2,20 @@ import React from "react";
 import Button from "./Button";
 import XIcon from "./XIcon";
 import Delete from "./Delete";
+import Archive from "./Archive";
 import "./Modal.css";
 
 export default function Modal ({
     reference,
-    className,
-    deletePath,
-    deleteNodeID,
-    handleModalToggle
-    
+    path,
+    nodeID,
+    handleModalToggle,
+    toggleExpand,
+    type,
+    action,
+    arrayOfThings
 }) {
-     const typeOfThing = deletePath.replaceAll('/', '')
+    
     return (
         <dialog ref={reference} className='overlay'>
             <div className='buttonHolder'>
@@ -23,15 +26,26 @@ export default function Modal ({
                     />
                 </Button>
             </div>
-            <p>Are you sure you want to delete your {typeOfThing}?</p>
+            <p>Are you sure you want to {action()} your {type}?</p>
             <div className="actionBtnHolder">
+                {(action() === 'delete') &&
                 <Delete
-                    deletePath={deletePath}
-                    deleteNodeID={deleteNodeID}
-                    className={className}
+                    path={path}
+                    nodeID={nodeID}
+                    className='color-1'
                     handleModalToggle={handleModalToggle}
-                />
-                <Button className='actionBtn' handleClick={handleModalToggle}>
+                    toggleExpand={toggleExpand}
+                />}
+                  {(action() === 'archive') &&
+                <Archive
+                    path={path}
+                    nodeID={nodeID}
+                    className='color-1'
+                    handleModalToggle={handleModalToggle}
+                    toggleExpand={toggleExpand}
+                    arrayOfThings={arrayOfThings}
+                />}
+                <Button className='actionBtn color-4' handleClick={handleModalToggle}>
                     Never Mind
                 </Button>
             </div>

@@ -7,7 +7,7 @@ import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
-import DeleteButton from './DeleteButton.js';
+import MoreEditButton from './MoreEditButton.js';
 // import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
 import Unarchive from './Unarchive.js';
 import FeedbackList from './FeedbackList.js';
@@ -216,7 +216,7 @@ return (
                 buttonText='Archive Drink'
               />
               {(addedBy === user.userID) &&
-              <DeleteButton 
+              <MoreEditButton 
                 path='/drinks/'
                 nodeID={drinkID}
                 nodeName={drinkName}
