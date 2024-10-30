@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from './UserContext.js';
 import NewRating from "./NewRating.js";
-import MoreEditButton from "./MoreEditButton.js";
+import MoreEditButton from "./MoreOptionsButton.js";
 
 
 export default function MyRating ({

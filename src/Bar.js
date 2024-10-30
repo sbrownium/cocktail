@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useContext, useEffect} from "react";
+import React, {useState, useMemo, useContext, useRef} from "react";
 import DrinkList from './DrinkList.js'
 import ChangeBar from './ChangeBar.js';
 import Edit from "./Edit.js";
@@ -6,7 +6,8 @@ import DrinkIcon from "./DrinkIcon.js";
 import Button from "./Button.js";
 import NewContainer from "./NewContainer.js";
 import ArchiveButton from "./ArchiveButton.js";
-import MoreEditButton from "./MoreEditButton.js";
+import MoreOptionsButton from "./MoreOptionsButton.js";
+import MoreOptionsMenu from "./MoreOptionsMenu.js";
 import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
 import { BarContext } from "./BarContext.js";
@@ -35,10 +36,11 @@ export default function Bar({
 }) {
   const [user] = useContext(UserContext);
   const { selectedBar, setSelectedBar } = useContext(BarContext)
+  const [barBeingEditted, setBarBeingEditted] = useState(false);
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
-
+  const barRef = useRef(null);
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive);
@@ -53,24 +55,14 @@ export default function Bar({
     setShowFilter(showFilter => !showFilter)
   }
 
-  // function handleNewDrinkToggle () {
-  //   setShowNewDrink(showNewDrink => !showNewDrink)
-  // }
+  function toggleBarEdit () {
+    setBarBeingEditted(barBeingEditted => !barBeingEditted);
+  }
 
   function handleBarNameEdit (e) {
     e.preventDefault();
     setEditBarName(e.target.value);
   }
-
-  // function resetBarName () {
-  //   setEditBarName((Object.values(bars).filter(bar => bar.barID === selectedBar)[0].barName))
-  // }
-
-  // function handleNeverMind (e) {
-  //   e.preventDefault();
-  //   resetBarName();
-  //   handleToggle(); 
-  // }
 
   function handleSelect (e) {
     e.preventDefault();
@@ -86,10 +78,7 @@ export default function Bar({
     handleChangeBarToggle();
     }; 
     
-  // function handleClick (e) {
-  //   e.preventDefault();
-  //   handleNewDrinkToggle();
-  // } 
+
   const barsArray = useMemo(() => {
   if (showBarArchive) {
     return Object.values(bars)
@@ -100,15 +89,11 @@ export default function Bar({
   const filteredBar = barsArray.filter(bar => bar.barID === selectedBar.barID);
   const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar.barID);
     return (
-      // {showingBar &&
       <div className="barContainer">   
       <ul>
         <li>
-         {/* <div className={!showingBar ? "noBars controlsContainer" : "controlsContainer"}>  */}
          <>
         {showingBar &&
-       
-
         <div className="controlsContainer"> 
         <>  
         {showFilter ?
@@ -158,17 +143,12 @@ export default function Bar({
         </form>
         </div>
       </dialog>
-     
-     
       </>
         </li>
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
             return (
               <li key={index}>
-                {beingEditted &&
-                <>
-                {!archived ? 
-                 <>
+                {barBeingEditted &&
                  <form>
                   <EditBox
                     className={(editBarName === '') && 'missing'}
@@ -185,40 +165,16 @@ export default function Bar({
                   : 
                <p className='missing'>Please give the bar a name to save</p>
                 }
-                </form>
-                  <ArchiveButton 
+                </form> }
+                <MoreOptionsMenu 
                     path='/bars/'
                     nodeID={barID}
-                    IDType='barID'
-                    arrayOfThings={Object.values(bars)}
-                    nodeName={barName}
-                    handleToggle={handleToggle}
-                    className={null}
-                    // reset={resetBarName}
-                    buttonText='Archive Bar'
+                    toggleBeingEditted={toggleBarEdit}
+                    userID={addedBy}
+                    reference={barRef}
+                    arrayOfThings={bars} // for archiving
+                    className='bars'
                   />
-                  {(addedBy === user.userID) &&
-                  <MoreEditButton 
-                    path='/bars/'
-                    nodeID={barID}
-                    nodeName={barName}
-                    handleToggle={handleToggle}
-                    className={null}
-                    // reset={resetBarName}
-                    buttonText='Delete Bar'
-                  />
-                  } 
-                 </> :
-                 <Unarchive
-                  path='/bars/'
-                  nodeID={barID}
-                  IDType='barID'
-                  arrayOfThings={Object.values(bars)}
-                  handleToggle={handleToggle}
-                /> }
-                </>
-                }
-
                 <DrinkList
                   barName={barName}
                   barID={barID}
@@ -234,16 +190,7 @@ export default function Bar({
             );
           })}
       </ul>
-     
-      {/* {showingBar &&
-      <Edit
-        handleToggle={handleToggle} 
-        beingEditted={beingEditted}
-        filteredBar={filteredBar}
-      />
-      } */}
-      </div>
-
+    </div>
     );
   }
   

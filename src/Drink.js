@@ -7,7 +7,7 @@ import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
-import MoreEditButton from './MoreEditButton.js';
+import MoreEditButton from './MoreOptionsButton.js';
 // import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
 import Unarchive from './Unarchive.js';
 import FeedbackList from './FeedbackList.js';

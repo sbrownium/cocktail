@@ -9,9 +9,11 @@ export default function Archive ({
     className,
     handleModalToggle,
     toggleExpand,
-    arrayOfThings
+    arrayOfThings,
+    type
 }) {
-    const thisThing = arrayOfThings.filter(a => a[path + 'ID'] === nodeID);
+    
+    const thisThing = Object.values(arrayOfThings).filter(a => a[type + 'ID'] === nodeID);
 
     function handleArchive(e){
         const updates = {};

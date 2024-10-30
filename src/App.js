@@ -263,10 +263,10 @@ function handleNewDrinkToggle () {
                   >
                     🍹
                   </Button>
-                  <Edit
+                  {/* <Edit
                     handleToggle={handleToggle} 
                     beingEditted={beingEditted}
-                  />
+                  /> */}
               <MoreContainer />
             </nav>
                 <div className='background'> </div>

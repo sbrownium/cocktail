@@ -44,6 +44,7 @@ export default function Modal ({
                     handleModalToggle={handleModalToggle}
                     toggleExpand={toggleExpand}
                     arrayOfThings={arrayOfThings}
+                    type={type}
                 />}
                 <Button className='actionBtn color-4' handleClick={handleModalToggle}>
                     Never Mind

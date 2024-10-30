@@ -2,12 +2,12 @@ import React, {useState, useContext, useRef, useEffect} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import EditBox from './EditBox';
-import MoreEditButton from './MoreEditButton.js';
+import MoreOptionsButton from './MoreOptionsButton.js';
 import Time from './Time.js';
 import Button from './Button.js';
 import { UserContext } from './UserContext.js';
 import './Comment.css';
-import MoreEditMenu from './MoreEditMenu.js';
+import MoreOptionsMenu from './MoreOptionsMenu.js';
 
 export default function Comment ({
   commentID,
@@ -114,13 +114,14 @@ return (
                     </>
                   }
                   </div>
-                  <MoreEditMenu 
+                  <MoreOptionsMenu 
                     path='/comments/'
                     nodeID={commentID}
-                    toggleCommentsBeingEditted={toggleCommentsBeingEditted}
+                    toggleBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
                     reference={commentRef}
                     arrayOfThings={null} // for archiving
+                    className='comments'
                   />
             </div>}  
         </li>

@@ -1,18 +1,19 @@
 import React, { useState, useContext } from "react";
 import Button from "./Button";
 import XIcon from "./XIcon";
-import MoreEditButton from "./MoreEditButton";
+import MoreOptionsButton from "./MoreOptionsButton";
 import { UserContext } from "./UserContext";
-import "./MoreEditMenu.css";
+import "./MoreOptionsMenu.css";
 
 
-export default function MoreEditMenu ({
+export default function MoreOptionsMenu ({
     path,
     nodeID,
-    toggleCommentsBeingEditted,
+    toggleBeingEditted,
     userID,
     reference,
-    arrayOfThings
+    arrayOfThings,
+    className
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
@@ -22,11 +23,11 @@ export default function MoreEditMenu ({
     }
     return (
         <div
-            className='moreSelectionsContainer comments'
+            className={`${className} moreSelectionsContainer`}
         > 
             {isExpanded &&
              <div
-                className='commentsButtonsHolder expanded'
+                className='moreOptionsButtonHolder expanded'
             > 
                 {!user ? 
                     <>
@@ -38,14 +39,14 @@ export default function MoreEditMenu ({
                     </>
                 :
                 <>
-                    <MoreEditButton // Delete Button
+                    <MoreOptionsButton // Delete Button
                         path={path}
                         nodeID={nodeID}
                         toggleExpand={toggleExpand}
                         reference={reference}
                     />
                      {(arrayOfThings !== null) &&
-                    <MoreEditButton // Archive Button
+                    <MoreOptionsButton // Archive Button
                         path={path}
                         nodeID={nodeID}
                         toggleExpand={toggleExpand}
@@ -53,7 +54,7 @@ export default function MoreEditMenu ({
                         arrayOfThings={arrayOfThings} // only for Archive
                     />}
                     <Button 
-                        handleClick={toggleCommentsBeingEditted}
+                        handleClick={toggleBeingEditted}
                         className='textButton'
                     >
                         Edit
@@ -64,7 +65,7 @@ export default function MoreEditMenu ({
             } 
 
              <Button
-                className={!isExpanded ? 'menuButtonContainer comments' : 'expanded menuButtonContainer comments'}
+                className={!isExpanded ? `menuButtonContainer ${className}` : `menuButtonContainer expanded ${className}`}
                 // If there is a user logged in, but not the owner of the comment
                 // disable click handler
                 handleClick={(user && (userID !== user.userID)) ? null : toggleExpand}

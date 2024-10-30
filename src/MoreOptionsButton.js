@@ -10,7 +10,7 @@ export default function MoreEditButton ({
     toggleExpand,
     arrayOfThings
 }) {
-    const type = path.replaceAll('/', '');
+    const type = path.replaceAll('/', '').slice(0,-1);
 
     const action = () => {
         if(arrayOfThings) {
@@ -43,6 +43,7 @@ export default function MoreEditButton ({
                 nodeID={nodeID}
                 handleModalToggle={handleModalToggle}
                 toggleExpand={toggleExpand}
+                arrayOfThings={arrayOfThings}
                 type={type}
                 action={action}
             />
