@@ -13,7 +13,7 @@ export default function Modal ({
     toggleExpand,
     type,
     action,
-    arrayOfThings
+    thisOne
 }) {
     
     return (
@@ -36,14 +36,15 @@ export default function Modal ({
                     handleModalToggle={handleModalToggle}
                     toggleExpand={toggleExpand}
                 />}
-                  {(action() === 'archive') &&
+                  {((action() === 'archive') || (action() === 'unarchive')) &&
                 <Archive
                     path={path}
                     nodeID={nodeID}
                     className='color-1'
                     handleModalToggle={handleModalToggle}
                     toggleExpand={toggleExpand}
-                    arrayOfThings={arrayOfThings}
+                    // categoryObject={categoryObject}
+                    thisOne={thisOne}
                     type={type}
                 />}
                 <Button className='actionBtn color-4' handleClick={handleModalToggle}>

@@ -172,7 +172,7 @@ export default function Bar({
                     toggleBeingEditted={toggleBarEdit}
                     userID={addedBy}
                     reference={barRef}
-                    arrayOfThings={bars} // for archiving
+                    categoryObject={bars} // for archiving
                     className='bars'
                   />
                 <DrinkList

@@ -12,7 +12,7 @@ export default function MoreOptionsMenu ({
     toggleBeingEditted,
     userID,
     reference,
-    arrayOfThings,
+    categoryObject,
     className
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -33,7 +33,7 @@ export default function MoreOptionsMenu ({
                     <>
                         <Button className='disabled' aria-disabled="true">Delete</Button>
                         <Button className='disabled' aria-disabled="true">Edit</Button>
-                        {(arrayOfThings !== null) &&
+                        {(categoryObject !== null) &&
                         <Button className='disabled' aria-disabled="true">Archive</Button>
                         }
                     </>
@@ -45,13 +45,13 @@ export default function MoreOptionsMenu ({
                         toggleExpand={toggleExpand}
                         reference={reference}
                     />
-                     {(arrayOfThings !== null) &&
+                     {(categoryObject !== null) &&
                     <MoreOptionsButton // Archive Button
                         path={path}
                         nodeID={nodeID}
                         toggleExpand={toggleExpand}
                         reference={reference}
-                        arrayOfThings={arrayOfThings} // only for Archive
+                        categoryObject={categoryObject} // only for Archive
                     />}
                     <Button 
                         handleClick={toggleBeingEditted}

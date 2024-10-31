@@ -120,7 +120,7 @@ return (
                     toggleBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
                     reference={commentRef}
-                    arrayOfThings={null} // for archiving
+                    categoryObject={null} // for archiving
                     className='comments'
                   />
             </div>}  

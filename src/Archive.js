@@ -9,18 +9,15 @@ export default function Archive ({
     className,
     handleModalToggle,
     toggleExpand,
-    arrayOfThings,
-    type
+    thisOne
 }) {
     
-    const thisThing = Object.values(arrayOfThings).filter(a => a[type + 'ID'] === nodeID);
-
     function handleArchive(e){
         const updates = {};
         e.preventDefault();
         const newArchive = {
-            ...thisThing[0],
-            archived: true,
+            ...thisOne()[0],
+            archived: (thisOne()[0].archived === true) ? false : true,
             lastTimeStamp: Date.now()
           };
           updates[path + nodeID] = newArchive;
@@ -36,7 +33,7 @@ return (
 return (
     <>
         <Button className={className} handleClick={handleArchive}>
-        Archive
+        {(thisOne()[0].archived === true) ? `Unarchive` : `Archive` }
         </Button>
     </>
 )

@@ -8,12 +8,18 @@ export default function MoreEditButton ({
     nodeID,
     reference,
     toggleExpand,
-    arrayOfThings
+    categoryObject
 }) {
     const type = path.replaceAll('/', '').slice(0,-1);
+    const thisOne = () => {
+        if (categoryObject){
+            return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID);
+        }}
 
     const action = () => {
-        if(arrayOfThings) {
+        if(categoryObject && thisOne()[0].archived === true) {
+            return 'unarchive';
+         } if(categoryObject && thisOne()[0].archived === false) {
             return 'archive';
          } else {
             return 'delete';
@@ -43,7 +49,7 @@ export default function MoreEditButton ({
                 nodeID={nodeID}
                 handleModalToggle={handleModalToggle}
                 toggleExpand={toggleExpand}
-                arrayOfThings={arrayOfThings}
+                thisOne={thisOne}
                 type={type}
                 action={action}
             />
