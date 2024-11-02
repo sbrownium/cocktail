@@ -13,7 +13,8 @@ export default function MoreOptionsMenu ({
     userID,
     reference,
     categoryObject,
-    className
+    className,
+    archived
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
@@ -21,6 +22,25 @@ export default function MoreOptionsMenu ({
     function toggleExpand () {
         setIsExpanded(isExpanded => !isExpanded);
     }
+    
+    // function isArchived () {
+    //     const type = path.replaceAll('/', '').slice(0,-1);
+
+    //     const thisOne = () => {
+    //         if (categoryObject){
+    //             return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID);
+    //     }}
+
+    // const action = () => {
+    //     if(categoryObject && thisOne()[0].archived === true) {
+    //         return true;
+    //      } if(categoryObject && thisOne()[0].archived === false) {
+    //         return false;
+    //      }
+    // };
+    // action();
+    // }
+    
     return (
         <div
             className={`${className} moreSelectionsContainer`}
@@ -34,7 +54,7 @@ export default function MoreOptionsMenu ({
                         <Button className='disabled' aria-disabled="true">Delete</Button>
                         <Button className='disabled' aria-disabled="true">Edit</Button>
                         {(categoryObject !== null) &&
-                        <Button className='disabled' aria-disabled="true">Archive</Button>
+                        <Button className='disabled' aria-disabled="true">{archived ? 'Unarchive':'Archive'}</Button>
                         }
                     </>
                 :
@@ -65,7 +85,8 @@ export default function MoreOptionsMenu ({
             } 
 
              <Button
-                className={!isExpanded ? `menuButtonContainer ${className}` : `menuButtonContainer expanded ${className}`}
+            //  ${className} is a prop, .expanded from state, .unarchived from database
+             className={`menuButtonContainer ${className} ${isExpanded && 'expanded'} ${archived && 'unarchived'}`}
                 // If there is a user logged in, but not the owner of the comment
                 // disable click handler
                 handleClick={(user && (userID !== user.userID)) ? null : toggleExpand}

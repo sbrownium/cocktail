@@ -37,7 +37,7 @@
     border-right: 1px solid #80808029;
     background: whitesmoke;
     border-radius: 8px 8px 0 0;
-}
+}   
 .moreOptionsButtonHolder.expanded button {
     padding: .5em 0 .5em 1em;
 }
@@ -61,6 +61,9 @@
 }
 .menuButtonContainer.bars {
     padding: .25em .5em .25em 3.05em;
+}
+.menuButtonContainer.bars.unarchived {
+    padding: .25em .5em .25em 4.23em;
 }
 .menuButtonContainer.comments {
     padding: .25em .5em .25em 2.59em;

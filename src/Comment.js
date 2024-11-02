@@ -120,8 +120,9 @@ return (
                     toggleBeingEditted={toggleCommentsBeingEditted}
                     userID={userID}
                     reference={commentRef}
-                    categoryObject={null} // for archiving
+                    categoryObject={null} // for archiving; not applicable here
                     className='comments'
+                    archived={null} // for archiving; not applicable here
                   />
             </div>}  
         </li>

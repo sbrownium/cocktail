@@ -174,6 +174,7 @@ export default function Bar({
                     reference={barRef}
                     categoryObject={bars} // for archiving
                     className='bars'
+                    archived={archived}
                   />
                 <DrinkList
                   barName={barName}

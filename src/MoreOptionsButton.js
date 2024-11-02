@@ -11,6 +11,7 @@ export default function MoreEditButton ({
     categoryObject
 }) {
     const type = path.replaceAll('/', '').slice(0,-1);
+
     const thisOne = () => {
         if (categoryObject){
             return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID);

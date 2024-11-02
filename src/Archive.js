@@ -11,7 +11,6 @@ export default function Archive ({
     toggleExpand,
     thisOne
 }) {
-    
     function handleArchive(e){
         const updates = {};
         e.preventDefault();

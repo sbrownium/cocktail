@@ -26,7 +26,7 @@ export default function Modal ({
                     />
                 </Button>
             </div>
-            <p>Are you sure you want to {action()} your {type}?</p>
+            <p>Are you sure you want to {action()} {(type === 'comment') ? 'your' : 'the'} {type}?</p>
             <div className="actionBtnHolder">
                 {(action() === 'delete') &&
                 <Delete
