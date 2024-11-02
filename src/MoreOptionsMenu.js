@@ -19,28 +19,18 @@ export default function MoreOptionsMenu ({
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
 
+   const anothersComment = () => {
+        if ((path === '/comments/') && user && (userID !== user.userID)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+       
     function toggleExpand () {
         setIsExpanded(isExpanded => !isExpanded);
     }
-    
-    // function isArchived () {
-    //     const type = path.replaceAll('/', '').slice(0,-1);
-
-    //     const thisOne = () => {
-    //         if (categoryObject){
-    //             return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID);
-    //     }}
-
-    // const action = () => {
-    //     if(categoryObject && thisOne()[0].archived === true) {
-    //         return true;
-    //      } if(categoryObject && thisOne()[0].archived === false) {
-    //         return false;
-    //      }
-    // };
-    // action();
-    // }
-    
+  
     return (
         <div
             className={`${className} moreSelectionsContainer`}
@@ -51,21 +41,24 @@ export default function MoreOptionsMenu ({
             > 
                 {!user ? 
                     <>
-                        <Button className='disabled' aria-disabled="true">Delete</Button>
+                        {(path !== '/bars/') && // no delete button on bars
+                            <Button className='disabled' aria-disabled="true">Delete</Button>
+                        }
                         <Button className='disabled' aria-disabled="true">Edit</Button>
-                        {(categoryObject !== null) &&
-                        <Button className='disabled' aria-disabled="true">{archived ? 'Unarchive':'Archive'}</Button>
+                        {(categoryObject !== null) && // no archive button on comments
+                            <Button className='disabled' aria-disabled="true">{archived ? 'Unarchive':'Archive'}</Button>
                         }
                     </>
                 :
                 <>
+                {(path !== '/bars/') && // no delete button on bars
                     <MoreOptionsButton // Delete Button
                         path={path}
                         nodeID={nodeID}
                         toggleExpand={toggleExpand}
                         reference={reference}
-                    />
-                     {(categoryObject !== null) &&
+                    /> }
+                     {(categoryObject !== null) && // no archive button on comments
                     <MoreOptionsButton // Archive Button
                         path={path}
                         nodeID={nodeID}
@@ -83,19 +76,18 @@ export default function MoreOptionsMenu ({
                 }
             </div> // End isExpanded
             } 
-
              <Button
             //  ${className} is a prop, .expanded from state, .unarchived from database
              className={`menuButtonContainer ${className} ${isExpanded && 'expanded'} ${archived && 'unarchived'}`}
-                // If there is a user logged in, but not the owner of the comment
-                // disable click handler
-                handleClick={(user && (userID !== user.userID)) ? null : toggleExpand}
+                // If there is a user logged in, but not the owner of the comment:
+                // disable click handler and
+                handleClick={anothersComment() ? null : toggleExpand}
                 // update aria
-                aria-disabled={(user && (userID !== user.userID)) && "true"}
+                aria-disabled={anothersComment() && "true"}
             >
             {!isExpanded ?
-                // add disabled class
-                <div className={(user && (userID !== user.userID)) ? "disabled dotHolder" : "dotHolder"}>
+                // add disabled class when there is a user, but not the owner 
+                <div className={`${anothersComment() && 'disabled'} dotHolder`}>
                     <div className="dot"></div>
                     <div className="dot"></div>
                     <div className="dot"></div>
