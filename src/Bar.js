@@ -28,7 +28,6 @@ export default function Bar({
   users,
   beingEditted,
   handleToggle,
-  handleClick,
   changeBarRef,
   handleChangeBarToggle,
   showingBar,
@@ -36,11 +35,11 @@ export default function Bar({
 }) {
   const [user] = useContext(UserContext);
   const { selectedBar, setSelectedBar } = useContext(BarContext)
-  const [barBeingEditted, setBarBeingEditted] = useState(false);
+  // const [barBeingEditted, setBarBeingEditted] = useState(false);
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
-  const barRef = useRef(null);
+  // const barRef = useRef(null);
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive);
@@ -55,14 +54,14 @@ export default function Bar({
     setShowFilter(showFilter => !showFilter)
   }
 
-  function toggleBarEdit () {
-    setBarBeingEditted(barBeingEditted => !barBeingEditted);
-  }
+  // function toggleBarEdit () {
+  //   setBarBeingEditted(barBeingEditted => !barBeingEditted);
+  // }
 
-  function handleBarNameEdit (e) {
-    e.preventDefault();
-    setEditBarName(e.target.value);
-  }
+  // function handleBarNameEdit (e) {
+  //   e.preventDefault();
+  //   setEditBarName(e.target.value);
+  // }
 
   function handleSelect (e) {
     e.preventDefault();
@@ -93,7 +92,7 @@ export default function Bar({
       <ul>
         <li>
          <>
-        {showingBar &&
+        {/* {showingBar &&
         <div className="controlsContainer"> 
         <>  
         {showFilter ?
@@ -112,7 +111,7 @@ export default function Bar({
           </>
           </div>
     
-        }
+        } */}
     
          <dialog ref={changeBarRef} className='overlay changeBars'>
         <div className='buttonHolder'>
@@ -148,7 +147,7 @@ export default function Bar({
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
             return (
               <li key={index}>
-                {barBeingEditted &&
+                {/* {barBeingEditted &&
                  <form>
                   <EditBox
                     className={(editBarName === '') && 'missing'}
@@ -165,8 +164,8 @@ export default function Bar({
                   : 
                <p className='missing'>Please give the bar a name to save</p>
                 }
-                </form> }
-                <MoreOptionsMenu 
+                </form> } */}
+                {/* <MoreOptionsMenu 
                     path='/bars/'
                     nodeID={barID}
                     toggleBeingEditted={toggleBarEdit}
@@ -175,10 +174,13 @@ export default function Bar({
                     categoryObject={bars} // for archiving
                     className='bars'
                     archived={archived}
-                  />
+                  /> */}
                 <DrinkList
+                  addedBy={addedBy}
+                  archived={archived}
                   barName={barName}
                   barID={barID}
+                  bars={bars}
                   barsDrinks={barsDrinks}
                   comments={comments}
                   ratings={ratings}

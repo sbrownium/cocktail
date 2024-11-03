@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "./Button";
 import XIcon from "./XIcon";
 import MoreOptionsButton from "./MoreOptionsButton";
 import { UserContext } from "./UserContext";
+import { BarContext } from "./BarContext";
 import "./MoreOptionsMenu.css";
 
 
@@ -18,6 +19,11 @@ export default function MoreOptionsMenu ({
 }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const [user] = useContext(UserContext);
+    const { selectedBar } = useContext(BarContext);
+
+    useEffect(() => {
+        setIsExpanded(false);
+     }, [selectedBar.barID]);
 
    const anothersComment = () => {
         if ((path === '/comments/') && user && (userID !== user.userID)) {
@@ -30,7 +36,7 @@ export default function MoreOptionsMenu ({
     function toggleExpand () {
         setIsExpanded(isExpanded => !isExpanded);
     }
-  
+    
     return (
         <div
             className={`${className} moreSelectionsContainer`}
@@ -44,10 +50,10 @@ export default function MoreOptionsMenu ({
                         {(path !== '/bars/') && // no delete button on bars
                             <Button className='disabled' aria-disabled="true">Delete</Button>
                         }
-                        <Button className='disabled' aria-disabled="true">Edit</Button>
                         {(categoryObject !== null) && // no archive button on comments
                             <Button className='disabled' aria-disabled="true">{archived ? 'Unarchive':'Archive'}</Button>
                         }
+                        <Button className='disabled' aria-disabled="true">Edit</Button>
                     </>
                 :
                 <>
@@ -57,6 +63,7 @@ export default function MoreOptionsMenu ({
                         nodeID={nodeID}
                         toggleExpand={toggleExpand}
                         reference={reference}
+                        setIsExpanded={setIsExpanded}
                     /> }
                      {(categoryObject !== null) && // no archive button on comments
                     <MoreOptionsButton // Archive Button
@@ -65,6 +72,7 @@ export default function MoreOptionsMenu ({
                         toggleExpand={toggleExpand}
                         reference={reference}
                         categoryObject={categoryObject} // only for Archive
+                        setIsExpanded={setIsExpanded}
                     />}
                     <Button 
                         handleClick={toggleBeingEditted}

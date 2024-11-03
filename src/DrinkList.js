@@ -1,26 +1,43 @@
-import React, {useContext, useState, useMemo} from 'react';
+import React, {useContext, useState, useMemo, useRef, useEffect} from 'react';
 import { UserContext } from './UserContext';
+import { BarContext } from './BarContext';
+import { ref, update } from "firebase/database";
+import { db } from "./firebase.js";
 import Order from './Order';
 import Filter from './Filter';
 import Button from './Button';
 import Drink from './Drink';
+import MoreOptionsMenu from './MoreOptionsMenu';
+import EditBox from './EditBox';
 import './DrinkList.css';
 
 export default function DrinkList({
+    addedBy,
+    archived,
     barName,
     barID,
+    bars,
     beingEditted,
     comments,
     barsDrinks,
     ratings,
     handleToggle,
-    users,
-    showFilter
+    users
 }){
+  
   const [user] = useContext(UserContext);
+  const { selectedBar } = useContext(BarContext)
   const {userID} = user;
   const [checked, setChecked] = useState('Date Added');
   const [showDrinkArchive, setShowDrinkArchive] = useState(false);
+  const [barBeingEditted, setBarBeingEditted] = useState(false);
+  const [changeBarName, setChangeBarName] = useState(selectedBar.barName);
+  const barRef = useRef(null);
+
+  useEffect(() => {
+      setBarBeingEditted(false); 
+      setChangeBarName(selectedBar.barName);
+   }, [selectedBar]);
 
   const initialFilter = {
     topRated: null,
@@ -38,8 +55,22 @@ export default function DrinkList({
     setChecked(e.target.value)
   }
 
+  function toggleBarEdit () {
+    setBarBeingEditted(barBeingEditted => !barBeingEditted);
+  }
+
   function toggleShowDrinkArchive () {
     setShowDrinkArchive(showDrinkArchive => !showDrinkArchive)
+  }
+
+  function handleBarNameEdit (e) {
+    e.preventDefault();
+    setChangeBarName(e.target.value);
+  }
+
+  function handleNeverMind () {
+    toggleBarEdit();
+    setChangeBarName(selectedBar.barName);
   }
 
   function alphaSort (a,b) {
@@ -185,9 +216,29 @@ const sortedDrinks = useMemo(() => {
   }
   return sortedDrinks;
 }, [barsDrinks, showDrinkArchive, beingEditted, checked, filterChecked, filteredComments, myfilteredComments]);
+
+function barNameUpdate (e){
+  e.preventDefault();
+  const updates = {};
+  const bar = Object.values(bars).filter(bar => bar.barID === barID)[0];
+  const newName = {
+    ...bar,
+    barName: changeBarName,
+    lastTimeStamp: Date.now()
+  };
+updates['/bars/' + barID] = newName;
+
+return (
+    update(ref(db), updates).then(() => {
+        console.log('Data saved successfully!')
+  })
+  .catch((error) => {
+    console.log('problem writing')
+  })
+)};
     return (
       <>
-      {showFilter &&
+      {/* {showFilter &&
       <>
       <Order
         checked={checked}
@@ -202,8 +253,48 @@ const sortedDrinks = useMemo(() => {
         barID={barID}
       />
       </> 
-}
-<h1>{barName}</h1>
+} */}
+<div className='nameContainer'>
+{!barBeingEditted ?
+<>
+  <h1>{barName}</h1>
+  <MoreOptionsMenu 
+    path='/bars/'
+    nodeID={barID}
+    toggleBeingEditted={toggleBarEdit}
+    userID={addedBy}
+    reference={barRef}
+    categoryObject={bars} // for archiving
+    className='bars'
+    archived={archived}
+  />
+  </>
+   :
+                 <form>
+                  <EditBox
+                    className={(changeBarName === '') && 'missing'}
+                    id='barNameEdit'
+                    edit={changeBarName}
+                    handleEdit={handleBarNameEdit}
+                  />
+                  {(changeBarName !== '') ?
+                  <> 
+                    <Button
+                      handleClick={barNameUpdate}
+                      children='Save'
+                      className={null}
+                    />
+                    <Button
+                      handleClick={handleNeverMind}
+                      children='Never Mind'
+                      className={null}
+                    /> 
+                  </>
+                  : 
+               <p className='missing'>Please give the bar a name to save</p>
+                }
+                </form> }
+</div>
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li className='drinkContainer' key={index}>
