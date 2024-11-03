@@ -1,17 +1,9 @@
-import React, {useState, useMemo, useContext, useRef} from "react";
+import React, {useState, useMemo, useContext} from "react";
 import DrinkList from './DrinkList.js'
 import ChangeBar from './ChangeBar.js';
-import Edit from "./Edit.js";
-import DrinkIcon from "./DrinkIcon.js";
 import Button from "./Button.js";
-import NewContainer from "./NewContainer.js";
-import ArchiveButton from "./ArchiveButton.js";
-import MoreOptionsButton from "./MoreOptionsButton.js";
-import MoreOptionsMenu from "./MoreOptionsMenu.js";
-import Unarchive from "./Unarchive.js";
 import { UserContext } from "./UserContext.js";
 import { BarContext } from "./BarContext.js";
-import EditBox from "./EditBox.js";
 import './Bar.css';
 import OliveXIcon from "./OliveXIcon.js";
 import OliveFilterIcon from "./OliveFilterIcon.js";
@@ -39,6 +31,7 @@ export default function Bar({
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
+
   // const barRef = useRef(null);
 
   function toggleShowBarArchive () {
@@ -121,12 +114,18 @@ export default function Bar({
                 fillColor='#303030'
                 />
             </Button>
-            {(Object.values(bars).some(bar => bar.archived === true)) &&
-          <Button
-            className='archiveBtn'
-            handleClick={toggleShowBarArchive}>
-              {!showBarArchive ? '🗄️' : '🗃️' }
-          </Button>} 
+            {(Object.values(bars).some(bar => bar.archived === true)) && // only show archive button if archived bars exist
+          <form className="modalCheckBox">
+            <label>
+              <input
+                type="checkbox"
+                checked={showBarArchive}
+                onChange={toggleShowBarArchive}
+              />
+                Include Archived Bars
+              </label>
+            </form>
+          } 
         </div>
         <div className="formContainer">
            {!showingBar && <TimeOfDay/>}
@@ -147,34 +146,6 @@ export default function Bar({
         {filteredBar.map(({ addedBy, archived, barName, barID }, index) => {
             return (
               <li key={index}>
-                {/* {barBeingEditted &&
-                 <form>
-                  <EditBox
-                    className={(editBarName === '') && 'missing'}
-                    id='barNameEdit'
-                    edit={editBarName}
-                    handleEdit={handleBarNameEdit}
-                  />
-                  {(editBarName !== '') ? 
-                  <Button
-                  handleClick={handleClick}
-                  children='Save'
-                  className={null}
-                  /> 
-                  : 
-               <p className='missing'>Please give the bar a name to save</p>
-                }
-                </form> } */}
-                {/* <MoreOptionsMenu 
-                    path='/bars/'
-                    nodeID={barID}
-                    toggleBeingEditted={toggleBarEdit}
-                    userID={addedBy}
-                    reference={barRef}
-                    categoryObject={bars} // for archiving
-                    className='bars'
-                    archived={archived}
-                  /> */}
                 <DrinkList
                   addedBy={addedBy}
                   archived={archived}

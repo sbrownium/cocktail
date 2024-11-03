@@ -60,3 +60,14 @@ p.archiveEmoji {
 .selectContainer select {
     font-size: 1.25em;
 }
+.overlay form.modalCheckBox label {
+    flex-direction: row;
+    font-size: 1em;
+}
+.overlay form.modalCheckBox,
+.overlay form.modalCheckBox label:last-of-type {
+    margin: 0;
+}
+.overlay form.modalCheckBox input {
+    margin: 0 .45em 0 0;
+}

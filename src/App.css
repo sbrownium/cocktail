@@ -357,6 +357,7 @@ dialog.overlay {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  align-items: center;
 }
 .selectionContainer .buttonHolder button {
   margin: 0;
