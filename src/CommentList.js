@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { BarContext } from "./BarContext";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
 import Button from "./Button";
@@ -14,6 +15,12 @@ export default function CommentList ({
     const commentsArray = Object.values(comments || {});
     const filteredComments = commentsArray.filter(comments => comments.drinkID === drinkID);
     const [ isExpanded, setIsExpanded ] = useState(false);
+    const { selectedBar } = useContext(BarContext);
+
+    useEffect(() => {
+        setIsExpanded(false);
+     }, [selectedBar.barID]);
+
 
     function toggleExpanded () {
         setIsExpanded(isExpanded => !isExpanded);
