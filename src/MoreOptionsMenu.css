@@ -4,7 +4,8 @@
     right: -1em;
     bottom: .45em;
 }
-.moreSelectionsContainer.bars {
+.moreSelectionsContainer.bars,
+.moreSelectionsContainer.drinks {
     align-items: flex-end;
     position: absolute;
     right: 0;
@@ -43,23 +44,27 @@
 }
 .comments .expanded,
 .menuButtonContainer.bars.expanded,
-.menuButtonContainer.comments.expanded {
+.menuButtonContainer.comments.expanded,
+.menuButtonContainer.drinks.expanded {
     background: whitesmoke;
 }
 .menuButtonContainer.comments.expanded,
-.menuButtonContainer.bars.expanded {
+.menuButtonContainer.bars.expanded,
+.menuButtonContainer.drinks.expanded {
     border-bottom: 1px solid #80808029;
     border-left: 1px solid #80808029;
     border-right: 1px solid #80808029;
     border-radius: 0 0 8px 8px;
 } 
 .menuButtonContainer.bars,
-.menuButtonContainer.comments {
+.menuButtonContainer.comments,
+.menuButtonContainer.drinks {
     background: none;
     border: none;
     margin: 0;
 }
-.menuButtonContainer.bars {
+.menuButtonContainer.bars,
+.menuButtonContainer.drinks {
     padding: .25em .5em .25em 3.05em;
 }
 .menuButtonContainer.bars.unarchived {

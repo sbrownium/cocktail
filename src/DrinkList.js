@@ -35,7 +35,7 @@ export default function DrinkList({
   const barRef = useRef(null);
 
   useEffect(() => {
-      setBarBeingEditted(false); 
+      setBarBeingEditted(false); // Close the bar edit box when bar name changes
       setChangeBarName(selectedBar.barName);
    }, [selectedBar]);
 

@@ -13,7 +13,8 @@ export default function Modal ({
     toggleExpand,
     type,
     action,
-    thisOne
+    thisOne,
+    archived
 }) {
     
     return (
@@ -46,6 +47,7 @@ export default function Modal ({
                     // categoryObject={categoryObject}
                     thisOne={thisOne}
                     type={type}
+                    archived={archived}
                 />}
                 <Button className='actionBtn color-4' handleClick={handleModalToggle}>
                     Never Mind

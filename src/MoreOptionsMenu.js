@@ -21,18 +21,22 @@ export default function MoreOptionsMenu ({
     const [user] = useContext(UserContext);
     const { selectedBar } = useContext(BarContext);
 
-    useEffect(() => {
+    useEffect(() => { // close the menu when the bar changes
         setIsExpanded(false);
      }, [selectedBar.barID]);
 
+   // determines if comments where created by a different user than the one logged in  
    const anothersComment = () => {
+    // if it is a comment and there is a user logged in and
+    // the user that created the comment is not the one logged in
         if ((path === '/comments/') && user && (userID !== user.userID)) {
             return true;
         } else {
             return false;
         }
     };
-       
+     
+    // open and closes menu
     function toggleExpand () {
         setIsExpanded(isExpanded => !isExpanded);
     }
@@ -47,7 +51,7 @@ export default function MoreOptionsMenu ({
             > 
                 {!user ? 
                     <>
-                        {(path !== '/bars/') && // no delete button on bars
+                        {(path === '/comments/') && // no delete button on bars
                             <Button className='disabled' aria-disabled="true">Delete</Button>
                         }
                         {(categoryObject !== null) && // no archive button on comments
@@ -57,7 +61,7 @@ export default function MoreOptionsMenu ({
                     </>
                 :
                 <>
-                {(path !== '/bars/') && // no delete button on bars
+                {(path === '/comments/') && // delete button only on comments
                     <MoreOptionsButton // Delete Button
                         path={path}
                         nodeID={nodeID}
@@ -67,6 +71,7 @@ export default function MoreOptionsMenu ({
                     /> }
                      {(categoryObject !== null) && // no archive button on comments
                     <MoreOptionsButton // Archive Button
+                        archived={archived}
                         path={path}
                         nodeID={nodeID}
                         toggleExpand={toggleExpand}

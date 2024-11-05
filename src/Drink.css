@@ -20,3 +20,7 @@
 .nameRatingsContainer ul {
     padding: 0 0 0 .5em;
 }
+.descriptionContainer {
+    display: flex;
+    flex-direction: row;
+}

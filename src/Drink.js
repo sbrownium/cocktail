@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import AverageRating from './AverageRating';
@@ -14,13 +14,13 @@ import FeedbackList from './FeedbackList.js';
 import './Drink.css';
 import CommentList from './CommentList.js';
 import RatingsList from './RatingsList.js';
+import MoreOptionsMenu from './MoreOptionsMenu.js';
 
 
 export default function Drink({
   addedBy,
   archived,
   barID,
-  beingEditted,
   comments,
   drinkName,
   drinkID,
@@ -34,9 +34,11 @@ export default function Drink({
  }) {
   
   const [user] = useContext(UserContext);
+  const [editDrink, setEditDrink] = useState(false)
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
+  const drinkRef = useRef(null);
   
   useEffect(() => {
     setEditDrinkName(drinkName);
@@ -56,6 +58,10 @@ export default function Drink({
     '👍': 3,
     '🎉': 4
 };
+
+function toggleDrinkEdit () {
+  setEditDrink(editDrink => !editDrink)
+}
  
 function handleDrinkNameEdit (e) {
     e.preventDefault();  
@@ -111,60 +117,10 @@ return (
 )
 }
     return (
-      <> 
-        {beingEditted ?
-            <>
-                <form>
-                {!archived &&
-                <>
-                  <EditBox
-                      className={(editDrinkName === '') && 'missing'}
-                      id='drinkNameEdit'
-                      edit={editDrinkName}
-                      handleEdit={handleDrinkNameEdit}
-                  />
-                  {/* <AverageRating
-                  emojiLookUp={emojiLookUp}
-                  ratings={ratings}
-                  ratingDrinkID={drinkID}
-                /> */}
-                  &nbsp;&mdash;&nbsp;
-                  <EditBox
-                      className={(editDrinkDescription === '') && 'missing'}
-                      id='drinkDescriptionEdit'
-                      edit={editDrinkDescription}
-                      handleEdit={handleDrinkDescriptionEdit}
-                  />
-                  &nbsp;&mdash;&nbsp;$
-                   <EditBox
-                      className={(editDrinkPrice === '') && 'missing'}
-                      id='drinkPriceEdit'
-                      edit={editDrinkPrice}
-                      handleEdit={handleDrinkPriceEdit}
-                  />
-                  <>
-                   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
-                    //.missing from NewDrink.css
-                    <p className='missing'>Please fill out all the fields to save</p> 
-                    :
-                 <Button
-                    handleClick={handleClick}
-                    children='Save'
-                    className={null}
-                 />
-                   }
-                   </>
-                   {/* } */}
-                   {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
-                   <button onClick={handleNeverMind}>Never Mind</button>
-                  }
-                   </>
-                  }
-               </form> 
-             </>   
-            :
-            <> 
-            <div className='nameRatingsContainer'>  
+      <>   
+            {!editDrink ?
+              <>
+              <div className='nameRatingsContainer'> 
               <h2>{drinkName}</h2> 
               <RatingsList 
                 drinkID={drinkID}
@@ -173,38 +129,94 @@ return (
                 emojiLookUp={emojiLookUp}
               />
              </div> 
-            {description} &mdash;
-            ${Number(price).toFixed(2)}
-            </>
-            }
-            {(archived && user && beingEditted) &&
-            <>  
-            <div className='nameRatingsContainer'>  
-              <h2>{drinkName}</h2> 
-              <RatingsList 
-                drinkID={drinkID}
-                ratings={ratings}
-                users={users}
-                emojiLookUp={emojiLookUp}
-              />
-             </div> 
-            {/* &mdash;&nbsp; */}
-            {description} &mdash;
-            ${Number(price).toFixed(2)}
-            <Unarchive
+         <div className='descriptionContainer'>
+              <div className='description'>
+                {description} &mdash;
+                ${Number(price).toFixed(2)}
+              </div>
+            <MoreOptionsMenu 
+              path='/drinks/'
+              nodeID={drinkID}
+              toggleBeingEditted={toggleDrinkEdit}
+              userID={addedBy}
+              reference={drinkRef}
+              categoryObject={drinks} // for archiving
+              className='drinks'
+              archived={archived}
+            />
+            </div>
+            </> :
+
+        
+<>
+<form>
+<>
+  <EditBox
+      className={(editDrinkName === '') && 'missing'}
+      id='drinkNameEdit'
+      edit={editDrinkName}
+      handleEdit={handleDrinkNameEdit}
+  />
+  {/* <AverageRating
+  emojiLookUp={emojiLookUp}
+  ratings={ratings}
+  ratingDrinkID={drinkID}
+/> */}
+  &nbsp;&mdash;&nbsp;
+  <EditBox
+      className={(editDrinkDescription === '') && 'missing'}
+      id='drinkDescriptionEdit'
+      edit={editDrinkDescription}
+      handleEdit={handleDrinkDescriptionEdit}
+  />
+  &nbsp;&mdash;&nbsp;$
+   <EditBox
+      className={(editDrinkPrice === '') && 'missing'}
+      id='drinkPriceEdit'
+      edit={editDrinkPrice}
+      handleEdit={handleDrinkPriceEdit}
+  />
+
+   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
+    //.missing from NewDrink.css
+    <p className='missing'>Please fill out all the fields to save</p> 
+    :
+ <Button
+    handleClick={handleClick}
+    children='Save'
+    className={null}
+ />
+   }
+  
+   {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
+   <button onClick={handleNeverMind}>Never Mind</button>
+  }
+   </>
+</form> 
+</>   
+
+
+ }
+            {/* <Unarchive
               path={'/drinks/'}
               nodeID={drinkID}
               IDType='drinkID'
               arrayOfThings={Object.values(drinks)}
               handleToggle={handleToggle}
-            />
-            </>
-            }
+            /> */}
+            
+            
             {!archived && // checks for logged in user and that drink is not archived 
-             <>
-               {(user && beingEditted) && // checks that it is being editted in addition to user and archived */}
-             <>
-             <ArchiveButton 
+            
+              <CommentList
+              comments={comments}
+              drinkID={drinkID}
+              users={users}
+            />
+            }
+              
+            
+             {/* <ArchiveButton 
                 path='/drinks/'
                 nodeID={drinkID}
                 IDType='drinkID'
@@ -214,9 +226,9 @@ return (
                 className={null}
                 reset={resetDrinks}
                 buttonText='Archive Drink'
-              />
-              {(addedBy === user.userID) &&
-              <MoreEditButton 
+              /> */}
+              
+              {/* <MoreEditButton 
                 path='/drinks/'
                 nodeID={drinkID}
                 nodeName={drinkName}
@@ -224,10 +236,10 @@ return (
                 className={null}
                 reset={resetDrinks}
                 buttonText='Delete Drink'
-              />
-              }
-              </>
-            }
+              /> */}
+            
+            
+            
            {/* <MyRating 
                 emojiLookUp={emojiLookUp}
                 ratings={ratings}
@@ -248,13 +260,10 @@ return (
               ratings={ratings}
               emojiLookUp={emojiLookUp}
             /> */}
-            <CommentList
-              comments={comments}
-              drinkID={drinkID}
-              users={users}
-            />
-          </>
-       }
-          </>
-      )    
+            
+    
+       
+      </>   
+       
+      ) 
 }

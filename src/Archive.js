@@ -9,11 +9,22 @@ export default function Archive ({
     className,
     handleModalToggle,
     toggleExpand,
-    thisOne
+    thisOne,
+    archived
 }) {
     function handleArchive(e){
         const updates = {};
         e.preventDefault();
+
+    //    const thisOne = () => {
+    //     if (categoryObject && (path !== 'drinks')){ // categoryObject only for archive/unarchive
+    //         // return this one
+    //         return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID)[0];
+    //     } if (categoryObject && (path === 'drinks')){ // categoryObject only for archive/unarchive
+    //         // return this one
+    //         return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID);
+    //     }
+    // } 
         const newArchive = {
             ...thisOne()[0],
             archived: (thisOne()[0].archived === true) ? false : true,
@@ -32,7 +43,7 @@ return (
 return (
     <>
         <Button className={className} handleClick={handleArchive}>
-        {(thisOne()[0].archived === true) ? `Unarchive` : `Archive` }
+        {archived ? `Unarchive` : `Archive` }
         </Button>
     </>
 )

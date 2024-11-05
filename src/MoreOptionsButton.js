@@ -8,19 +8,30 @@ export default function MoreEditButton ({
     nodeID,
     reference,
     toggleExpand,
-    categoryObject
+    categoryObject,
+    archived
 }) {
+    // removes slashes and 's' from path prop to use as singular text
     const type = path.replaceAll('/', '').slice(0,-1);
 
+    // figures the thing being references for archive/unarchive (eg, the particular drink, bar, comment, or rating)
     const thisOne = () => {
-        if (categoryObject){
+        // categoryObject only exists for things that can be archived (drinks and bars)
+        if (categoryObject && (type !== 'drink')){  
+            // database uses a hash for key and the object for value
+            // so only returning values then filtering for the particular thing's ID
             return Object.values(categoryObject).filter(a => a[type + 'ID'] === nodeID);
-        }}
+            // the drink array of objects has already had the keys removed in DrinkList
+        } if (categoryObject && (type === 'drink')){
+            return (categoryObject).filter(a => a[type + 'ID'] === nodeID);
+        }
+    }
 
-    const action = () => {
-        if(categoryObject && thisOne()[0].archived === true) {
+    const action = () => { // for button & modal text
+         // categoryObject only exists for things that can be archived (drinks and bars)
+        if(categoryObject && archived) {
             return 'unarchive';
-         } if(categoryObject && thisOne()[0].archived === false) {
+         } if(categoryObject && !archived) {
             return 'archive';
          } else {
             return 'delete';
@@ -33,7 +44,7 @@ export default function MoreEditButton ({
         } 
         else {
             reference.current.close(); // close modal
-            toggleExpand(); 
+            toggleExpand(); // closes the menu 
         }
     } 
     return (
@@ -53,6 +64,7 @@ export default function MoreEditButton ({
                 thisOne={thisOne}
                 type={type}
                 action={action}
+                archived={archived}
             />
         </>
     )
