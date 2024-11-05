@@ -1,4 +1,14 @@
 .nameContainer {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.drinkArchiveCheckBox {
+    padding: 0 3em 0 0;
+    display: inline-flex;
+    align-items: center;
+}
+form.drinkArchiveCheckBox input {
+    margin: 0 .45em 0 0;
 }

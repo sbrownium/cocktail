@@ -153,7 +153,6 @@ export default function Bar({
                   barID={barID}
                   bars={bars}
                   barsDrinks={barsDrinks}
-                  // drinks={drinks}
                   comments={comments}
                   ratings={ratings}
                   users={users}

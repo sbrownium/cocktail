@@ -67,7 +67,9 @@
 .menuButtonContainer.drinks {
     padding: .25em .5em .25em 3.05em;
 }
-.menuButtonContainer.bars.unarchived {
+/* .menuButtonContainer.bars.unarchived  */
+.menuButtonContainer.unarchived 
+{
     padding: .25em .5em .25em 4.23em;
 }
 .menuButtonContainer.comments {

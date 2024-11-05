@@ -258,6 +258,20 @@ return (
 {!barBeingEditted ?
 <>
   <h1>{barName}</h1>
+  {(barsDrinks.filter(drink => drink.barID === barID).some((drink) => drink.archived === true)) &&
+        // Checks if there is an archived drink to determine to show checkbox
+      <form className="drinkArchiveCheckBox">
+       <label>
+         <input
+           type="checkbox"
+           checked={showDrinkArchive}
+           onChange={toggleShowDrinkArchive}
+         />
+           Include Archived Drinks
+         </label>
+       </form>
+       // End of checkbox display conditional
+      } 
   <MoreOptionsMenu 
     path='/bars/'
     nodeID={barID}
@@ -317,11 +331,7 @@ return (
           </li>
           ))}
         </ul> 
-        {(barsDrinks.filter(drink => drink.barID === barID).some((drink) => drink.archived === true)) &&
-        // Object.values... checks if there is an archived drink to determine to show button
-        <Button handleClick={toggleShowDrinkArchive}>
-        {!showDrinkArchive ? 'Show Archived Drinks' : 'Hide Archived Drinks'}
-      </Button>}
+        
         </>  
       )    
 }
