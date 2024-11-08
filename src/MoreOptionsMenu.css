@@ -1,3 +1,7 @@
+.moreOptionsMenuContainer {
+    margin: 0 0 0 1.5em;
+}
+
 .moreSelectionsContainer.comments {
     align-items: flex-end;
     position: absolute;

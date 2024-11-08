@@ -4,6 +4,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.nameSubContainer {
+    display: flex;
+}
 .drinkArchiveCheckBox {
     padding: 0 3em 0 0;
     display: inline-flex;
@@ -12,3 +15,4 @@
 form.drinkArchiveCheckBox input {
     margin: 0 .45em 0 0;
 }
+

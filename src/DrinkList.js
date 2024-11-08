@@ -238,27 +238,13 @@ return (
   })
 )};
     return (
-      <>
-      {/* {showFilter &&
-      <>
-      <Order
-        checked={checked}
-        handleChange={handleChange}
-        ratings={ratings}
-        barID={barID}
-      />
-       <Filter
-        filterChecked={filterChecked}
-        handleFilterChange={handleFilterChange}
-        comments={comments}
-        barID={barID}
-      />
-      </> 
-} */}
-<div className='nameContainer'>
-{!barBeingEditted ?
 <>
+<div className='nameContainer'>
+
+{!barBeingEditted ?
+  <>
   <h1 className={archived && 'archived'}>{barName}</h1>
+  <div className='nameSubContainer'>
   {(barsDrinks.filter(drink => drink.barID === barID).some((drink) => drink.archived === true)) &&
         // Checks if there is an archived drink to determine to show checkbox
       <form className="drinkArchiveCheckBox">
@@ -283,16 +269,17 @@ return (
     className='bars'
     archived={archived}
   />
+  </div>
   </>
-   :
-                 <form>
+ :
+
+              <form>
                   <EditBox
                     className={(changeBarName === '') && 'missing'}
                     id='barNameEdit'
                     edit={changeBarName}
                     handleEdit={handleBarNameEdit}
                   />
-                  <> 
                     <Button
                       handleClick={barNameUpdate}
                       children='Save'
@@ -303,12 +290,23 @@ return (
                       children='Never Mind'
                       className={null}
                     /> 
-                  </>
+                  
                   {(changeBarName === '') && 
                <p className='missing'>Please give the bar a name to save</p>
                 }
-                </form> }
-</div>
+                </form>
+
+} 
+
+               
+               </div>
+            
+            
+            
+                
+                
+
+
         <ul>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li className='drinkContainer' key={index}>
@@ -332,7 +330,6 @@ return (
           </li>
           ))}
         </ul> 
-        
-        </>  
+        </>
       )    
 }

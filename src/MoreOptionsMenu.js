@@ -42,6 +42,7 @@ export default function MoreOptionsMenu ({
     }
     
     return (
+        <div className='moreOptionsMenuContainer'>
         <div
             className={`${className} moreSelectionsContainer`}
         > 
@@ -113,5 +114,6 @@ export default function MoreOptionsMenu ({
             }
             </Button>
         </div> 
+    </div>
     )
 }
