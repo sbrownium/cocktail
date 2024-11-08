@@ -20,6 +20,7 @@ import MoreOptionsMenu from './MoreOptionsMenu.js';
 export default function Drink({
   addedBy,
   archived,
+  archivedParent,
   barID,
   comments,
   drinkName,
@@ -81,7 +82,7 @@ function handleDrinkPriceEdit (e) {
 function handleNeverMind (e) {
   e.preventDefault();
   resetDrinks();
-  handleToggle();
+  toggleDrinkEdit();
 }
 
 function resetDrinks () {
@@ -105,7 +106,7 @@ function handleClick(e){
     price: editDrinkPrice
   };
   resetDrinks();
-  handleToggle();
+  toggleDrinkEdit();
   updates['/drinks/' + drinkID] = newEdit;
 return (
     update(ref(db), updates).then(() => {
@@ -121,7 +122,7 @@ return (
             {!editDrink ?
               <>
               <div className='nameRatingsContainer'> 
-              <h2>{drinkName}</h2> 
+              <h2 className={(archived || archivedParent) && 'archived'}>{drinkName}</h2> 
               <RatingsList 
                 drinkID={drinkID}
                 ratings={ratings}
@@ -130,10 +131,12 @@ return (
               />
              </div> 
          <div className='descriptionContainer'>
-              <div className='description'>
+              <div className={`description ${(archived || archivedParent) && 'archived'}`}> 
+              {/* <div className='description'> */}
                 {description} &mdash;
                 ${Number(price).toFixed(2)}
               </div>
+            {!archivedParent && // if the parent is archived don't show menu
             <MoreOptionsMenu 
               path='/drinks/'
               nodeID={drinkID}
@@ -144,10 +147,17 @@ return (
               className='drinks'
               archived={archived}
             />
+          }
             </div>
-            </> :
-
-        
+             {!(archived || archivedParent) && // checks for logged in user and that drink is not archived nor is the bar
+              <CommentList
+                comments={comments}
+                drinkID={drinkID}
+                users={users}
+              />
+              } 
+              </>
+              :      
 <>
 <form>
 <>
@@ -177,93 +187,25 @@ return (
       handleEdit={handleDrinkPriceEdit}
   />
 
-   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
+   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) && 
     //.missing from NewDrink.css
     <p className='missing'>Please fill out all the fields to save</p> 
-    :
- <Button
+   }
+  <Button
     handleClick={handleClick}
     children='Save'
     className={null}
  />
-   }
+   <button
+    onClick={handleNeverMind}
+    >
+      Never Mind
+    </button>
   
-   {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
-   <button onClick={handleNeverMind}>Never Mind</button>
-  }
    </>
 </form> 
 </>   
-
-
- }
-            {/* <Unarchive
-              path={'/drinks/'}
-              nodeID={drinkID}
-              IDType='drinkID'
-              arrayOfThings={Object.values(drinks)}
-              handleToggle={handleToggle}
-            /> */}
-            
-            
-            {!archived && // checks for logged in user and that drink is not archived 
-            
-              <CommentList
-              comments={comments}
-              drinkID={drinkID}
-              users={users}
-            />
-            }
-              
-            
-             {/* <ArchiveButton 
-                path='/drinks/'
-                nodeID={drinkID}
-                IDType='drinkID'
-                arrayOfThings={Object.values(drinks)}
-                nodeName={drinkName}
-                handleToggle={handleToggle}
-                className={null}
-                reset={resetDrinks}
-                buttonText='Archive Drink'
-              /> */}
-              
-              {/* <MoreEditButton 
-                path='/drinks/'
-                nodeID={drinkID}
-                nodeName={drinkName}
-                handleToggle={handleToggle}
-                className={null}
-                reset={resetDrinks}
-                buttonText='Delete Drink'
-              /> */}
-            
-            
-            
-           {/* <MyRating 
-                emojiLookUp={emojiLookUp}
-                ratings={ratings}
-                drinkName={drinkName}
-                ratingDrinkID={drinkID}
-                handleToggle={handleToggle}
-                beingEditted={beingEditted}
-                barID={barID} 
-                /> */}
-            {/* <FeedbackList
-              comments={comments}
-              users={users}
-              drinkID={drinkID}
-              beingEditted={beingEditted}
-              handleToggle={handleToggle}
-              barID={barID}
-              archived={archived}
-              ratings={ratings}
-              emojiLookUp={emojiLookUp}
-            /> */}
-            
-    
-       
-      </>   
-       
+ }       
+      </>  
       ) 
 }

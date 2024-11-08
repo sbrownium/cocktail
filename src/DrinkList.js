@@ -32,6 +32,7 @@ export default function DrinkList({
   const [showDrinkArchive, setShowDrinkArchive] = useState(false);
   const [barBeingEditted, setBarBeingEditted] = useState(false);
   const [changeBarName, setChangeBarName] = useState(selectedBar.barName);
+  const archivedParent = archived;
   const barRef = useRef(null);
 
   useEffect(() => {
@@ -257,7 +258,7 @@ return (
 <div className='nameContainer'>
 {!barBeingEditted ?
 <>
-  <h1>{barName}</h1>
+  <h1 className={archived && 'archived'}>{barName}</h1>
   {(barsDrinks.filter(drink => drink.barID === barID).some((drink) => drink.archived === true)) &&
         // Checks if there is an archived drink to determine to show checkbox
       <form className="drinkArchiveCheckBox">
@@ -291,7 +292,6 @@ return (
                     edit={changeBarName}
                     handleEdit={handleBarNameEdit}
                   />
-                  {(changeBarName !== '') ?
                   <> 
                     <Button
                       handleClick={barNameUpdate}
@@ -304,7 +304,7 @@ return (
                       className={null}
                     /> 
                   </>
-                  : 
+                  {(changeBarName === '') && 
                <p className='missing'>Please give the bar a name to save</p>
                 }
                 </form> }
@@ -315,6 +315,7 @@ return (
              <Drink
               addedBy={addedBy}
               archived={archived}
+              archivedParent={archivedParent}
               barID={barID}
               beingEditted={beingEditted}
               comments={comments}

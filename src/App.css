@@ -411,3 +411,6 @@ button.emoji {
   padding: 0;
   margin: 0;
 }
+.archived {
+  color: #808080;
+}
