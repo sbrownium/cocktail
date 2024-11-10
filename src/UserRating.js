@@ -19,20 +19,23 @@ export default function UserRating ({
     const emojiKeys = Object.keys(emojiLookUp);
     const ratingToEmoji = emojiKeys.find(key => emojiLookUp[key] === rating);
 
-    function toggleShowName () {
-        setShowName(showName => !showName);
-    }
+    // function toggleShowName () {
+    //     setShowName(showName => !showName);
+    // }
     
     return (
-        <li key={index} className='emoji'>
-            <Button className='remove' handleClick={toggleShowName}>
+        <li key={index}
+            className={`emoji ${(user.userID === userID) && 'myRating'}`}
+        >
+            {/* <Button className='remove' handleClick={toggleShowName}>
                 {showName ?
                     <p>{preferredName}</p>
                     :
                     <p>&nbsp;</p>
-                }
-                <p className={(user.userID === userID) ? 'myRating emojiRating' : 'emojiRating'}>{ratingToEmoji}</p>
-            </Button>
+                } */}
+                <p className='emojiRating'>{ratingToEmoji}</p>
+                <p className='ratingName'>{preferredName}</p>
+            {/* </Button> */}
         </li>
     ) 
 }

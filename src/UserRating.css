@@ -1,11 +1,25 @@
-li.emoji button p.emojiRating.myRating {
+/* li.emoji button p.emojiRating.myRating {
    background: #003e56;
    padding: .25em;
    border-radius: 50%;
 }
 li.emoji button p.emojiRating {
     font-size: 1.1em;
-}
+} */
+li.emoji.myRating {
+    background: #003e56;
+    padding: .25em;
+    width: 2.25em;
+    border-radius: 50%;
+    margin: 0;
+ }
+ li.emoji.myRating p.ratingName {
+    color: white;
+ }
+ li.emoji p.emojiRating,
+ li.emoji.myRating p.emojiRating {
+     font-size: 1.1em;
+ }
 .remove {
     background: none;
     border: none;
@@ -16,6 +30,15 @@ li.emoji button p.emojiRating {
 li.emoji {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 2.25em;
+    margin: 0 .25em;
+}
+li.emoji p {
+    font-size: .4em;
+    color: #003e56;
+    margin: 0;
 }
 li.emoji p {
     font-size: .4em;

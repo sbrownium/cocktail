@@ -1,5 +1,6 @@
 import React from "react";
 import UserRating from "./UserRating";
+import "./RatingsList.css";
 
 export default function RatingsList ({
     drinkID,
@@ -11,7 +12,7 @@ export default function RatingsList ({
     const filteredRatings = ratingsArray.filter(rating => rating.drinkID === drinkID)
 
     return (
-        <ul>
+        <ul className="ratingsList">
             {filteredRatings.map(({userID, rating}, index) => (
                 <UserRating
                     userID={userID}

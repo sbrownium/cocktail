@@ -13,6 +13,7 @@
 }
 .nameRatingsContainer {
     height: 4.4em;
+    margin: 0 0 .25em 0;
 }
 .nameRatingsContainer h2 {
     margin: 0 .125em 0 0;
