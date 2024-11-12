@@ -77,7 +77,9 @@ export default function NewComment({
   function handleSignInModal () {
     if (!newCommentRef.current.open) {
       newCommentRef.current.showModal(); // open modal
-     } 
+     }  else {
+      newCommentRef.current.close();
+     }
   }
 
 async function handleClick(e) {
@@ -121,9 +123,9 @@ e.preventDefault();
             </div>
           }
           <SignInModal
-            message='Please signin to leave a comment'
+            message='leave a comment'
             reference={newCommentRef}
-            handleModuleToggle={handleSignInModal}
+            handleToggle={handleSignInModal}
             users={users}
             handleCommentSubmit={handleCommentSubmit}
           />

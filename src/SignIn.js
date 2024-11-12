@@ -32,9 +32,9 @@ function handleLogOut (e) {
   setBeingEditted(false);
 }
 
-function handleSignIn () {
-  handleClick();
-}
+// function handleSignIn () {
+//   handleClick();
+// }
 
 function handleClick (e) {
   e.preventDefault();

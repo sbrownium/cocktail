@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase.js";
-import { UserProvider } from './UserContext';
-import { BarContext, BarProvider } from './BarContext.js';
+import { UserContext } from "./UserContext.js";
+import { BarContext } from './BarContext.js';
 import SignIn from './SignIn.js';
 import Bar from './Bar.js'
 import './App.css';
@@ -12,10 +12,7 @@ import Button from './Button.js';
 import Edit from './Edit.js';
 import SelectionContainer from './SelectionContainer.js';
 import MoreContainer from './MoreContainer.js';
-
-
-
-
+import SignInModal from './SignInModal.js';
 
 function App() {
   const [bars, setBars] = useState(null);
@@ -23,6 +20,7 @@ function App() {
   const [comments, setComments] = useState(null);
   const [ratings, setRatings] = useState(null);
   const [users, setUsers] = useState(null);
+  const [user] = useContext(UserContext); 
   const [loadingBars, setLoadingBars] = useState(true);
   const [loadingDrinks, setLoadingDrinks] = useState(true);
   const [loadingComments, setLoadingComments] = useState(true);
@@ -41,10 +39,20 @@ function App() {
   const [showBars, setShowBars] = useState(false);
   const [showingBar, setShowingBar] = useState(false);
   const [showBarsOption, setShowBarsOption] = useState(true);
+  const [pendingNewDrink, setPendingNewDrink] = useState(false); // set when user tries to add new drink without being logged in
 
   const newDrinkRef = useRef(null);
   const changeBarRef = useRef(null);
+  const signInRef = useRef(null);
 
+  useEffect(() => { // listens for a user trying to add a new drink without being signed in
+    // after they are signed in will open the new drink modal
+    if (user && pendingNewDrink) {
+      handleNewDrinkToggle(); // open new drink modal
+      setShowBarsOption(false); // do not show bars
+      setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
+    }
+  }, [user, pendingNewDrink]);
 
 
 function openModal (modal) {
@@ -54,10 +62,6 @@ function openModal (modal) {
 function closeModal (modal) {
   modal.current.close();
 }
-
-// function openSelectionContainer () {
-//   openModal(selectionRef);
-// }
   // turns editting state on or off
   function handleToggle () {
     setBeingEditted(beingEditted => !beingEditted); 
@@ -65,33 +69,46 @@ function closeModal (modal) {
 
 function handleChangeBarToggle () {
   handleModalToggle(changeBarRef, setShowBars);
-  // if (changeBarRef.current.open) {
-  //   setSelectedBar('');
-  // }
+  if (changeBarRef.current.open) {
+    setSelectedBar('');
+  }
 }
 
 function handleNewDrinkToggle () {
   handleModalToggle(newDrinkRef, setShowNewDrink);
 }
 
-
-
-  function handleModalToggle (ref, setState) {
-    if (!ref.current.open) {
-      openModal(ref); // open modal
-      setState(true); // hide button
+function handleSignModalToggle () {
+    if (!signInRef.current.open) {
+      openModal(signInRef); // open modal
     } 
     else {
-      closeModal(ref); // close modal
-      setState(false); // show button
+      closeModal(signInRef); // close modal
+    }
+} 
+
+function handleModalToggle (ref, setState) {
+  if (!ref.current.open) {
+    openModal(ref); // open modal
+    setState(true); // hide button
+  } 
+  else {
+    closeModal(ref); // close modal
+    setState(false); // show button
+  }
+} 
+
+  function handleClick (e) {
+    e.preventDefault();
+    if (user) {
+      setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
+      setShowBarsOption(false); // do not show bars
+      handleNewDrinkToggle(); // open new drink modal
+    } else {
+      setPendingNewDrink(true); // handleNewDrinkToggle needs to run after login
+      handleSignModalToggle(); // open the Sign in modal
     }
   } 
-
-    function handleClick (e) {
-      e.preventDefault();
-      handleNewDrinkToggle();
-      setShowBarsOption(false);
-    } 
 
     function handleReset (e) {
       e.preventDefault();
@@ -120,7 +137,6 @@ function handleNewDrinkToggle () {
       const barsData = snapshot.val();
       setBars(barsData);
       setBarsArray(barsData);
-      console.log(barsArray);
       setLoadingBars(false);
     }, (error) => {
       setErrorBars(error);
@@ -195,8 +211,6 @@ function handleNewDrinkToggle () {
   return (
     
         <>
-        <UserProvider>
-          {/* <BarProvider> */}
         <body>
           <div className='backgroundOverlay'></div>
         <header>
@@ -226,6 +240,13 @@ function handleNewDrinkToggle () {
               showingBar={showingBar}
               setShowingBar={setShowingBar}
           />
+           <SignInModal
+            message='add a drink'
+            reference={signInRef}
+            handleToggle={handleSignModalToggle}
+            users={users}
+            handleCommentSubmit={handleClick}
+        />
        <NewContainer
         newDrinkRef={newDrinkRef}
         users={users}
@@ -274,8 +295,6 @@ function handleNewDrinkToggle () {
          </footer>
          
          </body>
-         {/* </BarProvider> */}
-        </UserProvider>
         </>
  
   )

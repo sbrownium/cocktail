@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { UserContext } from './UserContext.js';
 import { BarContext } from './BarContext.js';
 import { ref, child, push, update } from "firebase/database";
@@ -12,6 +12,7 @@ import Button from './Button.js';
 import SignIn from './SignIn.js';
 import './NewContainer.css';
 import XIcon from './XIcon.js';
+import SignInModal from './SignInModal.js';
 
 
 export default function NewContainer ({
@@ -31,6 +32,7 @@ export default function NewContainer ({
     const [repeatAlert, setRepeatAlert] = useState(false);
     const [missingAlert, setMissingAlert] = useState(false);
     const barsArray = Object.values(bars);
+    // const signInRef = useRef(null);
     // const defaultBarObj = barsArray.filter((ID) => ID.barID === selectedBar.barID);
     // const defaultBarName = "defaultBarName"
     // checks if a bar is already selected
@@ -68,7 +70,6 @@ export default function NewContainer ({
           barName: selectedBar.barName || '',
         }));
       }, [selectedBar]);
-
     
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
@@ -417,7 +418,6 @@ export default function NewContainer ({
             } else {
                 const newDrinkObj = {archived, barID, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID:newDrinkKey, drinkName, description, price};
                 updates['/drinks/' + newDrinkKey] = newDrinkObj; 
-               
                 setSelectedBar(barID);
     
             }
