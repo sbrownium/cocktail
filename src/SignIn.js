@@ -10,7 +10,8 @@ import GoogleSignOutButton from './GoogleSignOutButton.js';
 
 export default function SignIn ({
   users,
-  setBeingEditted
+  setBeingEditted,
+  finishFlowFunction
 }) {
 const [user, setUser] = useContext(UserContext);
 
@@ -51,6 +52,7 @@ signInWithPopup(auth, provider)
       userName: result.user.displayName
     }        
           setUser(currentUser);
+          finishFlowFunction();
           const usersArray = Object.values(users);
           const existingUser = usersArray.find((u) => u.userID === currentUser.userID)
       if (!existingUser) {

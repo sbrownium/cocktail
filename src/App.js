@@ -46,16 +46,16 @@ function App() {
   const changeBarRef = useRef(null);
   const signInRef = useRef(null);
 
-  useEffect(() => { // listens for a user trying to add a new drink without being signed in
-    // after they are signed in will open the new drink modal
-    // the bar is the user is at has to be the same as when they first tried to log in so 
-    // the new drink modal does pop up unexpectedly way after the fact
-    if (user && pendingNewDrink && (barAtPendingNewDrink === selectedBar.barID)) {
-      handleNewDrinkToggle(); // open new drink modal
-      setShowBarsOption(false); // do not show bars
-      setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
-    }
-  }, [user, pendingNewDrink, selectedBar.barID]);
+  // useEffect(() => { // listens for a user trying to add a new drink without being signed in
+  //   // after they are signed in will open the new drink modal
+  //   // the bar is the user is at has to be the same as when they first tried to log in so 
+  //   // the new drink modal does pop up unexpectedly way after the fact
+  //   if (user && pendingNewDrink && (barAtPendingNewDrink === selectedBar.barID)) {
+  //     handleNewDrinkToggle(); // open new drink modal
+  //     setShowBarsOption(false); // do not show bars
+  //     setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
+  //   }
+  // }, [user, pendingNewDrink, selectedBar.barID]);
 
 
 function openModal (modal) {
@@ -104,12 +104,12 @@ function handleModalToggle (ref, setState) {
   function handleClick (e) {
     e.preventDefault();
     if (user) {
-      setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
+      // setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
       setShowBarsOption(false); // do not show bars
       handleNewDrinkToggle(); // open new drink modal
     } else {
-      setPendingNewDrink(true); // handleNewDrinkToggle needs to run after login
-      setBarAtPendingNewDrink(selectedBar.barID); // the bar the user is on when they try to add new drink without being logged in
+      // setPendingNewDrink(true); // handleNewDrinkToggle needs to run after login
+      // setBarAtPendingNewDrink(selectedBar.barID); // the bar the user is on when they try to add new drink without being logged in
       handleSignModalToggle(); // open the Sign in modal
     }
   } 
@@ -250,6 +250,7 @@ function handleModalToggle (ref, setState) {
             handleToggle={handleSignModalToggle}
             users={users}
             handleCommentSubmit={handleClick}
+            finishFlowFunction={handleNewDrinkToggle}
         />
        <NewContainer
         newDrinkRef={newDrinkRef}

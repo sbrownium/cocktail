@@ -15,6 +15,7 @@ import './Drink.css';
 import CommentList from './CommentList.js';
 import RatingsList from './RatingsList.js';
 import MoreOptionsMenu from './MoreOptionsMenu.js';
+import NewRating from './NewRating.js';
 
 
 export default function Drink({
@@ -36,6 +37,7 @@ export default function Drink({
   
   const [user] = useContext(UserContext);
   const [editDrink, setEditDrink] = useState(false)
+  const [editRating, setEditRating] = useState(false);
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
@@ -61,9 +63,13 @@ export default function Drink({
 };
 
 function toggleDrinkEdit () {
-  setEditDrink(editDrink => !editDrink)
+  setEditDrink(editDrink => !editDrink);
 }
  
+function toggleRatingEdit () {
+  setEditRating(editRating => !editRating);
+}
+
 function handleDrinkNameEdit (e) {
     e.preventDefault();  
     setEditDrinkName(e.target.value);
@@ -129,6 +135,14 @@ return (
                 users={users}
                 emojiLookUp={emojiLookUp}
               />
+              <NewRating
+                emojiLookUp={emojiLookUp}
+                handleToggle={handleToggle}
+                // filterRatings={filteredRatings}
+                ratingDrinkID={drinkID}
+                beingEditted={toggleRatingEdit}
+                text='Rate Drink'
+            />
              </div> 
          <div className='descriptionContainer'>
               <div className={`description ${(archived || archivedParent) && 'archived'}`}> 

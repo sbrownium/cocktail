@@ -80,7 +80,7 @@ if (filterRatings.length === 0)
     return (  
       <>
         <form>
-          <label>{text}
+          {/* <label>{text} */}
           <select name='ratingSelect'
           value={rating.rating} 
           onChange={handleRating}
@@ -90,7 +90,7 @@ if (filterRatings.length === 0)
     <option key={index} value={value}>{key}</option>
 )).reverse()}
           </select>
-          </label>
+          {/* </label> */}
           {beingEditted ?
           <Submit handleClick={handleClick} value='save'/>
           :

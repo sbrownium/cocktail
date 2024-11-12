@@ -9,7 +9,8 @@ export default function SignInModal ({
     message,
     reference,
     handleToggle,
-    users
+    users,
+    finishFlowFunction
 }){
     const [user] = useContext(UserContext)
     useEffect(() => {
@@ -32,6 +33,7 @@ export default function SignInModal ({
                 <p>Please sign in to {message}</p>
                 <SignIn
                     users={users}
+                    finishFlowFunction={finishFlowFunction}
                 />
             </div>
         </dialog>
