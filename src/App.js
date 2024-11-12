@@ -40,6 +40,7 @@ function App() {
   const [showingBar, setShowingBar] = useState(false);
   const [showBarsOption, setShowBarsOption] = useState(true);
   const [pendingNewDrink, setPendingNewDrink] = useState(false); // set when user tries to add new drink without being logged in
+  const [barAtPendingNewDrink, setBarAtPendingNewDrink] = useState('') // the bar the user is on when they try to add new drink without being logged in
 
   const newDrinkRef = useRef(null);
   const changeBarRef = useRef(null);
@@ -47,12 +48,14 @@ function App() {
 
   useEffect(() => { // listens for a user trying to add a new drink without being signed in
     // after they are signed in will open the new drink modal
-    if (user && pendingNewDrink) {
+    // the bar is the user is at has to be the same as when they first tried to log in so 
+    // the new drink modal does pop up unexpectedly way after the fact
+    if (user && pendingNewDrink && (barAtPendingNewDrink === selectedBar.barID)) {
       handleNewDrinkToggle(); // open new drink modal
       setShowBarsOption(false); // do not show bars
       setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
     }
-  }, [user, pendingNewDrink]);
+  }, [user, pendingNewDrink, selectedBar.barID]);
 
 
 function openModal (modal) {
@@ -106,6 +109,7 @@ function handleModalToggle (ref, setState) {
       handleNewDrinkToggle(); // open new drink modal
     } else {
       setPendingNewDrink(true); // handleNewDrinkToggle needs to run after login
+      setBarAtPendingNewDrink(selectedBar.barID); // the bar the user is on when they try to add new drink without being logged in
       handleSignModalToggle(); // open the Sign in modal
     }
   } 
