@@ -1,84 +1,127 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
+import SignInModal from './SignInModal.js';
 
 
 export default function NewRating({
   emojiLookUp,
   handleToggle,
-  filterRatings,
   barID,
-  ratingDrinkID,
-  text,
-  beingEditted
+  drinkID,
+  ratings,
+  users
 }) {
     
     const [rating, setRating] = useState('');
-    const [user, setUser] = useContext(UserContext);
-    const { userName, userID } = user 
-    
+    const [user] = useContext(UserContext);
+    // const { userName, userID } = user
+    const ratingSignInRef = useRef(null);
+    const drinkRatings = Object.values(ratings).filter(id => id.drinkID === drinkID);
+    const filteredRatings = drinkRatings.filter(rating => rating.userID === user.userID)
 
+    function handleSignModalToggle () {
+      if (!ratingSignInRef.current.open) {
+        ratingSignInRef.current.showModal(); // open modal
+      } 
+      else {
+        ratingSignInRef.current.close(); // close modal
+      }
+  } 
+  
     function handleRating (e) {
-        setRating({
-            rating: Number(e.target.value)
-        })
+        setRating(Number(e.target.value))
 }
+
+function updateRating (id) {
+  if (rating !== '') {
+  if (filteredRatings.length !== 0) {
+    const updates = {};
+    const updatedRating = {
+      ...filteredRatings[0],
+      userID: id ? id : user.userID,
+      lastTimeStamp: Date.now(),
+      rating: rating
+    };
+
+  updates['/ratings/' + filteredRatings[0].ratingID] = updatedRating;
+  
+ 
+  return (
+      update(ref(db), updates).then(() => {
+        setRating('');
+          console.log('Data saved successfully!')
+    })
+    .catch((error) => {
+      console.log('problem writing')
+    })
+  ) 
+}
+if (filteredRatings.length === 0)  
+ {
+    const newRatingKey = push(child(ref(db), '/ratings/')).key;
+    const updates = {};
+    const newRating = {
+      barID: barID,
+      ratingID: newRatingKey,
+      userID: id ? id : user.userID,
+      drinkID: drinkID,
+      initialTimeStamp: Date.now(),
+      lastTimeStamp: Date.now(),
+      rating: rating
+    };
+  updates['/ratings/' + newRatingKey] = newRating;
+  
+  return (
+      update(ref(db), updates).then(() => {
+        setRating('');
+          console.log('Data saved successfully!')
+    })
+    .catch((error) => {
+      console.log('problem writing')
+    })
+  )
+}
+}}
+ // Wait for the user state to be set before running updateRating
+//  useEffect(() => {
+//   if (user && handleSignInSuccess && ratingSignInRef.current && ratingSignInRef.current.open) {
+//     updateRating();
+//     handleSignModalToggle(); // close the modal after updating
+//   }
+// }, [user]);
+
+// Callback function to run after successful sign-in
+async function handleSignInSuccess(id) {
+  updateRating(id);
+}
+
+ // Callback function to run after successful sign-in
+//  function handleSignInSuccess() {
+//   updateRating();
+// }
+
     function handleClick(e) {
       e.preventDefault();
-    if (filterRatings.length != 0) {
-      const updates = {};
-      const updatedRating = {
-        barID: filterRatings[0].barID,
-        ratingID: filterRatings[0].ratingID,
-        userID: filterRatings[0].userID,
-        drinkID: filterRatings[0].drinkID,
-        initialTimeStamp: filterRatings[0].initialTimeStamp,
-        lastTimeStamp: Date.now(),
-        rating: rating.rating
-      };
-    setRating('');
-    handleToggle();
-    updates['/ratings/' + filterRatings[0].ratingID] = updatedRating;
-   
-    return (
-        update(ref(db), updates).then(() => {
-            console.log('Data saved successfully!')
-      })
-      .catch((error) => {
-        console.log('problem writing')
-      })
-    ) 
-  }
-if (filterRatings.length === 0)  
-   {
-      const newRatingKey = push(child(ref(db), '/ratings/')).key;
-      const updates = {};
-      const newRating = {
-        barID: barID,
-        ratingID: newRatingKey,
-        userID: userID,
-        drinkID: ratingDrinkID,
-        initialTimeStamp: Date.now(),
-        lastTimeStamp: Date.now(),
-        rating: rating.rating
-      };
-    setRating('');
-    updates['/ratings/' + newRatingKey] = newRating;
-   
-    return (
-        update(ref(db), updates).then(() => {
-            console.log('Data saved successfully!')
-      })
-      .catch((error) => {
-        console.log('problem writing')
-      })
-    )
-  }
+      if (!user) {
+        handleSignModalToggle();
+        return
+      } 
+      updateRating();
 }
     return (  
       <>
+      <SignInModal
+            message='rate the drink'
+            reference={ratingSignInRef}
+            handleToggle={handleSignModalToggle}
+            users={users}
+            handleCommentSubmit={handleClick}
+            onSignInSuccess={handleSignInSuccess}
+            // finishFlowFunction={updateRating}
+        />
         <form>
           {/* <label>{text} */}
           <select name='ratingSelect'
@@ -91,10 +134,10 @@ if (filterRatings.length === 0)
 )).reverse()}
           </select>
           {/* </label> */}
-          {beingEditted ?
+         
           <Submit handleClick={handleClick} value='save'/>
-          :
-          <Submit handleClick={handleClick} value='add'/>}
+          
+          {/* <Submit handleClick={handleClick} value='add'/> */}
         </form>
       </>
     );

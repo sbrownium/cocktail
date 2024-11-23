@@ -138,10 +138,10 @@ return (
               <NewRating
                 emojiLookUp={emojiLookUp}
                 handleToggle={handleToggle}
-                // filterRatings={filteredRatings}
-                ratingDrinkID={drinkID}
-                beingEditted={toggleRatingEdit}
-                text='Rate Drink'
+                barID={barID}
+                ratings={ratings}
+                users={users}
+                drinkID={drinkID}
             />
              </div> 
          <div className='descriptionContainer'>

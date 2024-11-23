@@ -72,9 +72,9 @@ function closeModal (modal) {
 
 function handleChangeBarToggle () {
   handleModalToggle(changeBarRef, setShowBars);
-  if (changeBarRef.current.open) {
-    setSelectedBar('');
-  }
+  // if (changeBarRef.current.open) {
+  //   setSelectedBar('');
+  // }
 }
 
 function handleNewDrinkToggle () {
@@ -105,7 +105,7 @@ function handleModalToggle (ref, setState) {
     e.preventDefault();
     if (user) {
       // setPendingNewDrink(false); // handleNewDrinkToggle does not need to run after login
-      setShowBarsOption(false); // do not show bars
+      // setShowBarsOption(false); // do not show bars
       handleNewDrinkToggle(); // open new drink modal
     } else {
       // setPendingNewDrink(true); // handleNewDrinkToggle needs to run after login
@@ -244,13 +244,14 @@ function handleModalToggle (ref, setState) {
               showingBar={showingBar}
               setShowingBar={setShowingBar}
           />
-           <SignInModal
+          <SignInModal
             message='add a drink'
             reference={signInRef}
             handleToggle={handleSignModalToggle}
             users={users}
             handleCommentSubmit={handleClick}
-            finishFlowFunction={handleNewDrinkToggle}
+            // finishFlowFunction={handleNewDrinkToggle}
+            onSignInSuccess={handleNewDrinkToggle}
         />
        <NewContainer
         newDrinkRef={newDrinkRef}
