@@ -52,7 +52,7 @@ export default function MoreOptionsMenu ({
             > 
                 {!user ? 
                     <>
-                        {(path === '/comments/') && // no delete button on bars
+                        {((path === '/comments/') || (path === '/ratings/')) && // no delete button on bars
                             <Button className='disabled' aria-disabled="true">Delete</Button>
                         }
                         {(categoryObject !== null) && // no archive button on comments
@@ -62,7 +62,7 @@ export default function MoreOptionsMenu ({
                     </>
                 :
                 <>
-                {(path === '/comments/') && // delete button only on comments
+                {(path === '/comments/') || (path ==='/ratings/') && // delete button only on comments and ratings
                     <MoreOptionsButton // Delete Button
                         path={path}
                         nodeID={nodeID}

@@ -37,7 +37,6 @@ export default function Drink({
   
   const [user] = useContext(UserContext);
   const [editDrink, setEditDrink] = useState(false)
-  const [editRating, setEditRating] = useState(false);
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
@@ -64,10 +63,6 @@ export default function Drink({
 
 function toggleDrinkEdit () {
   setEditDrink(editDrink => !editDrink);
-}
- 
-function toggleRatingEdit () {
-  setEditRating(editRating => !editRating);
 }
 
 function handleDrinkNameEdit (e) {
@@ -129,20 +124,13 @@ return (
               <>
               <div className='nameRatingsContainer'> 
               <h2 className={(archived || archivedParent) && 'archived'}>{drinkName}</h2> 
-              <RatingsList 
+              <RatingsList
+                barID={barID}
                 drinkID={drinkID}
                 ratings={ratings}
                 users={users}
                 emojiLookUp={emojiLookUp}
               />
-              <NewRating
-                emojiLookUp={emojiLookUp}
-                handleToggle={handleToggle}
-                barID={barID}
-                ratings={ratings}
-                users={users}
-                drinkID={drinkID}
-            />
              </div> 
          <div className='descriptionContainer'>
               <div className={`description ${(archived || archivedParent) && 'archived'}`}> 

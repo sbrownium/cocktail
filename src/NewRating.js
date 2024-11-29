@@ -4,6 +4,7 @@ import { db } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 import SignInModal from './SignInModal.js';
+import Button from './Button.js';
 
 
 export default function NewRating({
@@ -12,14 +13,18 @@ export default function NewRating({
   barID,
   drinkID,
   ratings,
-  users
+  users,
+  ratingsArray,
+  editRating,
+  setEditRating
 }) {
     
     const [rating, setRating] = useState('');
     const [user] = useContext(UserContext);
     // const { userName, userID } = user
     const ratingSignInRef = useRef(null);
-    const drinkRatings = Object.values(ratings).filter(id => id.drinkID === drinkID);
+    // const drinkRatings = Object.values(ratings).filter(id => id.drinkID === drinkID);
+    const drinkRatings = ratingsArray.filter(id => id.drinkID === drinkID);
     const filteredRatings = drinkRatings.filter(rating => rating.userID === user.userID)
 
     function handleSignModalToggle () {
@@ -48,11 +53,13 @@ function updateRating (id) {
 
   updates['/ratings/' + filteredRatings[0].ratingID] = updatedRating;
   
+  
  
   return (
       update(ref(db), updates).then(() => {
         setRating('');
           console.log('Data saved successfully!')
+          setEditRating(false);
     })
     .catch((error) => {
       console.log('problem writing')
@@ -73,11 +80,13 @@ if (filteredRatings.length === 0)
       rating: rating
     };
   updates['/ratings/' + newRatingKey] = newRating;
+ 
   
   return (
       update(ref(db), updates).then(() => {
         setRating('');
           console.log('Data saved successfully!')
+          setEditRating(false);
     })
     .catch((error) => {
       console.log('problem writing')
@@ -139,6 +148,11 @@ async function handleSignInSuccess(id) {
           
           {/* <Submit handleClick={handleClick} value='add'/> */}
         </form>
-      </>
+        {editRating &&
+        <Button handleClick={handleToggle}>
+            Never Mind 
+        </Button>
+        }   
+    </>
     );
   }
