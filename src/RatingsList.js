@@ -43,7 +43,7 @@ export default function RatingsList ({
                 />
             ))}
         </ul>
-        {(!hasBeenRated || editRating)?
+        {(!hasBeenRated || editRating) ?
             <NewRating
                 emojiLookUp={emojiLookUp}
                 handleToggle={toggleRatingEdit}
@@ -53,6 +53,7 @@ export default function RatingsList ({
                 ratingsArray={ratingsArray}
                 users={users}
                 drinkID={drinkID}
+                hasBeenRated={hasBeenRated}
             />
     :
             <>

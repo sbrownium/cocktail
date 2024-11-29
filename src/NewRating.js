@@ -16,7 +16,8 @@ export default function NewRating({
   users,
   ratingsArray,
   editRating,
-  setEditRating
+  setEditRating,
+  hasBeenRated
 }) {
     
     const [rating, setRating] = useState('');
@@ -132,10 +133,10 @@ async function handleSignInSuccess(id) {
             // finishFlowFunction={updateRating}
         />
         <form>
-          {/* <label>{text} */}
           <select name='ratingSelect'
-          value={rating.rating} 
-          onChange={handleRating}
+            value={rating.rating} 
+            onChange={handleRating}
+            defaultValue={hasBeenRated && hasBeenRated.rating} // If editing a rating, puts in the previous value as a default
           >
             <option>Rate</option>
             {Object.entries(emojiLookUp).map(([key, value], index) => (
