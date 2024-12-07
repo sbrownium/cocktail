@@ -1,0 +1,16 @@
+select[name="ratingSelect"] { 
+    padding: .125em 0 .125em .125em;
+}
+select[name="ratingSelect"].rated {
+    font-size: 1.5em;
+    border-radius: 7px;
+}
+select[name="ratingSelect"].unrated {
+    font-size: .9em;
+    border-radius: 4px;
+}
+/* select[name="ratingSelect"]:has( option[value='rate']:checked) {
+    font-size: .9em;
+    padding: 0;
+    border-radius: 4px;
+} */

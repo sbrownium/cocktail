@@ -5,6 +5,7 @@ import { UserContext } from './UserContext.js';
 import Submit from './Submit.js';
 import SignInModal from './SignInModal.js';
 import Button from './Button.js';
+import './NewRating.css';
 
 
 export default function NewRating({
@@ -136,9 +137,10 @@ async function handleSignInSuccess(id) {
           <select name='ratingSelect'
             value={rating.rating} 
             onChange={handleRating}
+            className={hasBeenRated ? 'rated' : 'unrated'}
             defaultValue={hasBeenRated && hasBeenRated.rating} // If editing a rating, puts in the previous value as a default
           >
-            <option>Rate</option>
+            <option value='rate'>Rate</option>
             {Object.entries(emojiLookUp).map(([key, value], index) => (
     <option key={index} value={value}>{key}</option>
 )).reverse()}
