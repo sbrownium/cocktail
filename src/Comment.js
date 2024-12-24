@@ -102,7 +102,7 @@ return (
                 </form>            
             </>
               : 
-              <div className='commentContainer'>
+              <div className={`commentContainer ${(userID === user.userID) ? 'border-1' : 'border-5'}`}>
                 <div className='textContainer'>
                   {text}
                 </div>

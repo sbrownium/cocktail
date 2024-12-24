@@ -11,6 +11,10 @@ body,
 main {
   flex-direction: column;
 }
+body,
+dialog {
+  background: #121212;
+}
 main {
   margin:0 0 80px 0;
   padding: 0 1em;
@@ -21,7 +25,7 @@ footer {
   bottom: 0;
   margin: 1em 0 0;
   width: 100%;
-  /* background: whitesmoke; */
+  /* background: #1D1D1E; */
   /* flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -31,7 +35,7 @@ footer {
   max-width: 500px; */
 }
 .background {
-  background: whitesmoke;
+  background: #1D1D1E;
   border-top: 1px solid #80808029;
   width: 100vw;
   position: absolute;
@@ -54,7 +58,7 @@ footer nav {
   padding: 1em; 
   width: 100vw;
   max-width: 500px; 
-  /* background: whitesmoke; */
+  /* background: #1D1D1E; */
 }
 header svg {
   margin: 1em;
@@ -204,9 +208,8 @@ input[type=submit] {
   margin: .75em 1em .5em;
 }
 
-/* Typogrpahy */
+/* Typography */
 .initialSelect button p {
-  color: black;
   margin: 0;
   font-size: 4em;
   line-height: 1.1em;
@@ -280,6 +283,16 @@ h2,
   font-weight: 800;
   font-style: italic;
 }
+p,
+li,
+a,
+button,
+label, 
+h1,
+h2,
+.proza-libre * {
+  color: rgba(255, 255, 255, 0.87);
+}
 
 .initialSelect p{
   font-family: "Kumbh Sans", sans-serif;
@@ -291,19 +304,32 @@ h2,
 }
 
 /* Colors */
+p.color-1 {
+  color: #2E9592;
+  background: none;
+}
+button.color-1,
+button.color-2,
+button.color-3,
+button.color-4,
+input[type=submit].color-4 {
+  color: black;
+}
 .color-1 {
   /* background: #dca4df; 
   background: #e86588; */
-  background: #f1abc9;
+  background: #2E9592;
 }
 .color-2 {
-  background: #c3ecf3;
+  /* background: #a7226f; */
+  /* background: #f76868 */
+  background: #bc3c86;
 }
 .color-3 {
-  background: #7bc9d4;
+  background: #f46c3f;
 }
 .color-4 {
-  background: #01747e;
+  background: #f7dc68;
 }
 .color-5 {
   background: #2d6677;
@@ -317,8 +343,10 @@ h2,
   color: white;
 }
 .border-1 {
-  border: 1px solid #f1abc9;
-  background: #f1abc920;
+   border: 1px solid #2E9592;
+}
+.outline-1 {
+  outline: 3px solid #2E9592;
 }
 .border-2 {
   border: 1px solid #c3ecf3;
@@ -329,12 +357,10 @@ h2,
   background: #7bc9d420;
 }
 .border-4 {
-  border: 1px solid #01747e;
-  background: #01747e20;
+  border: 1px solid #f7dc68;
 }
 .border-5 {
-  border: 1px solid #2d6677;
-  background: #2d667720;
+  border: 1px solid #ccc;
 }
 .border-6 {
   border: 1px solid #003e56;
@@ -404,7 +430,7 @@ dialog.overlay {
 }
 
 dialog.overlay::backdrop {
-  background: rgb(175 231 255 / 15%);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(3px);
 }
 button.emoji {

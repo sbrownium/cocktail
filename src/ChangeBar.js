@@ -13,7 +13,7 @@ export default function ChangeBar ({
   // once a bar has been selected
       return (
           <select name='barSelect'
-            className={showBarArchive && 'border-3'}
+            className={showBarArchive && 'outline-1'}
             onChange={handleSelect}
             defaultValue={showingBar && selectedBar.barID}
           >

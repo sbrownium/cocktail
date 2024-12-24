@@ -23,7 +23,7 @@ export default function Modal ({
                 <Button className='modalBtn' handleClick={handleModalToggle}>
                     <XIcon
                     height='1.25em'
-                    fillColor='#303030'
+                    fillColor='rgba(255, 255, 255, 0.6)'
                     />
                 </Button>
             </div>

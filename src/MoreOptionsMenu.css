@@ -23,7 +23,7 @@
 }
 
 .disabled {
-    color: #808080;
+    color: rgba(255, 255, 255, 0.38);
     cursor: default;
     border: none;
     background: none;
@@ -34,7 +34,7 @@
     text-transform: capitalize;
 }
 .disabled .dot {
-    background: #CCC;
+    background: rgba(255, 255, 255, 0.38);
 }
 .moreOptionsButtonHolder.expanded {
     position: absolute;
@@ -47,7 +47,7 @@
     /* border-bottom: none; */
     border-left: 1px solid #80808029;
     border-right: 1px solid #80808029;
-    background: whitesmoke;
+    background: #1D1D1E;
     border-radius: 8px 8px 0 0;
 }
 .ratings .moreOptionsButtonHolder.expanded {
@@ -61,7 +61,7 @@
 .menuButtonContainer.comments.expanded,
 .menuButtonContainer.drinks.expanded,
 .menuButtonContainer.ratings.expanded {
-    background: whitesmoke;
+    background: #1D1D1E;
 }
 .menuButtonContainer.comments.expanded,
 .menuButtonContainer.bars.expanded,

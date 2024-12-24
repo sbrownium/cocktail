@@ -443,7 +443,7 @@ export default function NewContainer ({
                 <Button className='modalBtn' handleClick={handleNewDrinkToggle}>
                     <XIcon
                     height='1.25em'
-                    fillColor='#303030'
+                    fillColor='rgba(255, 255, 255, 0.6)'
                     />
                 </Button>
             </div>
@@ -476,10 +476,10 @@ export default function NewContainer ({
                 />
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <fieldset className='formButtons'>
-                    <Submit className='color-1' handleClick={handleClick} value='Add'/>
-                    <Button className='color-4' handleClick={handleNewDrinkToggle}>
+                    <Button className='color-2' handleClick={handleNewDrinkToggle}>
                         Never Mind
                     </Button>
+                    <Submit className='color-1' handleClick={handleClick} value='Add'/>
                 </fieldset>
             </form>
            
@@ -506,7 +506,7 @@ export default function NewContainer ({
             {missingAlert &&
             <>
             <p>Missing stuff</p>
-            <Button className={null} handleClick={() => setMissingAlert(false)} >
+            <Button className='color-4' handleClick={() => setMissingAlert(false)} >
              OK
             </Button> 
             </>

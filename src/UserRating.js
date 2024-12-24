@@ -40,7 +40,7 @@ export default function UserRating ({
         <>
         { !userOwns() &&
         <li key={index}
-            className={`emoji ${(user.userID === userID) && 'myRating'}`}
+            className={`emoji ${(user.userID === userID) && 'myRating color-1'}`}
         >
             <p className='emojiRating'>{ratingToEmoji}</p>
             <p className='ratingName'>{preferredName}</p>

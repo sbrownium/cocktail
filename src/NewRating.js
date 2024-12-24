@@ -133,7 +133,8 @@ async function handleSignInSuccess(id) {
             onSignInSuccess={handleSignInSuccess}
             // finishFlowFunction={updateRating}
         />
-        <form>
+        <div className='userRatingContainer'>
+        <form className='ratings'> 
           <select name='ratingSelect'
             value={rating.rating} 
             onChange={handleRating}
@@ -147,15 +148,16 @@ async function handleSignInSuccess(id) {
           </select>
           {/* </label> */}
          
-          <Submit handleClick={handleClick} value='save'/>
+          <Submit className='color-1' handleClick={handleClick} value='save'/>
           
           {/* <Submit handleClick={handleClick} value='add'/> */}
         </form>
         {editRating &&
-        <Button handleClick={handleToggle}>
+        <Button className='nmind color-4' handleClick={handleToggle}>
             Never Mind 
         </Button>
-        }   
+        }
+        </div>   
     </>
     );
   }

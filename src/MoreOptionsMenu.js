@@ -62,7 +62,7 @@ export default function MoreOptionsMenu ({
                     </>
                 :
                 <>
-                {(path === '/comments/') || (path ==='/ratings/') && // delete button only on comments and ratings
+                {((path === '/comments/') || (path ==='/ratings/')) && // delete button only on comments and ratings
                     <MoreOptionsButton // Delete Button
                         path={path}
                         nodeID={nodeID}
@@ -109,7 +109,7 @@ export default function MoreOptionsMenu ({
                 :
                 <XIcon
                     height='1.25em'
-                    fillColor='#303030'
+                    fillColor='rgba(255, 255, 255, 0.6)'
                 />
             }
             </Button>

@@ -20,10 +20,10 @@ export default function MoreContainer () {
          
                 <div className={!moreSelected ? "moreButtonsHolder": "moreButtonsHolder expanded"}>
                     <a href="https://github.com/sbrownium/cocktail">
-                        <GitHub width='24.5px' height='24px' fillColor='black'/>
+                        <GitHub width='24.5px' height='24px' fillColor='rgba(255, 255, 255, 0.87)'/>
                     </a>
                     <a href="https://linkedin.com/in/sbrownium">
-                        <LinkedIn width='24.5px' height='24px' fillColor='#2867B2'/>
+                        <LinkedIn width='24.5px' height='24px' fillColor='rgba(255, 255, 255, 0.87)'/>
                     </a>
                 </div>
                 <Button
@@ -38,7 +38,7 @@ export default function MoreContainer () {
                 </div> :
                 <XIcon
                     height='1.25em'
-                    fillColor='#303030'
+                    fillColor='rgba(255, 255, 255, 0.6)'
                 />}
             </Button>
             </div>

@@ -111,7 +111,7 @@ export default function Bar({
             <Button className='modalBtn' handleClick={handleChangeBarToggle}>
                 <XIcon
                 height='1.25em'
-                fillColor='#303030'
+                fillColor='rgba(255, 255, 255, 0.6)'
                 />
             </Button>
             {(Object.values(bars).some(bar => bar.archived === true)) && // only show archive button if archived bars exist

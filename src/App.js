@@ -224,6 +224,7 @@ function handleModalToggle (ref, setState) {
             logo='yes'
             text='yes'
             width='300px'
+            textColor='white'
             />
             </Button>
         </header>

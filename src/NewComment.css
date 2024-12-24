@@ -4,6 +4,7 @@
 .commentForm {
     display: flex;
     flex-direction: row;
+    padding: .5em 0 0 2.5em;
 }
 .commentForm input[type=text] {
     font-size: 1em;

@@ -26,7 +26,7 @@ export default function SignInModal ({
                 <Button className='modalBtn' handleClick={handleToggle}>
                     <XIcon
                     height='1.25em'
-                    fillColor='#303030'
+                    fillColor='rgba(255, 255, 255, 0.6)'
                     />
                 </Button>
             </div>

@@ -106,7 +106,7 @@ e.preventDefault();
             placeholder="Add a comment..."
             onChange={(e) => setComment(e.target.value)}
           />
-          <Submit className="color-4" handleClick={handleClick} value='Add'/>
+          <Submit className="color-2" handleClick={handleClick} value='Add'/>
         </form>
         {/* <Button className="color-4" handleClick={clearComment}>Clear</Button> */}
         </div>
@@ -116,7 +116,7 @@ e.preventDefault();
               <XIcon 
                 width='15px'
                 height='15px'
-                fill='black'
+                fillColor='rgba(255, 255, 255, 0.6)'
               />
              </Button> 
             <p>Please add your comment before submitting</p>

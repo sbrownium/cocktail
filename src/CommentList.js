@@ -27,10 +27,10 @@ export default function CommentList ({
     }
 
     return (
-        <>
+        <div className={`commentListContainer ${isExpanded && 'expanded'}`}>
             {isExpanded ?
                 <>
-                <Button className='buttonEmoji' handleClick={toggleExpanded}>
+                <Button className='buttonEmoji color-2' handleClick={toggleExpanded}>
                 comments 🙈
                 </Button>
                 <ul>
@@ -54,11 +54,11 @@ export default function CommentList ({
                 setIsExpanded={setIsExpanded}
             />
             </> :
-            <Button className='buttonEmoji' handleClick={toggleExpanded}>
+            <Button className='buttonEmoji color-2' handleClick={toggleExpanded}>
                 comments 🐵
             </Button>
             }
             
-    </>
+    </div>
     )
 }
