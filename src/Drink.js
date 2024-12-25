@@ -196,10 +196,11 @@ return (
   <Button
     handleClick={handleClick}
     children='Save'
-    className={null}
+    className='color-1'
  />
    <button
     onClick={handleNeverMind}
+    className='color-4'
     >
       Never Mind
     </button>

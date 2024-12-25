@@ -6,7 +6,8 @@ export default function ChangeBar ({
   barsArray,
   handleSelect,
   showingBar,
-  showBarArchive
+  showBarArchive,
+  unselected
 }) {
   const { selectedBar } = useContext(BarContext)
   
@@ -15,9 +16,10 @@ export default function ChangeBar ({
           <select name='barSelect'
             className={showBarArchive && 'outline-1'}
             onChange={handleSelect}
-            defaultValue={showingBar && selectedBar.barID}
+            value={showingBar ? selectedBar.barID : unselected}
+            defaultValue={showingBar ? selectedBar.barID : unselected}
           >
-            <option value={!showBarArchive ? 'Current Bars' : 'All Bars'}>{!showBarArchive ? 'Current Bars' : 'All Bars'}</option> 
+            {!showingBar && <option value={unselected}>{unselected}</option>}
             {barsArray.map(({ barName, barID }, index) => {
                 return (
                   <option key={index} value={barID}>{barName}</option>

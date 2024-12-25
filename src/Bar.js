@@ -31,8 +31,9 @@ export default function Bar({
   const [showBarArchive, setShowBarArchive] = useState(false);
   const [editBarName, setEditBarName] = useState('');
   const [showFilter, setShowFilter] = useState(false);
+  const unselected = !showBarArchive ? 'Current Bars' : 'Current & Archived Bars'; // defaultValue for <ChangeBar/> <select>. showBarArchive is a checkbox
+  // on the changeBar modal controlling showing archived bars or not
 
-  // const barRef = useRef(null);
 
   function toggleShowBarArchive () {
     setShowBarArchive(showBarArchive => !showBarArchive);
@@ -43,31 +44,20 @@ export default function Bar({
     }
   }
 
-  function toggleFilter () {
-    setShowFilter(showFilter => !showFilter)
-  }
-
-  // function toggleBarEdit () {
-  //   setBarBeingEditted(barBeingEditted => !barBeingEditted);
+  // function toggleFilter () {
+  //   setShowFilter(showFilter => !showFilter)
   // }
 
-  // function handleBarNameEdit (e) {
-  //   e.preventDefault();
-  //   setEditBarName(e.target.value);
-  // }
-
-  function handleSelect (e) {
+  function handleSelect (e) { // <ChangeBar> onChange handler
     e.preventDefault();
-    setSelectedBar(e.target.value); 
-    if ((e.target.value === 'Current Bars') || (e.target.value === 'All Bars')) {
-    // if (e.target.value === "Pick a bar, any bar") {
-      setShowingBar(false);
+    setSelectedBar(e.target.value); // setSelectedBar from BarContext
+    if ((e.target.value === unselected)) { // when a bar is not selected
+      setShowingBar(false); // whether any bar is showing
     } else {
       setShowingBar(true);
-      setEditBarName(selectedBar.barName)
-      // setEditBarName(Object.values(bars).filter(bar => bar.barID === e.target.value)[0].barName); // sets the bar name for the edit state
+      setEditBarName(selectedBar.barName) // for editing the barName
     }
-    handleChangeBarToggle();
+    handleChangeBarToggle(); // toggles changeBar modal
     }; 
     
 
@@ -85,27 +75,6 @@ export default function Bar({
       <ul className="barList">
         <li>
          <>
-        {/* {showingBar &&
-        <div className="controlsContainer"> 
-        <>  
-        {showFilter ?
-          <Button className='edit icon' handleClick={toggleFilter}>
-            <OliveXIcon
-              width='35px'
-            />
-          </Button>
-          : 
-          <Button className='edit icon' handleClick={toggleFilter}>
-            <OliveFilterIcon
-              width='45px'
-            />
-          </Button>
-          }
-          </>
-          </div>
-    
-        } */}
-    
          <dialog ref={changeBarRef} className='overlay changeBars'>
         <div className='buttonHolder'>
             <Button className='modalBtn' handleClick={handleChangeBarToggle}>
@@ -137,6 +106,7 @@ export default function Bar({
           showBarArchive={showBarArchive}
           changeBarRef={changeBarRef}
           className='negative'
+          unselected={unselected}
         />
         </form>
         </div>

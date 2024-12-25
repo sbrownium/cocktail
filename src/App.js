@@ -261,7 +261,7 @@ function handleModalToggle (ref, setState) {
         drinks={drinks}
         comments={comments}
         handleNewDrinkToggle={handleNewDrinkToggle}
-        setSelectedBar={setSelectedBar}
+        // setSelectedBar={setSelectedBar}
         setShowingBar={setShowingBar}
       />
       <SelectionContainer 

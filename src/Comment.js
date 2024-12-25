@@ -92,12 +92,12 @@ return (
                   <Button
                     handleClick={handleClick}
                     children='Save'
-                    className={null}
+                    className='color-1'
                   />
                   <Button
                     handleClick={handleNeverMind}
                     children='Never Mind'
-                    className={null}
+                    className='color-4'
                   />
                 </form>            
             </>
