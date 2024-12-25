@@ -130,8 +130,10 @@ header svg {
   animation-duration: 2s;
 } */
 
-
-
+form select,
+form input {
+  color: black;
+}
 
 /* Applying the reverse animation to the dialog */
 dialog.selectionOverlay {

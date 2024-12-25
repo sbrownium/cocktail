@@ -1,3 +1,7 @@
+ul.drinkList {
+    padding: 0 0 0 .5em;
+}
+
 .drinkContainer {
     display: flex;
     flex-direction: column;

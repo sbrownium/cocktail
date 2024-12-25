@@ -283,12 +283,12 @@ return (
                     <Button
                       handleClick={barNameUpdate}
                       children='Save'
-                      className={null}
+                      className='color-1'
                     />
                     <Button
                       handleClick={handleNeverMind}
                       children='Never Mind'
-                      className={null}
+                      className='color-4'
                     /> 
                   
                   {(changeBarName === '') && 
@@ -307,7 +307,7 @@ return (
                 
 
 
-        <ul>
+        <ul className='drinkList'>
           {sortedDrinks.map(({addedBy, archived, drinkName, drinkID, description, initialTimeStamp, price}, index) => ( 
           <li className='drinkContainer' key={index}>
              <Drink

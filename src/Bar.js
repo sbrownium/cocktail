@@ -82,7 +82,7 @@ export default function Bar({
   const barsDrinks = Object.values(drinks).filter(drink => drink.barID === selectedBar.barID);
     return (
       <div className="barContainer">   
-      <ul>
+      <ul className="barList">
         <li>
          <>
         {/* {showingBar &&

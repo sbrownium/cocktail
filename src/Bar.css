@@ -42,6 +42,9 @@ button.archiveBtn {
     border: none;
     
 }
+ul.barList {
+    padding: 0em;
+}
 /* .archiveBtn {
     flex-direction: row;
 }
