@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ArchiveOrDeletePopOver from "./ArchiveOrDeletePopOver";
 import Button from "./Button";
 
-export default function ArchiveOrDeleteButton ({
+export default function ArchiveOrMoreEditButton ({
     path,
     nodeID,
     nodeName,

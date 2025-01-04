@@ -1,5 +1,6 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { UserContext } from './UserContext.js';
+import { BarContext } from './BarContext.js';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import BarSelector from './BarSelector.js';
@@ -11,6 +12,7 @@ import Button from './Button.js';
 import SignIn from './SignIn.js';
 import './NewContainer.css';
 import XIcon from './XIcon.js';
+import SignInModal from './SignInModal.js';
 
 
 export default function NewContainer ({
@@ -18,24 +20,27 @@ export default function NewContainer ({
     drinks,
     users,
     handleNewDrinkToggle,
-    defaultBar,
-    setSelectedBar,
-    newDrinkRef
-    // closeModal
+    // defaultBar,
+    // setSelectedBar,
+    newDrinkRef,
+    setShowingBar
 }) {
     const [user] = useContext(UserContext);
     const { userID } = user
+    const { selectedBar, setSelectedBar } = useContext(BarContext);
     const [logInAlert, setLogInAlert] = useState(false);
     const [repeatAlert, setRepeatAlert] = useState(false);
     const [missingAlert, setMissingAlert] = useState(false);
     const barsArray = Object.values(bars);
-    const defaultBarObj = barsArray.filter((ID) => ID.barID === defaultBar);
+    // const signInRef = useRef(null);
+    // const defaultBarObj = barsArray.filter((ID) => ID.barID === selectedBar.barID);
+    // const defaultBarName = "defaultBarName"
     // checks if a bar is already selected
-    const defaultBarName = useMemo(()=> {
-        if (defaultBar !== '') {
-            return defaultBarObj[0].barName;
-           }
-    },[defaultBar])
+    // const defaultBarName = useMemo(()=> {
+    //     if (selectedBar.barID !== '') {
+    //         return defaultBarObj[0].barName;
+    //        }
+    // },[selectedBar.barID])
     const initialValidation = {
         needsDrinkName: false,
         needsBarName: false,
@@ -45,8 +50,8 @@ export default function NewContainer ({
     }
     const initialNewDrink = {
         archived: false,
-        barID: defaultBar,
-        barName: defaultBarName,
+        barID: '',
+        barName: '',
         // drinkID: '',
         drinkName: '',
         description: '',
@@ -58,7 +63,13 @@ export default function NewContainer ({
     const [newDrink, setNewDrink] = useState(initialNewDrink);
     const [validation, setValidation] = useState(initialValidation);
 
-
+    useEffect(() => {
+        setNewDrink((newDrink) => ({
+          ...newDrink,
+          barID: selectedBar.barID || '',
+          barName: selectedBar.barName || '',
+        }));
+      }, [selectedBar]);
     
     function handleExistingBar (e) {
         if (e.target.value === 'new') {
@@ -401,6 +412,7 @@ export default function NewContainer ({
                 const newDrinkObj = {archived, barID: newBarKey, addedBy: userID, initialTimeStamp: Date.now(), lastTimeStamp: Date.now(), drinkID:newDrinkKey, drinkName, description, price};
                 updates['/bars/' + newBarKey] = newBarObj;
                 updates['/drinks/' + newDrinkKey] = newDrinkObj;
+            
                 setSelectedBar(newBarKey);
                 
             } else {
@@ -413,6 +425,7 @@ export default function NewContainer ({
             setNewDrink(initialNewDrink);
             setValidation(initialValidation);
             handleNewDrinkToggle();
+            setShowingBar(true);
             
             return (
                 update(ref(db), updates).then(() => {
@@ -430,7 +443,7 @@ export default function NewContainer ({
                 <Button className='modalBtn' handleClick={handleNewDrinkToggle}>
                     <XIcon
                     height='1.25em'
-                    fillColor='#303030'
+                    fillColor='rgba(255, 255, 255, 0.6)'
                     />
                 </Button>
             </div>
@@ -442,8 +455,8 @@ export default function NewContainer ({
                     validation={validation}
                     handleExistingBar={handleExistingBar}
                     // focusSelector={focusSelector}
-                    defaultBarID={defaultBar}
-                    defaultBarName={defaultBarName}
+                    // defaultBarID={selectedBar}
+                    // defaultBarName={defaultBarName}
                 />
                 <NewBar
                     newDrink={newDrink}
@@ -463,10 +476,10 @@ export default function NewContainer ({
                 />
                 {/* <NewComment commentDrinkID={newDrinkKey}/> */}
                 <fieldset className='formButtons'>
-                    <Submit className='color-1' handleClick={handleClick} value='Add'/>
-                    <Button className='color-4' handleClick={handleNewDrinkToggle}>
+                    <Button className='color-2' handleClick={handleNewDrinkToggle}>
                         Never Mind
                     </Button>
+                    <Submit className='color-1' handleClick={handleClick} value='Add'/>
                 </fieldset>
             </form>
            
@@ -493,7 +506,7 @@ export default function NewContainer ({
             {missingAlert &&
             <>
             <p>Missing stuff</p>
-            <Button className={null} handleClick={() => setMissingAlert(false)} >
+            <Button className='color-4' handleClick={() => setMissingAlert(false)} >
              OK
             </Button> 
             </>

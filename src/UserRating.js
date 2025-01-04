@@ -1,25 +1,51 @@
-import React, {useContext} from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from './UserContext.js';
 import './UserRating.css'
-
+// import Button from "./Button.js";
+import NewRating from "./NewRating.js";
+import MoreOptionsMenu from "./MoreOptionsMenu.js";
 
 export default function UserRating ({
-    userID,
+    barID,
     drinkID,
+    userID,
+    rating,
+    emojiLookUp,
+    index,
+    users,
+    ratingID,
     ratingsArray,
-    emojiLookUp
+    toggleRatingEdit,
+    hasBeenRated,
+    editRating
 }) {
     const [user] = useContext(UserContext);
-    // const { userID } = user; 
-    const filterRatings = ratingsArray.filter(rating => rating.userID === userID).filter(rating => rating.drinkID === drinkID);
-    
-    if (filterRatings.length !== 0) {
-    // const ratingID = filterRatings[0].ratingID;
+    // const [editRating, setEditRating] = useState(false);
+    const usersArray = Object.values(users);
+    const filteredUsers = usersArray.filter(u => u.userID === userID);
+    const preferredName = filteredUsers[0].preferredName
+    // const [ showName, setShowName ] = useState(false)
     const emojiKeys = Object.keys(emojiLookUp);
-    const ratingToEmoji = emojiKeys.find(key => emojiLookUp[key] === filterRatings[0].rating);
+    const ratingToEmoji = emojiKeys.find(key => emojiLookUp[key] === rating);
+
+    const userOwns = () => {
+        if (hasBeenRated && user) {
+            if (hasBeenRated.userID === userID)
+                if (editRating)
+                return true
+        }  
+    }
     
     return (
-        <span className={filterRatings[0].userID === user.userID ? 'emoji myRating' : 'emoji'}>{ratingToEmoji}</span>
-    ) 
+        <>
+        { !userOwns() &&
+        <li key={index}
+            className={`emoji ${(user.userID === userID) && 'myRating color-1'}`}
+        >
+            <p className='emojiRating'>{ratingToEmoji}</p>
+            <p className='ratingName'>{preferredName}</p>
+        </li>
     }
+    </>
+    ) 
 }

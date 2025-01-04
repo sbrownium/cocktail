@@ -1,6 +1,12 @@
-/* li .userContainer {
-    background: lightblue;
+/* Layout */
+.userContainer,
+.feedbackContainer {
+    display: flex;
 }
-li .userContainer:first-of-type {
-    background: lightcoral;
-} */
+.userContainer {
+    flex-direction: column;
+    margin: 1em 0;
+}
+.feedbackContainer {
+    flex-direction: row;
+}

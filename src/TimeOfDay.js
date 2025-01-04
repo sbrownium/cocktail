@@ -31,7 +31,7 @@ export default function TimeOfDay () {
     return (
         <>
             <h1>Where ya drinkin' {dayPart}?</h1>
-            {happyHour && <p className="happyHour color-2"><em>Heads up, it might could be happy hour, just sayin'</em></p>}
+            {happyHour && <p className="happyHour color-1"><em>Heads up, it could be happy hour, just sayin'</em></p>}
         </>
     )
     

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import AverageRating from './AverageRating';
@@ -7,18 +7,22 @@ import { UserContext } from './UserContext';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';
-import DeleteButton from './DeleteButton.js';
+import MoreEditButton from './MoreOptionsButton.js';
 // import ArchiveOrDeletePopOver from './ArchiveOrDeletePopOver.js'; 
 import Unarchive from './Unarchive.js';
 import FeedbackList from './FeedbackList.js';
 import './Drink.css';
+import CommentList from './CommentList.js';
+import RatingsList from './RatingsList.js';
+import MoreOptionsMenu from './MoreOptionsMenu.js';
+import NewRating from './NewRating.js';
 
 
 export default function Drink({
   addedBy,
   archived,
+  archivedParent,
   barID,
-  beingEditted,
   comments,
   drinkName,
   drinkID,
@@ -32,9 +36,11 @@ export default function Drink({
  }) {
   
   const [user] = useContext(UserContext);
+  const [editDrink, setEditDrink] = useState(false)
   const [editDrinkName, setEditDrinkName] = useState(drinkName);
   const [editDrinkDescription, setEditDrinkDescription] = useState(description)
   const [editDrinkPrice, setEditDrinkPrice] = useState(price);
+  const drinkRef = useRef(null);
   
   useEffect(() => {
     setEditDrinkName(drinkName);
@@ -54,7 +60,11 @@ export default function Drink({
     '👍': 3,
     '🎉': 4
 };
- 
+
+function toggleDrinkEdit () {
+  setEditDrink(editDrink => !editDrink);
+}
+
 function handleDrinkNameEdit (e) {
     e.preventDefault();  
     setEditDrinkName(e.target.value);
@@ -73,7 +83,7 @@ function handleDrinkPriceEdit (e) {
 function handleNeverMind (e) {
   e.preventDefault();
   resetDrinks();
-  handleToggle();
+  toggleDrinkEdit();
 }
 
 function resetDrinks () {
@@ -97,7 +107,7 @@ function handleClick(e){
     price: editDrinkPrice
   };
   resetDrinks();
-  handleToggle();
+  toggleDrinkEdit();
   updates['/drinks/' + drinkID] = newEdit;
 return (
     update(ref(db), updates).then(() => {
@@ -109,135 +119,96 @@ return (
 )
 }
     return (
-      <> 
-        {beingEditted ?
-            <>
-                <form>
-                {!archived &&
-                <>
-                  <EditBox
-                      className={(editDrinkName === '') && 'missing'}
-                      id='drinkNameEdit'
-                      edit={editDrinkName}
-                      handleEdit={handleDrinkNameEdit}
-                  />
-                  <AverageRating
-                  emojiLookUp={emojiLookUp}
-                  ratings={ratings}
-                  ratingDrinkID={drinkID}
-                />
-                  &nbsp;&mdash;&nbsp;
-                  <EditBox
-                      className={(editDrinkDescription === '') && 'missing'}
-                      id='drinkDescriptionEdit'
-                      edit={editDrinkDescription}
-                      handleEdit={handleDrinkDescriptionEdit}
-                  />
-                  &nbsp;&mdash;&nbsp;$
-                   <EditBox
-                      className={(editDrinkPrice === '') && 'missing'}
-                      id='drinkPriceEdit'
-                      edit={editDrinkPrice}
-                      handleEdit={handleDrinkPriceEdit}
-                  />
-                  <>
-                   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) ? 
-                    //.missing from NewDrink.css
-                    <p className='missing'>Please fill out all the fields to save</p> 
-                    :
-                 <Button
-                    handleClick={handleClick}
-                    children='Save'
-                    className={null}
-                 />
-                   }
-                   </>
-                   {/* } */}
-                   {((editDrinkName !== drinkName) || (editDrinkDescription !== description) || (editDrinkPrice !== price)) &&
-                   <button onClick={handleNeverMind}>Never Mind</button>
-                  }
-                   </>
-                  }
-               </form> 
-             </>   
-            :
-            <> 
-            <div className='drinkNameContainer'>
-              <h2>{drinkName}</h2>
-              {/* <AverageRating
-                emojiLookUp={emojiLookUp}
+      <>   
+            {!editDrink ?
+              <>
+              <div className='nameRatingsContainer'> 
+              <h2 className={(archived || archivedParent) && 'archived'}>{drinkName}</h2> 
+              <RatingsList
+                barID={barID}
+                drinkID={drinkID}
                 ratings={ratings}
-                ratingDrinkID={drinkID}
-              /> */}
+                users={users}
+                emojiLookUp={emojiLookUp}
+              />
              </div> 
-            {description} &mdash;
-            ${Number(price).toFixed(2)}
-            </>
-            }
-            {(archived && user && beingEditted) &&
-            <>    
-            <h2>{drinkName}</h2> &mdash;&nbsp;
-            {description} &mdash;
-            ${Number(price).toFixed(2)}
-            <Unarchive
-              path={'/drinks/'}
+         <div className='descriptionContainer'>
+              <div className={`description ${(archived || archivedParent) && 'archived'}`}> 
+              {/* <div className='description'> */}
+                {description} &mdash;
+                ${Number(price).toFixed(2)}
+              </div>
+            {!archivedParent && // if the parent is archived don't show menu
+            <MoreOptionsMenu 
+              path='/drinks/'
               nodeID={drinkID}
-              IDType='drinkID'
-              arrayOfThings={Object.values(drinks)}
-              handleToggle={handleToggle}
-            />
-            </>
-            }
-            {!archived && // checks for logged in user and that drink is not archived 
-             <>
-               {(user && beingEditted) && // checks that it is being editted in addition to user and archived */}
-             <>
-             <ArchiveButton 
-                path='/drinks/'
-                nodeID={drinkID}
-                IDType='drinkID'
-                arrayOfThings={Object.values(drinks)}
-                nodeName={drinkName}
-                handleToggle={handleToggle}
-                className={null}
-                reset={resetDrinks}
-                buttonText='Archive Drink'
-              />
-              {(addedBy === user.userID) &&
-              <DeleteButton 
-                path='/drinks/'
-                nodeID={drinkID}
-                nodeName={drinkName}
-                handleToggle={handleToggle}
-                className={null}
-                reset={resetDrinks}
-                buttonText='Delete Drink'
-              />
-              }
-              </>
-            }
-           {/* <MyRating 
-                emojiLookUp={emojiLookUp}
-                ratings={ratings}
-                drinkName={drinkName}
-                ratingDrinkID={drinkID}
-                handleToggle={handleToggle}
-                beingEditted={beingEditted}
-                barID={barID} 
-                /> */}
-            <FeedbackList
-              comments={comments}
-              users={users}
-              drinkID={drinkID}
-              beingEditted={beingEditted}
-              handleToggle={handleToggle}
-              barID={barID}
+              toggleBeingEditted={toggleDrinkEdit}
+              userID={addedBy}
+              reference={drinkRef}
+              categoryObject={drinks} // for archiving
+              className='drinks'
               archived={archived}
-              ratings={ratings}
-              emojiLookUp={emojiLookUp}
             />
-          </>
-       }
-          </>
-      )    
+          }
+            </div>
+             {!(archived || archivedParent) && // checks for logged in user and that drink is not archived nor is the bar
+              <CommentList
+                comments={comments}
+                drinkID={drinkID}
+                users={users}
+              />
+              } 
+              </>
+              :      
+<>
+<form>
+<>
+  <EditBox
+      className={(editDrinkName === '') && 'missing'}
+      id='drinkNameEdit'
+      edit={editDrinkName}
+      handleEdit={handleDrinkNameEdit}
+  />
+  {/* <AverageRating
+  emojiLookUp={emojiLookUp}
+  ratings={ratings}
+  ratingDrinkID={drinkID}
+/> */}
+  &nbsp;&mdash;&nbsp;
+  <EditBox
+      className={(editDrinkDescription === '') && 'missing'}
+      id='drinkDescriptionEdit'
+      edit={editDrinkDescription}
+      handleEdit={handleDrinkDescriptionEdit}
+  />
+  &nbsp;&mdash;&nbsp;$
+   <EditBox
+      className={(editDrinkPrice === '') && 'missing'}
+      id='drinkPriceEdit'
+      edit={editDrinkPrice}
+      handleEdit={handleDrinkPriceEdit}
+  />
+
+   {((editDrinkName === '') || (editDrinkDescription === '') || (editDrinkPrice === '')) && 
+    //.missing from NewDrink.css
+    <p className='missing'>Please fill out all the fields to save</p> 
+   }
+  <Button
+    handleClick={handleClick}
+    children='Save'
+    className='color-1'
+ />
+   <button
+    onClick={handleNeverMind}
+    className='color-4'
+    >
+      Never Mind
+    </button>
+  
+   </>
+</form> 
+</>   
+ }       
+      </>  
+      ) 
 }

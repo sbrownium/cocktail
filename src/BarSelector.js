@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext} from 'react';
+import { BarContext } from './BarContext';
 import './BarSelector.css';
 
 export default function BarSelector({
@@ -6,23 +7,25 @@ export default function BarSelector({
   newDrink,
   validation,
   handleExistingBar,
-  focusSelector,
-  defaultBarID,
-  defaultBarName
+  focusSelector
+  // ,
+  // defaultBarID,
+  // defaultBarName
 }) {
+    const { selectedBar } = useContext(BarContext);
     const barsArray = Object.values(bars);
     const uniqueBars = new Set();
-    uniqueBars.add(defaultBarID);
+    uniqueBars.add(selectedBar.barID);
       return (
         <>
           <label>Bar
           <select name='barSelect'
-          defaultValue={defaultBarID} 
+          defaultValue={selectedBar.barID} 
           className={validation.needsBarID ? 'missing' : null }
           value={newDrink.barID} 
           onChange={handleExistingBar}
           onFocus={focusSelector}>
-            <option key='0' value={defaultBarID}>{defaultBarName}</option>
+            <option key='0' value={selectedBar.barID}>{selectedBar.barName}</option>
             {barsArray.map(({ barName, barID }, index) => {
               if (!uniqueBars.has(barID)) {
                 uniqueBars.add(barID);  

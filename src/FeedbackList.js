@@ -38,7 +38,10 @@ export default function FeedbackList({
       <>
         {!beingEditted && 
         <>
-            <NewComment drinkID={drinkID} />
+            {/* <NewComment
+              drinkID={drinkID}
+              users={users}
+              /> */}
             <NewRating
                 emojiLookUp={emojiLookUp}
                 handleToggle={handleToggle}
@@ -63,11 +66,17 @@ export default function FeedbackList({
             emojiLookUp={emojiLookUp}
           />
     ))}
+    {!isExpanded &&
+    <Button className='buttonEmoji' handleClick={toggleExpanded}>
+     💬
+ </Button>}
     </div>
+    
     {isExpanded &&
+    <>
       <ul>
         {uniqueIDs.map((userID, index) => (
-          <li className="userContainer" key={index}>
+          <li key={index}>
             <UserContainer
                 archived={archived}
                 barID={barID}
@@ -85,10 +94,16 @@ export default function FeedbackList({
             />
           </li>
         ))}
-      </ul>}
-      <Button className='icon' handleClick={toggleExpanded}>
-     {!isExpanded ? 'Comments 💬' : 'Close 💬'}
+      </ul>
+      <Button className='buttonEmoji' handleClick={toggleExpanded}>
+     🙅💬
  </Button>
+ </>}
+ <NewComment
+  drinkID={drinkID}
+  users={users}
+  setIsExpanded={setIsExpanded}
+  />
  </>
     );
   }

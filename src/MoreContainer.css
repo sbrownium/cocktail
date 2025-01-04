@@ -9,7 +9,7 @@
     width: 4px;
     border-radius: 50%;
     margin: 7px 0;
-    background: black;
+    background: rgba(255, 255, 255, 0.6);
 }
 .dot:first-of-type {
     margin: 0 0 7px 0; 
@@ -38,14 +38,14 @@
     border-top: none;
     border-left: none;
     border-right: none;
-    background: whitesmoke;
+    background: #1D1D1E;
     transition: all .35s ease-in-out;
  }
  .moreButtonsHolder.expanded {
     transform: translateY(-12.08em);
     border-top: 1px solid #80808029;
     border-left: 1px solid #80808029;
-    border-bottom: 1px solid whitesmoke;
+    border-bottom: 1px solid #1D1D1E;
     border-right: 1px solid #80808029;
  }
  button.menuButton {

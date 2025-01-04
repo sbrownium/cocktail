@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { UserContext } from './UserContext.js';
 import NewRating from "./NewRating.js";
-import DeleteButton from "./DeleteButton.js";
+import MoreEditButton from "./MoreOptionsButton.js";
 
 
 export default function MyRating ({
@@ -34,7 +34,7 @@ export default function MyRating ({
                     beingEditted={beingEditted}
                     text='Change Rating '
                 />
-                <DeleteButton
+                <MoreEditButton
                     path='/ratings/'
                     nodeID={ratingID}
                     nodeName={ratingToEmoji}

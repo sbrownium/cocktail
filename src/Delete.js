@@ -3,19 +3,19 @@ import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import Button from "./Button";
 
-export default function DeletePopOver ({
+export default function Delete ({
     path,
     nodeID,
-    nodeName,
-    handleToggle,
-    reset
+    className,
+    handleModalToggle,
+    toggleExpand
 }) {
     
      function handleDelete(e){
         const updates = {};
         e.preventDefault(); 
-        handleToggle();
-        reset(); 
+        handleModalToggle();
+        toggleExpand();
         updates[path + nodeID] = null;
         return (
             update(ref(db), updates).then(() => {
@@ -28,13 +28,9 @@ export default function DeletePopOver ({
     }
     return (
         <>
-            <p>Just double-checking, you do want to delete {nodeName}?</p>
-            <Button className={null} handleClick={handleDelete}>
+            <Button className={className} handleClick={handleDelete}>
             Delete
             </Button>
-            <Button className={null} handleClick={handleToggle}>
-                Never Mind
-            </Button>  
         </>
     )
 }
