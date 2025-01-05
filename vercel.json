@@ -1,7 +1,7 @@
 {
     "rewrites": [
       {
-        "source": "https://cocktales-eight.vercel.app/__/auth/",
+        "source": "https://cocktales-eight.vercel.app/__/auth/.*",
         "destination": "https://cocktales-23d15.firebaseapp.com/__/auth/$1"
       }
     ]
