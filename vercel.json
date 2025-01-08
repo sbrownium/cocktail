@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/__/auth/",
+        "destination": "https://cocktales-23d15.firebaseapp.com/__/auth/"
+      }
+    ]
+  }
+  
