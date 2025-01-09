@@ -6,8 +6,8 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "cocktales-23d15.firebaseapp.com",
-  // authDomain: "sbrownium.github.io",
+  // authDomain: "cocktales-23d15.firebaseapp.com",
+  authDomain: "https://cocktales-eight.vercel.app/",
   databaseURL: process.env.REACT_APP_BASE_URL,
   projectId: "cocktales-23d15",
   storageBucket: "cocktales-23d15.appspot.com",
