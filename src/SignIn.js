@@ -2,7 +2,7 @@ import React, { useContext , useState} from 'react';
 import { googleLogout } from '@react-oauth/google';
 import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { ref, child, push, update } from "firebase/database";
-import { db } from "./firebase.js";
+import { db, app } from "./firebase.js";
 import { UserContext } from './UserContext.js';
 import GoogleSignInButton from './GoogleSignInButton.js';
 import GoogleSignOutButton from './GoogleSignOutButton.js';
@@ -83,7 +83,7 @@ export default function SignIn({
   }
 
   async function handleLogIn() {
-    const auth = getAuth();
+    const auth = getAuth(app);
   
     try {
       // const result = await signInWithPopup(auth, provider);
