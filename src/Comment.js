@@ -5,7 +5,7 @@ import EditBox from './EditBox';
 import MoreOptionsButton from './MoreOptionsButton.js';
 import Time from './Time.js';
 import Button from './Button.js';
-import { UserContext } from './UserContext.js';
+import { UserContext } from './app/UserContext.js';
 import './Comment.css';
 import MoreOptionsMenu from './MoreOptionsMenu.js';
 

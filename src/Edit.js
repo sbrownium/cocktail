@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./app/UserContext";
 import PencilIcon from "./PencilIcon";
 import Button from "./Button";
 import './Edit.css'

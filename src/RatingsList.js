@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from "react";
 import UserRating from "./UserRating";
 import "./RatingsList.css";
 import NewRating from "./NewRating";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./app/UserContext";
 import MoreOptionsMenu from "./MoreOptionsMenu";
 
 export default function RatingsList ({

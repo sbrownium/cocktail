@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UserContext } from './UserContext.js';
+import { UserContext } from './app/UserContext.js';
 import NewRating from "./NewRating.js";
 import MoreEditButton from "./MoreOptionsButton.js";
 

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from './UserContext.js';
+import { UserContext } from './app/UserContext.js';
 import './UserRating.css'
 // import Button from "./Button.js";
 import NewRating from "./NewRating.js";

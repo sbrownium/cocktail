@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import Comment from "./Comment";
 import UserRating from "./UserRating";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./app/UserContext";
 import NewComment from "./NewComment";
 import "./UserContainer.css";
 import Button from "./Button";

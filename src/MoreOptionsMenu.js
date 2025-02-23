@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import Button from "./Button";
 import XIcon from "./XIcon";
 import MoreOptionsButton from "./MoreOptionsButton";
-import { UserContext } from "./UserContext";
-import { BarContext } from "./BarContext";
+import { UserContext } from "./app/UserContext";
+import { BarContext } from "./app/BarContext";
 import "./MoreOptionsMenu.css";
 
 

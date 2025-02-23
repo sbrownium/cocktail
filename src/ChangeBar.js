@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import './ChangeBar.css'
-import { BarContext } from "./BarContext";
+import { BarContext } from "./app/BarContext";
 
 export default function ChangeBar ({
   barsArray,
