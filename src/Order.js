@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import Input from "./Input";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./app/UserContext";
 
 export default function Order ({checked, handleChange, ratings, barID}) {
     const [user] = useContext(UserContext);

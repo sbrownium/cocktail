@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { UserContext } from './UserContext.js';
-import { BarContext } from './BarContext.js';
+import { UserContext } from './app/UserContext.js';
+import { BarContext } from './app/BarContext.js';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
 import BarSelector from './BarSelector.js';

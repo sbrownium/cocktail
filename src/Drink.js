@@ -3,7 +3,7 @@ import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import AverageRating from './AverageRating';
 import MyRating from './MyRating';
-import { UserContext } from './UserContext';
+import { UserContext } from './app/UserContext.js';
 import ArchiveButton from './ArchiveButton';
 import Button from './Button';
 import EditBox from './EditBox';

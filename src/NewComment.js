@@ -1,8 +1,8 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { ref, child, push, update } from "firebase/database";
 import { db } from "./firebase.js";
-import { UserContext } from './UserContext.js';
-import { BarContext } from './BarContext.js';
+import { UserContext } from './app/UserContext.js';
+import { BarContext } from './app/BarContext.js';
 import Submit from './Submit.js';
 import Button from './Button.js';
 import SignInModal from './SignInModal.js';

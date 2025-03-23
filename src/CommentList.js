@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { BarContext } from "./BarContext";
+import { BarContext } from "./app/BarContext";
 import Comment from "./Comment";
 import NewComment from "./NewComment";
 import Button from "./Button";

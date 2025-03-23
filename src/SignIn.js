@@ -3,7 +3,7 @@ import { googleLogout } from '@react-oauth/google';
 import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { ref, child, push, update } from "firebase/database";
 import { db, app } from "./firebase.js";
-import { UserContext } from './UserContext.js';
+import { UserContext } from './app/UserContext.js';
 import GoogleSignInButton from './GoogleSignInButton.js';
 import GoogleSignOutButton from './GoogleSignOutButton.js';
 

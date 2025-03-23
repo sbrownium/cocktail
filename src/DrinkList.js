@@ -1,6 +1,6 @@
 import React, {useContext, useState, useMemo, useRef, useEffect} from 'react';
-import { UserContext } from './UserContext';
-import { BarContext } from './BarContext';
+import { UserContext } from './app/UserContext.js';
+import { BarContext } from './app/BarContext.js';
 import { ref, update } from "firebase/database";
 import { db } from "./firebase.js";
 import Order from './Order';

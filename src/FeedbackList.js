@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import NewComment from './NewComment';
-import { UserContext } from './UserContext';
+import { UserContext } from './app/UserContext';
 import UserContainer from './UserContainer';
 import NewRating from './NewRating';
 import Button from './Button';

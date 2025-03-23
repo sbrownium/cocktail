@@ -2,8 +2,8 @@ import React, {useState, useMemo, useContext} from "react";
 import DrinkList from './DrinkList.js'
 import ChangeBar from './ChangeBar.js';
 import Button from "./Button.js";
-import { UserContext } from "./UserContext.js";
-import { BarContext } from "./BarContext.js";
+import { UserContext } from "./app/UserContext.js";
+import { BarContext } from "./app/BarContext.js";
 import './Bar.css';
 import OliveXIcon from "./OliveXIcon.js";
 import OliveFilterIcon from "./OliveFilterIcon.js";

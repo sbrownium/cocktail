@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ref, onValue } from "firebase/database";
 import { db } from "./firebase.js";
-import { UserContext } from "./UserContext.js";
-import { BarContext } from './BarContext.js';
+import { UserContext } from "./app/UserContext.js";
+import { BarContext } from './app/BarContext.js';
 import SignIn from './SignIn.js';
 import Bar from './Bar.js'
 import './App.css';
